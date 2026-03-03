@@ -1,33 +1,5 @@
 # Live Music: Digital Popularity vs Reality
 
-## From Streams to Stages  
-To what extent do digital Spotify metrics predict the physical reality of global concert tours?
-
----
-
-## Project Objective
-
-This project examines whether digital streaming indicators — particularly Spotify popularity metrics — can predict measurable real-world outcomes in live music performance.
-
-We aim to bridge the gap between:
-
-- **Digital popularity (streams, followers, popularity scores)**
-- **Physical concert performance (ticket availability, scheduling, geographic reach)**
-
-The project integrates multiple APIs to construct a structured, reproducible data pipeline for cross-platform analysis.
-
----
-
-# Research Dimensions
-
-## 1. Streaming & Ticket Power
-
-- How does the number of Spotify followers correlate with the average ticket sales of a current tour for the same artists?
-- How does Spotify's "Popularity" metric differ between artists whose events are marked as *off-sale* versus still *on-sale*?
-- To what extent does a “Viral Hit” (high Spotify popularity and recent release) correlate with price dynamics (min/max price ranges) and ticket availability on the primary market compared to established artists?
-
-# Live Music: Digital Popularity vs Reality
-
 # From Streams to Stages  
 To what extent do digital Spotify metrics predict the physical reality of global concert tours?
 
