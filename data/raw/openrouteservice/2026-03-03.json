@@ -1,0 +1,242 @@
+{
+  "start": [
+    10.1328,
+    54.3233
+  ],
+  "end": [
+    10.1086,
+    54.3383
+  ],
+  "profile": "driving-car",
+  "route": {
+    "bbox": [
+      10.11063,
+      54.323204,
+      10.132963,
+      54.341196
+    ],
+    "routes": [
+      {
+        "summary": {
+          "distance": 3595.7,
+          "duration": 559.3
+        },
+        "segments": [
+          {
+            "distance": 3595.7,
+            "duration": 559.3,
+            "steps": [
+              {
+                "distance": 18.8,
+                "duration": 6.8,
+                "type": 11,
+                "instruction": "Head northwest",
+                "name": "-",
+                "way_points": [
+                  0,
+                  2
+                ]
+              },
+              {
+                "distance": 51.5,
+                "duration": 16.5,
+                "type": 0,
+                "instruction": "Turn left onto Rathausstraße, K 29",
+                "name": "Rathausstraße, K 29",
+                "way_points": [
+                  2,
+                  5
+                ]
+              },
+              {
+                "distance": 414.0,
+                "duration": 94.1,
+                "type": 1,
+                "instruction": "Turn right onto Fleethörn",
+                "name": "Fleethörn",
+                "way_points": [
+                  5,
+                  29
+                ]
+              },
+              {
+                "distance": 590.5,
+                "duration": 92.6,
+                "type": 1,
+                "instruction": "Turn right onto Knooper Weg, K 12",
+                "name": "Knooper Weg, K 12",
+                "way_points": [
+                  29,
+                  44
+                ]
+              },
+              {
+                "distance": 394.9,
+                "duration": 62.3,
+                "type": 0,
+                "instruction": "Turn left onto Lehmberg, L 321",
+                "name": "Lehmberg, L 321",
+                "way_points": [
+                  44,
+                  56
+                ]
+              },
+              {
+                "distance": 780.6,
+                "duration": 81.0,
+                "type": 1,
+                "instruction": "Turn right onto Westring, K 10",
+                "name": "Westring, K 10",
+                "way_points": [
+                  56,
+                  65
+                ]
+              },
+              {
+                "distance": 736.0,
+                "duration": 111.7,
+                "type": 0,
+                "instruction": "Turn left onto Olshausenstraße, K 36",
+                "name": "Olshausenstraße, K 36",
+                "way_points": [
+                  65,
+                  87
+                ]
+              },
+              {
+                "distance": 553.3,
+                "duration": 82.5,
+                "type": 0,
+                "instruction": "Turn left onto Mühlenweg",
+                "name": "Mühlenweg",
+                "way_points": [
+                  87,
+                  99
+                ]
+              },
+              {
+                "distance": 28.1,
+                "duration": 5.1,
+                "type": 1,
+                "instruction": "Turn right",
+                "name": "-",
+                "way_points": [
+                  99,
+                  100
+                ]
+              },
+              {
+                "distance": 28.0,
+                "duration": 6.7,
+                "type": 0,
+                "instruction": "Turn left",
+                "name": "-",
+                "way_points": [
+                  100,
+                  101
+                ]
+              },
+              {
+                "distance": 0.0,
+                "duration": 0.0,
+                "type": 10,
+                "instruction": "Arrive at your destination, on the left",
+                "name": "-",
+                "way_points": [
+                  101,
+                  101
+                ]
+              }
+            ]
+          }
+        ],
+        "bbox": [
+          10.11063,
+          54.323204,
+          10.132963,
+          54.341196
+        ],
+        "geometry": "i`qjI_bz|@ABSd@Rf@Vj@R`@MTQ\\Q\\a@x@c@z@CFQ\\OV_AbBCDUd@ADQZ[p@k@lAc@~@KPCFQXKTaAjBUb@IPC^gBW{ASqD}@iBo@k@W_@Os@Se@C]F[LuDv@_@LMBa@LkATGVw@tDu@~Da@pBMv@Cl@C^?nG?h@?TIbBC`AkGmBWGmBk@mGiBqC{@sCkAgFuBkCgASKGh@Il@Q|AO|ABf@UvBQb@AJMtAIv@KjAIrBIdDKnBMxAWjBWzAc@nBc@jB_BpF]~@eAxCJNbBxAh@j@VZXTl@\\nB`B`AfAhEhElDxCOv@Uz@e@w@_@bA",
+        "way_points": [
+          0,
+          101
+        ],
+        "warnings": [
+          {
+            "code": 1,
+            "message": "There may be restrictions on some roads"
+          }
+        ],
+        "extras": {
+          "roadaccessrestrictions": {
+            "values": [
+              [
+                0,
+                98,
+                0
+              ],
+              [
+                98,
+                99,
+                1
+              ],
+              [
+                99,
+                100,
+                32
+              ],
+              [
+                100,
+                101,
+                0
+              ]
+            ],
+            "summary": [
+              {
+                "value": 0.0,
+                "distance": 3544.1,
+                "amount": 98.57
+              },
+              {
+                "value": 32.0,
+                "distance": 28.1,
+                "amount": 0.78
+              },
+              {
+                "value": 1.0,
+                "distance": 23.5,
+                "amount": 0.65
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "metadata": {
+      "attribution": "openrouteservice.org | OpenStreetMap contributors",
+      "service": "routing",
+      "timestamp": 1772538295967,
+      "query": {
+        "coordinates": [
+          [
+            10.1328,
+            54.3233
+          ],
+          [
+            10.1086,
+            54.3383
+          ]
+        ],
+        "profile": "driving-car",
+        "profileName": "driving-car",
+        "format": "json"
+      },
+      "engine": {
+        "version": "9.5.0",
+        "build_date": "2025-10-31T12:33:09Z",
+        "graph_date": "2026-02-28T14:36:19Z",
+        "osm_date": "2026-02-09T01:00:01Z"
+      }
+    }
+  }
+}
