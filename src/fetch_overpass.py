@@ -21,28 +21,43 @@ OVERPASS_URLS = [
 ]
 
 
-def build_cafe_query(bbox: tuple[float, float, float, float]) -> str:
+def build_concert_venue_query(bbox: tuple[float, float, float, float]) -> str:
     """
-    Build an Overpass QL query for cafes in a bounding box.
+    Build an Overpass QL query for concert venues in a bounding box.
 
-    Parameters
-    ----------
-    bbox : tuple[float, float, float, float]
-        Bounding box in the form (south, west, north, east).
-
-    Returns
-    -------
-    str
-        Overpass QL query string.
+    We fetch nodes/ways/relations for common venue tags and use 'out center'
+    so ways/relations also get a coordinate.
     """
     south, west, north, east = bbox
 
     return (
         '[out:json][timeout:25];'
         '('
-        f'node["amenity"="cafe"]({south},{west},{north},{east});'
+        f'node["amenity"="concert_hall"]({south},{west},{north},{east});'
+        f'way["amenity"="concert_hall"]({south},{west},{north},{east});'
+        f'relation["amenity"="concert_hall"]({south},{west},{north},{east});'
+
+        f'node["amenity"="theatre"]({south},{west},{north},{east});'
+        f'way["amenity"="theatre"]({south},{west},{north},{east});'
+        f'relation["amenity"="theatre"]({south},{west},{north},{east});'
+
+        f'node["amenity"="arts_centre"]({south},{west},{north},{east});'
+        f'way["amenity"="arts_centre"]({south},{west},{north},{east});'
+        f'relation["amenity"="arts_centre"]({south},{west},{north},{east});'
+
+        f'node["amenity"="nightclub"]({south},{west},{north},{east});'
+        f'way["amenity"="nightclub"]({south},{west},{north},{east});'
+        f'relation["amenity"="nightclub"]({south},{west},{north},{east});'
+
+        f'node["leisure"="stadium"]({south},{west},{north},{east});'
+        f'way["leisure"="stadium"]({south},{west},{north},{east});'
+        f'relation["leisure"="stadium"]({south},{west},{north},{east});'
+
+        f'node["leisure"="sports_hall"]({south},{west},{north},{east});'
+        f'way["leisure"="sports_hall"]({south},{west},{north},{east});'
+        f'relation["leisure"="sports_hall"]({south},{west},{north},{east});'
         ');'
-        'out body 50;'
+        'out tags center;'
     )
 
 
@@ -103,9 +118,9 @@ def main() -> None:
     """
     Main execution function.
     """
-    bbox = (54.32, 10.12, 54.34, 10.15)
+    bbox = (54.28, 10.05, 54.38, 10.20)
 
-    query = build_cafe_query(bbox)
+    query = build_concert_venue_query(bbox)
     result = fetch_overpass(query)
 
     payload = {
