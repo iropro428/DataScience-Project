@@ -1,0 +1,333 @@
+{
+  "query": "taylor swift",
+  "result": {
+    "artists": {
+      "href": "https://api.spotify.com/v1/search?offset=0&limit=10&query=taylor%20swift&type=artist",
+      "limit": 10,
+      "next": "https://api.spotify.com/v1/search?offset=10&limit=10&query=taylor%20swift&type=artist",
+      "offset": 0,
+      "previous": null,
+      "total": 19,
+      "items": [
+        {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/artist/06HL4z0CvFAxyc27GXpf02"
+          },
+          "followers": {
+            "href": null,
+            "total": 152560903
+          },
+          "genres": [],
+          "href": "https://api.spotify.com/v1/artists/06HL4z0CvFAxyc27GXpf02",
+          "id": "06HL4z0CvFAxyc27GXpf02",
+          "images": [
+            {
+              "url": "https://i.scdn.co/image/ab6761610000e5ebe2e8e7ff002a4afda1c7147e",
+              "height": 640,
+              "width": 640
+            },
+            {
+              "url": "https://i.scdn.co/image/ab67616100005174e2e8e7ff002a4afda1c7147e",
+              "height": 320,
+              "width": 320
+            },
+            {
+              "url": "https://i.scdn.co/image/ab6761610000f178e2e8e7ff002a4afda1c7147e",
+              "height": 160,
+              "width": 160
+            }
+          ],
+          "name": "Taylor Swift",
+          "popularity": 96,
+          "type": "artist",
+          "uri": "spotify:artist:06HL4z0CvFAxyc27GXpf02"
+        },
+        {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/artist/2rEVnwCPBeGkWMv425KoG1"
+          },
+          "followers": {
+            "href": null,
+            "total": 2422634
+          },
+          "genres": [
+            "german pop"
+          ],
+          "href": "https://api.spotify.com/v1/artists/2rEVnwCPBeGkWMv425KoG1",
+          "id": "2rEVnwCPBeGkWMv425KoG1",
+          "images": [
+            {
+              "url": "https://i.scdn.co/image/ab6761610000e5eb996830f67fa1ae09c3b5edab",
+              "height": 640,
+              "width": 640
+            },
+            {
+              "url": "https://i.scdn.co/image/ab67616100005174996830f67fa1ae09c3b5edab",
+              "height": 320,
+              "width": 320
+            },
+            {
+              "url": "https://i.scdn.co/image/ab6761610000f178996830f67fa1ae09c3b5edab",
+              "height": 160,
+              "width": 160
+            }
+          ],
+          "name": "AYLIVA",
+          "popularity": 69,
+          "type": "artist",
+          "uri": "spotify:artist:2rEVnwCPBeGkWMv425KoG1"
+        },
+        {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/artist/3JcPRQw968SnjGhc9Zl2vE"
+          },
+          "followers": {
+            "href": null,
+            "total": 7
+          },
+          "genres": [],
+          "href": "https://api.spotify.com/v1/artists/3JcPRQw968SnjGhc9Zl2vE",
+          "id": "3JcPRQw968SnjGhc9Zl2vE",
+          "images": [
+            {
+              "url": "https://i.scdn.co/image/ab67616d0000b2732935c59917f4637626242ca9",
+              "height": 640,
+              "width": 640
+            },
+            {
+              "url": "https://i.scdn.co/image/ab67616d00001e022935c59917f4637626242ca9",
+              "height": 300,
+              "width": 300
+            },
+            {
+              "url": "https://i.scdn.co/image/ab67616d000048512935c59917f4637626242ca9",
+              "height": 64,
+              "width": 64
+            }
+          ],
+          "name": "Taylor Swiftt",
+          "popularity": 0,
+          "type": "artist",
+          "uri": "spotify:artist:3JcPRQw968SnjGhc9Zl2vE"
+        },
+        {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/artist/1qQLhymHXFPtP5U8KNKsm6"
+          },
+          "followers": {
+            "href": null,
+            "total": 3330543
+          },
+          "genres": [
+            "german hip hop"
+          ],
+          "href": "https://api.spotify.com/v1/artists/1qQLhymHXFPtP5U8KNKsm6",
+          "id": "1qQLhymHXFPtP5U8KNKsm6",
+          "images": [
+            {
+              "url": "https://i.scdn.co/image/ab6761610000e5ebd8b08d3199d2bd40f909e449",
+              "height": 640,
+              "width": 640
+            },
+            {
+              "url": "https://i.scdn.co/image/ab67616100005174d8b08d3199d2bd40f909e449",
+              "height": 320,
+              "width": 320
+            },
+            {
+              "url": "https://i.scdn.co/image/ab6761610000f178d8b08d3199d2bd40f909e449",
+              "height": 160,
+              "width": 160
+            }
+          ],
+          "name": "Apache 207",
+          "popularity": 69,
+          "type": "artist",
+          "uri": "spotify:artist:1qQLhymHXFPtP5U8KNKsm6"
+        },
+        {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/artist/61qDotnjM0jnY5lkfOP7ve"
+          },
+          "followers": {
+            "href": null,
+            "total": 301642
+          },
+          "genres": [],
+          "href": "https://api.spotify.com/v1/artists/61qDotnjM0jnY5lkfOP7ve",
+          "id": "61qDotnjM0jnY5lkfOP7ve",
+          "images": [
+            {
+              "url": "https://i.scdn.co/image/ab6761610000e5eb1e8366050ddb70f1267cde51",
+              "height": 640,
+              "width": 640
+            },
+            {
+              "url": "https://i.scdn.co/image/ab676161000051741e8366050ddb70f1267cde51",
+              "height": 320,
+              "width": 320
+            },
+            {
+              "url": "https://i.scdn.co/image/ab6761610000f1781e8366050ddb70f1267cde51",
+              "height": 160,
+              "width": 160
+            }
+          ],
+          "name": "TKKG",
+          "popularity": 73,
+          "type": "artist",
+          "uri": "spotify:artist:61qDotnjM0jnY5lkfOP7ve"
+        },
+        {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/artist/6qLgFXNKPt6JC3VMzl1nIQ"
+          },
+          "followers": {
+            "href": null,
+            "total": 11
+          },
+          "genres": [],
+          "href": "https://api.spotify.com/v1/artists/6qLgFXNKPt6JC3VMzl1nIQ",
+          "id": "6qLgFXNKPt6JC3VMzl1nIQ",
+          "images": [
+            {
+              "url": "https://i.scdn.co/image/ab67616d0000b273d45b5a828452b6a8644a4c89",
+              "height": 640,
+              "width": 640
+            },
+            {
+              "url": "https://i.scdn.co/image/ab67616d00001e02d45b5a828452b6a8644a4c89",
+              "height": 300,
+              "width": 300
+            },
+            {
+              "url": "https://i.scdn.co/image/ab67616d00004851d45b5a828452b6a8644a4c89",
+              "height": 64,
+              "width": 64
+            }
+          ],
+          "name": "Taylor Swiftee",
+          "popularity": 0,
+          "type": "artist",
+          "uri": "spotify:artist:6qLgFXNKPt6JC3VMzl1nIQ"
+        },
+        {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/artist/14waR9FpjuHkqhd3DlMAYu"
+          },
+          "followers": {
+            "href": null,
+            "total": 149
+          },
+          "genres": [],
+          "href": "https://api.spotify.com/v1/artists/14waR9FpjuHkqhd3DlMAYu",
+          "id": "14waR9FpjuHkqhd3DlMAYu",
+          "images": [],
+          "name": "Taylor Swiftsz",
+          "popularity": 0,
+          "type": "artist",
+          "uri": "spotify:artist:14waR9FpjuHkqhd3DlMAYu"
+        },
+        {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/artist/3t2iKODSDyzoDJw7AsD99u"
+          },
+          "followers": {
+            "href": null,
+            "total": 368588
+          },
+          "genres": [],
+          "href": "https://api.spotify.com/v1/artists/3t2iKODSDyzoDJw7AsD99u",
+          "id": "3t2iKODSDyzoDJw7AsD99u",
+          "images": [
+            {
+              "url": "https://i.scdn.co/image/ab6761610000e5ebe83f3be9f66d84bfd7afba29",
+              "height": 640,
+              "width": 640
+            },
+            {
+              "url": "https://i.scdn.co/image/ab67616100005174e83f3be9f66d84bfd7afba29",
+              "height": 320,
+              "width": 320
+            },
+            {
+              "url": "https://i.scdn.co/image/ab6761610000f178e83f3be9f66d84bfd7afba29",
+              "height": 160,
+              "width": 160
+            }
+          ],
+          "name": "Bibi Blocksberg",
+          "popularity": 77,
+          "type": "artist",
+          "uri": "spotify:artist:3t2iKODSDyzoDJw7AsD99u"
+        },
+        {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/artist/0DwbGCdaD8YLRiVUEiV70Q"
+          },
+          "followers": {
+            "href": null,
+            "total": 4355
+          },
+          "genres": [],
+          "href": "https://api.spotify.com/v1/artists/0DwbGCdaD8YLRiVUEiV70Q",
+          "id": "0DwbGCdaD8YLRiVUEiV70Q",
+          "images": [
+            {
+              "url": "https://i.scdn.co/image/ab67616d0000b2738160a48bb1693050f496b11e",
+              "height": 640,
+              "width": 640
+            },
+            {
+              "url": "https://i.scdn.co/image/ab67616d00001e028160a48bb1693050f496b11e",
+              "height": 300,
+              "width": 300
+            },
+            {
+              "url": "https://i.scdn.co/image/ab67616d000048518160a48bb1693050f496b11e",
+              "height": 64,
+              "width": 64
+            }
+          ],
+          "name": "Taylor Swift Piano Covers",
+          "popularity": 24,
+          "type": "artist",
+          "uri": "spotify:artist:0DwbGCdaD8YLRiVUEiV70Q"
+        },
+        {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/artist/2cb45D6OIM93XthEyqBpqF"
+          },
+          "followers": {
+            "href": null,
+            "total": 12
+          },
+          "genres": [],
+          "href": "https://api.spotify.com/v1/artists/2cb45D6OIM93XthEyqBpqF",
+          "id": "2cb45D6OIM93XthEyqBpqF",
+          "images": [
+            {
+              "url": "https://i.scdn.co/image/ab67616d0000b273471ca686b25c5e5a984c9f81",
+              "height": 640,
+              "width": 640
+            },
+            {
+              "url": "https://i.scdn.co/image/ab67616d00001e02471ca686b25c5e5a984c9f81",
+              "height": 300,
+              "width": 300
+            },
+            {
+              "url": "https://i.scdn.co/image/ab67616d00004851471ca686b25c5e5a984c9f81",
+              "height": 64,
+              "width": 64
+            }
+          ],
+          "name": "Taylor Swift DV",
+          "popularity": 0,
+          "type": "artist",
+          "uri": "spotify:artist:2cb45D6OIM93XthEyqBpqF"
+        }
+      ]
+    }
+  }
+}
