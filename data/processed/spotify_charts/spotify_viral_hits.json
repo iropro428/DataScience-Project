@@ -1,0 +1,742 @@
+[
+  {
+    "week_date": "2023-02-23",
+    "artist": "PinkPantheress, Ice Spice",
+    "track": "Boy's a liar Pt. 2",
+    "streams": 39172306,
+    "position": 3,
+    "weeks_on_chart": 3,
+    "viral_hit": true,
+    "uri": "spotify:track:6AQbmUe0Qwf5PZnt4HmTXv"
+  },
+  {
+    "week_date": "2023-03-30",
+    "artist": "ROSAL\u00cdA, Rauw Alejandro",
+    "track": "BESO",
+    "streams": 30932834,
+    "position": 5,
+    "weeks_on_chart": 1,
+    "viral_hit": true,
+    "uri": "spotify:track:609E1JCInJncactoMmkDon"
+  },
+  {
+    "week_date": "2023-03-30",
+    "artist": "Eslabon Armado, Peso Pluma",
+    "track": "Ella Baila Sola",
+    "streams": 26380972,
+    "position": 9,
+    "weeks_on_chart": 2,
+    "viral_hit": true,
+    "uri": "spotify:track:3dnP0JxCgygwQH9Gm7q7nb"
+  },
+  {
+    "week_date": "2023-03-30",
+    "artist": "Yng Lvcas, Peso Pluma",
+    "track": "La Bebe - Remix",
+    "streams": 26323157,
+    "position": 10,
+    "weeks_on_chart": 2,
+    "viral_hit": true,
+    "uri": "spotify:track:2UW7JaomAMuX9pZrjVpHAU"
+  },
+  {
+    "week_date": "2023-04-27",
+    "artist": "Grupo Frontera, Bad Bunny",
+    "track": "un x100to",
+    "streams": 56308592,
+    "position": 2,
+    "weeks_on_chart": 2,
+    "viral_hit": true,
+    "uri": "spotify:track:6pD0ufEQq0xdHSsRbg9LBK"
+  },
+  {
+    "week_date": "2023-04-27",
+    "artist": "David Kushner",
+    "track": "Daylight",
+    "streams": 32418390,
+    "position": 5,
+    "weeks_on_chart": 2,
+    "viral_hit": true,
+    "uri": "spotify:track:1odExI7RdWc4BT515LTAwj"
+  },
+  {
+    "week_date": "2023-04-27",
+    "artist": "Feid, Young Miko",
+    "track": "CLASSY 101",
+    "streams": 27370842,
+    "position": 8,
+    "weeks_on_chart": 4,
+    "viral_hit": true,
+    "uri": "spotify:track:6XSqqQIy7Lm7SnwxS4NrGx"
+  },
+  {
+    "week_date": "2023-06-01",
+    "artist": "Bad Bunny",
+    "track": "WHERE SHE GOES",
+    "streams": 37822318,
+    "position": 2,
+    "weeks_on_chart": 2,
+    "viral_hit": true,
+    "uri": "spotify:track:7ro0hRteUMfnOioTFI5TG1"
+  },
+  {
+    "week_date": "2023-06-01",
+    "artist": "Fuerza Regida",
+    "track": "TQM",
+    "streams": 21608146,
+    "position": 10,
+    "weeks_on_chart": 2,
+    "viral_hit": true,
+    "uri": "spotify:track:368eeEO3Y2uZUQ6S5oIjcu"
+  },
+  {
+    "week_date": "2023-06-29",
+    "artist": "Peso Pluma, Gabito Ballesteros, Junior H",
+    "track": "LADY GAGA",
+    "streams": 23357869,
+    "position": 9,
+    "weeks_on_chart": 1,
+    "viral_hit": true,
+    "uri": "spotify:track:0WCxpmafw3tOlUmiilGbsy"
+  },
+  {
+    "week_date": "2023-07-27",
+    "artist": "Jung Kook, Latto",
+    "track": "Seven (feat. Latto)",
+    "streams": 76886669,
+    "position": 1,
+    "weeks_on_chart": 2,
+    "viral_hit": true,
+    "uri": "spotify:track:7x9aauaA9cu6tyfpHnqDLo"
+  },
+  {
+    "week_date": "2023-07-27",
+    "artist": "Myke Towers",
+    "track": "LALA",
+    "streams": 39567286,
+    "position": 2,
+    "weeks_on_chart": 4,
+    "viral_hit": true,
+    "uri": "spotify:track:7ABLbnD53cQK00mhcaOUVG"
+  },
+  {
+    "week_date": "2023-07-27",
+    "artist": "Travis Scott, Bad Bunny, The Weeknd",
+    "track": "K-POP",
+    "streams": 33136019,
+    "position": 3,
+    "weeks_on_chart": 1,
+    "viral_hit": true,
+    "uri": "spotify:track:5L3ecxQnQ9qTBmnLQiwf0C"
+  },
+  {
+    "week_date": "2023-07-27",
+    "artist": "Olivia Rodrigo",
+    "track": "vampire",
+    "streams": 31102434,
+    "position": 5,
+    "weeks_on_chart": 4,
+    "viral_hit": true,
+    "uri": "spotify:track:3k79jB4aGmMDUQzEwa46Rz"
+  },
+  {
+    "week_date": "2023-07-27",
+    "artist": "Billie Eilish",
+    "track": "What Was I Made For? [From The Motion Picture \"Barbie\"]",
+    "streams": 30975425,
+    "position": 6,
+    "weeks_on_chart": 2,
+    "viral_hit": true,
+    "uri": "spotify:track:6wf7Yu7cxBSPrRlWeSeK0Q"
+  },
+  {
+    "week_date": "2023-07-27",
+    "artist": "NewJeans",
+    "track": "Super Shy",
+    "streams": 28439942,
+    "position": 9,
+    "weeks_on_chart": 3,
+    "viral_hit": true,
+    "uri": "spotify:track:5sdQOyqq2IDhvmx2lHOpwd"
+  },
+  {
+    "week_date": "2023-07-27",
+    "artist": "Quevedo",
+    "track": "Columbia",
+    "streams": 27367357,
+    "position": 10,
+    "weeks_on_chart": 3,
+    "viral_hit": true,
+    "uri": "spotify:track:6XbtvPmIpyCbjuT0e8cQtp"
+  },
+  {
+    "week_date": "2023-08-31",
+    "artist": "Doja Cat",
+    "track": "Paint The Town Red",
+    "streams": 40066955,
+    "position": 2,
+    "weeks_on_chart": 4,
+    "viral_hit": true,
+    "uri": "spotify:track:2IGMVunIBsBLtEQyoI1Mu7"
+  },
+  {
+    "week_date": "2023-08-31",
+    "artist": "KAROL G, Peso Pluma",
+    "track": "QLONA",
+    "streams": 26964890,
+    "position": 7,
+    "weeks_on_chart": 3,
+    "viral_hit": true,
+    "uri": "spotify:track:5RqSsdzTNPX1uzkmlHCFvK"
+  },
+  {
+    "week_date": "2023-09-28",
+    "artist": "Kenya Grace",
+    "track": "Strangers",
+    "streams": 30333437,
+    "position": 4,
+    "weeks_on_chart": 4,
+    "viral_hit": true,
+    "uri": "spotify:track:5mjYQaktjmjcMKcUIcqz4s"
+  },
+  {
+    "week_date": "2023-09-28",
+    "artist": "Tate McRae",
+    "track": "greedy",
+    "streams": 27103985,
+    "position": 6,
+    "weeks_on_chart": 2,
+    "viral_hit": true,
+    "uri": "spotify:track:3rUGC1vUpkDG9CZFHMur1t"
+  },
+  {
+    "week_date": "2023-10-26",
+    "artist": "Bad Bunny",
+    "track": "MONACO",
+    "streams": 36609863,
+    "position": 4,
+    "weeks_on_chart": 2,
+    "viral_hit": true,
+    "uri": "spotify:track:4MjDJD8cW7iVeWInc2Bdyj"
+  },
+  {
+    "week_date": "2023-10-26",
+    "artist": "Bad Bunny, Feid",
+    "track": "PERRO NEGRO",
+    "streams": 35627250,
+    "position": 5,
+    "weeks_on_chart": 2,
+    "viral_hit": true,
+    "uri": "spotify:track:7iQXYTyuG13aoeHxGG28Nh"
+  },
+  {
+    "week_date": "2023-10-26",
+    "artist": "Jung Kook, Jack Harlow",
+    "track": "3D (feat. Jack Harlow)",
+    "streams": 25756565,
+    "position": 10,
+    "weeks_on_chart": 4,
+    "viral_hit": true,
+    "uri": "spotify:track:01qFKNWq73UfEslI0GvumE"
+  },
+  {
+    "week_date": "2023-11-30",
+    "artist": "Jack Harlow",
+    "track": "Lovin On Me",
+    "streams": 30326682,
+    "position": 5,
+    "weeks_on_chart": 3,
+    "viral_hit": true,
+    "uri": "spotify:track:4xhsWYTOGcal8zt0J161CU"
+  },
+  {
+    "week_date": "2023-11-30",
+    "artist": "Jung Kook",
+    "track": "Standing Next to You",
+    "streams": 25076832,
+    "position": 10,
+    "weeks_on_chart": 4,
+    "viral_hit": true,
+    "uri": "spotify:track:2KslE17cAJNHTsI2MI0jb2"
+  },
+  {
+    "week_date": "2024-02-01",
+    "artist": "Ariana Grande",
+    "track": "yes, and?",
+    "streams": 29404865,
+    "position": 6,
+    "weeks_on_chart": 3,
+    "viral_hit": true,
+    "uri": "spotify:track:7gaA3wERFkFkgivjwbSvkG"
+  },
+  {
+    "week_date": "2024-02-01",
+    "artist": "21 Savage",
+    "track": "redrum",
+    "streams": 28695407,
+    "position": 9,
+    "weeks_on_chart": 3,
+    "viral_hit": true,
+    "uri": "spotify:track:52eIcoLUM25zbQupAZYoFh"
+  },
+  {
+    "week_date": "2024-02-29",
+    "artist": "Beyonc\u00e9",
+    "track": "TEXAS HOLD 'EM",
+    "streams": 40652527,
+    "position": 2,
+    "weeks_on_chart": 3,
+    "viral_hit": true,
+    "uri": "spotify:track:7AYmToZ5y67fBjq4RLFbuq"
+  },
+  {
+    "week_date": "2024-02-29",
+    "artist": "\u00a5$, Kanye West, Ty Dolla $ign",
+    "track": "CARNIVAL",
+    "streams": 40242905,
+    "position": 3,
+    "weeks_on_chart": 3,
+    "viral_hit": true,
+    "uri": "spotify:track:3w0w2T288dec0mgeZZqoNN"
+  },
+  {
+    "week_date": "2024-03-28",
+    "artist": "Ariana Grande",
+    "track": "we can't be friends (wait for your love)",
+    "streams": 55136708,
+    "position": 2,
+    "weeks_on_chart": 3,
+    "viral_hit": true,
+    "uri": "spotify:track:51ZQ1vr10ffzbwIjDCwqm4"
+  },
+  {
+    "week_date": "2024-03-28",
+    "artist": "Future, Metro Boomin, Kendrick Lamar",
+    "track": "Like That",
+    "streams": 48998189,
+    "position": 4,
+    "weeks_on_chart": 1,
+    "viral_hit": true,
+    "uri": "spotify:track:2tudvzsrR56uom6smgOcSf"
+  },
+  {
+    "week_date": "2024-03-28",
+    "artist": "Hozier",
+    "track": "Too Sweet",
+    "streams": 31175099,
+    "position": 8,
+    "weeks_on_chart": 1,
+    "viral_hit": true,
+    "uri": "spotify:track:0AjmK0Eai4zGrLaJwPvrDp"
+  },
+  {
+    "week_date": "2024-04-25",
+    "artist": "Taylor Swift, Post Malone",
+    "track": "Fortnight (feat. Post Malone)",
+    "streams": 102878399,
+    "position": 1,
+    "weeks_on_chart": 1,
+    "viral_hit": true,
+    "uri": "spotify:track:2OzhQlSqBEmt7hmkYxfT6m"
+  },
+  {
+    "week_date": "2024-04-25",
+    "artist": "Taylor Swift",
+    "track": "Down Bad",
+    "streams": 66123951,
+    "position": 2,
+    "weeks_on_chart": 1,
+    "viral_hit": true,
+    "uri": "spotify:track:2F3N9tdombb64aW6VtZOdo"
+  },
+  {
+    "week_date": "2024-04-25",
+    "artist": "Taylor Swift",
+    "track": "So Long, London",
+    "streams": 61238184,
+    "position": 4,
+    "weeks_on_chart": 1,
+    "viral_hit": true,
+    "uri": "spotify:track:3Vevii7qKqrmW8CcyzBHDl"
+  },
+  {
+    "week_date": "2024-04-25",
+    "artist": "Taylor Swift",
+    "track": "I Can Do It With a Broken Heart",
+    "streams": 61235217,
+    "position": 5,
+    "weeks_on_chart": 1,
+    "viral_hit": true,
+    "uri": "spotify:track:4q5YezDOIPcoLr8R81x9qy"
+  },
+  {
+    "week_date": "2024-04-25",
+    "artist": "Taylor Swift",
+    "track": "The Tortured Poets Department",
+    "streams": 59746801,
+    "position": 6,
+    "weeks_on_chart": 1,
+    "viral_hit": true,
+    "uri": "spotify:track:3NMrVbIVWT3fPXBj0rNDKG"
+  },
+  {
+    "week_date": "2024-04-25",
+    "artist": "Taylor Swift",
+    "track": "My Boy Only Breaks His Favorite Toys",
+    "streams": 57022276,
+    "position": 7,
+    "weeks_on_chart": 1,
+    "viral_hit": true,
+    "uri": "spotify:track:2XXwLdtuAcE0HSCu61ijAb"
+  },
+  {
+    "week_date": "2024-04-25",
+    "artist": "Taylor Swift",
+    "track": "But Daddy I Love Him",
+    "streams": 53434247,
+    "position": 9,
+    "weeks_on_chart": 1,
+    "viral_hit": true,
+    "uri": "spotify:track:5og4Qzt92jJzVDkOtSEilb"
+  },
+  {
+    "week_date": "2024-04-25",
+    "artist": "Taylor Swift, Florence + The Machine",
+    "track": "Florida!!! (feat. Florence + The Machine)",
+    "streams": 50743539,
+    "position": 10,
+    "weeks_on_chart": 1,
+    "viral_hit": true,
+    "uri": "spotify:track:3ZVFcD8Wlw9T9klGqmJf9F"
+  },
+  {
+    "week_date": "2024-05-30",
+    "artist": "Billie Eilish",
+    "track": "LUNCH",
+    "streams": 63286378,
+    "position": 1,
+    "weeks_on_chart": 2,
+    "viral_hit": true,
+    "uri": "spotify:track:629DixmZGHc7ILtEntuiWE"
+  },
+  {
+    "week_date": "2024-05-30",
+    "artist": "Kendrick Lamar",
+    "track": "Not Like Us",
+    "streams": 52725079,
+    "position": 4,
+    "weeks_on_chart": 4,
+    "viral_hit": true,
+    "uri": "spotify:track:6AI3ezQ4o3HUoP6Dhudph3"
+  },
+  {
+    "week_date": "2024-05-30",
+    "artist": "Billie Eilish",
+    "track": "BIRDS OF A FEATHER",
+    "streams": 48335831,
+    "position": 5,
+    "weeks_on_chart": 2,
+    "viral_hit": true,
+    "uri": "spotify:track:6dOtVTDdiauQNBQEDOtlAB"
+  },
+  {
+    "week_date": "2024-05-30",
+    "artist": "Post Malone, Morgan Wallen",
+    "track": "I Had Some Help (Feat. Morgan Wallen)",
+    "streams": 45242273,
+    "position": 7,
+    "weeks_on_chart": 3,
+    "viral_hit": true,
+    "uri": "spotify:track:7221xIgOnuakPdLqT0F3nP"
+  },
+  {
+    "week_date": "2024-05-30",
+    "artist": "Billie Eilish",
+    "track": "CHIHIRO",
+    "streams": 44059526,
+    "position": 8,
+    "weeks_on_chart": 2,
+    "viral_hit": true,
+    "uri": "spotify:track:7BRD7x5pt8Lqa1eGYC4dzj"
+  },
+  {
+    "week_date": "2024-06-27",
+    "artist": "Sabrina Carpenter",
+    "track": "Please Please Please",
+    "streams": 70220721,
+    "position": 1,
+    "weeks_on_chart": 3,
+    "viral_hit": true,
+    "uri": "spotify:track:5N3hjp1WNayUPZrA8kJmJP"
+  },
+  {
+    "week_date": "2024-08-01",
+    "artist": "Jimin",
+    "track": "Who",
+    "streams": 64762611,
+    "position": 1,
+    "weeks_on_chart": 2,
+    "viral_hit": true,
+    "uri": "spotify:track:7tI8dRuH2Yc6RuoTjxo4dU"
+  },
+  {
+    "week_date": "2024-08-29",
+    "artist": "Lady Gaga, Bruno Mars",
+    "track": "Die With A Smile",
+    "streams": 64681639,
+    "position": 1,
+    "weeks_on_chart": 2,
+    "viral_hit": true,
+    "uri": "spotify:track:2plbrEY59IikOBgBGLjaoe"
+  },
+  {
+    "week_date": "2024-08-29",
+    "artist": "Sabrina Carpenter",
+    "track": "Taste",
+    "streams": 53682650,
+    "position": 6,
+    "weeks_on_chart": 1,
+    "viral_hit": true,
+    "uri": "spotify:track:5G2f63n7IPVPPjfNIGih7Q"
+  },
+  {
+    "week_date": "2024-09-26",
+    "artist": "Linkin Park",
+    "track": "The Emptiness Machine",
+    "streams": 31622024,
+    "position": 9,
+    "weeks_on_chart": 3,
+    "viral_hit": true,
+    "uri": "spotify:track:2PnlsTsOTLE5jnBnNe2K0A"
+  },
+  {
+    "week_date": "2024-10-31",
+    "artist": "ROS\u00c9, Bruno Mars",
+    "track": "APT.",
+    "streams": 87041494,
+    "position": 1,
+    "weeks_on_chart": 2,
+    "viral_hit": true,
+    "uri": "spotify:track:5vNRhkKd0yEAg8suGBpjeY"
+  },
+  {
+    "week_date": "2024-10-31",
+    "artist": "Oscar Maydon, Fuerza Regida",
+    "track": "Tu Boda",
+    "streams": 40246472,
+    "position": 5,
+    "weeks_on_chart": 4,
+    "viral_hit": true,
+    "uri": "spotify:track:1cOboCuWYI2osTOfolMRS6"
+  },
+  {
+    "week_date": "2024-10-31",
+    "artist": "Tyler, The Creator",
+    "track": "Noid",
+    "streams": 29980387,
+    "position": 9,
+    "weeks_on_chart": 2,
+    "viral_hit": true,
+    "uri": "spotify:track:1YdtGoSYDvVQKoUqSDXX41"
+  },
+  {
+    "week_date": "2024-10-31",
+    "artist": "Tyler, The Creator, Daniel Caesar",
+    "track": "St. Chroma (feat. Daniel Caesar)",
+    "streams": 29514831,
+    "position": 10,
+    "weeks_on_chart": 1,
+    "viral_hit": true,
+    "uri": "spotify:track:1QoyuMHNBe7lg3YW4Qtll4"
+  },
+  {
+    "week_date": "2024-11-28",
+    "artist": "Kendrick Lamar, SZA",
+    "track": "luther (with sza)",
+    "streams": 47282944,
+    "position": 3,
+    "weeks_on_chart": 1,
+    "viral_hit": true,
+    "uri": "spotify:track:2CGNAOSuO1MEFCbBRgUzjd"
+  },
+  {
+    "week_date": "2024-11-28",
+    "artist": "Kendrick Lamar",
+    "track": "squabble up",
+    "streams": 44764851,
+    "position": 5,
+    "weeks_on_chart": 1,
+    "viral_hit": true,
+    "uri": "spotify:track:0nj9Bq5sHDiTxSHunhgkFb"
+  },
+  {
+    "week_date": "2024-11-28",
+    "artist": "Kendrick Lamar, Lefty Gunplay",
+    "track": "tv off (feat. lefty gunplay)",
+    "streams": 41864595,
+    "position": 7,
+    "weeks_on_chart": 1,
+    "viral_hit": true,
+    "uri": "spotify:track:0aB0v4027ukVziUGwVGYpG"
+  },
+  {
+    "week_date": "2024-11-28",
+    "artist": "Kendrick Lamar",
+    "track": "wacced out murals",
+    "streams": 33916700,
+    "position": 9,
+    "weeks_on_chart": 1,
+    "viral_hit": true,
+    "uri": "spotify:track:5gOfC9UzZQzTyShqPMrpjT"
+  },
+  {
+    "week_date": "2025-01-30",
+    "artist": "Bad Bunny",
+    "track": "DtMF",
+    "streams": 65855640,
+    "position": 1,
+    "weeks_on_chart": 4,
+    "viral_hit": true,
+    "uri": "spotify:track:3sK8wGT43QFpWrvNQsrQya"
+  },
+  {
+    "week_date": "2025-01-30",
+    "artist": "Bad Bunny",
+    "track": "BAILE INoLVIDABLE",
+    "streams": 43608685,
+    "position": 4,
+    "weeks_on_chart": 4,
+    "viral_hit": true,
+    "uri": "spotify:track:2lTm559tuIvatlT1u0JYG2"
+  },
+  {
+    "week_date": "2025-01-30",
+    "artist": "Bad Bunny",
+    "track": "NUEVAYoL",
+    "streams": 39126640,
+    "position": 6,
+    "weeks_on_chart": 4,
+    "viral_hit": true,
+    "uri": "spotify:track:5TFD2bmFKGhoCRbX61nXY5"
+  },
+  {
+    "week_date": "2025-01-30",
+    "artist": "Bad Bunny",
+    "track": "VOY A LLeVARTE PA PR",
+    "streams": 32451496,
+    "position": 9,
+    "weeks_on_chart": 4,
+    "viral_hit": true,
+    "uri": "spotify:track:59D4DOkspUbWyMmbAPQkxZ"
+  },
+  {
+    "week_date": "2025-03-27",
+    "artist": "Doechii",
+    "track": "Anxiety",
+    "streams": 35445198,
+    "position": 4,
+    "weeks_on_chart": 3,
+    "viral_hit": true,
+    "uri": "spotify:track:3LPLRNr58Z9Pn0clnEtkXb"
+  },
+  {
+    "week_date": "2025-03-27",
+    "artist": "JENNIE",
+    "track": "like JENNIE",
+    "streams": 27564233,
+    "position": 9,
+    "weeks_on_chart": 3,
+    "viral_hit": true,
+    "uri": "spotify:track:0fK7ie6XwGxQTIkpFoWkd1"
+  },
+  {
+    "week_date": "2025-05-29",
+    "artist": "Jin",
+    "track": "Don\u2019t Say You Love Me",
+    "streams": 37534471,
+    "position": 2,
+    "weeks_on_chart": 2,
+    "viral_hit": true,
+    "uri": "spotify:track:27xkOIER6uDLKALIelHylZ"
+  },
+  {
+    "week_date": "2025-06-26",
+    "artist": "Sabrina Carpenter",
+    "track": "Manchild",
+    "streams": 32649685,
+    "position": 3,
+    "weeks_on_chart": 3,
+    "viral_hit": true,
+    "uri": "spotify:track:42UBPzRMh5yyz0EDPr6fr1"
+  },
+  {
+    "week_date": "2025-07-31",
+    "artist": "Justin Bieber",
+    "track": "DAISIES",
+    "streams": 32712866,
+    "position": 4,
+    "weeks_on_chart": 3,
+    "viral_hit": true,
+    "uri": "spotify:track:5BZsQlgw21vDOAjoqkNgKb"
+  },
+  {
+    "week_date": "2025-07-31",
+    "artist": "Tanishk Bagchi, Faheem Abdullah, Arslan Nizami, Irshad Kamil",
+    "track": "Saiyaara (From \"Saiyaara\")",
+    "streams": 30371053,
+    "position": 6,
+    "weeks_on_chart": 2,
+    "viral_hit": true,
+    "uri": "spotify:track:1D35BJlymlh6OLD75WupSF"
+  },
+  {
+    "week_date": "2025-07-31",
+    "artist": "BLACKPINK",
+    "track": "JUMP",
+    "streams": 28360963,
+    "position": 8,
+    "weeks_on_chart": 3,
+    "viral_hit": true,
+    "uri": "spotify:track:5H1sKFMzDeMtXwND3V6hRY"
+  },
+  {
+    "week_date": "2025-10-30",
+    "artist": "Taylor Swift",
+    "track": "The Fate of Ophelia",
+    "streams": 58302513,
+    "position": 1,
+    "weeks_on_chart": 4,
+    "viral_hit": true,
+    "uri": "spotify:track:53iuhJlwXhSER5J2IYYv1W"
+  },
+  {
+    "week_date": "2025-10-30",
+    "artist": "Taylor Swift",
+    "track": "Opalite",
+    "streams": 35175933,
+    "position": 3,
+    "weeks_on_chart": 4,
+    "viral_hit": true,
+    "uri": "spotify:track:3yWuTOYDztXjZxdE2cIRUa"
+  },
+  {
+    "week_date": "2026-01-29",
+    "artist": "Harry Styles",
+    "track": "Aperture",
+    "streams": 39380028,
+    "position": 2,
+    "weeks_on_chart": 1,
+    "viral_hit": true,
+    "uri": "spotify:track:45Z3m6yazmAi4jZuW0tzW0"
+  },
+  {
+    "week_date": "2026-01-29",
+    "artist": "Bruno Mars",
+    "track": "I Just Might",
+    "streams": 28562625,
+    "position": 8,
+    "weeks_on_chart": 3,
+    "viral_hit": true,
+    "uri": "spotify:track:12bYYQaLqHliSXvRIYlq8G"
+  }
+]
