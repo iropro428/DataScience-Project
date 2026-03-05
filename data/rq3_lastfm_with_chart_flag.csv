@@ -1,0 +1,496 @@
+name,lastfm_url,listeners,playcount,tags,collected_at,artist_norm,in_charts
+PinkPantheress,https://www.last.fm/music/PinkPantheress,2922490,302010843,"electronic, pop, 2-step, rnb, dance-pop",2026-03-04T22:18:06.055971,pinkpantheress,True
+The Weeknd,https://www.last.fm/music/The+Weeknd,5233527,1095012174,"rnb, electronic, dubstep, Canadian, prog-rnb",2026-03-04T22:18:07.889583,the weeknd,True
+Kendrick Lamar,https://www.last.fm/music/Kendrick+Lamar,5023800,1010480682,"Hip-Hop, rap, west coast, hip hop, compton",2026-03-04T22:18:09.026108,kendrick lamar,True
+Radiohead,https://www.last.fm/music/Radiohead,8149620,1346223611,"rock, alternative, alternative rock, indie, electronic",2026-03-04T22:18:09.978167,radiohead,True
+Taylor Swift,https://www.last.fm/music/Taylor+Swift,5863513,3608500687,"country, pop, female vocalists, singer-songwriter, acoustic",2026-03-04T22:18:11.440466,taylor swift,True
+Rihanna,https://www.last.fm/music/Rihanna,8203450,586375817,"pop, rnb, female vocalists, dance, Hip-Hop",2026-03-04T22:18:12.951257,rihanna,True
+Kanye West,https://www.last.fm/music/Kanye+West,7864740,1487947021,"Hip-Hop, rap, hip hop, rnb, Kanye West",2026-03-04T22:18:13.818563,kanye west,True
+Charli xcx,https://www.last.fm/music/Charli+xcx,3704686,697501352,"pop, synthpop, electronic, female vocalists, Electroclash",2026-03-04T22:18:14.547308,charli xcx,True
+Lady Gaga,https://www.last.fm/music/Lady+Gaga,7632370,1011759640,"pop, dance, electronic, female vocalists, female vocalist",2026-03-04T22:18:16.523961,lady gaga,True
+Drake,https://www.last.fm/music/Drake,6646671,1128317449,"Hip-Hop, rap, rnb, hip hop, Canadian",2026-03-04T22:18:17.726639,drake,True
+"Tyler, The Creator","https://www.last.fm/music/Tyler,+The+Creator",4255100,1027180546,"Hip-Hop, rap, ofwgkta, underground hip-hop, swag",2026-03-04T22:18:18.643021,"tyler, the creator",False
+Ariana Grande,https://www.last.fm/music/Ariana+Grande,4406075,1079846196,"pop, rnb, female vocalists, Ariana Grande, american",2026-03-04T22:18:19.592879,ariana grande,True
+Bad Bunny,https://www.last.fm/music/Bad+Bunny,2475994,382878834,"Reggaeton, trap, latin, puerto rico, trap latino",2026-03-04T22:18:21.929077,bad bunny,True
+Tame Impala,https://www.last.fm/music/Tame+Impala,4217192,399575749,"Psychedelic Rock, psychedelic, indie rock, australian, rock",2026-03-04T22:18:22.610617,tame impala,True
+Lana Del Rey,https://www.last.fm/music/Lana+Del+Rey,5180414,1547583167,"indie, female vocalists, indie pop, pop, alternative",2026-03-04T22:18:24.327789,lana del rey,True
+Sabrina Carpenter,https://www.last.fm/music/Sabrina+Carpenter,3172298,627272775,"pop, female vocalists, rnb, american, my top songs",2026-03-04T22:18:25.707028,sabrina carpenter,True
+Bruno Mars,https://www.last.fm/music/Bruno+Mars,5149729,287374114,"pop, rnb, male vocalists, r&b, slow jams",2026-03-04T22:18:26.409346,bruno mars,True
+Billie Eilish,https://www.last.fm/music/Billie+Eilish,4157414,816132082,"pop, indie pop, electropop, art pop, alternative",2026-03-04T22:18:28.528548,billie eilish,True
+Gorillaz,https://www.last.fm/music/Gorillaz,6779023,501969515,"electronic, alternative, Hip-Hop, rock, indie",2026-03-04T22:18:29.899824,gorillaz,True
+Arctic Monkeys,https://www.last.fm/music/Arctic+Monkeys,7015740,918368045,"indie rock, indie, british, alternative, rock",2026-03-04T22:18:32.628885,arctic monkeys,True
+Frank Ocean,https://www.last.fm/music/Frank+Ocean,4193451,758062229,"rnb, soul, Hip-Hop, r&b, ofwgkta",2026-03-04T22:18:35.245427,frank ocean,True
+Mitski,https://www.last.fm/music/Mitski,3201407,643218175,"indie rock, indie, indie pop, singer-songwriter, dream pop",2026-03-04T22:18:36.240577,mitski,True
+Paramore,https://www.last.fm/music/Paramore,5558244,570509832,"rock, pop punk, alternative, female vocalists, emo",2026-03-04T22:18:37.056167,paramore,False
+A$AP Rocky,https://www.last.fm/music/A$AP+Rocky,3389842,357103920,"Hip-Hop, rap, underground hip-hop, swag, cloud rap",2026-03-04T22:18:38.199943,a$ap rocky,True
+Doja Cat,https://www.last.fm/music/Doja+Cat,3560361,456043431,"pop, rnb, rap, Hip-Hop, hip hop",2026-03-04T22:18:39.080154,doja cat,True
+Chappell Roan,https://www.last.fm/music/Chappell+Roan,2504682,323368999,"pop, indie pop, synthpop, electropop, queer",2026-03-04T22:18:39.862818,chappell roan,True
+Don Toliver,https://www.last.fm/music/Don+Toliver,2440803,255139710,"rap, trap, Hip-Hop, rnb, texas",2026-03-04T22:18:40.548265,don toliver,True
+The Smiths,https://www.last.fm/music/The+Smiths,4998810,526469583,"post-punk, indie, new wave, 80s, alternative",2026-03-04T22:18:45.316876,the smiths,False
+Fleetwood Mac,https://www.last.fm/music/Fleetwood+Mac,4808547,289097731,"classic rock, rock, 70s, blues, pop",2026-03-04T22:18:45.900923,fleetwood mac,True
+Justin Bieber,https://www.last.fm/music/Justin+Bieber,4706695,312898754,"pop, black metal, rnb, justin bieber, Hip-Hop",2026-03-04T22:18:50.915342,justin bieber,True
+The Marías,https://www.last.fm/music/The+Mar%C3%ADas,2420147,226251575,"dream pop, indie pop, bedroom pop, indie, Sophisti-Pop",2026-03-04T22:18:51.540948,the marías,True
+Deftones,https://www.last.fm/music/Deftones,4165017,554151364,"Nu Metal, alternative, metal, alternative rock, alternative metal",2026-03-04T22:18:52.272953,deftones,False
+Linkin Park,https://www.last.fm/music/Linkin+Park,6856669,726615747,"Nu Metal, rock, alternative rock, alternative, metal",2026-03-04T22:18:53.033719,linkin park,True
+The Neighbourhood,https://www.last.fm/music/The+Neighbourhood,3887320,384820783,"indie, indie rock, indie pop, rock, alternative",2026-03-04T22:18:53.736203,the neighbourhood,True
+SZA,https://www.last.fm/music/SZA,3438127,575399022,"rnb, soul, alternative rnb, electronic, Neo-Soul",2026-03-04T22:19:10.600231,sza,True
+Travis Scott,https://www.last.fm/music/+noredirect/Travis+Scott,3280150,667663266,,2026-03-04T22:19:19.013913,travis scott,True
+Coldplay,https://www.last.fm/music/Coldplay,9019488,772721635,"rock, alternative, britpop, alternative rock, indie",2026-03-04T22:19:19.581808,coldplay,True
+Childish Gambino,https://www.last.fm/music/Childish+Gambino,3744860,319453833,"Hip-Hop, rap, hip hop, indie, underground hip-hop",2026-03-04T22:19:20.235652,childish gambino,False
+Michael Jackson,https://www.last.fm/music/Michael+Jackson,6744770,344044785,"pop, 80s, dance, soul, funk",2026-03-04T22:19:20.902387,michael jackson,True
+Clairo,https://www.last.fm/music/Clairo,2869840,339576932,"bedroom pop, indie pop, dream pop, Lo-Fi, pop",2026-03-04T22:19:21.548761,clairo,False
+Playboi Carti,https://www.last.fm/music/Playboi+Carti,2438179,765040341,"trap, cloud rap, Hip-Hop, rap, rage",2026-03-04T22:19:22.133621,playboi carti,True
+Future,https://www.last.fm/music/Future,3171840,449794315,"Hip-Hop, rap, trap, hip hop, atlanta",2026-03-04T22:19:22.706395,future,True
+Olivia Rodrigo,https://www.last.fm/music/Olivia+Rodrigo,3027822,541878471,"pop, pop rock, rock, female vocalists, indie pop",2026-03-04T22:19:23.377815,olivia rodrigo,True
+TV Girl,https://www.last.fm/music/TV+Girl,2784803,282983259,"indie pop, Lo-Fi, indie, chillwave, pop",2026-03-04T22:19:24.051264,tv girl,True
+Twenty One Pilots,https://www.last.fm/music/Twenty+One+Pilots,3291476,419608422,"electronic, alternative, rap, indie pop, indie",2026-03-04T22:19:24.679335,twenty one pilots,True
+Harry Styles,https://www.last.fm/music/Harry+Styles,3197410,403975946,"pop, rock, pop rock, alternative, british",2026-03-04T22:19:25.240153,harry styles,True
+Joji,https://www.last.fm/music/Joji,2956634,361580479,"Lo-Fi, rnb, Hip-Hop, alternative rnb, japanese",2026-03-04T22:19:25.807853,joji,True
+Beyoncé,https://www.last.fm/music/+noredirect/Beyonc%C3%A9,6322308,686725671,"rnb, pop, female vocalists, soul, Hip-Hop",2026-03-04T22:19:39.537466,beyoncé,True
+Mac Miller,https://www.last.fm/music/Mac+Miller,3466486,422425806,"Hip-Hop, rap, underground hip-hop, hip hop, pittsburgh",2026-03-04T22:19:40.330638,mac miller,False
+sombr,https://www.last.fm/music/sombr,1741726,76129357,"indie, alternative, rock, singer-songwriter, indie rock",2026-03-04T22:19:41.249620,sombr,True
+Nirvana,https://www.last.fm/music/Nirvana,7457169,571999238,"Grunge, rock, alternative rock, alternative, 90s",2026-03-04T22:19:41.883807,nirvana,True
+Olivia Dean,https://www.last.fm/music/Olivia+Dean,1335764,65672603,"soul, rnb, pop, indie, female vocalists",2026-03-04T22:19:42.530828,olivia dean,True
+The Beatles,https://www.last.fm/music/The+Beatles,6445190,1084445788,"classic rock, rock, british, 60s, pop",2026-03-04T22:19:43.387563,the beatles,False
+Lil Uzi Vert,https://www.last.fm/music/Lil+Uzi+Vert,2694002,421039099,"trap, Hip-Hop, rap, emo rap, pop rap",2026-03-04T22:19:44.604744,lil uzi vert,True
+Britney Spears,https://www.last.fm/music/Britney+Spears,6372536,487801745,"pop, dance, female vocalists, Britney Spears, legend",2026-03-04T22:19:45.703639,britney spears,True
+Katy Perry,https://www.last.fm/music/Katy+Perry,7048299,429941777,"pop, female vocalists, pop rock, indie, rock",2026-03-04T22:19:46.447049,katy perry,True
+Zara Larsson,https://www.last.fm/music/Zara+Larsson,2185312,77760970,"pop, swedish, female vocalists, indie, Sweden",2026-03-04T22:19:47.162408,zara larsson,True
+Kali Uchis,https://www.last.fm/music/Kali+Uchis,3011779,307120156,"rnb, Neo-Soul, soul, alternative rnb, pop",2026-03-04T22:19:48.842686,kali uchis,True
+Lorde,https://www.last.fm/music/Lorde,3672072,436545887,"pop, indie pop, electronic, indie, New Zealand",2026-03-04T22:19:49.416260,lorde,True
+Maroon 5,https://www.last.fm/music/Maroon+5,6564586,281970159,"pop rock, rock, pop, alternative, alternative rock",2026-03-04T22:19:50.118840,maroon 5,True
+beabadoobee,https://www.last.fm/music/beabadoobee,2554484,309200514,"indie pop, indie rock, indie, bedroom pop, dream pop",2026-03-04T22:19:50.793340,beabadoobee,True
+Mac DeMarco,https://www.last.fm/music/Mac+DeMarco,3198917,337956905,"Lo-Fi, indie, post-punk, experimental, indie rock",2026-03-04T22:19:52.308511,mac demarco,True
+Addison Rae,https://www.last.fm/music/Addison+Rae,1486740,105718875,"pop, american, electropop, alt-pop, queen of pop",2026-03-04T22:19:54.312645,addison rae,True
+Baby Keem,https://www.last.fm/music/Baby+Keem,1987315,195006090,"Hip-Hop, rap, trap, hip hop, west coast hip hop",2026-03-04T22:19:55.104159,baby keem,False
+Laufey,https://www.last.fm/music/Laufey,2268345,246922075,"jazz, Bossa Nova, pop, female vocalists, jazz pop",2026-03-04T22:19:55.984661,laufey,True
+Tate McRae,https://www.last.fm/music/Tate+McRae,2217123,268753947,"pop, my top songs, Canadian, electropop, canada",2026-03-04T22:19:56.649625,tate mcrae,True
+The Cure,https://www.last.fm/music/The+Cure,5427832,387847216,"post-punk, new wave, alternative, 80s, rock",2026-03-04T22:19:57.260771,the cure,True
+J. Cole,https://www.last.fm/music/J.+Cole,3807253,298561920,"Hip-Hop, rap, hip hop, North Carolina, underground hip-hop",2026-03-04T22:19:58.083263,j. cole,True
+My Chemical Romance,https://www.last.fm/music/My+Chemical+Romance,4784939,532508768,"rock, alternative, punk rock, emo, punk",2026-03-04T22:19:59.078207,my chemical romance,False
+Red Hot Chili Peppers,https://www.last.fm/music/Red+Hot+Chili+Peppers,7187992,552392959,"rock, alternative rock, Funk Rock, alternative, funk",2026-03-04T22:19:59.792589,red hot chili peppers,True
+Steve Lacy,https://www.last.fm/music/Steve+Lacy,3062192,281894231,"free jazz, jazz, saxophone, rnb, Avant-Garde Jazz",2026-03-04T22:20:00.976651,steve lacy,True
+The Strokes,https://www.last.fm/music/The+Strokes,5651179,472079320,"indie rock, indie, rock, alternative, alternative rock",2026-03-04T22:20:01.888628,the strokes,False
+Calvin Harris,https://www.last.fm/music/Calvin+Harris,4941812,203633856,"electronic, dance, electro, Disco, electronica",2026-03-04T22:20:02.476081,calvin harris,True
+Daniel Caesar,https://www.last.fm/music/Daniel+Caesar,2302276,234072485,"rnb, soul, Neo-Soul, Canadian, alternative rnb",2026-03-04T22:20:03.080835,daniel caesar,True
+Green Day,https://www.last.fm/music/Green+Day,6520124,438568755,"punk rock, rock, punk, pop punk, alternative",2026-03-04T22:20:06.223446,green day,False
+Dominic Fike,https://www.last.fm/music/Dominic+Fike,2334593,143046989,"indie, indie pop, pop, alternative, american",2026-03-04T22:20:06.894249,dominic fike,True
+Weezer,https://www.last.fm/music/Weezer,5347975,291123805,"alternative rock, rock, alternative, indie, indie rock",2026-03-04T22:20:07.744801,weezer,False
+System of a Down,https://www.last.fm/music/System+of+a+Down,5761070,503652324,"alternative metal, metal, Nu Metal, rock, alternative",2026-03-04T22:20:08.328278,system of a down,False
+Queen,https://www.last.fm/music/Queen,7160666,420132600,"classic rock, rock, hard rock, glam rock, 80s",2026-03-04T22:20:09.369543,queen,True
+Eminem,https://www.last.fm/music/Eminem,7726026,561177490,"rap, Hip-Hop, hip hop, Eminem, pop",2026-03-04T22:20:10.110441,eminem,True
+Djo,https://www.last.fm/music/Djo,2256954,87510894,"psychedelic pop, indie pop, indie, psychedelic, indie rock",2026-03-04T22:20:10.715757,djo,True
+Post Malone,https://www.last.fm/music/Post+Malone,3483537,326543547,"Hip-Hop, rap, trap, cloud rap, pop",2026-03-04T22:20:11.419291,post malone,True
+Sade,https://www.last.fm/music/Sade,3333903,131927747,"soul, jazz, female vocalists, chillout, pop",2026-03-04T22:20:11.997470,sade,False
+Brent Faiyaz,https://www.last.fm/music/Brent+Faiyaz,2006990,227021135,"rnb, soul, electronic, Neo-Soul, alternative rnb",2026-03-04T22:20:12.661932,brent faiyaz,True
+Hozier,https://www.last.fm/music/Hozier,3294111,276486848,"blues, indie, soul, singer-songwriter, irish",2026-03-04T22:20:13.568797,hozier,True
+Malcolm Todd,https://www.last.fm/music/Malcolm+Todd,1128902,73140615,"alternative rnb, indie, USA, indie rock, los angeles",2026-03-04T22:20:14.238827,malcolm todd,False
+RAYE,https://www.last.fm/music/RAYE,1797157,55543998,"pop, rnb, british, female vocalists, my top songs",2026-03-04T22:20:14.907433,raye,True
+Cigarettes After Sex,https://www.last.fm/music/Cigarettes+After+Sex,2828983,302427325,"dream pop, shoegaze, slowcore, Lo-Fi, indie",2026-03-04T22:20:15.542181,cigarettes after sex,True
+Metro Boomin,https://www.last.fm/music/Metro+Boomin,2441400,239901919,"trap, rap, Hip-Hop, hip hop, Southern Hip Hop",2026-03-04T22:20:16.131060,metro boomin,True
+Daft Punk,https://www.last.fm/music/Daft+Punk,6249715,401525530,"electronic, House, dance, techno, electronica",2026-03-04T22:20:16.856972,daft punk,True
+BTS,https://www.last.fm/music/BTS,2316882,2967402208,"k-pop, bts, Kpop, Korean, pop",2026-03-04T22:20:17.553029,bts,True
+Pink Floyd,https://www.last.fm/music/Pink+Floyd,5495214,601824371,"Progressive rock, Psychedelic Rock, classic rock, rock, psychedelic",2026-03-04T22:20:18.517392,pink floyd,False
+Panic! at the Disco,https://www.last.fm/music/Panic%21+at+the+Disco,4359108,312924316,"alternative, rock, pop punk, indie, emo",2026-03-04T22:20:19.325475,panic! at the disco,False
+KATSEYE,https://www.last.fm/music/KATSEYE,1479403,91924770,"pop, k-pop, hyperpop, electropop, american",2026-03-04T22:20:20.127024,katseye,True
+Black Eyed Peas,https://www.last.fm/music/Black+Eyed+Peas,5654716,149750731,"Hip-Hop, pop, rnb, rap, hip hop",2026-03-04T22:20:36.918236,black eyed peas,True
+LE SSERAFIM,https://www.last.fm/music/LE+SSERAFIM,1616893,296166634,"k-pop, Kpop, Korean, pop, female vocalists",2026-03-04T22:20:37.572541,le sserafim,True
+BLACKPINK,https://www.last.fm/music/BLACKPINK,1952307,305695144,"k-pop, Kpop, pop, Korean, blackpink",2026-03-04T22:20:38.170896,blackpink,True
+Justin Timberlake,https://www.last.fm/music/Justin+Timberlake,5473467,162437801,"pop, rnb, dance, male vocalists, Hip-Hop",2026-03-04T22:20:38.765236,justin timberlake,True
+The Killers,https://www.last.fm/music/The+Killers,6874883,375777822,"indie, indie rock, rock, alternative, alternative rock",2026-03-04T22:20:39.399479,the killers,True
+Pierce the Veil,https://www.last.fm/music/Pierce+the+Veil,2041985,258363509,"post-hardcore, emocore, experimental, emo, post hardcore",2026-03-04T22:20:40.071824,pierce the veil,True
+Yeat,https://www.last.fm/music/Yeat,1583135,359683948,"trap, rap, cloud rap, rage, plugg",2026-03-04T22:20:41.025989,yeat,True
+Fall Out Boy,https://www.last.fm/music/Fall+Out+Boy,5015956,414210544,"pop punk, rock, alternative, emo, punk",2026-03-04T22:20:41.768425,fall out boy,False
+David Guetta,https://www.last.fm/music/David+Guetta,5160920,185161947,"House, dance, electronic, club, techno",2026-03-04T22:20:42.386788,david guetta,True
+EsDeeKid,https://www.last.fm/music/EsDeeKid,875817,54620316,"cloud rap, trap, Jerk, rap, british",2026-03-04T22:20:42.978279,esdeekid,True
+TWICE,https://www.last.fm/music/TWICE,1869503,488851948,"k-pop, Kpop, Korean, pop, girl group",2026-03-04T22:20:43.597164,twice,True
+Marina,https://www.last.fm/music/Marina,2213425,177329693,"pop, female vocalists, indie pop, post-hardcore, polish",2026-03-04T22:20:44.377304,marina,False
+Dua Lipa,https://www.last.fm/music/Dua+Lipa,3224232,314803417,"pop, synthpop, electropop, british, female vocalists",2026-03-04T22:20:47.319357,dua lipa,True
+The Smashing Pumpkins,https://www.last.fm/music/The+Smashing+Pumpkins,4501259,254287062,"alternative rock, Grunge, alternative, rock, 90s",2026-03-04T22:20:48.040001,the smashing pumpkins,False
+ABBA,https://www.last.fm/music/ABBA,4330377,187246764,"pop, Disco, 70s, swedish, 80s",2026-03-04T22:20:49.209898,abba,True
+Pitbull,https://www.last.fm/music/Pitbull,4341486,105486701,"Hip-Hop, rap, Reggaeton, hip hop, Crunk",2026-03-04T22:20:49.887861,pitbull,True
+The Cranberries,https://www.last.fm/music/The+Cranberries,4668662,154889144,"rock, alternative, alternative rock, female vocalists, irish",2026-03-04T22:20:51.615631,the cranberries,True
+Madonna,https://www.last.fm/music/Madonna,5520985,355367626,"pop, dance, female vocalists, 80s, electronic",2026-03-04T22:20:53.670868,madonna,True
+Kesha,https://www.last.fm/music/+noredirect/Kesha,3086977,114670089,,2026-03-04T22:21:13.480336,kesha,True
+David Bowie,https://www.last.fm/music/David+Bowie,5543805,399323072,"glam rock, rock, classic rock, 80s, alternative",2026-03-04T22:21:42.961329,david bowie,False
+JAŸ-Z,https://www.last.fm/music/+noredirect/JA%C5%B8-Z,251885,728894,,2026-03-04T22:21:46.304593,jaÿ-z,True
+XXXTENTACION,https://www.last.fm/music/XXXTENTACION,2776645,335832968,"Hip-Hop, rap, cloud rap, trap, emo rap",2026-03-04T22:21:56.038793,xxxtentacion,True
+Muse,https://www.last.fm/music/Muse,6326491,564793915,"alternative rock, rock, Progressive rock, alternative, indie",2026-03-04T22:22:17.810290,muse,False
+Miley Cyrus,https://www.last.fm/music/Miley+Cyrus,4785176,295900006,"pop, female vocalists, dance, Disney, guilty pleasure",2026-03-04T22:22:18.490722,miley cyrus,True
+Foo Fighters,https://www.last.fm/music/Foo+Fighters,6313148,359676961,"rock, alternative rock, Grunge, alternative, hard rock",2026-03-04T22:22:20.315477,foo fighters,False
+Cocteau Twins,https://www.last.fm/music/Cocteau+Twins,2252915,164979136,"dream pop, shoegaze, post-punk, ethereal, alternative",2026-03-04T22:22:50.277602,cocteau twins,False
+Conan Gray,https://www.last.fm/music/Conan+Gray,2379267,244693650,"pop, indie pop, indie, my top songs, yearning",2026-03-04T22:22:51.519482,conan gray,True
+Nelly Furtado,https://www.last.fm/music/Nelly+Furtado,4789200,115295400,"pop, female vocalists, folk, Canadian, singer-songwriter",2026-03-04T22:22:57.130549,nelly furtado,True
+Doechii,https://www.last.fm/music/Doechii,1975972,92675137,"rap, Hip-Hop, rnb, hip hop, pop rap",2026-03-04T22:23:00.433470,doechii,True
+One Direction,https://www.last.fm/music/One+Direction,3219123,311669282,"pop, british, boyband, one direction, X factor",2026-03-04T22:23:01.107849,one direction,True
+The 1975,https://www.last.fm/music/The+1975,2613156,295987777,"indie, indie rock, british, alternative, rock",2026-03-04T22:23:02.118233,the 1975,True
+Beach House,https://www.last.fm/music/Beach+House,3473201,240496296,"dream pop, indie pop, indie, Lo-Fi, Dreamy",2026-03-04T22:23:03.152567,beach house,True
+Lil Wayne,https://www.last.fm/music/+noredirect/Lil+Wayne,3529811,164668622,,2026-03-04T22:23:04.230284,lil wayne,True
+PARTYNEXTDOOR,https://www.last.fm/music/PARTYNEXTDOOR,1935900,164005666,"rnb, r&b, Hip-Hop, soul, canada",2026-03-04T22:23:04.953395,partynextdoor,True
+Melanie Martinez,https://www.last.fm/music/Melanie+Martinez,2262252,238982224,"pop, indie, indie pop, female vocalists, alternative",2026-03-04T22:23:05.545009,melanie martinez,False
+Lil Peep,https://www.last.fm/music/Lil+Peep,2147926,363823785,"cloud rap, emo rap, rap, Hip-Hop, emo",2026-03-04T22:23:06.265688,lil peep,False
+21 Savage,https://www.last.fm/music/21+Savage,2272007,215988841,"trap, Hip-Hop, rap, hip hop, atlanta",2026-03-04T22:23:26.124653,21 savage,True
+Adele,https://www.last.fm/music/Adele,5565336,315075342,"soul, female vocalists, british, singer-songwriter, indie",2026-03-04T22:23:35.423040,adele,True
+Slipknot,https://www.last.fm/music/Slipknot,4168449,356582811,"Nu Metal, metal, heavy metal, Nu-metal, rock",2026-03-04T22:23:36.141966,slipknot,False
+Kate Bush,https://www.last.fm/music/Kate+Bush,3411549,142325589,"female vocalists, singer-songwriter, pop, alternative, 80s",2026-03-04T22:23:36.943936,kate bush,True
+Gracie Abrams,https://www.last.fm/music/Gracie+Abrams,1774025,281023014,"pop, indie pop, my top songs, indie, singer-songwriter",2026-03-04T22:23:38.880735,gracie abrams,True
+Oasis,https://www.last.fm/music/Oasis,5817393,323063577,"britpop, rock, british, alternative, indie",2026-03-04T22:23:41.020544,oasis,True
+Shakira,https://www.last.fm/music/Shakira,4806448,176316873,"pop, latin, female vocalists, spanish, rock",2026-03-04T22:23:42.381671,shakira,True
+Limp Bizkit,https://www.last.fm/music/Limp+Bizkit,4078832,175083167,"Nu Metal, rapcore, alternative, rock, metal",2026-03-04T22:23:43.064512,limp bizkit,False
+Gunna,https://www.last.fm/music/Gunna,1779003,176439461,"rap, trap, Hip-Hop, hip hop, atlanta",2026-03-04T22:23:43.842040,gunna,True
+Juice WRLD,https://www.last.fm/music/Juice+WRLD,2448007,510546528,"trap, rap, emo rap, Hip-Hop, pop",2026-03-04T22:23:44.732267,juice wrld,True
+Alex G,https://www.last.fm/music/Alex+G,2027114,247481111,"Lo-Fi, singer-songwriter, indie rock, indie, indie folk",2026-03-04T22:23:45.371183,alex g,False
+bôa,https://www.last.fm/music/+noredirect/b%C3%B4a,2061842,79579936,"alternative rock, alternative, rock, indie, female vocalists",2026-03-04T22:23:48.015664,bôa,False
+Troye Sivan,https://www.last.fm/music/Troye+Sivan,2413316,167167720,"pop, indie pop, indie, male vocalists, alternative",2026-03-04T22:23:51.425033,troye sivan,True
+Billy Joel,https://www.last.fm/music/Billy+Joel,4002041,126400231,"classic rock, singer-songwriter, rock, pop, piano",2026-03-04T22:23:52.170546,billy joel,False
+Phoebe Bridgers,https://www.last.fm/music/Phoebe+Bridgers,2120975,284452858,"singer-songwriter, folk, indie folk, indie, indie rock",2026-03-04T22:23:52.865237,phoebe bridgers,False
+MGMT,https://www.last.fm/music/MGMT,5210563,216923086,"electronic, indie, psychedelic, alternative, indie pop",2026-03-04T22:23:53.811108,mgmt,False
+ROSALÍA,https://www.last.fm/music/ROSAL%C3%8DA,1821645,194964491,"pop, Flamenco, spanish, Flamenco Nuevo, spain",2026-03-04T22:23:54.437924,rosalía,True
+Kid Cudi,https://www.last.fm/music/Kid+Cudi,4648881,270325355,"Hip-Hop, rap, alternative rap, hip hop, House",2026-03-04T22:23:55.533558,kid cudi,False
+Evanescence,https://www.last.fm/music/Evanescence,4440482,214331242,"Gothic Rock, rock, female vocalists, alternative, Gothic",2026-03-04T22:23:56.347353,evanescence,True
+Halsey,https://www.last.fm/music/Halsey,2774603,218583046,"pop, indie pop, indie, alternative, female vocalists",2026-03-04T22:23:56.949055,halsey,True
+Tory Lanez,https://www.last.fm/music/Tory+Lanez,1928385,143997731,"rnb, Hip-Hop, rap, Canadian, trap",2026-03-04T22:23:57.649774,tory lanez,True
+Noah Kahan,https://www.last.fm/music/Noah+Kahan,1537923,167058915,"indie, folk, singer-songwriter, acoustic, Vermont",2026-03-04T22:23:58.349134,noah kahan,True
+The Police,https://www.last.fm/music/The+Police,4539438,109086544,"rock, new wave, classic rock, 80s, pop",2026-03-04T22:23:59.042968,the police,True
+Megan Thee Stallion,https://www.last.fm/music/Megan+Thee+Stallion,2278315,180442161,"rap, Hip-Hop, trap, hip hop, american",2026-03-04T22:23:59.679521,megan thee stallion,True
+OutKast,https://www.last.fm/music/OutKast,4916274,146259746,"Hip-Hop, funk, rap, soul, hip hop",2026-03-04T22:24:15.553783,outkast,False
+Sufjan Stevens,https://www.last.fm/music/Sufjan+Stevens,3859568,295763171,"folk, indie, singer-songwriter, alternative, indie rock",2026-03-04T22:24:16.697524,sufjan stevens,False
+Alice in Chains,https://www.last.fm/music/Alice+in+Chains,3411263,215748292,"Grunge, alternative rock, rock, hard rock, alternative",2026-03-04T22:24:35.122166,alice in chains,False
+Bring Me the Horizon,https://www.last.fm/music/Bring+Me+the+Horizon,2789482,316309619,"deathcore, metalcore, screamo, hardcore, metal",2026-03-04T22:24:41.427042,bring me the horizon,False
+Demi Lovato,https://www.last.fm/music/Demi+Lovato,3334640,196681853,"pop, pop rock, female vocalists, Disney, guilty pleasure",2026-03-04T22:24:44.106870,demi lovato,False
+Avril Lavigne,https://www.last.fm/music/Avril+Lavigne,5073928,263726784,"pop rock, pop, rock, female vocalists, Canadian",2026-03-04T22:24:45.041504,avril lavigne,False
+Ed Sheeran,https://www.last.fm/music/Ed+Sheeran,4161226,252630630,"acoustic, british, singer-songwriter, pop, easy-listening",2026-03-04T22:24:46.161583,ed sheeran,True
+Jennie,https://www.last.fm/music/Jennie,1459036,105643692,"k-pop, Korean, Kpop, jennie, blackpink",2026-03-04T22:24:48.315405,jennie,True
+ILLIT,https://www.last.fm/music/ILLIT,1111486,84387757,"k-pop, Kpop, Korean, girl group, pop",2026-03-04T22:24:51.421811,illit,True
+Lizzy McAlpine,https://www.last.fm/music/Lizzy+McAlpine,1392107,108224697,"indie pop, folk, indie folk, my top songs, USA",2026-03-04T22:24:52.829030,lizzy mcalpine,True
+Chase Atlantic,https://www.last.fm/music/Chase+Atlantic,1824534,196553856,"rnb, indie, australian, rock, alternative",2026-03-04T22:24:53.681241,chase atlantic,True
+Mazzy Star,https://www.last.fm/music/Mazzy+Star,2681004,106918332,"dream pop, shoegaze, female vocalists, indie, alternative",2026-03-04T22:24:55.409619,mazzy star,False
+The Kid LAROI,https://www.last.fm/music/The+Kid+LAROI,2447299,158884319,"Hip-Hop, rap, emo rap, australian, trap",2026-03-04T22:24:56.051816,the kid laroi,True
+50 Cent,https://www.last.fm/music/50+Cent,4868179,117425605,"rap, Hip-Hop, Gangsta Rap, hip hop, 50 Cent",2026-03-04T22:24:58.731597,50 cent,False
+Blood Orange,https://www.last.fm/music/Blood+Orange,1932824,101774598,"chillwave, indie, rnb, alternative rnb, indie pop",2026-03-04T22:24:59.310957,blood orange,False
+Young Thug,https://www.last.fm/music/Young+Thug,1848928,189474362,"Hip-Hop, trap, rap, atlanta, hip hop",2026-03-04T22:25:02.216141,young thug,True
+aespa,https://www.last.fm/music/aespa,1296200,261579027,"k-pop, Kpop, Korean, pop, hyperpop",2026-03-04T22:25:13.210007,aespa,True
+Trippie Redd,https://www.last.fm/music/Trippie+Redd,1859419,183773536,"trap, Hip-Hop, rap, emo rap, cloud rap",2026-03-04T22:25:15.314687,trippie redd,False
+The Cardigans,https://www.last.fm/music/The+Cardigans,3606916,90477229,"pop, rock, female vocalists, swedish, alternative",2026-03-04T22:25:20.729022,the cardigans,False
+Selena Gomez,https://www.last.fm/music/Selena+Gomez,3130971,201423254,"pop, female vocalists, Disney, pop rock, dance",2026-03-04T22:25:23.119884,selena gomez,True
+Faye Webster,https://www.last.fm/music/Faye+Webster,1755637,131615285,"indie folk, singer-songwriter, indie, folk, american",2026-03-04T22:25:25.820033,faye webster,False
+Chief Keef,https://www.last.fm/music/Chief+Keef,1715350,137494250,"Hip-Hop, rap, drill, Gangsta Rap, trap",2026-03-04T22:25:44.644104,chief keef,False
+Tears for Fears,https://www.last.fm/music/Tears+for+Fears,3907961,89364092,"new wave, 80s, synth pop, pop, rock",2026-03-04T22:25:54.038951,tears for fears,True
+Elton John,https://www.last.fm/music/Elton+John,5171397,161015546,"pop, classic rock, singer-songwriter, rock, piano",2026-03-04T22:25:54.925027,elton john,True
+Nicki Minaj,https://www.last.fm/music/Nicki+Minaj,4699361,304255046,"Hip-Hop, rap, rnb, pop, hip hop",2026-03-04T22:25:57.228181,nicki minaj,True
+Chris Brown,https://www.last.fm/music/Chris+Brown,4721507,156377626,"rnb, Hip-Hop, Chris Brown, rap, hip hop",2026-03-04T22:25:59.841854,chris brown,True
+Florence   The Machine,https://www.last.fm/music/Florence+++The+Machine,17115,187007,,2026-03-04T22:26:00.614917,florence   the machine,False
+Usher,https://www.last.fm/music/Usher,4968505,101400164,"rnb, Hip-Hop, pop, soul, rap",2026-03-04T22:26:01.576338,usher,True
+Slowdive,https://www.last.fm/music/Slowdive,2181345,144021723,"shoegaze, dream pop, ambient, indie, indie rock",2026-03-04T22:26:02.172442,slowdive,False
+Three Days Grace,https://www.last.fm/music/Three+Days+Grace,3836042,182135591,"alternative rock, rock, hard rock, alternative, metal",2026-03-04T22:26:03.190898,three days grace,False
+Imagine Dragons,https://www.last.fm/music/Imagine+Dragons,4021563,248712871,"indie, indie rock, alternative, rock, indie pop",2026-03-04T22:26:04.058716,imagine dragons,True
+Madison Beer,https://www.last.fm/music/Madison+Beer,1638084,105326464,"pop, female vocalists, rnb, indie, my top songs",2026-03-04T22:26:05.089110,madison beer,True
+Empire of the Sun,https://www.last.fm/music/Empire+of+the+Sun,2984014,76705630,"electronic, synthpop, australian, electronica, synth pop",2026-03-04T22:26:05.696708,empire of the sun,True
+Korn,https://www.last.fm/music/Korn,3368573,245665839,"Nu Metal, metal, alternative, rock, Nu-metal",2026-03-04T22:26:11.024145,korn,False
+Lil Tecca,https://www.last.fm/music/Lil+Tecca,1742450,156441639,"rap, Hip-Hop, trap, hip hop, new york",2026-03-04T22:26:11.971313,lil tecca,True
+Cage the Elephant,https://www.last.fm/music/Cage+the+Elephant,3345543,144214252,"indie rock, alternative, rock, indie, punk rock",2026-03-04T22:26:13.721693,cage the elephant,False
+Gwen Stefani,https://www.last.fm/music/Gwen+Stefani,4408955,87886325,"pop, female vocalists, dance, rock, alternative",2026-03-04T22:26:14.741654,gwen stefani,True
+Ellie Goulding,https://www.last.fm/music/Ellie+Goulding,3907039,150866337,"electronic, female vocalists, british, indie, indie pop",2026-03-04T22:26:15.472862,ellie goulding,True
+Frank Sinatra,https://www.last.fm/music/Frank+Sinatra,4885987,179271799,"jazz, swing, oldies, vocal jazz, easy listening",2026-03-04T22:26:16.615496,frank sinatra,True
+5 Seconds of Summer,https://www.last.fm/music/5+Seconds+of+Summer,2228692,205097709,"pop punk, pop rock, pop, australian, rock",2026-03-04T22:26:17.236602,5 seconds of summer,False
+Lil Baby,https://www.last.fm/music/Lil+Baby,1592233,165257183,"rap, Hip-Hop, hip hop, trap, atlanta",2026-03-04T22:26:17.847308,lil baby,True
+The Rolling Stones,https://www.last.fm/music/The+Rolling+Stones,5779078,271177712,"classic rock, rock, british, 60s, blues",2026-03-04T22:26:18.737955,the rolling stones,False
+Kodak Black,https://www.last.fm/music/Kodak+Black,1780237,103284887,"trap, rap, Hip-Hop, hip hop, florida",2026-03-04T22:26:19.864083,kodak black,True
+Ravyn Lenae,https://www.last.fm/music/Ravyn+Lenae,1640640,43017207,"rnb, soul, Neo-Soul, alternative rnb, electronic",2026-03-04T22:26:20.618502,ravyn lenae,True
+Ken Carson,https://www.last.fm/music/Ken+Carson,1141879,276030224,"rage, trap, cloud rap, rap, opium",2026-03-04T22:26:21.324109,ken carson,False
+Lil Yachty,https://www.last.fm/music/Lil+Yachty,1783282,129785469,"trap, rap, Hip-Hop, hip hop, Psychedelic Rock",2026-03-04T22:26:22.179784,lil yachty,False
+Big Thief,https://www.last.fm/music/Big+Thief,1625085,117556612,"indie rock, indie folk, folk, folk rock, indie",2026-03-04T22:26:22.812481,big thief,False
+Panchiko,https://www.last.fm/music/Panchiko,1122829,78975114,"indie rock, shoegaze, Lo-Fi, dream pop, indie",2026-03-04T22:26:23.551368,panchiko,False
+Grimes,https://www.last.fm/music/Grimes,2627478,193603349,"electronic, dream pop, experimental, psychedelic, Canadian",2026-03-04T22:26:24.190170,grimes,False
+She & Him,https://www.last.fm/music/She+&+Him,1676027,47355797,"folk, indie, female vocalists, indie pop, singer-songwriter",2026-03-04T22:26:24.968010,she & him,True
+Prince,https://www.last.fm/music/Prince,3263324,101039453,"funk, pop, soul, rock, 80s",2026-03-04T22:26:26.059906,prince,True
+Miguel,https://www.last.fm/music/Miguel,2647242,76967621,"rnb, soul, r&b, Hip-Hop, hip hop",2026-03-04T22:26:27.149725,miguel,True
+Imogen Heap,https://www.last.fm/music/Imogen+Heap,3006148,89433698,"electronic, female vocalists, indie, alternative, singer-songwriter",2026-03-04T22:26:28.170186,imogen heap,True
+Amy Winehouse,https://www.last.fm/music/Amy+Winehouse,4581562,201553766,"soul, jazz, female vocalists, british, singer-songwriter",2026-03-04T22:26:29.199118,amy winehouse,False
+Ethel Cain,https://www.last.fm/music/Ethel+Cain,1240159,145826203,"dream pop, slowcore, ambient, dark ambient, drone",2026-03-04T22:26:29.934230,ethel cain,False
+Men I Trust,https://www.last.fm/music/Men+I+Trust,2134749,123553821,"dream pop, indie pop, indie, Sophisti-Pop, downtempo",2026-03-04T22:26:30.717211,men i trust,False
+Magdalena Bay,https://www.last.fm/music/Magdalena+Bay,1410653,110048601,"synthpop, electropop, indie pop, dream pop, pop",2026-03-04T22:26:31.624537,magdalena bay,False
+$uicideboy$,https://www.last.fm/music/$uicideboy$,1563970,459188268,"cloud rap, Hip-Hop, trap, rap, Horrorcore",2026-03-04T22:26:32.482910,$uicideboy$,False
+blink-182,https://www.last.fm/music/blink-182,4589449,305339793,"punk rock, pop punk, punk, rock, alternative",2026-03-04T22:26:35.525328,blink-182,False
+The Goo Goo Dolls,https://www.last.fm/music/+noredirect/The+Goo+Goo+Dolls,2580946,51509967,,2026-03-04T22:26:50.496168,the goo goo dolls,True
+IVE,https://www.last.fm/music/IVE,1025917,154815663,"k-pop, Korean, Kpop, pop, female vocalists",2026-03-04T22:26:57.722717,ive,True
+Lucki,https://www.last.fm/music/+noredirect/Lucki,1135578,283254620,,2026-03-04T22:26:58.468411,lucki,False
+Led Zeppelin,https://www.last.fm/music/Led+Zeppelin,4897283,338249344,"classic rock, hard rock, rock, 70s, Progressive rock",2026-03-04T22:26:59.908818,led zeppelin,False
+Cardi B,https://www.last.fm/music/Cardi+B,2385192,76994131,"Hip-Hop, rap, trap, hip hop, american",2026-03-04T22:27:00.563453,cardi b,True
+Pearl Jam,https://www.last.fm/music/Pearl+Jam,4319791,250731278,"Grunge, rock, alternative rock, 90s, alternative",2026-03-04T22:27:01.271901,pearl jam,False
+Charlie Puth,https://www.last.fm/music/Charlie+Puth,2410781,132342443,"pop, rnb, soul, american, USA",2026-03-04T22:27:01.940349,charlie puth,True
+Sean Paul,https://www.last.fm/music/Sean+Paul,3140189,48438356,"dancehall, reggae, Hip-Hop, rnb, rap",2026-03-04T22:27:02.810400,sean paul,True
+The Chainsmokers,https://www.last.fm/music/The+Chainsmokers,2761881,87205460,"electronic, pop, House, electro house, dance",2026-03-04T22:27:03.710517,the chainsmokers,True
+Snow Strippers,https://www.last.fm/music/Snow+Strippers,852051,53842718,"witch house, electropop, Electroclash, electronic, new rave",2026-03-04T22:27:04.523058,snow strippers,False
+Jung Kook,https://www.last.fm/music/Jung+Kook,1431318,795017609,"k-pop, pop, Korean, bts, jungkook",2026-03-04T22:27:05.282348,jung kook,True
+Shawn Mendes,https://www.last.fm/music/Shawn+Mendes,2672470,139015463,"pop, Canadian, folk, male vocalists, acoustic",2026-03-04T22:27:06.917440,shawn mendes,True
+Björk,https://www.last.fm/music/+noredirect/Bj%C3%B6rk,3420993,254780514,"electronic, experimental, alternative, female vocalists, icelandic",2026-03-04T22:27:07.650649,björk,True
+Pixies,https://www.last.fm/music/Pixies,4235805,213475512,"alternative rock, alternative, indie, indie rock, rock",2026-03-04T22:27:08.433721,pixies,False
+2Pac,https://www.last.fm/music/2Pac,4119764,143898570,"rap, Hip-Hop, Gangsta Rap, West Coast Rap, hip hop",2026-03-04T22:27:09.112252,2pac,False
+Crystal Castles,https://www.last.fm/music/Crystal+Castles,3141483,236850526,"electronic, 8-bit, new rave, electro, electronica",2026-03-04T22:27:10.269900,crystal castles,False
+Guns N' Roses,https://www.last.fm/music/Guns+N%27+Roses,5142461,201524320,"hard rock, rock, classic rock, 80s, metal",2026-03-04T22:27:10.869410,guns n' roses,True
+Red Velvet,https://www.last.fm/music/Red+Velvet,1368614,241281245,"k-pop, Kpop, pop, Korean, female vocalists",2026-03-04T22:27:11.675153,red velvet,False
+Black Sabbath,https://www.last.fm/music/Black+Sabbath,4354764,207419247,"heavy metal, hard rock, classic rock, metal, rock",2026-03-04T22:27:12.267132,black sabbath,True
+ENHYPEN,https://www.last.fm/music/ENHYPEN,1103348,327809340,"k-pop, Kpop, Korean, pop, boy group",2026-03-04T22:27:12.893283,enhypen,True
+Marvin Gaye,https://www.last.fm/music/Marvin+Gaye,3711394,88715282,"soul, funk, motown, rhythm and blues, rnb",2026-03-04T22:27:15.014758,marvin gaye,True
+Mariah Carey,https://www.last.fm/music/Mariah+Carey,5021918,250108891,"pop, rnb, female vocalists, soul, Mariah Carey",2026-03-04T22:27:18.718828,mariah carey,True
+Lisa,https://www.last.fm/music/Lisa,1919588,125766134,"j-pop, japanese, female vocalists, pop, Hip-Hop",2026-03-04T22:27:19.312684,lisa,True
+Gigi Perez,https://www.last.fm/music/Gigi+Perez,1363612,47691976,"bedroom pop, singer-songwriter, indie, folk, my top songs",2026-03-04T22:27:20.015066,gigi perez,True
+MF DOOM,https://www.last.fm/music/MF+DOOM,2271261,160109202,"Hip-Hop, underground hip-hop, rap, hip hop, mf doom",2026-03-04T22:27:20.648304,mf doom,False
+J Balvin,https://www.last.fm/music/J+Balvin,1805392,62920070,"Reggaeton, pop, colombian, latin, Colombia",2026-03-04T22:27:21.405408,j balvin,True
+Thundercat,https://www.last.fm/music/Thundercat,2002717,75151334,"funk, electronic, jazz, soul, psychedelic",2026-03-04T22:27:22.219612,thundercat,False
+girl in red,https://www.last.fm/music/girl+in+red,2448299,113290406,"dream pop, indie pop, indie, bedroom pop, Lo-Fi",2026-03-04T22:27:22.853017,girl in red,True
+Strawberry Guy,https://www.last.fm/music/Strawberry+Guy,1688579,48873276,"dream pop, indie pop, bedroom pop, british, shoegaze",2026-03-04T22:27:23.937986,strawberry guy,False
+Flo Rida,https://www.last.fm/music/Flo+Rida,4118878,75015990,"Hip-Hop, rap, hip hop, Dirty South, southern rap",2026-03-04T22:27:24.682189,flo rida,False
+Daryl Hall & John Oates,https://www.last.fm/music/+noredirect/Daryl+Hall+&+John+Oates,2504835,53881628,,2026-03-04T22:27:25.598648,daryl hall & john oates,True
+Glass Animals,https://www.last.fm/music/Glass+Animals,2575687,133361686,"electronic, trip-hop, indie, british, dubstep",2026-03-04T22:27:26.379539,glass animals,True
+ZAYN,https://www.last.fm/music/ZAYN,2214428,116624671,"pop, rnb, british, male vocalists, sexy",2026-03-04T22:27:27.039397,zayn,True
+Wallows,https://www.last.fm/music/Wallows,2041410,124820371,"indie, indie rock, indie pop, alternative, rock",2026-03-04T22:27:28.351643,wallows,False
+Adrianne Lenker,https://www.last.fm/music/Adrianne+Lenker,1316338,110516464,"singer-songwriter, indie folk, folk, female vocalists, indie",2026-03-04T22:27:29.437123,adrianne lenker,False
+Marina Sena,https://www.last.fm/music/Marina+Sena,474594,90939421,"indie, brazilian, mpb, Greek, Greek Pop",2026-03-04T22:27:31.612398,marina sena,False
+FKA twigs,https://www.last.fm/music/FKA+twigs,1644501,148770286,"trip-hop, electronic, experimental, dream pop, alternative rnb",2026-03-04T22:27:32.872547,fka twigs,False
+Depeche Mode,https://www.last.fm/music/Depeche+Mode,4402883,292902538,"electronic, new wave, synthpop, synth pop, 80s",2026-03-04T22:27:33.830967,depeche mode,False
+Billy Idol,https://www.last.fm/music/Billy+Idol,3019938,56090272,"rock, new wave, 80s, punk, classic rock",2026-03-04T22:27:34.642920,billy idol,False
+The Notorious B.I.G.,https://www.last.fm/music/The+Notorious+B.I.G.,3075955,92947250,"Hip-Hop, rap, Gangsta Rap, east coast rap, hip hop",2026-03-04T22:27:52.320806,the notorious b.i.g.,False
+The Offspring,https://www.last.fm/music/The+Offspring,4537431,211987018,"punk rock, punk, rock, alternative rock, alternative",2026-03-04T22:27:53.048580,the offspring,False
+Rauw Alejandro,https://www.last.fm/music/Rauw+Alejandro,1076427,88372009,"Reggaeton, dance, latin, sexy, male vocalists",2026-03-04T22:27:54.805099,rauw alejandro,True
+XG,https://www.last.fm/music/XG,801381,61346855,"pop, japanese, rnb, k-pop, j-pop",2026-03-04T22:27:56.010676,xg,False
+Camila Cabello,https://www.last.fm/music/Camila+Cabello,2365581,127125500,"pop, female vocalists, cuba, dance, cuban",2026-03-04T22:27:56.988510,camila cabello,False
+Bryson Tiller,https://www.last.fm/music/Bryson+Tiller,1673484,102839163,"rnb, Hip-Hop, trap, rap, soul",2026-03-04T22:27:57.723181,bryson tiller,True
+Blur,https://www.last.fm/music/Blur,4721514,192403319,"britpop, rock, indie, british, alternative",2026-03-04T22:27:58.424122,blur,False
+DJ Snake,https://www.last.fm/music/DJ+Snake,2554391,47740094,"trap, electronic, dance, EDM, french",2026-03-04T22:27:59.029342,dj snake,True
+Aphex Twin,https://www.last.fm/music/Aphex+Twin,2996970,219445672,"electronic, idm, ambient, experimental, electronica",2026-03-04T22:28:01.031282,aphex twin,False
+Fontaines D.C.,https://www.last.fm/music/Fontaines+D.C.,1068219,74600803,"post-punk, Crank wave, indie rock, irish, post-brexit new wave",2026-03-04T22:28:01.641002,fontaines d.c.,False
+AC/DC,https://www.last.fm/music/AC%2FDC,4509544,210840303,"hard rock, classic rock, rock, heavy metal, metal",2026-03-04T22:28:04.331053,ac/dc,True
+Fred again..,https://www.last.fm/music/Fred+again..,1265826,64899953,"House, electronic, dance, UK Garage, Progressive House",2026-03-04T22:28:04.911481,fred again..,True
+2hollis,https://www.last.fm/music/2hollis,765293,77435986,"cloud rap, digicore, hyperpop, electropop, Electroclash",2026-03-04T22:28:05.578550,2hollis,False
+Elliott Smith,https://www.last.fm/music/Elliott+Smith,2924015,282835585,"singer-songwriter, folk, indie, acoustic, indie rock",2026-03-04T22:28:06.348578,elliott smith,False
+Duran Duran,https://www.last.fm/music/Duran+Duran,3130713,75127293,"new wave, 80s, pop, synth pop, rock",2026-03-04T22:28:07.146939,duran duran,False
+HUNTR/X,https://www.last.fm/music/HUNTR%2FX,1114812,40014185,"k-pop, pop, Korean, ost, Kpop",2026-03-04T22:28:07.814559,huntr/x,True
+Bob Dylan,https://www.last.fm/music/Bob+Dylan,4266431,290987548,"folk, singer-songwriter, classic rock, folk rock, rock",2026-03-04T22:28:08.820385,bob dylan,False
+OneRepublic,https://www.last.fm/music/OneRepublic,4277682,134022465,"pop rock, rock, alternative, alternative rock, indie",2026-03-04T22:28:09.501208,onerepublic,True
+Willow,https://www.last.fm/music/Willow,2298418,73292708,"rnb, pop, alternative, post-rock, female vocalists",2026-03-04T22:28:10.141456,willow,False
+Tyla,https://www.last.fm/music/Tyla,1443483,49564559,"rnb, pop, south africa, amapiano, afrobeat",2026-03-04T22:28:10.848296,tyla,True
+Sublime,https://www.last.fm/music/Sublime,3080178,121707102,"ska, reggae, punk, alternative, rock",2026-03-04T22:28:11.495577,sublime,False
+Denzel Curry,https://www.last.fm/music/Denzel+Curry,1606417,152554741,"Hip-Hop, rap, hip hop, Southern Hip Hop, trap",2026-03-04T22:28:12.983691,denzel curry,False
+¥$,https://www.last.fm/music/%C2%A5$,1449765,78492978,"Hip-Hop, rap, hip hop, Kanye West, trap",2026-03-04T22:28:13.744550,¥$,True
+Eagles,https://www.last.fm/music/Eagles,3790002,78088244,"classic rock, rock, 70s, soft rock, country",2026-03-04T22:28:14.583113,eagles,True
+Kings of Leon,https://www.last.fm/music/Kings+of+Leon,5093310,264674186,"rock, indie, indie rock, alternative, Southern Rock",2026-03-04T22:28:17.124636,kings of leon,True
+d4vd,https://www.last.fm/music/d4vd,2264421,112975823,"pop, rnb, dream pop, rock, indie pop",2026-03-04T22:28:19.827834,d4vd,True
+bbno$,https://www.last.fm/music/bbno$,1476522,67048712,"rap, Hip-Hop, Canadian, hip hop, canada",2026-03-04T22:28:21.535249,bbno$,False
+Stray Kids,https://www.last.fm/music/Stray+Kids,1324476,477369907,"k-pop, pop, Korean, Kpop, Hip-Hop",2026-03-04T22:28:22.115448,stray kids,True
+Tove Lo,https://www.last.fm/music/Tove+Lo,2406366,122045272,"pop, swedish, electronic, female vocalists, indie",2026-03-04T22:28:36.727283,tove lo,False
+Kehlani,https://www.last.fm/music/Kehlani,1659399,67873239,"rnb, pop, soul, female vocalists, Hip-Hop",2026-03-04T22:28:37.318226,kehlani,True
+Nine Inch Nails,https://www.last.fm/music/Nine+Inch+Nails,3570426,314829395,"industrial, industrial rock, electronic, alternative, rock",2026-03-04T22:28:37.921687,nine inch nails,False
+Ayesha Erotica,https://www.last.fm/music/Ayesha+Erotica,1159355,58887816,"electropop, hyperpop, miami bass, pop, electronic",2026-03-04T22:28:43.142552,ayesha erotica,False
+Talking Heads,https://www.last.fm/music/Talking+Heads,3216634,140804575,"new wave, post-punk, 80s, rock, alternative",2026-03-04T22:28:51.726336,talking heads,False
+TOMORROW X TOGETHER,https://www.last.fm/music/TOMORROW+X+TOGETHER,1201974,422061318,"k-pop, Kpop, pop, Korean, txt",2026-03-04T22:28:52.590611,tomorrow x together,False
+Hotel Ugly,https://www.last.fm/music/Hotel+Ugly,1868622,51994794,"indie, Neo Soul, soul, alternative, indie pop",2026-03-04T22:28:57.538628,hotel ugly,True
+Hearts2Hearts,https://www.last.fm/music/Hearts2Hearts,317554,16162545,"Korean, k-pop, Kpop, girl group, sm entertainment",2026-03-04T22:29:06.119620,hearts2hearts,False
+The Sundays,https://www.last.fm/music/The+Sundays,1297121,47593034,"dream pop, indie, female vocalists, alternative, 90s",2026-03-04T22:29:06.709628,the sundays,False
+Dire Straits,https://www.last.fm/music/Dire+Straits,3489758,113777013,"classic rock, rock, 80s, blues, guitar",2026-03-04T22:29:13.213859,dire straits,False
+Fiona Apple,https://www.last.fm/music/Fiona+Apple,2701393,176029530,"female vocalists, singer-songwriter, alternative, piano, indie",2026-03-04T22:29:14.829085,fiona apple,False
+j-hope,https://www.last.fm/music/j-hope,1016741,747250978,"k-pop, Hip-Hop, Korean, rap, bts",2026-03-04T22:29:18.617172,j-hope,True
+Dave,https://www.last.fm/music/Dave,1257297,74680585,"french, rap, Grime, Hip-Hop, hip hop",2026-03-04T22:29:20.549544,dave,True
+Slayyyter,https://www.last.fm/music/Slayyyter,783468,49188391,"pop, hyperpop, electronic, electropop, bubblegum bass",2026-03-04T22:29:21.226262,slayyyter,False
+Mother Mother,https://www.last.fm/music/Mother+Mother,1902369,102754293,"indie, Canadian, indie pop, experimental, folk",2026-03-04T22:29:25.067128,mother mother,False
+Fetty Wap,https://www.last.fm/music/Fetty+Wap,1668347,32003000,"Hip-Hop, rap, trap, rnb, hip hop",2026-03-04T22:29:25.936009,fetty wap,True
+Soundgarden,https://www.last.fm/music/Soundgarden,3283785,102294485,"Grunge, alternative rock, rock, hard rock, alternative",2026-03-04T22:29:26.966306,soundgarden,False
+Jamiroquai,https://www.last.fm/music/Jamiroquai,2853958,102915643,"funk, acid jazz, electronic, dance, pop",2026-03-04T22:29:27.757235,jamiroquai,False
+Massive Attack,https://www.last.fm/music/Massive+Attack,3825546,185985377,"trip-hop, electronic, chillout, downtempo, electronica",2026-03-04T22:29:28.519501,massive attack,False
+A Boogie wit da Hoodie,https://www.last.fm/music/A+Boogie+wit+da+Hoodie,1426412,99562311,"Hip-Hop, rap, hip hop, trap, Melodic Rap",2026-03-04T22:29:29.459145,a boogie wit da hoodie,True
+fakemink,https://www.last.fm/music/fakemink,436138,55311254,"cloud rap, Jerk, plugg, rap, Hip-Hop",2026-03-04T22:29:30.135145,fakemink,False
+Khalid,https://www.last.fm/music/Khalid,2271778,94851741,"soul, pop, rnb, alternative rnb, alternative",2026-03-04T22:29:31.033070,khalid,True
+Sam Smith,https://www.last.fm/music/Sam+Smith,3049190,111853937,"soul, pop, british, electronic, dance",2026-03-04T22:29:31.730842,sam smith,True
+America,https://www.last.fm/music/America,2107097,39086672,"classic rock, rock, 70s, soft rock, folk",2026-03-04T22:29:32.448654,america,False
+NMIXX,https://www.last.fm/music/NMIXX,722228,82438333,"k-pop, pop, Korean, Kpop, nmixx",2026-03-04T22:29:33.134952,nmixx,False
+Nickelback,https://www.last.fm/music/Nickelback,4322864,150218929,"rock, alternative rock, hard rock, alternative, Canadian",2026-03-04T22:29:33.838028,nickelback,False
+Avenged Sevenfold,https://www.last.fm/music/Avenged+Sevenfold,2842970,228521585,"metalcore, hard rock, metal, hardcore, rock",2026-03-04T22:29:35.445186,avenged sevenfold,False
+Clean Bandit,https://www.last.fm/music/Clean+Bandit,2514159,49927188,"electronic, indie, experimental, british, electronica",2026-03-04T22:29:36.125917,clean bandit,False
+Queens of the Stone Age,https://www.last.fm/music/Queens+of+the+Stone+Age,3709970,252435117,"Stoner Rock, alternative rock, rock, hard rock, alternative",2026-03-04T22:29:37.173704,queens of the stone age,False
+Bladee,https://www.last.fm/music/Bladee,954990,403525443,"cloud rap, trap, drain, Hip-Hop, hip hop",2026-03-04T22:29:39.733865,bladee,False
+VACATIONS,https://www.last.fm/music/VACATIONS,1859656,67910398,"indie rock, indie pop, indie, dream pop, soul",2026-03-04T22:29:40.482386,vacations,False
+Julia Wolf,https://www.last.fm/music/Julia+Wolf,557762,12600132,"indie pop, pop, singer-songwriter, alternative, alternative pop",2026-03-04T22:29:41.146720,julia wolf,False
+Disclosure,https://www.last.fm/music/Disclosure,2438802,73942876,"electronic, UK Garage, House, future garage, dubstep",2026-03-04T22:29:41.831655,disclosure,False
+Eyedress,https://www.last.fm/music/Eyedress,2173432,73784132,"electronic, psychedelic, experimental, indie, philippines",2026-03-04T22:29:42.934416,eyedress,False
+Alex Warren,https://www.last.fm/music/Alex+Warren,921253,26584497,"folk, pop, singer-songwriter, indie, indie folk",2026-03-04T22:29:43.919158,alex warren,True
+Timbaland,https://www.last.fm/music/Timbaland,3517672,63566288,"Hip-Hop, rnb, rap, pop, hip hop",2026-03-04T22:29:44.542020,timbaland,True
+Suki Waterhouse,https://www.last.fm/music/Suki+Waterhouse,1716668,53514328,"indie pop, my top songs, pop, indie, female vocalists",2026-03-04T22:29:46.006483,suki waterhouse,False
+Labi Siffre,https://www.last.fm/music/Labi+Siffre,969389,15683375,"soul, funk, singer-songwriter, pop, british",2026-03-04T22:29:47.374049,labi siffre,False
+Avicii,https://www.last.fm/music/Avicii,3312458,110802601,"House, electronic, dance, Progressive House, electro house",2026-03-04T22:29:48.458571,avicii,True
+Lord Huron,https://www.last.fm/music/Lord+Huron,2271718,71637214,"folk, psychedelic, indie, indie pop, indie folk",2026-03-04T22:29:49.128023,lord huron,True
+Major Lazer,https://www.last.fm/music/Major+Lazer,2931057,68415415,"electronic, dancehall, reggae, dub, electro",2026-03-04T22:29:49.711215,major lazer,True
+Creedence Clearwater Revival,https://www.last.fm/music/Creedence+Clearwater+Revival,4045557,120938410,"classic rock, rock, Southern Rock, 60s, folk",2026-03-04T22:29:50.289477,creedence clearwater revival,True
+Title Fight,https://www.last.fm/music/Title+Fight,1168829,95108896,"melodic hardcore, pop punk, hardcore, punk, punk rock",2026-03-04T22:29:50.957640,title fight,False
+Daddy Yankee,https://www.last.fm/music/Daddy+Yankee,2200125,50346045,"Reggaeton, latin, Hip-Hop, spanish, rap",2026-03-04T22:29:51.635534,daddy yankee,True
+Bee Gees,https://www.last.fm/music/Bee+Gees,3401162,68281826,"Disco, pop, 70s, classic rock, oldies",2026-03-04T22:29:52.320100,bee gees,False
+Zedd,https://www.last.fm/music/Zedd,2556212,60584032,"electro house, electronic, House, electro, dubstep",2026-03-04T22:29:52.897392,zedd,False
+Sia,https://www.last.fm/music/Sia,4361667,161927127,"female vocalists, indie, chillout, trip-hop, downtempo",2026-03-04T22:29:53.578543,sia,True
+Destroy Lonely,https://www.last.fm/music/Destroy+Lonely,886732,186970053,"opium, trap, plugg, rap, rage",2026-03-04T22:29:54.434807,destroy lonely,False
+YoungBoy Never Broke Again,https://www.last.fm/music/YoungBoy+Never+Broke+Again,1121900,169869174,"rap, trap, Hip-Hop, louisiana, Gangsta Rap",2026-03-04T22:29:56.601165,youngboy never broke again,False
+Blondie,https://www.last.fm/music/Blondie,3393016,73350469,"new wave, 80s, rock, female vocalists, pop",2026-03-04T22:29:57.247151,blondie,False
+The All-American Rejects,https://www.last.fm/music/The+All-American+Rejects,3254844,85385676,"rock, pop punk, alternative, punk, emo",2026-03-04T22:29:57.863247,the all-american rejects,False
+Dean Blunt,https://www.last.fm/music/Dean+Blunt,914720,68685334,"experimental, Lo-Fi, dub, Avant-Garde, art pop",2026-03-04T22:29:58.820529,dean blunt,False
+Joey Bada$$,https://www.last.fm/music/Joey+Bada$$,1734848,113150775,"Hip-Hop, rap, underground hip-hop, hip hop, new york",2026-03-04T22:29:59.492655,joey bada$$,False
+Stevie Wonder,https://www.last.fm/music/Stevie+Wonder,3920214,110329025,"soul, funk, motown, pop, rnb",2026-03-04T22:30:00.392042,stevie wonder,True
+Electric Light Orchestra,https://www.last.fm/music/Electric+Light+Orchestra,2943981,75934610,"classic rock, Progressive rock, rock, 70s, british",2026-03-04T22:30:01.134587,electric light orchestra,False
+Migos,https://www.last.fm/music/Migos,1848946,70740944,"Hip-Hop, trap, rap, trap rap, hip hop",2026-03-04T22:30:17.594165,migos,False
+Metric,https://www.last.fm/music/Metric,2809277,110623159,"indie, indie rock, female vocalists, Canadian, alternative",2026-03-04T22:30:18.387131,metric,False
+Rex Orange County,https://www.last.fm/music/Rex+Orange+County,2024672,123446056,"indie pop, rnb, pop, jazz, indie",2026-03-04T22:30:19.405019,rex orange county,False
+Rae Sremmurd,https://www.last.fm/music/Rae+Sremmurd,1871366,45311412,"Hip-Hop, rap, hip hop, trap, urban",2026-03-04T22:30:20.069094,rae sremmurd,False
+Franz Ferdinand,https://www.last.fm/music/Franz+Ferdinand,4831912,179077783,"indie rock, indie, rock, alternative, britpop",2026-03-04T22:30:20.661732,franz ferdinand,False
+Carly Rae Jepsen,https://www.last.fm/music/Carly+Rae+Jepsen,2976803,154145769,"pop, Canadian, female vocalists, folk, acoustic",2026-03-04T22:30:21.368774,carly rae jepsen,False
+Marshmello,https://www.last.fm/music/Marshmello,2534472,67374129,"electronic, dance, EDM, trap, pop",2026-03-04T22:30:22.222558,marshmello,True
+Two Door Cinema Club,https://www.last.fm/music/Two+Door+Cinema+Club,3113351,128187129,"indie, electronic, british, alternative, synth indie rock",2026-03-04T22:30:23.110894,two door cinema club,False
+Bon Jovi,https://www.last.fm/music/Bon+Jovi,4208319,123565014,"rock, hard rock, classic rock, 80s, hair metal",2026-03-04T22:30:23.733220,bon jovi,False
+Geese,https://www.last.fm/music/Geese,511461,33999772,"indie rock, post-punk, art punk, Crank wave, dance-punk",2026-03-04T22:30:24.326350,geese,False
+The Clash,https://www.last.fm/music/The+Clash,4110505,152058961,"punk, punk rock, british, rock, classic rock",2026-03-04T22:30:25.075519,the clash,True
+ROLE MODEL,https://www.last.fm/music/ROLE+MODEL,1022930,51858983,"8-bit, chiptune, electronic, 8bit, pop",2026-03-04T22:30:26.353020,role model,False
+Her's,https://www.last.fm/music/Her%27s,1439143,45412830,"dream pop, post-punk, jangle pop, indie pop, indie",2026-03-04T22:30:26.953225,her's,False
+Måneskin,https://www.last.fm/music/M%C3%A5neskin,1838916,99831475,"rock, glam rock, italian, alternative rock, Italy",2026-03-04T22:30:27.656375,måneskin,False
+Zach Bryan,https://www.last.fm/music/Zach+Bryan,1179653,130908934,"country, singer-songwriter, americana, Alt-country, country rock",2026-03-04T22:30:28.229645,zach bryan,True
+Lily Allen,https://www.last.fm/music/Lily+Allen,3731003,129239405,"pop, female vocalists, british, britpop, singer-songwriter",2026-03-04T22:30:29.111174,lily allen,False
+Alicia Keys,https://www.last.fm/music/Alicia+Keys,4167155,101124412,"soul, rnb, female vocalists, pop, singer-songwriter",2026-03-04T22:30:29.876422,alicia keys,False
+PEDRO SAMPAIO,https://www.last.fm/music/PEDRO+SAMPAIO,550013,29298466,"brazilian, funk, brazil, melody, pop",2026-03-04T22:30:30.833054,pedro sampaio,True
+Anitta,https://www.last.fm/music/Anitta,1189909,153086836,"pop, brazilian, funk, dance, female vocalists",2026-03-04T22:30:31.737038,anitta,True
+Snoop Dogg,https://www.last.fm/music/Snoop+Dogg,4319833,81269273,"Hip-Hop, rap, Gangsta Rap, west coast, hip hop",2026-03-04T22:30:32.545121,snoop dogg,False
+Summer Walker,https://www.last.fm/music/Summer+Walker,1710382,107057544,"rnb, soul, Neo-Soul, pop, trap",2026-03-04T22:30:34.130210,summer walker,True
+Bon Iver,https://www.last.fm/music/Bon+Iver,3533128,236503590,"folk, indie, singer-songwriter, acoustic, Lo-Fi",2026-03-04T22:30:34.815908,bon iver,True
+Artemas,https://www.last.fm/music/Artemas,1577748,51433725,"pop, british, rnb, indie, dark pop",2026-03-04T22:30:35.614253,artemas,True
+Gucci Mane,https://www.last.fm/music/Gucci+Mane,2731189,65631733,"Hip-Hop, rap, Dirty South, southern rap, trap",2026-03-04T22:30:36.414084,gucci mane,False
+Rammstein,https://www.last.fm/music/Rammstein,3087781,317452837,"industrial metal, metal, german, industrial, rock",2026-03-04T22:30:37.124697,rammstein,False
+KAYTRANADA,https://www.last.fm/music/KAYTRANADA,1544296,74334340,"electronic, Hip-Hop, beats, experimental, House",2026-03-04T22:30:37.769371,kaytranada,False
+JID,https://www.last.fm/music/JID,1370698,103504171,"rap, Hip-Hop, trap, hip hop, rnb",2026-03-04T22:30:38.824710,jid,True
+Jordana,https://www.last.fm/music/Jordana,1247480,27412321,"pop, indie pop, indie rock, indie, female vocalists",2026-03-04T22:30:39.458986,jordana,False
+Yung Lean,https://www.last.fm/music/Yung+Lean,1297493,159639448,"Hip-Hop, cloud rap, sad, based, real recognize real and this nigga the realest",2026-03-04T22:30:40.062408,yung lean,False
+Current Joys,https://www.last.fm/music/Current+Joys,1721353,65440334,"indie, indie pop, indie rock, dream pop, Lo-Fi",2026-03-04T22:30:40.763682,current joys,False
+P!nk,https://www.last.fm/music/P%21nk,3731132,122141424,"pop, pop rock, female vocalists, rock, female",2026-03-04T22:30:41.439418,p!nk,True
+Rosé,https://www.last.fm/music/Ros%C3%A9,1644666,102733900,"Rosé, pop, k-pop, Korean, rose",2026-03-04T22:30:42.357084,rosé,True
+Ty Dolla $ign,https://www.last.fm/music/Ty+Dolla+$ign,1643314,29276948,"Hip-Hop, rap, rnb, hip hop, cloud rnb",2026-03-04T22:30:43.271288,ty dolla $ign,True
+Car Seat Headrest,https://www.last.fm/music/Car+Seat+Headrest,1354673,168382751,"Lo-Fi, indie rock, indie, noise pop, furry",2026-03-04T22:30:44.450398,car seat headrest,False
+t.A.T.u.,https://www.last.fm/music/t.A.T.u.,2200648,48563271,"pop, russian, electronic, female vocalists, dance",2026-03-04T22:30:53.344235,t.a.t.u.,False
+KAROL G,https://www.last.fm/music/KAROL+G,1408195,73005686,"Reggaeton, pop, latin pop, latin, Colombia",2026-03-04T22:31:03.727795,karol g,True
+Swedish House Mafia,https://www.last.fm/music/Swedish+House+Mafia,2682111,53121052,"House, electronic, dance, electro house, electro",2026-03-04T22:31:04.426259,swedish house mafia,False
+Mindless Self Indulgence,https://www.last.fm/music/Mindless+Self+Indulgence,1507768,131724295,"industrial, industrial jungle pussy punk, electronic, punk, alternative",2026-03-04T22:31:08.027089,mindless self indulgence,False
+The Beach Boys,https://www.last.fm/music/The+Beach+Boys,4092436,161836541,"classic rock, 60s, pop, Surf, rock",2026-03-04T22:31:08.893588,the beach boys,True
+Mumford & Sons,https://www.last.fm/music/Mumford+&+Sons,2667238,136918270,"folk, indie, british, acoustic, bluegrass",2026-03-04T22:31:09.490327,mumford & sons,False
+Mark Ronson,https://www.last.fm/music/Mark+Ronson,3052754,50026990,"funk, british, pop, Hip-Hop, dj",2026-03-04T22:31:10.128130,mark ronson,False
+Foster the People,https://www.last.fm/music/Foster+the+People,3687798,117884199,"indie, indie pop, alternative, american, indie rock",2026-03-04T22:31:10.809376,foster the people,True
+Leon Thomas,https://www.last.fm/music/Leon+Thomas,875329,21079975,"jazz, soul, funk, spiritual jazz, free jazz",2026-03-04T22:31:21.014453,leon thomas,True
+The Living Tombstone,https://www.last.fm/music/The+Living+Tombstone,1290289,51174972,"electronic, brony, dubstep, mlp, rock",2026-03-04T22:31:21.655545,the living tombstone,False
+The Script,https://www.last.fm/music/The+Script,2948373,74858270,"pop rock, rock, irish, pop, acoustic",2026-03-04T22:31:22.341274,the script,True
+Sleeping With Sirens,https://www.last.fm/music/Sleeping+With+Sirens,1165264,74015159,"post-hardcore, screamo, emocore, experimental, hardcore",2026-03-04T22:31:25.190491,sleeping with sirens,False
+Steely Dan,https://www.last.fm/music/Steely+Dan,1747762,72043648,"Jazz Rock, classic rock, rock, 70s, jazz",2026-03-04T22:31:28.471168,steely dan,False
+BROCKHAMPTON,https://www.last.fm/music/BROCKHAMPTON,1657544,192599974,"Hip-Hop, rap, hip hop, pop rap, experimental hip hop",2026-03-04T22:31:29.393147,brockhampton,False
+"Earth, Wind & Fire","https://www.last.fm/music/Earth,+Wind+&+Fire",2910579,48196406,"funk, soul, Disco, 70s, rnb",2026-03-04T22:31:31.738562,"earth, wind & fire",False
+Phantogram,https://www.last.fm/music/Phantogram,1912973,47356064,"trip-hop, electronic, indie, experimental, new york",2026-03-04T22:31:33.503565,phantogram,False
+Freddie Gibbs,https://www.last.fm/music/Freddie+Gibbs,1278766,107699731,"Hip-Hop, Gangsta Rap, rap, underground hip-hop, hip hop",2026-03-04T22:31:35.984731,freddie gibbs,False
+Tool,https://www.last.fm/music/Tool,2591971,226667157,"Progressive metal, Progressive rock, alternative, metal, rock",2026-03-04T22:31:36.597833,tool,False
+No Doubt,https://www.last.fm/music/No+Doubt,3558092,83431544,"rock, ska, pop, alternative, female vocalists",2026-03-04T22:31:39.706449,no doubt,False
+Givēon,https://www.last.fm/music/Giv%C4%93on,688767,24836079,"rnb, soul, pop, USA, Neo Soul",2026-03-04T22:31:40.283900,givēon,False
+Lil Nas X,https://www.last.fm/music/Lil+Nas+X,2616138,114675990,"Hip-Hop, rap, pop, country rap, trap",2026-03-04T22:31:40.864018,lil nas x,True
+Lykke Li,https://www.last.fm/music/Lykke+Li,3106961,96800791,"indie pop, female vocalists, swedish, electronic, pop",2026-03-04T22:31:42.903524,lykke li,False
+George Harrison,https://www.last.fm/music/George+Harrison,2440715,68682985,"classic rock, rock, singer-songwriter, british, pop",2026-03-04T22:31:56.903931,george harrison,False
+Bob Marley & The Wailers,https://www.last.fm/music/Bob+Marley+&+The+Wailers,3444910,124680836,"reggae, roots reggae, ska, roots, classic rock",2026-03-04T22:32:06.439211,bob marley & the wailers,True
+Ne-Yo,https://www.last.fm/music/Ne-Yo,3316511,63158035,"rnb, soul, Hip-Hop, pop, Ne-Yo",2026-03-04T22:32:07.026052,ne-yo,True
+Pantera,https://www.last.fm/music/Pantera,2591476,131186274,"thrash metal, groove metal, heavy metal, metal, Power metal",2026-03-04T22:32:07.921056,pantera,False
+Chevelle,https://www.last.fm/music/Chevelle,1803654,59042783,"alternative rock, alternative metal, rock, hard rock, alternative",2026-03-04T22:32:08.841372,chevelle,False
+Nas,https://www.last.fm/music/Nas,3350826,138929850,"Hip-Hop, rap, east coast rap, hip hop, new york",2026-03-04T22:32:09.892673,nas,False
+ATEEZ,https://www.last.fm/music/ATEEZ,789322,210298311,"k-pop, Korean, Kpop, pop, boy group",2026-03-04T22:32:11.803878,ateez,False
+boygenius,https://www.last.fm/music/boygenius,1133239,98866012,"indie rock, indie folk, indie, folk, female vocalists",2026-03-04T22:32:13.074803,boygenius,False
+The Doors,https://www.last.fm/music/The+Doors,4700836,226961962,"classic rock, Psychedelic Rock, rock, 60s, psychedelic",2026-03-04T22:32:13.816260,the doors,False
+Wiz Khalifa,https://www.last.fm/music/Wiz+Khalifa,3851111,87867946,"Hip-Hop, rap, hip hop, underground hip-hop, pittsburgh",2026-03-04T22:32:14.607011,wiz khalifa,True
+G-Eazy,https://www.last.fm/music/G-Eazy,2040036,55062035,"Hip-Hop, rap, hip hop, american, The Cool Kids",2026-03-04T22:32:15.388799,g-eazy,True
+Toby Fox,https://www.last.fm/music/Toby+Fox,1182616,152497912,"Soundtrack, video game music, chiptune, electronic, undertale",2026-03-04T22:32:16.459630,toby fox,False
+Elvis Presley,https://www.last.fm/music/Elvis+Presley,4458537,149963982,"rock n roll, classic rock, rock, oldies, Rock and Roll",2026-03-04T22:32:17.502032,elvis presley,True
+Jhené Aiko,https://www.last.fm/music/+noredirect/Jhen%C3%A9+Aiko,1366120,69159350,"rnb, soul, pop, female vocalists, r&b",2026-03-04T22:32:18.382186,jhené aiko,False
+Audioslave,https://www.last.fm/music/Audioslave,3278308,94022860,"alternative rock, rock, hard rock, Grunge, alternative",2026-03-04T22:32:19.035538,audioslave,False
+Ghost,https://www.last.fm/music/Ghost,1615258,155218523,"heavy metal, Psychedelic Rock, doom metal, psychedelic, Progressive rock",2026-03-04T22:32:19.848348,ghost,False
+R.E.M.,https://www.last.fm/music/R.E.M.,4333332,154654403,"rock, alternative rock, alternative, indie, pop",2026-03-04T22:32:20.750641,r.e.m.,False
+All Time Low,https://www.last.fm/music/All+Time+Low,2543992,144065502,"pop punk, powerpop, rock, punk, emo",2026-03-04T22:32:21.332629,all time low,False
+KiiiKiii,https://www.last.fm/music/KiiiKiii,215726,7734520,"k-pop, Korean, Kpop, pop, girl group",2026-03-04T22:32:21.954894,kiiikiii,False
+Kylie Minogue,https://www.last.fm/music/Kylie+Minogue,3504437,173587223,"pop, dance, female vocalists, australian, electronic",2026-03-04T22:32:23.154242,kylie minogue,False
+Omar Apollo,https://www.last.fm/music/Omar+Apollo,1457185,63518670,"rnb, soul, funk, indie, mexican",2026-03-04T22:32:24.144625,omar apollo,False
+Sleep Token,https://www.last.fm/music/Sleep+Token,824267,152323851,"Progressive metal, alternative metal, DJENT, Progressive rock, pop",2026-03-04T22:32:24.736151,sleep token,True
+Portishead,https://www.last.fm/music/Portishead,3273692,140751707,"trip-hop, electronic, female vocalists, chillout, trip hop",2026-03-04T22:32:25.349964,portishead,False
+Bad Omens,https://www.last.fm/music/Bad+Omens,771882,84160566,"metalcore, post-hardcore, alternative metal, metal, alternative rock",2026-03-04T22:32:26.338715,bad omens,False
+OsamaSon,https://www.last.fm/music/OsamaSon,427129,109020796,"trap, plugg, dark plugg, rage, rap",2026-03-04T22:32:27.721396,osamason,False
+Agust D,https://www.last.fm/music/Agust+D,830721,574168520,"rap, Hip-Hop, Korean, bts, hip hop",2026-03-04T22:32:28.402268,agust d,True
+Surf Curse,https://www.last.fm/music/Surf+Curse,1979505,45100143,"Lo-Fi, Surf, indie, indie rock, Garage Rock",2026-03-04T22:32:29.036068,surf curse,True
+Rage Against the Machine,https://www.last.fm/music/Rage+Against+the+Machine,4219440,161518805,"alternative rock, rock, alternative, political, rapcore",2026-03-04T22:32:29.640517,rage against the machine,False
+B.o.B,https://www.last.fm/music/B.o.B,3154864,46266203,"Hip-Hop, rap, hip hop, Dirty South, atlanta",2026-03-04T22:32:30.240361,b.o.b,True
+i-dle,https://www.last.fm/music/i-dle,475522,15909899,"k-pop, Korean, i-dle, GIDLE, cube entertainment",2026-03-04T22:32:31.521097,i-dle,True
+Aerosmith,https://www.last.fm/music/Aerosmith,4687407,130073249,"hard rock, classic rock, rock, 80s, 70s",2026-03-04T22:32:32.217594,aerosmith,False
+DJ Khaled,https://www.last.fm/music/DJ+Khaled,2835151,60411069,"Hip-Hop, rap, hip hop, miami, djs",2026-03-04T22:32:33.176853,dj khaled,False
+Chris Isaak,https://www.last.fm/music/Chris+Isaak,2015168,31774793,"rock, blues, singer-songwriter, 80s, pop",2026-03-04T22:32:33.762526,chris isaak,False
+Labrinth,https://www.last.fm/music/Labrinth,2508265,73412582,"electronic, british, rnb, dance, r&b",2026-03-04T22:32:34.400405,labrinth,True
+Jason Derulo,https://www.last.fm/music/+noredirect/Jason+Derulo,3080732,59804257,,2026-03-04T22:32:35.337245,jason derulo,False
+Toto,https://www.last.fm/music/Toto,3049325,54915267,"rock, classic rock, 80s, Progressive rock, pop",2026-03-04T22:32:36.405401,toto,True
+Creed,https://www.last.fm/music/Creed,2417322,56627859,"rock, alternative rock, hard rock, Grunge, alternative",2026-03-04T22:32:37.013689,creed,False
+Lit,https://www.last.fm/music/Lit,1284456,12930803,"alternative rock, pop punk, rock, alternative, punk",2026-03-04T22:32:37.840851,lit,False
+Kelly Clarkson,https://www.last.fm/music/Kelly+Clarkson,4475094,131217035,"pop, female vocalists, pop rock, rock, Kelly Clarkson",2026-03-04T22:32:54.141533,kelly clarkson,True
+CORTIS,https://www.last.fm/music/CORTIS,405439,18399947,"Cortis, k-pop, Korean, juhoon da Thauany, Kpop",2026-03-04T22:32:54.847470,cortis,False
+Thee Sacred Souls,https://www.last.fm/music/Thee+Sacred+Souls,1162267,28152730,"soul, funk, rnb, United States, USA",2026-03-04T22:32:55.502899,thee sacred souls,False
+Falling in Reverse,https://www.last.fm/music/Falling+in+Reverse,1347128,68034090,"post-hardcore, screamo, hardcore, rock, ronnie radke",2026-03-04T22:32:56.176151,falling in reverse,False
+Natasha Bedingfield,https://www.last.fm/music/Natasha+Bedingfield,2959071,42856083,"pop, female vocalists, british, singer-songwriter, female",2026-03-04T22:32:56.835681,natasha bedingfield,True
+Bruce Springsteen,https://www.last.fm/music/Bruce+Springsteen,3546912,148895671,"rock, classic rock, singer-songwriter, folk, 80s",2026-03-04T22:32:57.420601,bruce springsteen,True
+Jimin,https://www.last.fm/music/Jimin,859538,791688440,"k-pop, jimin, bts, Korean, Kpop",2026-03-04T22:32:58.023670,jimin,True
+Selena Gomez & the Scene,https://www.last.fm/music/Selena+Gomez+&+the+Scene,2466378,54697652,"pop, female vocalists, pop rock, Disney, Selena Gomez",2026-03-04T22:32:58.737972,selena gomez & the scene,False
+HIM,https://www.last.fm/music/HIM,1661462,98491058,"Love Metal, Gothic Rock, rock, finnish, metal",2026-03-04T22:32:59.767155,him,False
+Wet Leg,https://www.last.fm/music/Wet+Leg,882417,26619072,"indie rock, post-punk, Crank wave, indie pop, indie",2026-03-04T22:33:00.382429,wet leg,False
+Crowded House,https://www.last.fm/music/Crowded+House,1958124,30923911,"rock, pop, 80s, australian, New Zealand",2026-03-04T22:33:01.620847,crowded house,False
+Christina Aguilera,https://www.last.fm/music/Christina+Aguilera,4429479,206545335,"pop, female vocalists, soul, rnb, dance",2026-03-04T22:33:02.449615,christina aguilera,False
+Exo,https://www.last.fm/music/Exo,1033112,165379088,"k-pop, exo, Korean, Kpop, exo-k",2026-03-04T22:33:03.369827,exo,False
+ScHoolboy Q,https://www.last.fm/music/ScHoolboy+Q,1966619,79286358,"Hip-Hop, rap, underground hip-hop, West Coast Rap, hip hop",2026-03-04T22:33:04.144689,schoolboy q,True
+Odetari,https://www.last.fm/music/Odetari,1104469,63725640,"hyperpop, ass, odecore, krushclub, tiktok",2026-03-04T22:33:05.033302,odetari,True
+JVKE,https://www.last.fm/music/JVKE,1571503,45296032,"pop, indie pop, indie, my top songs, USA",2026-03-04T22:33:05.870544,jvke,True
+Cafuné,https://www.last.fm/music/Cafun%C3%A9,1451301,32318415,"indie pop, indie rock, dream pop, pop, alternative",2026-03-04T22:33:24.141193,cafuné,False
+Christina Aguilera,https://www.last.fm/music/Christina+Aguilera,4429479,206545335,"pop, female vocalists, soul, rnb, dance",2026-03-04T22:33:25.919000,christina aguilera,False
+Akon,https://www.last.fm/music/Akon,3693557,60704386,"rnb, Hip-Hop, rap, pop, hip hop",2026-03-04T22:33:26.582590,akon,False
+Cavetown,https://www.last.fm/music/Cavetown,1609528,86141715,"indie pop, pop, indie, bedroom pop, Lo-Fi",2026-03-04T22:33:27.823020,cavetown,False
+Crowded House,https://www.last.fm/music/Crowded+House,1958124,30923911,"rock, pop, 80s, australian, New Zealand",2026-03-04T22:33:37.445699,crowded house,False
+Ozzy Osbourne,https://www.last.fm/music/Ozzy+Osbourne,3089059,94327385,"heavy metal, hard rock, metal, classic rock, rock",2026-03-04T22:33:40.690230,ozzy osbourne,True
+Offset,https://www.last.fm/music/Offset,1448852,44988693,"trap, rap, Hip-Hop, travis scott, hip hop",2026-03-04T22:33:48.610694,offset,True
+Benson Boone,https://www.last.fm/music/Benson+Boone,1456781,44423716,"pop, rock, pop rock, my top songs, singer-songwriter",2026-03-04T22:33:52.506619,benson boone,True
+RM,https://www.last.fm/music/RM,772921,520384986,"k-pop, rap, bts, Hip-Hop, Korean",2026-03-04T22:33:53.371372,rm,True
+Jane Remover,https://www.last.fm/music/Jane+Remover,500002,52098257,"digicore, hyperpop, shoegaze, indietronica, trap",2026-03-04T22:33:54.225978,jane remover,False
+Matt Maltese,https://www.last.fm/music/Matt+Maltese,1712156,67167177,"indie pop, pop, singer-songwriter, indie, british",2026-03-04T22:33:58.006001,matt maltese,False
+John Lennon,https://www.last.fm/music/John+Lennon,4035893,84622715,"classic rock, rock, singer-songwriter, british, pop",2026-03-04T22:33:59.110332,john lennon,True
+Reneé Rapp,https://www.last.fm/music/Rene%C3%A9+Rapp,982162,79507452,"my top songs, pop, american, USA, rnb",2026-03-04T22:33:59.855671,reneé rapp,False
+The White Stripes,https://www.last.fm/music/The+White+Stripes,4815044,197622281,"rock, alternative rock, alternative, indie, indie rock",2026-03-04T22:34:01.254427,the white stripes,True
+Earl Sweatshirt,https://www.last.fm/music/Earl+Sweatshirt,1561664,150756704,"Hip-Hop, rap, ofwgkta, underground hip-hop, swag",2026-03-04T22:34:01.951613,earl sweatshirt,False
+Cults,https://www.last.fm/music/Cults,2434282,54471283,"indie pop, Lo-Fi, experimental, noise, indie",2026-03-04T22:34:04.189432,cults,False
+Tainy,https://www.last.fm/music/Tainy,784846,36246957,"Reggaeton, latin, puerto rico, pop, producer",2026-03-04T22:34:05.107795,tainy,True
+Jin,https://www.last.fm/music/Jin,795007,787559146,"bts, rap, Hip-Hop, hip hop, Kpop",2026-03-04T22:34:06.282861,jin,True
+Joy Division,https://www.last.fm/music/Joy+Division,3355005,182064147,"post-punk, new wave, 80s, alternative, indie",2026-03-04T22:34:09.209279,joy division,False
+Modern Baseball,https://www.last.fm/music/Modern+Baseball,912390,80484442,"emo, pop punk, indie, punk, indie rock",2026-03-04T22:34:10.053832,modern baseball,False
+Lola Young,https://www.last.fm/music/Lola+Young,1152073,25873763,"pop, rnb, indie pop, soul, my top songs",2026-03-04T22:34:10.814613,lola young,True
+Don Omar,https://www.last.fm/music/Don+Omar,1780202,33322988,"Reggaeton, latin, Hip-Hop, spanish, latino",2026-03-04T22:34:12.240836,don omar,True
+Duster,https://www.last.fm/music/Duster,1578184,117477963,"slowcore, space rock, shoegaze, indie rock, drone rock",2026-03-04T22:34:12.929589,duster,False
+Jack Harlow,https://www.last.fm/music/Jack+Harlow,1821134,76846451,"rap, Hip-Hop, trap, hip hop, pop rap",2026-03-04T22:34:28.942196,jack harlow,True
+Waka Flocka Flame,https://www.last.fm/music/Waka+Flocka+Flame,1790840,20330129,"Hip-Hop, rap, Dirty South, trap, hip hop",2026-03-04T22:34:37.214911,waka flocka flame,False
+Sonder,https://www.last.fm/music/Sonder,1039774,48099655,"soul, rnb, electronic, Neo-Soul, alternative rnb",2026-03-04T22:34:37.915676,sonder,False
+Jennifer Lopez,https://www.last.fm/music/Jennifer+Lopez,3738601,71653651,"pop, rnb, latin, female vocalists, dance",2026-03-04T22:34:38.806518,jennifer lopez,False
+Little Mix,https://www.last.fm/music/Little+Mix,1823338,112383401,"pop, british, female vocalists, Girl Groups, X factor",2026-03-04T22:34:39.465052,little mix,False
+Wolf Alice,https://www.last.fm/music/Wolf+Alice,1251269,57112935,"indie rock, indie, british, alternative rock, female vocalists",2026-03-04T22:34:40.098248,wolf alice,False
+NLE Choppa,https://www.last.fm/music/NLE+Choppa,1460495,57014255,"trap, rap, Hip-Hop, hip hop, memphis",2026-03-04T22:34:40.766330,nle choppa,True
+wave to earth,https://www.last.fm/music/wave+to+earth,823097,85684049,"indie pop, Korean, k-indie, indie rock, Korean Pop",2026-03-04T22:34:55.475278,wave to earth,False
+The Lumineers,https://www.last.fm/music/The+Lumineers,2552448,90575392,"folk, indie, folk rock, american, rock",2026-03-04T22:35:09.898821,the lumineers,True
+V,https://www.last.fm/music/V,906065,719300435,"bts, pop, rnb, Melodic Death Metal, Taehyung",2026-03-04T22:35:24.505417,v,True
+Lauv,https://www.last.fm/music/Lauv,1735659,76866147,"pop, indie pop, indie, american, jazz",2026-03-04T22:35:32.008046,lauv,True
+Ashnikko,https://www.last.fm/music/Ashnikko,1437241,62578850,"pop, electronic, electropop, Hip-Hop, rap",2026-03-04T22:35:40.836196,ashnikko,True
+Stone Temple Pilots,https://www.last.fm/music/Stone+Temple+Pilots,2470260,72195808,"Grunge, alternative rock, rock, alternative, 90s",2026-03-04T22:35:41.550194,stone temple pilots,False
+King Von,https://www.last.fm/music/King+Von,985572,60194029,"drill, rap, Hip-Hop, trap, hip hop",2026-03-04T22:35:42.228499,king von,False
+Hole,https://www.last.fm/music/Hole,2080548,71026833,"Grunge, female vocalists, alternative rock, rock, alternative",2026-03-04T22:35:42.902787,hole,False
+Keane,https://www.last.fm/music/Keane,3997883,116470042,"britpop, indie, british, alternative, rock",2026-03-04T22:35:43.643412,keane,True
+M83,https://www.last.fm/music/M83,3493781,139183368,"electronic, shoegaze, post-rock, indie, electronica",2026-03-04T22:35:44.450786,m83,False
+Air,https://www.last.fm/music/Air,3182451,135765945,"electronic, chillout, ambient, french, electronica",2026-03-04T22:35:45.229965,air,False
+George Michael,https://www.last.fm/music/George+Michael,3193894,56721297,"pop, 80s, british, soul, dance",2026-03-04T22:35:46.127229,george michael,False
+Dr. Dre,https://www.last.fm/music/Dr.+Dre,3934510,88930545,"Hip-Hop, rap, Gangsta Rap, west coast, hip hop",2026-03-04T22:35:47.251930,dr. dre,False
+Neil Young,https://www.last.fm/music/Neil+Young,2696140,110695225,"classic rock, singer-songwriter, folk, rock, folk rock",2026-03-04T22:35:48.255741,neil young,False
+Seventeen,https://www.last.fm/music/Seventeen,927181,284920887,"k-pop, Kpop, pop, rock, seventeen",2026-03-04T22:35:48.897840,seventeen,False
+The Velvet Underground,https://www.last.fm/music/The+Velvet+Underground,3168703,129404764,"psychedelic, rock, classic rock, proto-punk, alternative",2026-03-04T22:35:49.762481,the velvet underground,False
+BigXthaPlug,https://www.last.fm/music/BigXthaPlug,927084,31886230,"Hip-Hop, rap, texas, dallas, trap",2026-03-04T22:35:50.790371,bigxthaplug,False
+Tinashe,https://www.last.fm/music/Tinashe,1586552,83604278,"rnb, pop, soul, Hip-Hop, british",2026-03-04T22:36:08.138206,tinashe,True
+Lynyrd Skynyrd,https://www.last.fm/music/Lynyrd+Skynyrd,3247064,63364359,"Southern Rock, classic rock, rock, hard rock, 70s",2026-03-04T22:36:18.309734,lynyrd skynyrd,False
+Pet Shop Boys,https://www.last.fm/music/Pet+Shop+Boys,2322216,68730565,"synthpop, electronic, pop, 80s, new wave",2026-03-04T22:36:19.304384,pet shop boys,False
