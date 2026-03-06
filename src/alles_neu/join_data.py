@@ -1,23 +1,23 @@
 # join_data.py
 import pandas as pd
 
-# Laden
+# load
 df_lastfm = pd.read_csv("data/artists_lastfm.csv")
 df_events = pd.read_csv("data/ticketmaster_events.csv")
 
-# Join auf artist_name
+# Join artist_name
 df = df_events.merge(df_lastfm, left_on="artist_name", right_on="name", how="left")
 
-# Tour-Größe pro Artist berechnen
+# Calculate tour size per artist
 tour_size = df.groupby("artist_name")["event_id"].count().reset_index()
 tour_size.columns = ["artist_name", "total_events"]
 
 df = df.merge(tour_size, on="artist_name", how="left")
 
-# Speichern
+# safe
 df.to_csv("data/final_dataset.csv", index=False)
 
-print("✅ Finales Dataset gespeichert → data/final_dataset.csv")
+print("Finales Dataset gespeichert → data/final_dataset.csv")
 print(f"   Rows: {len(df)}")
 print(f"   Columns: {list(df.columns)}")
 print("\nBeispiel:")
