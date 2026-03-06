@@ -1,4 +1,4 @@
-# analyse_f1_correlation.py
+# Analyse_f1_correlation.py
 import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.ticker as mticker
@@ -6,26 +6,26 @@ from scipy import stats
 import numpy as np
 import os
 
-# ── Laden ─────────────────────────────────────────────
+# Load
 df = pd.read_csv("data/final_dataset.csv")
 os.makedirs("data/plots", exist_ok=True)
 
 print(f"Geladene Artists: {len(df)}")
 print(f"Fehlende Werte:\n{df[['listeners', 'total_events']].isnull().sum()}")
 
-# ── Bereinigen ────────────────────────────────────────
+# Clean
 df = df.dropna(subset=["listeners", "total_events"])
 df = df[df["total_events"] > 0]
 print(f"\nNach Bereinigung: {len(df)} Artists")
 
-# ── Deskriptive Statistik ─────────────────────────────
+# Descriptive statistics
 print("\n=== Deskriptive Statistik ===")
 print(df[["listeners", "total_events"]].describe().round(2))
 
-# ── Pearson Korrelation ───────────────────────────────
+# Pearson correlation
 r, p = stats.pearsonr(df["listeners"], df["total_events"])
 
-# Stärke bestimmen
+# Determine strenght
 if abs(r) >= 0.7:
     strength = "stark"
 elif abs(r) >= 0.4:
@@ -41,21 +41,21 @@ print(f"r  = {r:.4f}")
 print(f"p  = {p:.4f}")
 print(f"r² = {r ** 2:.4f}  ({r ** 2 * 100:.1f}% Varianz erklärt)")
 print(f"→  {strength} {direction}e Korrelation")
-print(f"→  {'statistisch signifikant ✅' if p < 0.05 else 'nicht signifikant ⚠️'}")
+print(f"→  {'statistisch signifikant' if p < 0.05 else 'nicht signifikant'}")
 
-# ── Regressionsline ───────────────────────────────────
+# Regressionline
 slope, intercept, r_val, p_val, std_err = stats.linregress(
     df["listeners"], df["total_events"]
 )
 
-# ── Plot ──────────────────────────────────────────────
+# Plot
 fig, axes = plt.subplots(1, 2, figsize=(16, 7))
 fig.suptitle(
     "F1: Last.fm Listeners vs Tour Scale (Number of Events)",
     fontsize=15, fontweight="bold", y=1.02
 )
 
-# ── Plot Links: Scatterplot ───────────────────────────
+# Left plot: scatterplot
 ax1 = axes[0]
 
 ax1.scatter(
@@ -63,7 +63,7 @@ ax1.scatter(
     color="steelblue", alpha=0.7, s=80, zorder=5, label="Artists"
 )
 
-# Top 15 Artists labeln
+# Top 15 artist label
 top = df.nlargest(15, "total_events")
 for _, row in top.iterrows():
     ax1.annotate(
@@ -73,13 +73,13 @@ for _, row in top.iterrows():
         xytext=(6, 4), fontsize=7, color="darkblue"
     )
 
-# Trendlinie
+# Trendline
 x_line = np.linspace(df["listeners"].min(), df["listeners"].max(), 100)
 y_line = slope * x_line + intercept
 ax1.plot(x_line, y_line, color="red", linestyle="--",
          linewidth=2, label=f"Trendlinie (r={r:.3f})")
 
-# Konfidenzband
+# Confidence band
 n = len(df)
 x_mean = df["listeners"].mean()
 se = std_err * np.sqrt(
@@ -105,10 +105,10 @@ ax1.xaxis.set_major_formatter(mticker.FuncFormatter(
 ax1.legend(fontsize=9)
 ax1.grid(True, alpha=0.3)
 
-# ── Plot Rechts: Verteilung ───────────────────────────
+# Right plot: distribution
 ax2 = axes[1]
 
-# Artists in 4 Quartile nach Listeners aufteilen
+# Artists divided into 4 quartiles by listeners
 df["quartile"] = pd.qcut(df["listeners"], q=4, labels=[
     "Q1\n(niedrig)", "Q2", "Q3", "Q4\n(hoch)"
 ])
@@ -122,7 +122,7 @@ bars = ax2.bar(
     edgecolor="white", linewidth=1.5
 )
 
-# Werte über Balken
+# value over bars
 for bar, val in zip(bars, quartile_means.values):
     ax2.text(
         bar.get_x() + bar.get_width() / 2,
@@ -143,9 +143,9 @@ plt.tight_layout()
 plt.savefig("data/plots/f1_correlation.png", dpi=150, bbox_inches="tight")
 plt.show()
 
-print("\n✅ Plot gespeichert → data/plots/f1_correlation.png")
+print("\n Plot gespeichert → data/plots/f1_correlation.png")
 
-# ── Interpretation ────────────────────────────────────
+# Interpretation
 print("\n=== Interpretation ===")
 print(f"""
 Forschungsfrage: How does the number of Last.fm listeners correlate 
