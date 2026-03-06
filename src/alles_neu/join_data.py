@@ -1,7 +1,7 @@
 # join_data.py
 import pandas as pd
 
-# load
+# Load
 df_lastfm = pd.read_csv("data/artists_lastfm.csv")
 df_events = pd.read_csv("data/ticketmaster_events.csv")
 
@@ -14,7 +14,7 @@ tour_size.columns = ["artist_name", "total_events"]
 
 df = df.merge(tour_size, on="artist_name", how="left")
 
-# safe
+# Save
 df.to_csv("data/final_dataset.csv", index=False)
 
 print("Finales Dataset gespeichert → data/final_dataset.csv")
