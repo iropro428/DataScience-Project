@@ -36,22 +36,22 @@ def get_top_artists(pages=5):  # 1 page = 50 artists → 5 pages = 250 artists
     return all_artists
 
 
-# ── Ausführen ─────────────────────────────────────────
+# Run 
 artists = get_top_artists(pages=10)  # = 500 Artists
 
-print(f"✅ {len(artists)} Artists gesammelt")
+print(f" {len(artists)} Artists gesammelt")
 
-# Als Python-Liste speichern
+# Save As Python-List
 with open("alt/artists.py", "w") as f:
     f.write("ARTISTS = [\n")
     for a in artists:
-        # Anführungszeichen im Namen escapen
+        # Escape quotation marks in names
         a_clean = a.replace('"', '\\"')
         f.write(f'    "{a_clean}",\n')
     f.write("]\n")
 
-print("✅ artists.py gespeichert")
+print(" artists.py gespeichert")
 
-# Als CSV speichern
+# Save as CSV
 pd.DataFrame({"name": artists}).to_csv("data/artists_list.csv", index=False)
-print("✅ data/audioscrobbler/artists_list.csv gespeichert")
+print("data/audioscrobbler/artists_list.csv gespeichert")
