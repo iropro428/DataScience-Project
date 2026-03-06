@@ -25,7 +25,7 @@ def get_artist_data(artist_name):
         data = response.json()
 
         if "error" in data:
-            print(f"  ❌ {artist_name}: {data['message']}")
+            print(f"{artist_name}: {data['message']}")
             return None
 
         a = data["artist"]
@@ -33,14 +33,14 @@ def get_artist_data(artist_name):
         return {
             "name": a["name"],
             "lastfm_url": a["url"],
-            "listeners": int(a["stats"]["listeners"]),  # = Spotify followers Äquivalent
-            "playcount": int(a["stats"]["playcount"]),  # = Streams Äquivalent
+            "listeners": int(a["stats"]["listeners"]),  # = Spotify followers equivalent
+            "playcount": int(a["stats"]["playcount"]),  # = Streams equivalent
             "tags": ", ".join([t["name"] for t in a["tags"]["tag"]]),  # = genres
             "collected_at": pd.Timestamp.now().isoformat()
         }
 
     except Exception as e:
-        print(f"  ⚠️  Fehler bei {artist_name}: {e}")
+        print(f"Fehler bei {artist_name}: {e}")
         return None
 
 
@@ -51,12 +51,12 @@ for i, name in enumerate(ARTISTS):
     data = get_artist_data(name)
     if data:
         results.append(data)
-        print(f"  ✅ listeners={data['listeners']:,}  playcount={data['playcount']:,}")
+        print(f"listeners={data['listeners']:,}  playcount={data['playcount']:,}")
     time.sleep(0.3)
 
 df = pd.DataFrame(results)
 os.makedirs("data", exist_ok=True)
 df.to_csv("data/raw/last_fm/artists_lastfm.csv", index=False)
 
-print(f"\n✅ Fertig! {len(df)} Artists → data/artists_lastfm.csv")
+print(f"\n Fertig! {len(df)} Artists → data/artists_lastfm.csv")
 print(df[["name", "listeners", "playcount", "tags"]].to_string())
