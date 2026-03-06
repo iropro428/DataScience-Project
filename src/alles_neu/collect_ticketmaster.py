@@ -12,7 +12,7 @@ load_dotenv()
 TM_KEY = os.getenv("TICKETMASTER_API_KEY")
 BASE_URL = "https://app.ticketmaster.com/discovery/v2"
 
-# Artist-Liste
+# Artist-List
 from alt.artists import ARTISTS
 
 
@@ -63,7 +63,7 @@ def get_events(artist_id, artist_name):
                 country = venue.get("country", {}).get("name", None)
                 venue_name = venue.get("name", None)
 
-                # capital city?
+                # Capital city?
                 is_capital = venue.get("city", {}).get("name") in CAPITAL_CITIES
 
                 # Date
@@ -71,7 +71,7 @@ def get_events(artist_id, artist_name):
                 start = dates.get("start", {})
                 event_date = start.get("localDate", None)
 
-                # weekday
+                # Weekday
                 weekday = None
                 is_weekend = None
                 if event_date:
@@ -154,7 +154,7 @@ if __name__ == '__main__':
 
         time.sleep(0.5)
 
-    # safe CSV
+    # Save CSV
     df_events = pd.DataFrame(all_events)
     os.makedirs("data", exist_ok=True)
     df_events.to_csv("data/raw/ticketmaster/ticketmaster_events.csv", index=False)
