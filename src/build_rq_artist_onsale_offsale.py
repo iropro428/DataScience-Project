@@ -118,7 +118,7 @@ def main():
                     "n_events_found": len(tm_events),
                     "onsale": onsale,
                     "offsale": offsale,
-                    "events_sample": tm_events[:10],  # nur ein sample, damit JSON nicht riesig wird
+                    "events_sample": tm_events[:10],  # Only one sample, so that the JSON file doesn't become huge
                 },
             }
         )
