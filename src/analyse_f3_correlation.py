@@ -96,7 +96,7 @@ def main() -> None:
     # Parse listeners as numeric
     lastfm["listeners"] = parse_listeners(lastfm["listeners"])
 
-    # Debug / sanity outputs (super helpful for spotting mismatches)
+    # Debug / sanity outputs
     total_artists = len(lastfm)
     matched = int(lastfm["in_charts"].sum())
     match_rate = float(lastfm["in_charts"].mean()) if total_artists else 0.0
