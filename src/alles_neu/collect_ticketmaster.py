@@ -12,11 +12,11 @@ load_dotenv()
 TM_KEY = os.getenv("TICKETMASTER_API_KEY")
 BASE_URL = "https://app.ticketmaster.com/discovery/v2"
 
-# ── Artist-Liste (gleiche wie Last.fm) ───────────────
+# Artist-Liste
 from alt.artists import ARTISTS
 
 
-# ── 1. Artist ID von Ticketmaster holen ──────────────
+# 1. get Artist ID from Ticketmaster
 def get_tm_artist_id(artist_name):
     try:
         response = requests.get(f"{BASE_URL}/attractions.json", params={
@@ -30,11 +30,11 @@ def get_tm_artist_id(artist_name):
             return None, None
         return items[0]["id"], items[0]["name"]
     except Exception as e:
-        print(f"  ⚠️  Artist-ID Fehler: {e}")
+        print(f" Artist-ID Fehler: {e}")
         return None, None
 
 
-# ── 2. Events für Artist holen ───────────────────────
+# 2. get Events from Artist 
 def get_events(artist_id, artist_name):
     events = []
     page = 0
@@ -56,22 +56,22 @@ def get_events(artist_id, artist_name):
                 break
 
             for event in items:
-                # Venue Infos
+                # Venue Informations
                 venues = event.get("_embedded", {}).get("venues", [{}])
                 venue = venues[0] if venues else {}
                 city = venue.get("city", {}).get("name", None)
                 country = venue.get("country", {}).get("name", None)
                 venue_name = venue.get("name", None)
 
-                # Ist es eine Hauptstadt?
+                # capital city?
                 is_capital = venue.get("city", {}).get("name") in CAPITAL_CITIES
 
-                # Datum
+                # Date
                 dates = event.get("dates", {})
                 start = dates.get("start", {})
                 event_date = start.get("localDate", None)
 
-                # Wochentag
+                # weekday
                 weekday = None
                 is_weekend = None
                 if event_date:
@@ -86,7 +86,7 @@ def get_events(artist_id, artist_name):
                 offsale_date = public.get("endDateTime", None)
                 status = dates.get("status", {}).get("code", None)
 
-                # Lead time (Tage zwischen Onsale und Event)
+                # Lead time (Days between Onsale and Event)
                 lead_time_days = None
                 if onsale_date and event_date:
                     try:
@@ -104,7 +104,7 @@ def get_events(artist_id, artist_name):
                     "event_date": event_date,
                     "weekday": weekday,
                     "is_weekend": is_weekend,
-                    "status": status,  # onsale / offsale / cancelled
+                    "status": status,  
                     "onsale_date": onsale_date,
                     "offsale_date": offsale_date,
                     "lead_time_days": lead_time_days,
@@ -116,7 +116,7 @@ def get_events(artist_id, artist_name):
                     "longitude": venue.get("location", {}).get("longitude"),
                 })
 
-            # Nächste Seite?
+            # next page?
             total_pages = data.get("page", {}).get("totalPages", 1)
             page += 1
             if page >= total_pages:
@@ -125,17 +125,17 @@ def get_events(artist_id, artist_name):
             time.sleep(0.2)
 
         except Exception as e:
-            print(f"  ⚠️  Events Fehler Seite {page}: {e}")
+            print(f" Events Fehler Seite {page}: {e}")
             break
 
     return events
 
 
 if __name__ == '__main__':
-    # ── Hauptstädte Liste ─────────────────────────────────
+    # List of capitals 
     CAPITAL_CITIES = get_capital_cities()
 
-    # ── Main ──────────────────────────────────────────────
+    # main
     all_events = []
 
     for i, name in enumerate(ARTISTS):
@@ -154,7 +154,7 @@ if __name__ == '__main__':
 
         time.sleep(0.5)
 
-    # ── CSV speichern ─────────────────────────────────────
+    # safe CSV
     df_events = pd.DataFrame(all_events)
     os.makedirs("data", exist_ok=True)
     df_events.to_csv("data/raw/ticketmaster/ticketmaster_events.csv", index=False)
