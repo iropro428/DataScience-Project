@@ -59,34 +59,73 @@ DataScience-Project/
 │
 ├── data/
 │   ├── plots/
-│   │   ├── correlation_plot.png/
-│   │   ├── f1_correlation.png/
-│   │   ├── f1_timeline.png/
-│   │   └── rq3_liteners_chart_vs_nonchart_boxplot.png/
+│   │   ├── correlation_plot.png
+│   │   ├── f1_correlation.png
+│   │   ├── f1_timeline.png
+│   │   └── rq3_liteners_chart_vs_nonchart_boxplot.png
 │   │
 │   ├── processed/
 │   │   ├── spotify_charts/
-│   │   │   ├── chart_artists.csv/
-│   │   │   ├── spotify_artists_streams_monthly.json/
-│   │   │   ├── spotify_viral_hits.json/
-│   │   │   ├── spotify_weekly_with_viral_flag.csv/
-│   │   │   └── spotify_weekly_with_viral_flag.json/
+│   │   │   ├── chart_artists.csv
+│   │   │   ├── spotify_artists_streams_monthly.json
+│   │   │   ├── spotify_viral_hits.json
+│   │   │   ├── spotify_weekly_with_viral_flag.csv
+│   │   │   └── spotify_weekly_with_viral_flag.json
 │   │   │
 │   │   ├── ticketmaster/
-│   │   │   └── 2026-03-04.json/
+│   │   │   └── 2026-03-04.json
 │   │   │   
-│   │   ├── f2_results.csv/
-│   │   │ 
-│   │   ├── f3_results.csv/
-│
-├── src/
-│   ├── raw/
-│   │   ├── ticketmaster/
-│   │   ├── spotify/
-│   │   ├── overpass/
-│   │   └── openrouteservice/
+│   │   ├── f2_results.csv
+│   │   ├── f3_results.csv
+│   │   │── final_dataset.csv
+│   │   └── geo_alignment.csv
 │   │
-│   └── processed/
+│   └── raw/
+│       ├── audioscrobbler/
+│       │   └── artists_list.csv
+│       │
+│       │── spotify_charts/
+│       │   └── regional-global-weekly # 2023-2026
+│       │
+│       │── artists_lastfm.csv
+│       │── artists_list.csv
+│       │── capitals.json
+│       │── final_dataset.csv
+│       │── last_fm
+│       │── lastfm_geo_presence.csv
+│       │── lastfm_toptracks.csv
+│       │── rq3_lastfm_with_chart_flag.csv
+│       │── rq3_listeners_chart_vs_nonchart_summary.csv
+│       └── ticketmaster_events.csv
+│   
+├── src/
+│   ├── old/
+│   │   ├── analyse_f3_correlation.py
+│   │   ├── filter_and_analyse.py
+│   │   ├── process_spotify_charts.py
+│   │   └── process_spotify_viral.py
+│   │
+│   ├── research_question_analyses/
+│   │   ├── analyse_f1_correlation.py
+│   │   ├── analyse_f2_concentration_events.py
+│   │   └── analyse_f3.py
+│   │
+│   └── scripts/
+│       ├── data/
+│       │   └── raw/
+│       │       └── capitals.json
+│       │
+│       ├── artists.py
+│       ├── collect_artists_lastfm.py
+│       ├── collect_lastfm_geo.py
+│       ├── collect_ticketmaster.py
+│       ├── collect_ticketmaster_ORIG.py
+│       ├── collect_toptracks.py
+│       ├── compute_concentration.py
+│       ├── get_artists_list.py
+│       ├── get_capitals.py
+│       ├── join_data.py
+│       └── process_spotify_charts.py
 │
 ├── .env
 ├── .gitignore
