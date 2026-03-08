@@ -7,7 +7,7 @@ import numpy as np
 import os
 
 # Load
-df = pd.read_csv("data/final_dataset.csv")
+df = pd.read_csv("data/processed/final_dataset.csv")
 os.makedirs("data/plots", exist_ok=True)
 
 print(f"Geladene Artists: {len(df)}")
