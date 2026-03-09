@@ -1,11 +1,10 @@
-# process_spotify_charts.py
-# Verarbeitet Spotify Weekly Chart CSVs → Künstler-Profil-Tabelle
+# Processes Spotify Weekly Chart CSVs → artist profile table
 #
 # Input:  data/raw/spotify_charts/*.csv
-#         (Dateiname muss YYYY-MM-DD enthalten, z.B. regional-global-weekly-2023-02-23.csv)
+#         (filename must contain YYYY-MM-DD, e.g., regional-global-weekly-2023-02-23.csv)
 #
 # Output:
-#   data/processed/spotify_charts/chart_artists.csv ← Haupt-Output für F3
+#   data/processed/spotify_charts/chart_artists.csv ← Haupt-Output for F3
 #   data/processed/spotify_charts/spotify_artist_streams_monthly.json
 
 import pandas as pd
@@ -51,9 +50,9 @@ def normalize_columns(df: pd.DataFrame) -> pd.DataFrame:
     df = df.rename(columns=col_map)
 
     if "artist" not in df.columns or "streams" not in df.columns:
-        raise KeyError(f"Fehlende Pflicht-Spalten. Gefunden: {list(df.columns)}")
+        raise KeyError(f"Missing required columns. Found: {list(df.columns)}")
 
-    # Streams bereinigen
+    # Clean streams
     df["streams"] = (
         pd.to_numeric(
             df["streams"].astype(str).str.replace(",", "", regex=False),
@@ -69,7 +68,7 @@ def normalize_columns(df: pd.DataFrame) -> pd.DataFrame:
     if "weeks_on_chart" in df.columns:
         df["weeks_on_chart"] = pd.to_numeric(df["weeks_on_chart"], errors="coerce").fillna(0).astype(int)
 
-    # Kollaborationen aufsplitten: "Artist A, Artist B" → zwei Zeilen
+    # Split collaborations: "Artist A, Artist B" → two rows
     df["artist"] = df["artist"].astype(str).str.strip()
     df["artist"] = df["artist"].str.split(", ")
     df = df.explode("artist")
@@ -82,18 +81,18 @@ def normalize_columns(df: pd.DataFrame) -> pd.DataFrame:
 def main():
     files = sorted(glob.glob(INPUT_GLOB))
     if not files:
-        print(f"❌  Keine CSV-Dateien gefunden: {INPUT_GLOB}")
-        print("    Spotify Chart CSVs nach data/raw/spotify_charts/ kopieren.")
+        print(f"   No CSV files found: {INPUT_GLOB}")
+        print("    Copy Spotify chart CSVs to data/raw/spotify_charts/")
         return
 
-    print(f"📂  {len(files)} Chart-Dateien gefunden")
+    print(f"  {len(files)} Chart files found")
 
     all_frames = []
     skipped = 0
 
     for f in files:
         date_str = extract_date(f)
-        # Datumsfilter Feb 2023 – Feb 2026
+        # Date filter Feb 2023 – Feb 2026
         if not (DATE_START <= date_str <= DATE_END):
             skipped += 1
             continue
@@ -103,17 +102,17 @@ def main():
             df["week_date"] = pd.to_datetime(date_str)
             all_frames.append(df)
         except Exception as e:
-            print(f"  ⚠️  {os.path.basename(f)}: {e}")
+            print(f"     {os.path.basename(f)}: {e}")
 
     if not all_frames:
-        print("❌  Keine verwertbaren Daten nach Datumsfilter")
+        print("No usable data after applying the date filter")
         return
 
-    print(f"✅  {len(all_frames)} Wochen geladen  |  {skipped} außerhalb Zeitraum")
+    print(f"  {len(all_frames)} Weeks loaded  |  {skipped} outside the time period")
 
     data = pd.concat(all_frames, ignore_index=True)
 
-    # ── Monatsaggregation ─────────────────────────────────────────────────
+    # Monthly aggregation
     data["month"] = data["week_date"].dt.to_period("M").astype(str)
 
     monthly = (
@@ -124,11 +123,11 @@ def main():
     )
     monthly["sample_week_date"] = monthly["sample_week_date"].dt.strftime("%Y-%m-%d")
 
-    # ── Künstler-Profil-Tabelle (für F3 Join) ────────────────────────────
-    #  Pro Artist: Summe Streams, Anzahl Wochen im Chart, Spitzenposition, Peak-Monat
+    # Artist profile table (for F3 join)
+    # Per artist: total streams, number of weeks in the chart, peak position, peak month
     agg = {"streams": "sum", "week_date": "count"}
     if "position" in data.columns:
-        agg["position"] = "min"  # beste (=niedrigste) Position
+        agg["position"] = "min"  # best (= lowest) position
 
     artist_profile = (
         data.groupby("artist")
@@ -141,7 +140,7 @@ def main():
         .reset_index()
         .sort_values("total_chart_streams", ascending=False)
     )
-    # Zeitraum des ersten / letzten Chartauftritts
+    # Time period of the first / last chart appearance
     first_last = data.groupby("artist")["week_date"].agg(
         first_chart_date="min", last_chart_date="max"
     ).reset_index()
@@ -154,14 +153,14 @@ def main():
     with open(OUTPUT_MONTHLY, "w") as f_out:
         json.dump(monthly.to_dict(orient="records"), f_out, indent=2)
 
-    print(f"\n✅  {len(artist_profile)} Chart-Künstler → {OUTPUT_ARTISTS}")
-    print(f"✅  Monatsdaten            → {OUTPUT_MONTHLY}")
+    print(f"\n  {len(artist_profile)} Chart-Artists → {OUTPUT_ARTISTS}")
+    print(f"  Monthly data            → {OUTPUT_MONTHLY}")
 
-    print(f"\n--- Schnellcheck ---")
-    print(f"  Zeitraum:        {data['week_date'].min().date()} – {data['week_date'].max().date()}")
-    print(f"  Chart-Wochen:    {data['week_date'].nunique()}")
-    print(f"  Chart-Künstler:  {len(artist_profile)}")
-    print(f"\nTop 10 Künstler nach Gesamt-Streams:")
+    print(f"\n--- Quick check ---")
+    print(f"  Time period:    {data['week_date'].min().date()} – {data['week_date'].max().date()}")
+    print(f"  Chart-Weeks:    {data['week_date'].nunique()}")
+    print(f"  Chart-Artists:  {len(artist_profile)}")
+    print(f"\nTop 10 Artists by total streams:")
     print(artist_profile.head(10)[["artist", "total_chart_streams", "chart_weeks", "peak_position"]].to_string(index=False))
 
 
