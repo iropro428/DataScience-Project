@@ -1,0 +1,27 @@
+city,country,total_visits,n_artists,first_seen,last_seen
+London,Great Britain,189,100,2026-03-08,2026-12-18
+Berlin,Germany,82,45,2026-03-09,2026-12-19
+Dublin,Ireland,73,56,2026-03-06,2026-11-05
+Amsterdam,Netherlands,60,34,2026-03-12,2026-11-05
+Madrid,Spain,36,17,2026-03-17,2026-11-05
+Warsaw,Poland,27,22,2026-03-11,2026-08-23
+Stockholm,Sweden,16,13,2026-04-18,2026-11-11
+Vienna,Austria,11,11,2026-03-13,2026-11-18
+Hamilton,Canada,10,9,2026-03-06,2026-08-02
+Helsinki,Finland,9,9,2026-05-27,2026-12-07
+Ottawa,Canada,8,8,2026-07-10,2026-07-18
+London,United Kingdom,7,2,2026-06-19,2026-07-28
+Oslo,Norway,5,4,2026-03-08,2026-06-17
+Singapore,Singapore,5,5,2026-03-07,2026-11-25
+Brussels,Belgium,5,4,2026-06-14,2026-08-25
+London,Canada,3,3,2026-04-04,2026-07-18
+Kingston,United States Of America,2,2,2026-03-13,2026-05-01
+Georgetown,United States Of America,2,2,2026-04-18,2026-04-18
+Prague,Czech Republic,2,2,2026-06-27,2026-07-26
+Victoria,Canada,2,2,2026-03-19,2026-04-19
+Ankara,Turkey,2,2,2026-04-19,2026-06-18
+Vienna,United States Of America,2,2,2026-06-07,2026-09-17
+Abu Dhabi,United Arab Emirates,2,2,2026-04-24,2026-04-25
+Lima,Peru,1,1,2026-05-20,2026-05-20
+Pretoria,South Africa,1,1,2026-03-20,2026-03-20
+Tallinn,Estonia,1,1,2026-06-14,2026-06-14

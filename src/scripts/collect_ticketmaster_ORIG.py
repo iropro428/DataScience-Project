@@ -157,5 +157,5 @@ if __name__ == '__main__':
     # Save CSV
     df_events = pd.DataFrame(all_events)
     os.makedirs("data", exist_ok=True)
-    df_events.to_csv("data/raw/ticketmaster/ticketmaster_events.csv", index=False)
+    df_events.to_csv("data/raw/ticketmaster_events.csv", index=False)
     print(f"\n {len(df_events)} Events total → data/ticketmaster_events.csv")
