@@ -1,14 +1,17 @@
-# collect_lastfm_geo.py
-# Sammelt fuer jedes Land in den Ticketmaster-Daten die Top-Kuenstler von Last.fm.
-# Dadurch wissen wir: In welchen Laendern ist ein Artist auf Last.fm prominent?
-#
-# Last.fm Endpunkt: geo.getTopArtists(country=X, limit=50)
-# → Ruft pro Land die Top-50-Artists ab → invertiert zu: Artist → [Laender]
-#
-# Input:  data/processed/f4_city_frequencies.csv  (enthaelt country-Spalte)
-#         oder data/raw/ticketmaster_events.csv
-# Output: data/raw/lastfm_geo_presence.csv
-#         Spalten: artist_name, country, rank (Position im Laender-Chart)
+'''
+collect_lastfm_geo.py
+
+Build a country list from our Ticketmaster-derived files and fetch corresponding Last.fm's Top Artists per country.
+Tells us: In which countries is an artist popular on Last.fm.
+
+Last.fm endpoint: geo.getTopArtists(country=X, limit=50)
+→ Fetches the Top-50-Artists for each country → inverted to: artist → [countries]
+
+Input:  data/processed/f4_city_frequencies.csv  (includes country-column)
+        or data/raw/ticketmaster_events.csv
+Output: data/raw/lastfm_geo_presence.csv
+        column: artist_name, country, rank (position in country-charts)
+'''
 
 import requests
 import pandas as pd
@@ -17,7 +20,7 @@ import os
 from pathlib import Path
 from dotenv import load_dotenv
 
-# .env laden
+# Load .env
 _script_dir = Path(__file__).resolve().parent
 for _candidate in [
     _script_dir / ".env",
@@ -32,19 +35,27 @@ else:
 
 LASTFM_KEY = os.getenv("LASTFM_API_KEY")
 if not LASTFM_KEY:
-    print("❌ LASTFM_API_KEY nicht gesetzt")
+    print("LASTFM_API_KEY is not set. Please add it to your .env file.")
     import sys;
-
     sys.exit(1)
 
 BASE_URL = "http://ws.audioscrobbler.com/2.0/"
 OUTPUT = Path("data/raw/lastfm_geo_presence.csv")
-LIMIT = 50  # Top-N Artists pro Land
-DELAY = 0.25  # Sekunden zwischen Requests
+LIMIT = 50  # Top-N artists per country
+DELAY = 0.25  # Seconds between requests to reduce rate-limit risks
 
 
-# ── Laender aus Ticketmaster-Daten laden ─────────────────────────────────
+# Load countrues from Ticketmaster API 
 def load_tour_countries() -> list:
+    """
+    Build the list of countries we want to query on Last.fm.
+
+    We first try a processed file (cleaner), and if that does not exist,
+    we fall back to the raw Ticketmaster events.
+
+    Returns:
+        Sorted list of unique country names.
+    """
     sources = [
         "data/processed/f4_city_frequencies.csv",
         "data/raw/ticketmaster_events.csv",
@@ -54,17 +65,19 @@ def load_tour_countries() -> list:
             df = pd.read_csv(src)
             if "country" in df.columns:
                 countries = df["country"].dropna().unique().tolist()
-                print(f"✅ {len(countries)} Laender aus {src}")
+                print(f"Loaded {len(countries)} contries from {src}")
                 return sorted(countries)
-    print("❌ Keine Laender-Quelle gefunden")
+    print("Could not find any input file with a 'country' column.")
     import sys;
     sys.exit(1)
 
 
 def get_top_artists_for_country(country: str) -> list:
     """
-    Ruft Last.fm geo.getTopArtists fuer ein Land ab.
-    Gibt Liste von (artist_name, rank) zurueck.
+    Query Last.fm geo.getTopArtists for the Top Artists in a given country.
+
+    Returns:
+        List of tuples: (artist_name, rank, listeners_in_country)
     """
     try:
         r = requests.get(BASE_URL, params={
@@ -77,9 +90,9 @@ def get_top_artists_for_country(country: str) -> list:
         r.raise_for_status()
         data = r.json()
 
-        # Fehler-Check: Last.fm gibt manchmal {"error": 6} fuer unbekannte Laender
+        # Error-Check: Sometimes Last.fm returns {"error": 6} for invalid country names
         if "error" in data:
-            print(f"  ⚠️  {country}: Last.fm Fehler {data['error']} — {data.get('message', '')}")
+            print(f"{country}: Last.fm error {data['error']} — {data.get('message', '')}")
             return []
 
         artists = data.get("topartists", {}).get("artist", [])
@@ -93,14 +106,14 @@ def get_top_artists_for_country(country: str) -> list:
         return result
 
     except Exception as e:
-        print(f"  ❌ {country}: {e}")
+        print(f"{country}: {e}")
         return []
 
 
 def main():
     countries = load_tour_countries()
-    print(f"📡 Starte Last.fm geo.getTopArtists fuer {len(countries)} Laender...")
-    print(f"   Limit: Top {LIMIT} Artists pro Land\n")
+    print(f"Starting Last.fm geo.getTopArtists for {len(countries)} countries...")
+    print(f"   Limit: Top {LIMIT} artists per country\n")
 
     all_rows = []
 
@@ -120,21 +133,21 @@ def main():
         time.sleep(DELAY)
 
     if not all_rows:
-        print("❌ Keine Daten gesammelt")
+        print("No data collected.")
         return
 
     df = pd.DataFrame(all_rows)
 
-    # Normalisiere Namen fuer spaetere Joins
+    # Normalize Names for later joins (case-insensitive matching)
     df["artist_norm"] = df["artist_name"].str.lower().str.strip()
 
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)
     df.to_csv(OUTPUT, index=False)
 
-    print(f"\n✅ {len(df)} Eintraege gespeichert → {OUTPUT}")
-    print(f"   {df['country'].nunique()} Laender")
-    print(f"   {df['artist_name'].nunique()} einzigartige Artists")
-    print(f"\nTop Artists global (meiste Laender-Charts):")
+    print(f"\nSaved {len(df)} rows to → {OUTPUT}")
+    print(f"   {df['country'].nunique()} Countries")
+    print(f"   {df['artist_name'].nunique()} unique artists")
+    print(f"\nTop Artists global (by number of country charts they appear in):")
     top = (df.groupby("artist_name")["country"]
            .count()
            .sort_values(ascending=False)
