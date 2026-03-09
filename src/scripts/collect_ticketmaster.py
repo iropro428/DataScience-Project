@@ -1,9 +1,12 @@
-# collect_ticketmaster.py  —  v2  (mit Ticket-Preisen für F2)
+# Script to collect and process concert event data from the Ticketmaster API for a list of 
+# artists and store it as a CSV dataset for analysis.
+
+# collect_ticketmaster.py  —  v2  (with ticket price for F2)
 import requests, pandas as pd, time, os, json
 from dotenv import load_dotenv
 from pathlib import Path
 
-# .env suchen: erst neben dem Script, dann im Projektroot (2 Ebenen hoch)
+# .env search: first next to the script, then in the project root (two levels up)
 _script_dir = Path(__file__).resolve().parent
 for _candidate in [
     _script_dir / ".env",
@@ -12,44 +15,44 @@ for _candidate in [
 ]:
     if _candidate.exists():
         load_dotenv(_candidate)
-        print(f"✅ .env geladen: {_candidate}")
+        print(f" .env geladen: {_candidate}")
         break
 else:
     load_dotenv()  # Fallback: CWD
 
 TM_KEY = os.getenv("TICKETMASTER_API_KEY")
 if not TM_KEY:
-    print("❌ TICKETMASTER_API_KEY nicht gefunden!")
+    print(" TICKETMASTER_API_KEY nicht gefunden!")
     print("   Stelle sicher dass .env die Zeile enthält:")
     print("   TICKETMASTER_API_KEY=dein_key_hier")
     import sys;
 
     sys.exit(1)
-print(f"✅ API Key geladen ({TM_KEY[:8]}...)")
+print(f" API Key geladen ({TM_KEY[:8]}...)")
 BASE_URL = "https://app.ticketmaster.com/discovery/v2"
 
-# Package-Events die kein eigenes Konzert sind (VIP, Business Seat etc.)
+# Package events that are not actual concerts (e.g., VIP packages, business seats, etc.)
 SKIP_KEYWORDS = [
     "vip package", "business seat", "hospitality", "meet & greet", "meet and greet", "premium package", "vip experience", "fan package"]
 
-# ── Artist-Liste laden ────────────────────────────────────────────────────
+# Load artists-list
 try:
     from artists import ARTISTS
 except ImportError:
     df_list = pd.read_csv("data/artists_list.csv")
     ARTISTS = df_list["name"].tolist()
 
-# ── Hauptstädte laden ─────────────────────────────────────────────────────
+# Load capital cities
 try:
     with open("data/raw/capitals.json") as f:
         CAPITAL_CITIES = set(json.load(f))
-    print(f"✅ {len(CAPITAL_CITIES)} Hauptstädte geladen")
+    print(f" {len(CAPITAL_CITIES)} Hauptstädte geladen")
 except FileNotFoundError:
-    print("⚠️  data/capitals.json nicht gefunden — bitte get_capitals.py ausführen")
+    print("  data/capitals.json nicht gefunden — bitte get_capitals.py ausführen")
     CAPITAL_CITIES = set()
 
 
-# ── Artist ID holen ───────────────────────────────────────────────────────
+# Get artist ID
 def get_tm_artist_id(artist_name):
     try:
         r = requests.get(f"{BASE_URL}/attractions.json", params={
@@ -62,11 +65,11 @@ def get_tm_artist_id(artist_name):
             return None, None
         return items[0]["id"], items[0]["name"]
     except Exception as e:
-        print(f"  ⚠️  Artist-ID Fehler: {e}")
+        print(f"    Artist-ID Fehler: {e}")
         return None, None
 
 
-# ── Events für Artist holen ───────────────────────────────────────────────
+# Get events for the artist
 def get_events(artist_id, artist_name):
     events = []
     page = 0
@@ -87,12 +90,12 @@ def get_events(artist_id, artist_name):
 
             for event in items:
 
-                # ── Package-Events überspringen (VIP, Business Seat, etc.) ──
+                # Skip package events (VIP, business seats, etc.)
                 event_name_raw = (event.get("name") or "").lower()
                 if any(kw in event_name_raw for kw in SKIP_KEYWORDS):
                     continue
 
-                # ── Venue ─────────────────────────────────────────────────
+                # Venue
                 venues = event.get("_embedded", {}).get("venues", [{}])
                 venue = venues[0] if venues else {}
                 city = venue.get("city", {}).get("name", None)
@@ -100,7 +103,7 @@ def get_events(artist_id, artist_name):
                 venue_name = venue.get("name", None)
                 is_capital = city in CAPITAL_CITIES if city else False
 
-                # ── Datum ─────────────────────────────────────────────────
+                # Date
                 dates = event.get("dates", {})
                 start = dates.get("start", {})
                 event_date = start.get("localDate", None)
@@ -115,14 +118,14 @@ def get_events(artist_id, artist_name):
                         weekday = None
                         is_weekend = None
 
-                # ── Sales (Onsale / Offsale Datum) ────────────────────────
+                # Sales (Onsale / Offsale Date)
                 sales = event.get("sales", {})
                 public = sales.get("public", {})
                 onsale_date = public.get("startDateTime", None)
                 offsale_date = public.get("endDateTime", None)
                 tm_status = dates.get("status", {}).get("code", None)
 
-                # ── Lead Time ─────────────────────────────────────────────
+                # Lead Time
                 lead_time_days = None
                 if onsale_date and event_date:
                     try:
@@ -133,12 +136,12 @@ def get_events(artist_id, artist_name):
                     except:
                         pass
 
-                # ── Presale Info ──────────────────────────────────────────
+                # Presale info
                 presales = sales.get("presales", [])
                 has_presale = len(presales) > 0
                 n_presales = len(presales)
 
-                # ── Ticket Preise  (NEU für F2) ───────────────────────────
+                # Ticket Price  (NEW for F2)
                 price_ranges = event.get("priceRanges", [])
                 ticket_price_min = None
                 ticket_price_max = None
@@ -146,7 +149,7 @@ def get_events(artist_id, artist_name):
                 ticket_currency = None
 
                 if price_ranges:
-                    pr = price_ranges[0]  # erster Preisbereich
+                    pr = price_ranges[0]  # first price range
                     ticket_price_min = pr.get("min", None)
                     ticket_price_max = pr.get("max", None)
                     ticket_currency = pr.get("currency", None)
@@ -187,29 +190,29 @@ def get_events(artist_id, artist_name):
             time.sleep(0.2)
 
         except Exception as e:
-            print(f"  ⚠️  Events Fehler Seite {page}: {e}")
+            print(f"    Events Fehler Seite {page}: {e}")
             break
 
     return events
 
 
-# ── Main ──────────────────────────────────────────────────────────────────
+# Main
 all_events = []
 
 for i, name in enumerate(ARTISTS):
     print(f"\n[{i + 1}/{len(ARTISTS)}] {name}")
     artist_id, tm_name = get_tm_artist_id(name)
     if not artist_id:
-        print(f"  ❌ Nicht gefunden auf Ticketmaster")
+        print(f"   Nicht gefunden auf Ticketmaster")
         continue
-    print(f"  🎤 TM: {tm_name} (ID: {artist_id})")
+    print(f"   TM: {tm_name} (ID: {artist_id})")
     events = get_events(artist_id, name)
     n_with_price = sum(1 for e in events if e["ticket_price_avg"] is not None)
-    print(f"  ✅ {len(events)} Events  |  {n_with_price} mit Ticketpreis")
+    print(f"   {len(events)} Events  |  {n_with_price} mit Ticketpreis")
     all_events.extend(events)
     time.sleep(0.4)
 
-# ── Speichern ─────────────────────────────────────────────────────────────
+# Save
 os.makedirs("data/raw", exist_ok=True)
 df = pd.DataFrame(all_events)
 df.to_csv("data/raw/ticketmaster_events.csv", index=False)
@@ -218,7 +221,7 @@ total = len(df)
 w_price = df["ticket_price_avg"].notna().sum()
 pct_price = w_price / total * 100 if total > 0 else 0
 
-print(f"\n✅ {total} Events gespeichert → data/raw/ticketmaster_events.csv")
+print(f"\n {total} Events gespeichert → data/raw/ticketmaster_events.csv")
 print(f"   davon mit Ticketpreis: {w_price} ({pct_price:.1f}%)")
 print(f"\nPreis-Statistik:")
 print(df["ticket_price_avg"].describe().round(2))
