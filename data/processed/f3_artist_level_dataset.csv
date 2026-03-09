@@ -1,0 +1,496 @@
+artist,listeners,in_chart,chart_weeks,total_streams,best_position
+PinkPantheress,2922490,True,11.0,205656274.0,3.0
+The Weeknd,5233527,True,37.0,3466615363.0,3.0
+Kendrick Lamar,5023800,True,34.0,1920957684.0,2.0
+Radiohead,8149620,True,27.0,418359275.0,29.0
+Taylor Swift,5863513,True,37.0,4266405139.0,1.0
+Rihanna,8203450,True,31.0,553833821.0,39.0
+Kanye West,7864740,True,13.0,342431863.0,3.0
+Charli xcx,3704686,True,19.0,323741740.0,14.0
+Lady Gaga,7632370,True,20.0,1157385738.0,1.0
+Drake,6646671,True,36.0,963750145.0,15.0
+"Tyler, The Creator",4255100,False,0.0,0.0,
+Ariana Grande,4406075,True,37.0,1109629138.0,2.0
+Bad Bunny,2475994,True,36.0,3394122112.0,1.0
+Tame Impala,4217192,True,5.0,101669810.0,53.0
+Lana Del Rey,5180414,True,33.0,737134288.0,31.0
+Sabrina Carpenter,3172298,True,37.0,2494755919.0,1.0
+Bruno Mars,5149729,True,37.0,2861196103.0,1.0
+Billie Eilish,4157414,True,37.0,2459302740.0,1.0
+Gorillaz,6779023,True,15.0,158683224.0,53.0
+Arctic Monkeys,7015740,True,37.0,1358303915.0,15.0
+Frank Ocean,4193451,True,24.0,252812931.0,69.0
+Mitski,3201407,True,18.0,321987141.0,3.0
+Paramore,5558244,False,0.0,0.0,
+A$AP Rocky,3389842,True,3.0,39443783.0,56.0
+Doja Cat,3560361,True,18.0,466085238.0,1.0
+Chappell Roan,2504682,True,23.0,917984476.0,6.0
+Don Toliver,2440803,True,27.0,319472218.0,45.0
+The Smiths,4998810,False,0.0,0.0,
+Fleetwood Mac,4808547,True,19.0,258504205.0,37.0
+Justin Bieber,4706695,True,34.0,817722110.0,4.0
+The Marías,2420147,True,15.0,262241098.0,38.0
+Deftones,4165017,False,0.0,0.0,
+Linkin Park,6856669,True,29.0,724627470.0,9.0
+The Neighbourhood,3887320,True,37.0,576199049.0,17.0
+SZA,3438127,True,37.0,1987375040.0,2.0
+Travis Scott,3280150,True,25.0,945857597.0,3.0
+Coldplay,9019488,True,37.0,1744148670.0,19.0
+Childish Gambino,3744860,False,0.0,0.0,
+Michael Jackson,6744770,True,10.0,111639890.0,83.0
+Clairo,2869840,False,0.0,0.0,
+Playboi Carti,2438179,True,33.0,927958805.0,11.0
+Future,3171840,True,21.0,596742628.0,4.0
+Olivia Rodrigo,3027822,True,15.0,460162426.0,5.0
+TV Girl,2784803,True,21.0,201059740.0,107.0
+Twenty One Pilots,3291476,True,8.0,76836957.0,57.0
+Harry Styles,3197410,True,35.0,737417046.0,2.0
+Joji,2956634,True,5.0,45197849.0,74.0
+Beyoncé,6322308,True,9.0,160774934.0,2.0
+Mac Miller,3466486,False,0.0,0.0,
+sombr,1741726,True,12.0,680729101.0,2.0
+Nirvana,7457169,True,13.0,168022847.0,114.0
+Olivia Dean,1335764,True,7.0,464744426.0,3.0
+The Beatles,6445190,False,0.0,0.0,
+Lil Uzi Vert,2694002,True,6.0,105365827.0,30.0
+Britney Spears,6372536,True,3.0,46940622.0,55.0
+Katy Perry,7048299,True,3.0,26888195.0,144.0
+Zara Larsson,2185312,True,4.0,139417006.0,9.0
+Kali Uchis,3011779,True,35.0,654761217.0,11.0
+Lorde,3672072,True,3.0,48199175.0,19.0
+Maroon 5,6564586,True,16.0,139600905.0,85.0
+beabadoobee,2554484,True,1.0,7914985.0,165.0
+Mac DeMarco,3198917,True,2.0,15429983.0,173.0
+Addison Rae,1486740,True,9.0,97947512.0,33.0
+Baby Keem,1987315,False,0.0,0.0,
+Laufey,2268345,True,11.0,135985666.0,33.0
+Tate McRae,2217123,True,32.0,1175241448.0,1.0
+The Cure,5427832,True,2.0,17935722.0,143.0
+J. Cole,3807253,True,15.0,231110539.0,17.0
+My Chemical Romance,4784939,False,0.0,0.0,
+Red Hot Chili Peppers,7187992,True,3.0,33780034.0,161.0
+Steve Lacy,3062192,True,12.0,137396683.0,57.0
+The Strokes,5651179,False,0.0,0.0,
+Calvin Harris,4941812,True,28.0,359597422.0,59.0
+Daniel Caesar,2302276,True,8.0,137101590.0,10.0
+Green Day,6520124,False,0.0,0.0,
+Dominic Fike,2334593,True,6.0,75497208.0,18.0
+Weezer,5347975,False,0.0,0.0,
+System of a Down,5761070,False,0.0,0.0,
+Queen,7160666,True,2.0,35340243.0,59.0
+Eminem,7726026,True,36.0,777201020.0,12.0
+Djo,2256954,True,25.0,520755114.0,1.0
+Post Malone,3483537,True,31.0,916884870.0,1.0
+Sade,3333903,False,0.0,0.0,
+Brent Faiyaz,2006990,True,2.0,17219702.0,153.0
+Hozier,3294111,True,32.0,679489101.0,8.0
+Malcolm Todd,1128902,False,0.0,0.0,
+RAYE,1797157,True,24.0,382928264.0,6.0
+Cigarettes After Sex,2828983,True,37.0,491299361.0,65.0
+Metro Boomin,2441400,True,21.0,904374691.0,4.0
+Daft Punk,6249715,True,37.0,505072607.0,24.0
+BTS,2316882,True,5.0,74581683.0,45.0
+Pink Floyd,5495214,False,0.0,0.0,
+Panic! at the Disco,4359108,False,0.0,0.0,
+KATSEYE,1479403,True,12.0,300584800.0,10.0
+Black Eyed Peas,5654716,True,4.0,58518724.0,24.0
+LE SSERAFIM,1616893,True,14.0,173731673.0,25.0
+BLACKPINK,1952307,True,10.0,141555656.0,8.0
+Justin Timberlake,5473467,True,2.0,17376841.0,167.0
+The Killers,6874883,True,20.0,199006276.0,50.0
+Pierce the Veil,2041985,True,1.0,8270513.0,175.0
+Yeat,1583135,True,6.0,89067439.0,15.0
+Fall Out Boy,5015956,False,0.0,0.0,
+David Guetta,5160920,True,21.0,430129268.0,10.0
+EsDeeKid,875817,True,4.0,88927760.0,41.0
+TWICE,1869503,True,4.0,74322292.0,52.0
+Marina,2213425,False,0.0,0.0,
+Dua Lipa,3224232,True,20.0,584986218.0,6.0
+The Smashing Pumpkins,4501259,False,0.0,0.0,
+ABBA,4330377,True,1.0,8431450.0,175.0
+Pitbull,4341486,True,17.0,172908951.0,96.0
+The Cranberries,4668662,True,1.0,8901520.0,193.0
+Madonna,5520985,True,13.0,188348221.0,12.0
+Kesha,3086977,True,2.0,25319672.0,73.0
+David Bowie,5543805,False,0.0,0.0,
+JAŸ-Z,251885,True,1.0,10149204.0,79.0
+XXXTENTACION,2776645,True,4.0,34478211.0,181.0
+Muse,6326491,False,0.0,0.0,
+Miley Cyrus,4785176,True,26.0,599239329.0,1.0
+Foo Fighters,6313148,False,0.0,0.0,
+Cocteau Twins,2252915,False,0.0,0.0,
+Conan Gray,2379267,True,7.0,60127067.0,146.0
+Nelly Furtado,4789200,True,6.0,51046715.0,150.0
+Doechii,1975972,True,10.0,219628177.0,4.0
+One Direction,3219123,True,28.0,352044360.0,13.0
+The 1975,2613156,True,1.0,8106206.0,195.0
+Beach House,3473201,True,1.0,7242499.0,200.0
+Lil Wayne,3529811,True,6.0,97384374.0,25.0
+PARTYNEXTDOOR,1935900,True,2.0,22726227.0,66.0
+Melanie Martinez,2262252,False,0.0,0.0,
+Lil Peep,2147926,False,0.0,0.0,
+21 Savage,2272007,True,17.0,542202128.0,6.0
+Adele,5565336,True,18.0,272867800.0,95.0
+Slipknot,4168449,False,0.0,0.0,
+Kate Bush,3411549,True,3.0,35273558.0,28.0
+Gracie Abrams,1774025,True,20.0,589781468.0,6.0
+Oasis,5817393,True,5.0,49662076.0,94.0
+Shakira,4806448,True,23.0,483075042.0,2.0
+Limp Bizkit,4078832,False,0.0,0.0,
+Gunna,1779003,True,17.0,237144034.0,10.0
+Juice WRLD,2448007,True,3.0,42868727.0,101.0
+Alex G,2027114,False,0.0,0.0,
+bôa,2061842,False,0.0,0.0,
+Troye Sivan,2413316,True,5.0,55780829.0,34.0
+Billy Joel,4002041,False,0.0,0.0,
+Phoebe Bridgers,2120975,False,0.0,0.0,
+MGMT,5210563,False,0.0,0.0,
+ROSALÍA,1821645,True,15.0,287748136.0,5.0
+Kid Cudi,4648881,False,0.0,0.0,
+Evanescence,4440482,True,11.0,102520227.0,90.0
+Halsey,2774603,True,13.0,116152151.0,76.0
+Tory Lanez,1928385,True,9.0,77844851.0,116.0
+Noah Kahan,1537923,True,18.0,285457307.0,8.0
+The Police,4539438,True,33.0,409102953.0,10.0
+Megan Thee Stallion,2278315,True,4.0,54825865.0,35.0
+OutKast,4916274,False,0.0,0.0,
+Sufjan Stevens,3859568,False,0.0,0.0,
+Alice in Chains,3411263,False,0.0,0.0,
+Bring Me the Horizon,2789482,False,0.0,0.0,
+Demi Lovato,3334640,False,0.0,0.0,
+Avril Lavigne,5073928,False,0.0,0.0,
+Ed Sheeran,4161226,True,32.0,904715982.0,19.0
+Jennie,1459036,True,29.0,846030614.0,3.0
+ILLIT,1111486,True,6.0,84074377.0,33.0
+Lizzy McAlpine,1392107,True,4.0,43449120.0,45.0
+Chase Atlantic,1824534,True,5.0,56112187.0,64.0
+Mazzy Star,2681004,False,0.0,0.0,
+The Kid LAROI,2447299,True,27.0,426420216.0,14.0
+50 Cent,4868179,False,0.0,0.0,
+Blood Orange,1932824,False,0.0,0.0,
+Young Thug,1848928,True,8.0,85211422.0,77.0
+aespa,1296200,True,4.0,59883124.0,50.0
+Trippie Redd,1859419,False,0.0,0.0,
+The Cardigans,3606916,False,0.0,0.0,
+Selena Gomez,3130971,True,22.0,351079402.0,11.0
+Faye Webster,1755637,False,0.0,0.0,
+Chief Keef,1715350,False,0.0,0.0,
+Tears for Fears,3907961,True,26.0,242253064.0,63.0
+Elton John,5171397,True,17.0,229239231.0,24.0
+Nicki Minaj,4699361,True,10.0,132456965.0,7.0
+Chris Brown,4721507,True,7.0,124229514.0,43.0
+Florence   The Machine,17115,False,0.0,0.0,
+Usher,4968505,True,1.0,8413514.0,188.0
+Slowdive,2181345,False,0.0,0.0,
+Three Days Grace,3836042,False,0.0,0.0,
+Imagine Dragons,4021563,True,28.0,570255535.0,38.0
+Madison Beer,1638084,True,4.0,35269322.0,154.0
+Empire of the Sun,2984014,True,7.0,66675164.0,110.0
+Korn,3368573,False,0.0,0.0,
+Lil Tecca,1742450,True,11.0,130798200.0,23.0
+Cage the Elephant,3345543,False,0.0,0.0,
+Gwen Stefani,4408955,True,2.0,32486495.0,63.0
+Ellie Goulding,3907039,True,7.0,69961384.0,63.0
+Frank Sinatra,4885987,True,3.0,161744561.0,21.0
+5 Seconds of Summer,2228692,False,0.0,0.0,
+Lil Baby,1592233,True,4.0,70653003.0,17.0
+The Rolling Stones,5779078,False,0.0,0.0,
+Kodak Black,1780237,True,2.0,27215200.0,22.0
+Ravyn Lenae,1640640,True,12.0,206519108.0,8.0
+Ken Carson,1141879,False,0.0,0.0,
+Lil Yachty,1783282,False,0.0,0.0,
+Big Thief,1625085,False,0.0,0.0,
+Panchiko,1122829,False,0.0,0.0,
+Grimes,2627478,False,0.0,0.0,
+She & Him,1676027,True,3.0,54574346.0,16.0
+Prince,3263324,True,2.0,19131137.0,94.0
+Miguel,2647242,True,18.0,192680997.0,23.0
+Imogen Heap,3006148,True,6.0,62382258.0,72.0
+Amy Winehouse,4581562,False,0.0,0.0,
+Ethel Cain,1240159,False,0.0,0.0,
+Men I Trust,2134749,False,0.0,0.0,
+Magdalena Bay,1410653,False,0.0,0.0,
+$uicideboy$,1563970,False,0.0,0.0,
+blink-182,4589449,False,0.0,0.0,
+The Goo Goo Dolls,2580946,True,27.0,401231401.0,12.0
+IVE,1025917,True,1.0,11162721.0,72.0
+Lucki,1135578,False,0.0,0.0,
+Led Zeppelin,4897283,False,0.0,0.0,
+Cardi B,2385192,True,1.0,9812988.0,138.0
+Pearl Jam,4319791,False,0.0,0.0,
+Charlie Puth,2410781,True,15.0,165791587.0,82.0
+Sean Paul,3140189,True,4.0,47897234.0,55.0
+The Chainsmokers,2761881,True,27.0,375763769.0,62.0
+Snow Strippers,852051,False,0.0,0.0,
+Jung Kook,1431318,True,36.0,942654754.0,1.0
+Shawn Mendes,2672470,True,1.0,7915471.0,196.0
+Björk,3420993,True,2.0,20858988.0,91.0
+Pixies,4235805,False,0.0,0.0,
+2Pac,4119764,False,0.0,0.0,
+Crystal Castles,3141483,False,0.0,0.0,
+Guns N' Roses,5142461,True,10.0,86446301.0,129.0
+Red Velvet,1368614,False,0.0,0.0,
+Black Sabbath,4354764,True,1.0,25897960.0,33.0
+ENHYPEN,1103348,True,1.0,10413428.0,97.0
+Marvin Gaye,3711394,True,1.0,8436078.0,195.0
+Mariah Carey,5021918,True,6.0,305715700.0,1.0
+Lisa,1919588,True,8.0,143936991.0,14.0
+Gigi Perez,1363612,True,19.0,391915013.0,8.0
+MF DOOM,2271261,False,0.0,0.0,
+J Balvin,1805392,True,10.0,100854405.0,33.0
+Thundercat,2002717,False,0.0,0.0,
+girl in red,2448299,True,3.0,32193042.0,82.0
+Strawberry Guy,1688579,False,0.0,0.0,
+Flo Rida,4118878,False,0.0,0.0,
+Daryl Hall & John Oates,2504835,True,2.0,28885710.0,75.0
+Glass Animals,2575687,True,19.0,192306378.0,53.0
+ZAYN,2214428,True,1.0,10579763.0,106.0
+Wallows,2041410,False,0.0,0.0,
+Adrianne Lenker,1316338,False,0.0,0.0,
+Marina Sena,474594,False,0.0,0.0,
+FKA twigs,1644501,False,0.0,0.0,
+Depeche Mode,4402883,False,0.0,0.0,
+Billy Idol,3019938,False,0.0,0.0,
+The Notorious B.I.G.,3075955,False,0.0,0.0,
+The Offspring,4537431,False,0.0,0.0,
+Rauw Alejandro,1076427,True,32.0,671683833.0,5.0
+XG,801381,False,0.0,0.0,
+Camila Cabello,2365581,False,0.0,0.0,
+Bryson Tiller,1673484,True,4.0,49924258.0,50.0
+Blur,4721514,False,0.0,0.0,
+DJ Snake,2554391,True,11.0,117622213.0,35.0
+Aphex Twin,2996970,False,0.0,0.0,
+Fontaines D.C.,1068219,False,0.0,0.0,
+AC/DC,4509544,True,7.0,80889699.0,155.0
+Fred again..,1265826,True,1.0,9462453.0,123.0
+2hollis,765293,False,0.0,0.0,
+Elliott Smith,2924015,False,0.0,0.0,
+Duran Duran,3130713,False,0.0,0.0,
+HUNTR/X,1114812,True,9.0,632882467.0,1.0
+Bob Dylan,4266431,False,0.0,0.0,
+OneRepublic,4277682,True,36.0,658833232.0,25.0
+Willow,2298418,False,0.0,0.0,
+Tyla,1443483,True,22.0,319551353.0,9.0
+Sublime,3080178,False,0.0,0.0,
+Denzel Curry,1606417,False,0.0,0.0,
+¥$,1449765,True,5.0,150724564.0,3.0
+Eagles,3790002,True,2.0,39006993.0,51.0
+Kings of Leon,5093310,True,2.0,18234905.0,173.0
+d4vd,2264421,True,29.0,500777540.0,16.0
+bbno$,1476522,False,0.0,0.0,
+Stray Kids,1324476,True,3.0,48416632.0,42.0
+Tove Lo,2406366,False,0.0,0.0,
+Kehlani,1659399,True,7.0,75095272.0,81.0
+Nine Inch Nails,3570426,False,0.0,0.0,
+Ayesha Erotica,1159355,False,0.0,0.0,
+Talking Heads,3216634,False,0.0,0.0,
+TOMORROW X TOGETHER,1201974,False,0.0,0.0,
+Hotel Ugly,1868622,True,24.0,229623439.0,82.0
+Hearts2Hearts,317554,False,0.0,0.0,
+The Sundays,1297121,False,0.0,0.0,
+Dire Straits,3489758,False,0.0,0.0,
+Fiona Apple,2701393,False,0.0,0.0,
+j-hope,1016741,True,8.0,120599442.0,25.0
+Dave,1257297,True,12.0,195428899.0,11.0
+Slayyyter,783468,False,0.0,0.0,
+Mother Mother,1902369,False,0.0,0.0,
+Fetty Wap,1668347,True,1.0,11018120.0,92.0
+Soundgarden,3283785,False,0.0,0.0,
+Jamiroquai,2853958,False,0.0,0.0,
+Massive Attack,3825546,False,0.0,0.0,
+A Boogie wit da Hoodie,1426412,True,2.0,23422630.0,29.0
+fakemink,436138,False,0.0,0.0,
+Khalid,2271778,True,35.0,337155070.0,94.0
+Sam Smith,3049190,True,10.0,155461757.0,7.0
+America,2107097,False,0.0,0.0,
+NMIXX,722228,False,0.0,0.0,
+Nickelback,4322864,False,0.0,0.0,
+Avenged Sevenfold,2842970,False,0.0,0.0,
+Clean Bandit,2514159,False,0.0,0.0,
+Queens of the Stone Age,3709970,False,0.0,0.0,
+Bladee,954990,False,0.0,0.0,
+VACATIONS,1859656,False,0.0,0.0,
+Julia Wolf,557762,False,0.0,0.0,
+Disclosure,2438802,False,0.0,0.0,
+Eyedress,2173432,False,0.0,0.0,
+Alex Warren,921253,True,14.0,483662424.0,1.0
+Timbaland,3517672,True,6.0,59449833.0,150.0
+Suki Waterhouse,1716668,False,0.0,0.0,
+Labi Siffre,969389,False,0.0,0.0,
+Avicii,3312458,True,8.0,67811269.0,131.0
+Lord Huron,2271718,True,32.0,503541967.0,15.0
+Major Lazer,2931057,True,1.0,9840618.0,126.0
+Creedence Clearwater Revival,4045557,True,15.0,161430496.0,90.0
+Title Fight,1168829,False,0.0,0.0,
+Daddy Yankee,2200125,True,3.0,37421765.0,52.0
+Bee Gees,3401162,False,0.0,0.0,
+Zedd,2556212,False,0.0,0.0,
+Sia,4361667,True,12.0,228004928.0,9.0
+Destroy Lonely,886732,False,0.0,0.0,
+YoungBoy Never Broke Again,1121900,False,0.0,0.0,
+Blondie,3393016,False,0.0,0.0,
+The All-American Rejects,3254844,False,0.0,0.0,
+Dean Blunt,914720,False,0.0,0.0,
+Joey Bada$$,1734848,False,0.0,0.0,
+Stevie Wonder,3920214,True,2.0,20940084.0,121.0
+Electric Light Orchestra,2943981,False,0.0,0.0,
+Migos,1848946,False,0.0,0.0,
+Metric,2809277,False,0.0,0.0,
+Rex Orange County,2024672,False,0.0,0.0,
+Rae Sremmurd,1871366,False,0.0,0.0,
+Franz Ferdinand,4831912,False,0.0,0.0,
+Carly Rae Jepsen,2976803,False,0.0,0.0,
+Marshmello,2534472,True,12.0,154875151.0,15.0
+Two Door Cinema Club,3113351,False,0.0,0.0,
+Bon Jovi,4208319,False,0.0,0.0,
+Geese,511461,False,0.0,0.0,
+The Clash,4110505,True,1.0,9002489.0,139.0
+ROLE MODEL,1022930,False,0.0,0.0,
+Her's,1439143,False,0.0,0.0,
+Måneskin,1838916,False,0.0,0.0,
+Zach Bryan,1179653,True,17.0,528536633.0,20.0
+Lily Allen,3731003,False,0.0,0.0,
+Alicia Keys,4167155,False,0.0,0.0,
+PEDRO SAMPAIO,550013,True,4.0,39762468.0,82.0
+Anitta,1189909,True,9.0,118478749.0,19.0
+Snoop Dogg,4319833,False,0.0,0.0,
+Summer Walker,1710382,True,1.0,9593704.0,169.0
+Bon Iver,3533128,True,1.0,7804790.0,193.0
+Artemas,1577748,True,12.0,291255522.0,3.0
+Gucci Mane,2731189,False,0.0,0.0,
+Rammstein,3087781,False,0.0,0.0,
+KAYTRANADA,1544296,False,0.0,0.0,
+JID,1370698,True,7.0,76806978.0,45.0
+Jordana,1247480,False,0.0,0.0,
+Yung Lean,1297493,False,0.0,0.0,
+Current Joys,1721353,False,0.0,0.0,
+P!nk,3731132,True,1.0,8696717.0,197.0
+Rosé,1644666,True,17.0,613186705.0,1.0
+Ty Dolla $ign,1643314,True,5.0,150724564.0,3.0
+Car Seat Headrest,1354673,False,0.0,0.0,
+t.A.T.u.,2200648,False,0.0,0.0,
+KAROL G,1408195,True,36.0,1344986167.0,2.0
+Swedish House Mafia,2682111,False,0.0,0.0,
+Mindless Self Indulgence,1507768,False,0.0,0.0,
+The Beach Boys,4092436,True,2.0,39690851.0,48.0
+Mumford & Sons,2667238,False,0.0,0.0,
+Mark Ronson,3052754,False,0.0,0.0,
+Foster the People,3687798,True,1.0,9172922.0,188.0
+Leon Thomas,875329,True,1.0,8903823.0,154.0
+The Living Tombstone,1290289,False,0.0,0.0,
+The Script,2948373,True,5.0,45475135.0,106.0
+Sleeping With Sirens,1165264,False,0.0,0.0,
+Steely Dan,1747762,False,0.0,0.0,
+BROCKHAMPTON,1657544,False,0.0,0.0,
+"Earth, Wind & Fire",2910579,False,0.0,0.0,
+Phantogram,1912973,False,0.0,0.0,
+Freddie Gibbs,1278766,False,0.0,0.0,
+Tool,2591971,False,0.0,0.0,
+No Doubt,3558092,False,0.0,0.0,
+Givēon,688767,False,0.0,0.0,
+Lil Nas X,2616138,True,1.0,7982786.0,160.0
+Lykke Li,3106961,False,0.0,0.0,
+George Harrison,2440715,False,0.0,0.0,
+Bob Marley & The Wailers,3444910,True,1.0,8628041.0,176.0
+Ne-Yo,3316511,True,17.0,164880620.0,96.0
+Pantera,2591476,False,0.0,0.0,
+Chevelle,1803654,False,0.0,0.0,
+Nas,3350826,False,0.0,0.0,
+ATEEZ,789322,False,0.0,0.0,
+boygenius,1133239,False,0.0,0.0,
+The Doors,4700836,False,0.0,0.0,
+Wiz Khalifa,3851111,True,11.0,96927069.0,85.0
+G-Eazy,2040036,True,1.0,9062118.0,191.0
+Toby Fox,1182616,False,0.0,0.0,
+Elvis Presley,4458537,True,2.0,71359136.0,34.0
+Jhené Aiko,1366120,False,0.0,0.0,
+Audioslave,3278308,False,0.0,0.0,
+Ghost,1615258,False,0.0,0.0,
+R.E.M.,4333332,False,0.0,0.0,
+All Time Low,2543992,False,0.0,0.0,
+KiiiKiii,215726,False,0.0,0.0,
+Kylie Minogue,3504437,False,0.0,0.0,
+Omar Apollo,1457185,False,0.0,0.0,
+Sleep Token,824267,True,1.0,9652861.0,127.0
+Portishead,3273692,False,0.0,0.0,
+Bad Omens,771882,False,0.0,0.0,
+OsamaSon,427129,False,0.0,0.0,
+Agust D,830721,True,1.0,40794132.0,21.0
+Surf Curse,1979505,True,2.0,19489549.0,133.0
+Rage Against the Machine,4219440,False,0.0,0.0,
+B.o.B,3154864,True,1.0,9402054.0,145.0
+i-dle,475522,True,3.0,27341456.0,110.0
+Aerosmith,4687407,False,0.0,0.0,
+DJ Khaled,2835151,False,0.0,0.0,
+Chris Isaak,2015168,False,0.0,0.0,
+Labrinth,2508265,True,1.0,11271405.0,71.0
+Jason Derulo,3080732,False,0.0,0.0,
+Toto,3049325,True,13.0,115588083.0,108.0
+Creed,2417322,False,0.0,0.0,
+Lit,1284456,False,0.0,0.0,
+Kelly Clarkson,4475094,True,6.0,181179499.0,9.0
+CORTIS,405439,False,0.0,0.0,
+Thee Sacred Souls,1162267,False,0.0,0.0,
+Falling in Reverse,1347128,False,0.0,0.0,
+Natasha Bedingfield,2959071,True,15.0,185922446.0,16.0
+Bruce Springsteen,3546912,True,2.0,37212549.0,43.0
+Jimin,859538,True,36.0,913340763.0,1.0
+Selena Gomez & the Scene,2466378,False,0.0,0.0,
+HIM,1661462,False,0.0,0.0,
+Wet Leg,882417,False,0.0,0.0,
+Crowded House,1958124,False,0.0,0.0,
+Christina Aguilera,4429479,False,0.0,0.0,
+Exo,1033112,False,0.0,0.0,
+ScHoolboy Q,1966619,True,1.0,16270479.0,45.0
+Odetari,1104469,True,1.0,12449776.0,75.0
+JVKE,1571503,True,10.0,152822261.0,21.0
+Cafuné,1451301,False,0.0,0.0,
+Christina Aguilera,4429479,False,0.0,0.0,
+Akon,3693557,False,0.0,0.0,
+Cavetown,1609528,False,0.0,0.0,
+Crowded House,1958124,False,0.0,0.0,
+Ozzy Osbourne,3089059,True,1.0,33182077.0,60.0
+Offset,1448852,True,2.0,20250461.0,77.0
+Benson Boone,1456781,True,26.0,984255148.0,1.0
+RM,772921,True,2.0,24962070.0,64.0
+Jane Remover,500002,False,0.0,0.0,
+Matt Maltese,1712156,False,0.0,0.0,
+John Lennon,4035893,True,3.0,71234665.0,16.0
+Reneé Rapp,982162,False,0.0,0.0,
+The White Stripes,4815044,True,2.0,18844959.0,146.0
+Earl Sweatshirt,1561664,False,0.0,0.0,
+Cults,2434282,False,0.0,0.0,
+Tainy,784846,True,4.0,43535094.0,31.0
+Jin,795007,True,17.0,344112013.0,2.0
+Joy Division,3355005,False,0.0,0.0,
+Modern Baseball,912390,False,0.0,0.0,
+Lola Young,1152073,True,16.0,353314600.0,8.0
+Don Omar,1780202,True,26.0,250188644.0,80.0
+Duster,1578184,False,0.0,0.0,
+Jack Harlow,1821134,True,10.0,263017773.0,4.0
+Waka Flocka Flame,1790840,False,0.0,0.0,
+Sonder,1039774,False,0.0,0.0,
+Jennifer Lopez,3738601,False,0.0,0.0,
+Little Mix,1823338,False,0.0,0.0,
+Wolf Alice,1251269,False,0.0,0.0,
+NLE Choppa,1460495,True,3.0,37849726.0,22.0
+wave to earth,823097,False,0.0,0.0,
+The Lumineers,2552448,True,1.0,10870508.0,82.0
+V,906065,True,29.0,402601181.0,31.0
+Lauv,1735659,True,1.0,11279309.0,99.0
+Ashnikko,1437241,True,1.0,9174378.0,192.0
+Stone Temple Pilots,2470260,False,0.0,0.0,
+King Von,985572,False,0.0,0.0,
+Hole,2080548,False,0.0,0.0,
+Keane,3997883,True,36.0,346939855.0,80.0
+M83,3493781,False,0.0,0.0,
+Air,3182451,False,0.0,0.0,
+George Michael,3193894,False,0.0,0.0,
+Dr. Dre,3934510,False,0.0,0.0,
+Neil Young,2696140,False,0.0,0.0,
+Seventeen,927181,False,0.0,0.0,
+The Velvet Underground,3168703,False,0.0,0.0,
+BigXthaPlug,927084,False,0.0,0.0,
+Tinashe,1586552,True,9.0,144799346.0,16.0
+Lynyrd Skynyrd,3247064,False,0.0,0.0,
+Pet Shop Boys,2322216,False,0.0,0.0,
