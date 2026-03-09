@@ -1,5 +1,5 @@
 # get_capitals.py
-# Lädt alle Hauptstädte via RestCountries API und speichert sie in data/raw/capitals.json
+# Loads all capital cities via the RestCountries API and saves them to data/raw/capitals.json
 import requests, json, os
 
 
@@ -13,7 +13,7 @@ def get_capital_cities():
             if capital:
                 capitals.add(capital)
 
-    print(f"✅ {len(capitals)} Hauptstädte geladen")
+    print(f" {len(capitals)} load capital cities")
     return capitals
 
 
@@ -23,4 +23,4 @@ if __name__ == "__main__":
     out = "data/raw/capitals.json"
     with open(out, "w", encoding="utf-8") as f:
         json.dump(sorted(CAPITAL_CITIES), f, ensure_ascii=False, indent=2)
-    print(f"✅ Gespeichert → {out}")
+    print(f" saved → {out}")
