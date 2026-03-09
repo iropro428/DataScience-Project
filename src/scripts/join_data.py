@@ -1,6 +1,6 @@
 # join_data.py
-# Aggregiert Rohdaten → data/processed/final_dataset.csv
-# Forschungsfragen: F2, F4, F6, F7 + Basis für alle anderen
+# Aggregates raw data → data/processed/final_dataset.csv
+# Research questions: F2, F4, F6, F7 + foundation for all other analyses
 #
 # Input:
 #   data/raw/artists_lastfm.csv
@@ -20,10 +20,10 @@ import os, sys
 
 os.makedirs("data/processed", exist_ok=True)
 
-# ── Rohdaten laden ─────────────────────────────────────────────────────────
+# Load raw data
 for p in ["data/raw/artists_lastfm.csv", "data/raw/ticketmaster_events.csv"]:
     if not os.path.exists(p):
-        print(f"❌  {p} fehlt");
+        print(f"  {p} fehlt");
         sys.exit(1)
 
 df_lastfm = pd.read_csv("data/raw/artists_lastfm.csv")
@@ -39,11 +39,11 @@ df_events["onsale_date_dt"] = pd.to_datetime(df_events["onsale_date"], errors="c
 df_events["is_weekend"] = pd.to_numeric(df_events["is_weekend"], errors="coerce")
 df_events["is_capital"] = pd.to_numeric(df_events["is_capital"], errors="coerce")
 
-# ── Lead Time: Nur zukünftige Events — 1 Wert pro Artist ─────────────────
-# Nur Artists die mindestens ein zukünftiges Event haben.
-# Pro Artist:
-#   first_event_date  = frühestes event_date >= today
-#   first_onsale_date = frühestes onsale_date dieser zukünftigen Events
+# Lead time: only future events — one value per artist
+# Only artists with at least one future event are included.
+# Per artist:
+#   first_event_date  = earliest event_date >= today
+#   first_onsale_date = earliest onsale_date of these future events
 #   lead_time_days    = first_event_date - first_onsale_date
 _df_future = df_events[
     (df_events["event_date_dt"] >= today) &
@@ -54,14 +54,14 @@ _first_event = _df_future.groupby("artist_name")["event_date_dt"].min().rename("
 _first_onsale = _df_future.groupby("artist_name")["onsale_date_dt"].min().rename("first_onsale_date")
 _lead_df = pd.concat([_first_event, _first_onsale], axis=1).dropna()
 _lead_df["lead_time_days"] = (_lead_df["first_event_date"] - _lead_df["first_onsale_date"]).dt.days
-_lead_df.loc[_lead_df["lead_time_days"] < 0, "lead_time_days"] = None  # Datenfehler
+_lead_df.loc[_lead_df["lead_time_days"] < 0, "lead_time_days"] = None  # data error
 n_lead = _lead_df["lead_time_days"].notna().sum()
 print(f"lead_time_days: {n_lead} Artists mit zukuenftigem Event + onsale_date "
       f"(Median: {_lead_df['lead_time_days'].median():.0f} Tage)")
 
-# ── Dedup: VIP/Package-Events entfernen ───────────────────────────────────
-# Ticketmaster listet VIP Packages, Business Seats etc. als eigene Events
-# → kein eigenes Konzert, verfälscht Event-Zählungen
+# Dedup: remove VIP/Package-Events
+# Ticketmaster listet VIP Packages, Business Seats etc. as separate events
+# → not an actual concert, distorts event counts
 SKIP_KW = ["vip package", "business seat", "hospitality",
            "meet & greet", "meet and greet", "premium package",
            "vip experience", "fan package"]
@@ -75,18 +75,18 @@ if "event_name" in df_events.columns:
     n_removed = n_before - len(df_events)
     print(f"🔧 Dedup Packages: {n_removed} Package-Events entfernt ({n_before} → {len(df_events)})")
 
-# Zusatz-Dedup: selber Artist + selbe Stadt + selbes Datum → nur 1 Event behalten
-# (fängt sonstige Duplikate wie "Einfache" vs "Sitzplatz" etc.)
+# Additional dedup: same artist + same city + same date → keep only one event
+# (catches other duplicates such as "standard" vs. "seated ticket" etc.)
 n_before2 = len(df_events)
 df_events = df_events.sort_values("event_name").drop_duplicates(
     subset=["artist_name", "city", "event_date"], keep="first"
 )
 n_removed2 = n_before2 - len(df_events)
 if n_removed2 > 0:
-    print(f"🔧 Dedup Datum/Stadt: {n_removed2} weitere Duplikate entfernt ({n_before2} → {len(df_events)})")
+    print(f" Dedup Date/City: {n_removed2} remove more duplicates ({n_before2} → {len(df_events)})")
 
 # ══════════════════════════════════════════════════════════════════════════
-# 1) BASIS-AGGREGATION
+# 1) BASE-AGGREGATION
 # ══════════════════════════════════════════════════════════════════════════
 tour_base = (
     df_events.groupby("artist_name")
@@ -120,7 +120,7 @@ def get_touring_status(group):
 touring_df = df_events.groupby("artist_name").apply(get_touring_status, include_groups=False).reset_index()
 
 # ══════════════════════════════════════════════════════════════════════════
-# 3) F2 — Events letztes Jahr (Tour-Intensität)
+# 3) F2 — Events last year (tour intensity)
 # ══════════════════════════════════════════════════════════════════════════
 events_lastyear = (
     df_events[
@@ -137,11 +137,11 @@ events_lastyear = (
 # ══════════════════════════════════════════════════════════════════════════
 # 4) F4 — REVISIT vs. NEW CITIES
 #
-#   new_cities         = Städte mit genau 1 Besuch
-#   revisit_cities     = Städte mit ≥ 2 Besuchen
-#   pct_revisit_cities = revisit / (revisit + new) × 100       [% Städte]
-#   revisit_ratio      = revisit_cities / new_cities
-#   pct_events_revisit = Events in Revisit-Städten / total × 100  [% Events]
+#   new_cities       = cities visited exactly once
+# revisit_cities     = cities visited two or more times
+# pct_revisit_cities = revisit / (revisit + new) × 100       [% of cities]
+# revisit_ratio      = revisit_cities / new_cities
+# pct_events_revisit = events in revisit cities / total × 100  [% of events]
 # ══════════════════════════════════════════════════════════════════════════
 def f4_revisit(group):
     counts = group["city"].dropna().value_counts()
@@ -168,7 +168,7 @@ def f4_revisit(group):
 
 revisit_df = df_events.groupby("artist_name").apply(f4_revisit, include_groups=False).reset_index()
 
-# F4 Detail: Artist × Stadt × Besuche
+# F4 Detail: Artist × City × Visits
 agg_dict = {"visits": ("event_id", "count"), "first_visit": ("event_date", "min"),
             "last_visit": ("event_date", "max"), "is_capital": ("is_capital", "first")}
 if "latitude" in df_events.columns:
@@ -176,23 +176,23 @@ if "latitude" in df_events.columns:
 city_freq = df_events.groupby(["artist_name", "city", "country"]).agg(**agg_dict).reset_index()
 city_freq["is_revisit"] = (city_freq["visits"] >= 2).astype(int)
 city_freq.to_csv("data/processed/f4_city_frequencies.csv", index=False)
-print(f"✅  f4_city_frequencies.csv     → {len(city_freq)} Einträge")
+print(f"  f4_city_frequencies.csv     → {len(city_freq)} Entries")
 
 
 # ══════════════════════════════════════════════════════════════════════════
 # 5) F6 — CAPITAL vs. NON-CAPITAL CITIES
 #
-#   capital_events      = Events in Hauptstädten (is_capital = 1)
-#   non_capital_events  = Events in Nicht-Hauptstädten
-#   pct_capital         = capital_events / total_events × 100       [% Events]
-#   capital_ratio       = capital_events / non_capital_events
-#   unique_capitals     = Anzahl verschiedener Hauptstädte besucht
-#   unique_non_capitals = Anzahl verschiedener Nicht-Hauptstädte besucht
-#   pct_capital_cities  = unique_capitals / alle_städte × 100       [% Städte]
+#   capital_events    = events in capital cities (is_capital = 1)
+# non_capital_events  = events in non-capital cities
+# pct_capital         = capital_events / total_events × 100 [% of events]
+# capital_ratio       = capital_events / non_capital_events
+# unique_capitals     = number of different capital cities visited
+# unique_non_capitals = number of different non-capital cities visited
+# pct_capital_cities  = unique_capitals / all_cities × 100 [% of cities]
 #
-#   Unterschied pct_capital vs pct_capital_cities:
-#     pct_capital       → misst Anteil am Konzertvolumen
-#     pct_capital_cities → misst Anteil an der geografischen Breite
+# Difference between pct_capital vs pct_capital_cities:
+#   pct_capital        → measures the share of concerts occurring in capital cities (event volume)
+#   pct_capital_cities → measures the share of capital cities within the geographic spread of the tour
 # ══════════════════════════════════════════════════════════════════════════
 def f6_capital(group):
     cap = group["is_capital"].fillna(0)
@@ -217,7 +217,7 @@ def f6_capital(group):
 
 capital_df = df_events.groupby("artist_name").apply(f6_capital, include_groups=False).reset_index()
 
-# F6 Detail 1: Welche Hauptstädte gesamt am häufigsten besucht?
+# F6 Detail 1: Which capital cities are visited most frequently overall?
 capitals_visited = (
     df_events[df_events["is_capital"] == 1]
     .groupby(["city", "country"])
@@ -227,9 +227,9 @@ capitals_visited = (
     .sort_values("total_visits", ascending=False)
 )
 capitals_visited.to_csv("data/processed/f6_capitals_visited.csv", index=False)
-print(f"✅  f6_capitals_visited.csv      → {len(capitals_visited)} Hauptstädte")
+print(f"  f6_capitals_visited.csv      → {len(capitals_visited)} Capital Cities")
 
-# F6 Detail 2: Pro Artist, welche Hauptstädte wie oft?
+# F6 Detail 2: For each artist, how often is each capital city visited?
 capitals_per_artist = (
     df_events[df_events["is_capital"] == 1]
     .groupby(["artist_name", "city", "country"])
@@ -238,11 +238,11 @@ capitals_per_artist = (
     .reset_index()
 )
 capitals_per_artist.to_csv("data/processed/f6_capitals_per_artist.csv", index=False)
-print(f"✅  f6_capitals_per_artist.csv   → {len(capitals_per_artist)} Einträge")
+print(f"  f6_capitals_per_artist.csv   → {len(capitals_per_artist)} Entries")
 
 
 # ══════════════════════════════════════════════════════════════════════════
-# 6) F7 — Ø Tage zwischen Konzerten
+# 6) F7 — Ø Days between concerts
 # ══════════════════════════════════════════════════════════════════════════
 def avg_days_between(group):
     dates = group["event_date_dt"].dropna().sort_values()
@@ -255,7 +255,7 @@ days_df = df_events.groupby("artist_name").apply(avg_days_between, include_group
 days_df.columns = ["artist_name", "avg_days_between_shows"]
 
 # ══════════════════════════════════════════════════════════════════════════
-# 7) F2 — STREAMING-KONZENTRATION (optional)
+# 7) F2 — Streaming concentration (optional)
 # ══════════════════════════════════════════════════════════════════════════
 conc_df = None
 if os.path.exists("data/raw/lastfm_toptracks.csv"):
@@ -264,15 +264,15 @@ if os.path.exists("data/raw/lastfm_toptracks.csv"):
         from compute_concentration import compute_concentration
 
         conc_df = compute_concentration(pd.read_csv("data/raw/lastfm_toptracks.csv"))
-        print(f"✅  Streaming-Konzentration:     {len(conc_df)} Artists")
+        print(f"  Streaming-concentration:     {len(conc_df)} Artists")
     except Exception as e:
-        print(f"⚠️   compute_concentration: {e}")
+        print(f"   compute_concentration: {e}")
 
 # ══════════════════════════════════════════════════════════════════════════
-# 8) ZUSAMMENFÜHREN
+# 8) Merge
 # ══════════════════════════════════════════════════════════════════════════
 df_final = tour_base.copy()
-# lead_time_days einmergen (berechnet aus first_onsale_date → first_event_date)
+# lead_time_days merge in (calculated from first_onsale_date → first_event_date)
 df_final = df_final.merge(
     _lead_df[["lead_time_days"]].reset_index().rename(columns={"artist_name": "artist_name"}),
     on="artist_name", how="left"
@@ -291,8 +291,8 @@ df_final = (
 df_final = df_final[df_final["total_events"] > 0].copy()
 df_final.to_csv("data/processed/final_dataset.csv", index=False)
 
-print(f"\n✅  {len(df_final)} Artists → data/processed/final_dataset.csv")
-print(f"    {len(df_final.columns)} Spalten")
+print(f"\n  {len(df_final)} Artists → data/processed/final_dataset.csv")
+print(f"    {len(df_final.columns)} Columns")
 
 # Schnellcheck F4 + F6
 for label, cols in [
