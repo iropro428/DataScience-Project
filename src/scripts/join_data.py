@@ -23,7 +23,7 @@ os.makedirs("data/processed", exist_ok=True)
 # ── Rohdaten laden ─────────────────────────────────────────────────────────
 for p in ["data/raw/artists_lastfm.csv", "data/raw/ticketmaster_events.csv"]:
     if not os.path.exists(p):
-        print(f"❌  {p} fehlt");
+        print(f"  {p} fehlt");
         sys.exit(1)
 
 df_lastfm = pd.read_csv("data/raw/artists_lastfm.csv")
@@ -176,7 +176,7 @@ if "latitude" in df_events.columns:
 city_freq = df_events.groupby(["artist_name", "city", "country"]).agg(**agg_dict).reset_index()
 city_freq["is_revisit"] = (city_freq["visits"] >= 2).astype(int)
 city_freq.to_csv("data/processed/f4_city_frequencies.csv", index=False)
-print(f"✅  f4_city_frequencies.csv     → {len(city_freq)} Einträge")
+print(f"  f4_city_frequencies.csv     → {len(city_freq)} Einträge")
 
 
 # ══════════════════════════════════════════════════════════════════════════
@@ -227,7 +227,7 @@ capitals_visited = (
     .sort_values("total_visits", ascending=False)
 )
 capitals_visited.to_csv("data/processed/f6_capitals_visited.csv", index=False)
-print(f"✅  f6_capitals_visited.csv      → {len(capitals_visited)} Hauptstädte")
+print(f"  f6_capitals_visited.csv      → {len(capitals_visited)} Hauptstädte")
 
 # F6 Detail 2: Pro Artist, welche Hauptstädte wie oft?
 capitals_per_artist = (
@@ -238,7 +238,7 @@ capitals_per_artist = (
     .reset_index()
 )
 capitals_per_artist.to_csv("data/processed/f6_capitals_per_artist.csv", index=False)
-print(f"✅  f6_capitals_per_artist.csv   → {len(capitals_per_artist)} Einträge")
+print(f"  f6_capitals_per_artist.csv   → {len(capitals_per_artist)} Einträge")
 
 
 # ══════════════════════════════════════════════════════════════════════════
@@ -264,9 +264,9 @@ if os.path.exists("data/raw/lastfm_toptracks.csv"):
         from compute_concentration import compute_concentration
 
         conc_df = compute_concentration(pd.read_csv("data/raw/lastfm_toptracks.csv"))
-        print(f"✅  Streaming-Konzentration:     {len(conc_df)} Artists")
+        print(f"  Streaming-Konzentration:     {len(conc_df)} Artists")
     except Exception as e:
-        print(f"⚠️   compute_concentration: {e}")
+        print(f"   compute_concentration: {e}")
 
 # ══════════════════════════════════════════════════════════════════════════
 # 8) ZUSAMMENFÜHREN
@@ -291,7 +291,7 @@ df_final = (
 df_final = df_final[df_final["total_events"] > 0].copy()
 df_final.to_csv("data/processed/final_dataset.csv", index=False)
 
-print(f"\n✅  {len(df_final)} Artists → data/processed/final_dataset.csv")
+print(f"\n  {len(df_final)} Artists → data/processed/final_dataset.csv")
 print(f"    {len(df_final.columns)} Spalten")
 
 # Schnellcheck F4 + F6

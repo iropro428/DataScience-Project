@@ -13,7 +13,7 @@ TM_KEY = os.getenv("TICKETMASTER_API_KEY")
 BASE_URL = "https://app.ticketmaster.com/discovery/v2"
 
 # Artist-List
-from alt.artists import ARTISTS
+from artists import ARTISTS
 
 
 # 1. get Artist ID from Ticketmaster
