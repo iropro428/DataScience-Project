@@ -1,7 +1,8 @@
 # Script to collect and process concert event data from the Ticketmaster API for a list of 
 # artists and store it as a CSV dataset for analysis.
 
-# collect_ticketmaster.py  —  v2  (with ticket price for F2)
+# collect_ticketmaster.py (with ticket price for F2)
+
 import requests, pandas as pd, time, os, json
 from dotenv import load_dotenv
 from pathlib import Path
