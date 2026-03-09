@@ -13,7 +13,7 @@ TM_KEY = os.getenv("TICKETMASTER_API_KEY")
 BASE_URL = "https://app.ticketmaster.com/discovery/v2"
 
 # Artist-List
-from alt.artists import ARTISTS
+from artists import ARTISTS
 
 
 # 1. get Artist ID from Ticketmaster
@@ -157,5 +157,5 @@ if __name__ == '__main__':
     # Save CSV
     df_events = pd.DataFrame(all_events)
     os.makedirs("data", exist_ok=True)
-    df_events.to_csv("data/raw/ticketmaster/ticketmaster_events.csv", index=False)
+    df_events.to_csv("data/raw/ticketmaster_events.csv", index=False)
     print(f"\n {len(df_events)} Events total → data/ticketmaster_events.csv")
