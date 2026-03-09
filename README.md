@@ -136,15 +136,12 @@ DataScience-Project/
 # Keys
 
 TICKETMASTER_KEY
-SPOTIFY_CLIENT_ID
-SPOTIFY_CLIENT_SECRET
-OPENROUTESERVICE_KEY
 
 ---
 
 # Authors
 
-Selen Erbas
-Ajna Annageldyeva
-Irem Karadeniz
+Selen Erbas,
+Ajna Annageldyeva,
+Irem Karadeniz,
 Ali-Jawad Yusufi
