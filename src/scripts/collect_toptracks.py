@@ -1,4 +1,4 @@
-# Last.fm artist.getTopTracks → Konzentrationsmetrik für F2
+# Last.fm artist.getTopTracks 
 import requests, pandas as pd, time, os
 from dotenv import load_dotenv
 
@@ -42,11 +42,11 @@ def get_top_tracks(artist_name, limit=20):
             for i, t in enumerate(tracks)
         ]
     except Exception as e:
-        print(f"  ⚠️  {artist_name}: {e}")
+        print(f"    {artist_name}: {e}")
         return []
 
 
-# ── Main ──────────────────────────────────────────────────────────────────
+# Main
 all_tracks = []
 
 for i, name in enumerate(ARTISTS):
@@ -62,10 +62,10 @@ for i, name in enumerate(ARTISTS):
         print("→ keine Daten")
     time.sleep(0.25)
 
-# ── Speichern ─────────────────────────────────────────────────────────────
+# Save
 os.makedirs("data/raw", exist_ok=True)
 df_tracks = pd.DataFrame(all_tracks)
 df_tracks.to_csv("data/raw/lastfm_toptracks.csv", index=False)
 
-print(f"\n✅ {len(df_tracks)} Track-Einträge → data/raw/lastfm_toptracks.csv")
+print(f"\n {len(df_tracks)} Track-Einträge → data/raw/lastfm_toptracks.csv")
 print(f"   Artists mit Daten: {df_tracks['artist_name'].nunique()}")
