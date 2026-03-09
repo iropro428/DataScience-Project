@@ -1,21 +1,20 @@
-# Berechnet Streaming-Konzentrations-Metriken aus lastfm_toptracks.csv
-# Wird von join_data.py aufgerufen ODER standalone ausführbar
+# Calculates streaming concentration metrics from lastfm_toptracks.csv.
+# Can be called by join_data.py or executed as a standalone script.
 import pandas as pd
 import numpy as np
 import os
 
 def compute_concentration(df_tracks: pd.DataFrame) -> pd.DataFrame:
     """
-    Eingabe: DataFrame mit Spalten [artist_name, rank, playcount]
-    Ausgabe: DataFrame mit Konzentrations-Metriken pro Artist
-
-    Metriken:
-      top1_share   — Anteil Track #1 am Gesamt-Playcount (%)
-      top3_share   — Anteil Top-3 am Gesamt-Playcount (%)
-      top5_share   — Anteil Top-5 am Gesamt-Playcount (%)  ← Haupt-Metrik F2
-      hhi          — Herfindahl-Hirschman Index (0–10000), Maß für Konzentration
-      n_tracks     — Anzahl Tracks mit Daten
-      total_track_plays — Summe aller Track-Playcounts
+    Input: DataFrame with columns [artist_name, rank, playcount]
+    Output: DataFrame with concentration metrics per artist
+    Metrics:
+      top1_share — share of track #1 in the total playcount (%)
+      top3_share — share of the top 3 tracks in the total playcount (%)
+      top5_share — share of the top 5 tracks in the total playcount (%)  ← main metric F2
+      hhi        — Herfindahl–Hirschman Index (0–10000), a measure of concentration
+      n_tracks   — number of tracks with available data
+      total_track_plays — total sum of all track playcounts
     """
     results = []
 
@@ -27,21 +26,21 @@ def compute_concentration(df_tracks: pd.DataFrame) -> pd.DataFrame:
         if total == 0:
             continue
 
-        shares = grp["playcount"] / total  # Anteil jedes Tracks
+        shares = grp["playcount"] / total  # Propotion of each track
 
         top1  = grp[grp["rank"] <= 1]["playcount"].sum()
         top3  = grp[grp["rank"] <= 3]["playcount"].sum()
         top5  = grp[grp["rank"] <= 5]["playcount"].sum()
 
-        # HHI = Summe der quadrierten Marktanteile × 10000
-        # 0 = perfekte Gleichverteilung, 10000 = ein Track hat alles
+        # HHI = sum of squared market shares × 10000
+        # 0 = perfectly equal distribution, 10000 = one track accounts for everything
         hhi = float((shares ** 2).sum() * 10000)
 
         results.append({
             "artist_name":       artist,
             "top1_share":        round(top1 / total * 100, 2),
             "top3_share":        round(top3 / total * 100, 2),
-            "top5_share":        round(top5 / total * 100, 2),   # ← F2 x-Achse
+            "top5_share":        round(top5 / total * 100, 2),   # ← F2 x-axis
             "hhi":               round(hhi, 1),
             "n_tracks":          len(grp),
             "total_track_plays": int(total),
@@ -53,7 +52,7 @@ def compute_concentration(df_tracks: pd.DataFrame) -> pd.DataFrame:
 if __name__ == "__main__":
     path = "data/raw/lastfm_toptracks.csv"
     if not os.path.exists(path):
-        print(f"❌ {path} nicht gefunden — erst collect_toptracks.py ausführen")
+        print(f" {path} nicht gefunden — erst collect_toptracks.py ausführen")
         exit(1)
 
     df_tracks = pd.read_csv(path)
@@ -62,7 +61,7 @@ if __name__ == "__main__":
     os.makedirs("data/processed", exist_ok=True)
     df_conc.to_csv("data/processed/streaming_concentration.csv", index=False)
 
-    print(f"✅ {len(df_conc)} Artists → data/processed/streaming_concentration.csv")
+    print(f" {len(df_conc)} Artists → data/processed/streaming_concentration.csv")
     print(f"\nBeispiel:")
     print(df_conc.head(10).to_string())
     print(f"\nStatistik top5_share:")
