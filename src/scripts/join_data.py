@@ -176,11 +176,7 @@ if "latitude" in df_events.columns:
 city_freq = df_events.groupby(["artist_name", "city", "country"]).agg(**agg_dict).reset_index()
 city_freq["is_revisit"] = (city_freq["visits"] >= 2).astype(int)
 city_freq.to_csv("data/processed/f4_city_frequencies.csv", index=False)
-<<<<<<< HEAD
-print(f"  f4_city_frequencies.csv     → {len(city_freq)} Einträge")
-=======
 print(f"  f4_city_frequencies.csv     → {len(city_freq)} Entries")
->>>>>>> 73d1ee7cfef4d45a9bd08f49ba629403e7265cc0
 
 
 # ══════════════════════════════════════════════════════════════════════════
@@ -231,11 +227,7 @@ capitals_visited = (
     .sort_values("total_visits", ascending=False)
 )
 capitals_visited.to_csv("data/processed/f6_capitals_visited.csv", index=False)
-<<<<<<< HEAD
-print(f"  f6_capitals_visited.csv      → {len(capitals_visited)} Hauptstädte")
-=======
 print(f"  f6_capitals_visited.csv      → {len(capitals_visited)} Capital Cities")
->>>>>>> 73d1ee7cfef4d45a9bd08f49ba629403e7265cc0
 
 # F6 Detail 2: For each artist, how often is each capital city visited?
 capitals_per_artist = (
@@ -246,11 +238,7 @@ capitals_per_artist = (
     .reset_index()
 )
 capitals_per_artist.to_csv("data/processed/f6_capitals_per_artist.csv", index=False)
-<<<<<<< HEAD
-print(f"  f6_capitals_per_artist.csv   → {len(capitals_per_artist)} Einträge")
-=======
 print(f"  f6_capitals_per_artist.csv   → {len(capitals_per_artist)} Entries")
->>>>>>> 73d1ee7cfef4d45a9bd08f49ba629403e7265cc0
 
 
 # ══════════════════════════════════════════════════════════════════════════
@@ -276,11 +264,7 @@ if os.path.exists("data/raw/lastfm_toptracks.csv"):
         from compute_concentration import compute_concentration
 
         conc_df = compute_concentration(pd.read_csv("data/raw/lastfm_toptracks.csv"))
-<<<<<<< HEAD
-        print(f"  Streaming-Konzentration:     {len(conc_df)} Artists")
-=======
         print(f"  Streaming-concentration:     {len(conc_df)} Artists")
->>>>>>> 73d1ee7cfef4d45a9bd08f49ba629403e7265cc0
     except Exception as e:
         print(f"   compute_concentration: {e}")
 
@@ -308,11 +292,7 @@ df_final = df_final[df_final["total_events"] > 0].copy()
 df_final.to_csv("data/processed/final_dataset.csv", index=False)
 
 print(f"\n  {len(df_final)} Artists → data/processed/final_dataset.csv")
-<<<<<<< HEAD
-print(f"    {len(df_final.columns)} Spalten")
-=======
 print(f"    {len(df_final.columns)} Columns")
->>>>>>> 73d1ee7cfef4d45a9bd08f49ba629403e7265cc0
 
 # Schnellcheck F4 + F6
 for label, cols in [
