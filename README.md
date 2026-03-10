@@ -135,6 +135,7 @@ DataScience-Project/
 
 # Keys
 
+LASTFM_KEY
 TICKETMASTER_KEY
 
 ---
