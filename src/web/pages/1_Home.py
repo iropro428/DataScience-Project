@@ -115,13 +115,13 @@ for col, icon, title, color, border, bg, desc, qs, page in [
                     letter-spacing:.1em;color:#475569 !important;margin-bottom:10px;">
                     Research questions
                 </div>
-                {''.join(f"""<div style="display:flex;align-items:center;gap:8px;margin-bottom:7px;">
+                {''.join(f'''<div style="display:flex;align-items:center;gap:8px;margin-bottom:7px;">
                     <span style="background:{color}22;color:{color} !important;
                         border-radius:50%;width:20px;height:20px;display:flex;
                         align-items:center;justify-content:center;
                         font-size:.7rem;font-weight:700;flex-shrink:0;">{i + 1}</span>
                     <span style="color:#cbd5e1 !important;font-size:.82rem;">{q}</span>
-                </div>""" for i, q in enumerate(qs))}
+                </div>''' for i, q in enumerate(qs))}
             </div>
         </div>
         """, unsafe_allow_html=True)
