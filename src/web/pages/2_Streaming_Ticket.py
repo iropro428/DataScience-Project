@@ -23,14 +23,14 @@ apply_styles()
 render_navbar()
 apply_glossary_styles()
 
-# ── CSS ───────────────────────────────────────────────
+# CSS
 
 
-# ── Header ─────────────────────────────────────────────
+# Header 
 st.markdown("""
 <div class="page-header">
     <h1>🎟️ Streaming &amp; Ticket Power</h1>
-    <p>Wie stark haengt digitale Beliebtheit auf Last.fm mit dem Umfang und der Intensitaet von Tourneen zusammen?</p>
+    <p>How strongly is digital popularity on Last.fm related to the scale and intensity of touring?</p>
 </div>
 """, unsafe_allow_html=True)
 
@@ -39,7 +39,7 @@ st.markdown("""
     padding:24px 28px;margin-bottom:28px;">
     <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;
         letter-spacing:.12em;color:#475569 !important;margin-bottom:14px;">
-        Inhaltsübersicht — Forschungsfragen
+        Table of contents — Research questions
     </div>
     <div style="display:flex;flex-direction:column;gap:10px;">
         <a href="#frage-1" style="display:flex;align-items:center;gap:12px;
@@ -49,7 +49,7 @@ st.markdown("""
                 width:24px;height:24px;display:flex;align-items:center;justify-content:center;
                 font-size:.75rem;font-weight:700;flex-shrink:0;">1</span>
             <span style="color:#cbd5e1 !important;font-size:.9rem;">
-                Wie korreliert die Anzahl der Last.fm Listeners mit dem Umfang einer Tournee?
+                How does the number of Last.fm listeners correlate with the scale of an artist's tour, measured by the number of events scheduled?
             </span>
         </a>
         <a href="#frage-2" style="display:flex;align-items:center;gap:12px;
@@ -59,7 +59,7 @@ st.markdown("""
                 width:24px;height:24px;display:flex;align-items:center;justify-content:center;
                 font-size:.75rem;font-weight:700;flex-shrink:0;">2</span>
             <span style="color:#cbd5e1 !important;font-size:.9rem;">
-                Wie beeinflusst die Konzentration des Streamings auf wenige Top-Tracks die Tour-Intensitaet?
+                How does the concentration of an artist's streaming activity on a few top tracks relate to the intensity of their touring, measured by events per year?
             </span>
         </a>
         <a href="#frage-3" style="display:flex;align-items:center;gap:12px;
@@ -69,7 +69,7 @@ st.markdown("""
                 width:24px;height:24px;display:flex;align-items:center;justify-content:center;
                 font-size:.75rem;font-weight:700;flex-shrink:0;">3</span>
             <span style="color:#cbd5e1 !important;font-size:.9rem;">
-                Unterscheiden sich Last.fm Listeners zwischen Chart-Artists und Non-Chart-Artists?
+                How do current Last.fm listener counts differ between artists who appeared in Spotify Weekly Charts (Feb 2023–Feb 2026) and those who did not?
             </span>
         </a>
     </div>
@@ -79,7 +79,7 @@ st.markdown("""
 st.markdown('<div id="frage-1"></div>', unsafe_allow_html=True)
 
 
-# ── Load Data ──────────────────────────────────────────
+# Load Data 
 @st.cache_data
 def load_data():
     path = "data/processed/final_dataset.csv"
@@ -94,12 +94,12 @@ def load_data():
 df = load_data()
 
 if df is None:
-    st.error("⚠️ Dataset nicht gefunden. Bitte zuerst die Collection-Skripte ausführen.")
+    st.error("Dataset not found. Please run the collection scripts first.")
     st.code("python scripts/collect_artists_lastfm.py\npython scripts/collect_ticketmaster.py\npython scripts/join_data.py")
     st.stop()
 
 
-# ── Genre Helper ───────────────────────────────────────
+# Genre Helper
 def extract_genres(tags_str):
     if pd.isna(tags_str):
         return []
@@ -125,15 +125,15 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 st.markdown("""
-**Was messen wir?**
-Wir untersuchen, ob Künstler mit mehr Last.fm-Listeners auch tendenziell mehr Live-Konzerte
-veranstalten. Der Last.fm Listener Count gibt an, wie viele eindeutige Nutzer einen Künstler
-gehört haben — ein anerkannter akademischer Proxy für digitale Popularität.
-Tour-Skala = Gesamtzahl der Ticketmaster-Events von 2022–2026.
+**What are we measuring?**
+We examine whether artists with more Last.fm listeners also tend to perform more live concerts.
+The Last.fm listener count indicates how many unique users have listened to an artist —
+a recognized academic proxy for digital popularity.
+Tour scale = total number of Ticketmaster events from 2022–2026.
 
-**Warum ist das relevant?**  
-Wenn digitale Popularität live-Aktivität vorhersagt, bestätigt das, dass Streaming-Plattformen
-als Planungsgrundlage für die Live-Musikbranche dienen können.
+**Why is this relevant?**  
+If digital popularity predicts live activity, this supports the idea that streaming platforms
+can serve as a planning basis for the live music industry.
 """)
 
 st.divider()
@@ -141,21 +141,21 @@ st.divider()
 # ══════════════════════════════════════════════════════
 # GRAPH 1 — Scatterplot
 # ══════════════════════════════════════════════════════
-st.markdown('<div class="section-title">📈 Graph 1 — Scatterplot: Last.fm Listeners vs. Anzahl Events</div>',
+st.markdown('<div class="section-title">📈 Graph 1 — Scatterplot: Last.fm listeners vs. number of events</div>',
             unsafe_allow_html=True)
 
 st.markdown("""
-Ein **Scatterplot** zeigt die Beziehung zwischen zwei numerischen Variablen direkt.
-Jeder Punkt = ein Künstler. Die **Trendlinie (OLS-Regression)** zeigt die Richtung der Korrelation.
-Das schraffierte Band = 95%-Konfidenzintervall.
-Nutze die Filter, um Teilmengen der Daten zu erkunden und zu sehen wie sich r verändert.
+A **scatterplot** directly shows the relationship between two numerical variables.
+Each point = one artist. The **trend line (OLS regression)** shows the direction of the correlation.
+The shaded band = 95% confidence interval.
+Use the filters to explore subsets of the data and see how r changes.
 """)
 
-# ── Filter Controls ────────────────────────────────────
+# Filter Controls
 c1, c2 = st.columns(2)
 with c1:
     listener_range = st.slider(
-        "🎧 Listener-Bereich (Last.fm)",
+        "🎧 Listener range (Last.fm)",
         min_value=int(df["listeners"].min()),
         max_value=int(df["listeners"].max()),
         value=(int(df["listeners"].min()), int(df["listeners"].max())),
@@ -163,7 +163,7 @@ with c1:
     )
 with c2:
     event_max = st.slider(
-        "🎟️ Max. Events (Ausreißer entfernen)",
+        "🎟️ Max. events (remove outliers)",
         min_value=5,
         max_value=int(df["total_events"].max()),
         value=int(df["total_events"].max()),
@@ -173,11 +173,11 @@ with c2:
 c3, c4 = st.columns([3, 1])
 with c3:
     selected_genres = st.multiselect(
-        "🎵 Genre-Filter (leer = alle)",
+        "🎵 Genre filter (empty = all)",
         options=top_genres, default=[], key="g1_genres"
     )
 with c4:
-    show_labels = st.checkbox("Künstlernamen anzeigen", value=False, key="g1_lbl")
+    show_labels = st.checkbox("Show artist names", value=False, key="g1_lbl")
 
 # Apply filters
 df1 = df[
@@ -191,22 +191,22 @@ if selected_genres and "tags" in df1.columns:
         g in extract_genres(x) for g in selected_genres
     ))]
 
-# ── Stats ──────────────────────────────────────────────
+# Stats
 if len(df1) >= 5:
     r, p = stats.pearsonr(df1["listeners"], df1["total_events"])
     r2 = r ** 2
-    strength = "stark" if abs(r) >= 0.7 else "moderat" if abs(r) >= 0.4 else "schwach"
-    direction = "positiv" if r > 0 else "negativ"
+    strength = "strong" if abs(r) >= 0.7 else "moderate" if abs(r) >= 0.4 else "weak"
+    direction = "positive" if r > 0 else "negative"
 
     m1, m2, m3, m4 = st.columns(4)
-    m1.metric("n Künstler", len(df1))
+    m1.metric("n artists", len(df1))
     m2.metric("Pearson r", f"{r:.3f}")
-    m3.metric("R² (Varianz erklärt)", f"{r2:.1%}")
-    m4.metric("p-Wert", f"{p:.4f}",
-              delta="signifikant ✅" if p < 0.05 else "nicht signifikant ⚠️",
+    m3.metric("R² (variance explained)", f"{r2:.1%}")
+    m4.metric("p-value", f"{p:.4f}",
+              delta="significant " if p < 0.05 else "not significant ",
               delta_color="normal" if p < 0.05 else "inverse")
 
-    # ── Plot ───────────────────────────────────────────
+    # Plot 
     hover = {"listeners": ":,", "total_events": True}
     if "tags" in df1.columns:
         hover["tags"] = True
@@ -226,11 +226,11 @@ if len(df1) >= 5:
         color_continuous_scale="Viridis",
         text="artist_name" if show_labels else None,
         labels={
-            "listeners": "Last.fm Listeners",
-            "total_events": "Anzahl geplanter Events",
-            "tags": "Genre-Tags"
+            "listeners": "Last.fm listeners",
+            "total_events": "Number of scheduled events",
+            "tags": "Genre tags"
         },
-        title=f"Last.fm Listeners vs. Tour-Skala  |  r = {r:.3f}  |  n = {len(df1)} Künstler",
+        title=f"Last.fm listeners vs. tour scale  |  r = {r:.3f}  |  n = {len(df1)} artists",
         template="plotly_dark"
     )
     fig1.add_trace(go.Scatter(
@@ -262,67 +262,67 @@ if len(df1) >= 5:
     )
     st.plotly_chart(fig1, use_container_width=True)
 
-    # ── Interpretation ─────────────────────────────────
+    # Interpretation 
     st.markdown(f"""
     <div class="insight-card">
-        <h4>📊 Statistisches Ergebnis</h4>
+        <h4>📊 Statistical result</h4>
         <p>
-        Der Pearson-Korrelationskoeffizient beträgt <strong style="color:#1DB954">r = {r:.3f}</strong>
-        — das ist eine <strong>{strength}e {direction}e Korrelation</strong> zwischen Last.fm Listeners 
-        und Tour-Skala. Der R²-Wert von <strong style="color:#1DB954">{r2:.1%}</strong> bedeutet, 
-        dass der Listener-Count {r2:.1%} der Varianz in der Event-Anzahl erklärt.
-        Das Ergebnis ist <strong>{"statistisch signifikant ✅" if p < 0.05 else "nicht statistisch signifikant ⚠️"}</strong>
+        The Pearson correlation coefficient is <strong style="color:#1DB954">r = {r:.3f}</strong>
+        — this is a <strong>{strength} {direction} correlation</strong> between Last.fm listeners 
+        and tour scale. The R² value of <strong style="color:#1DB954">{r2:.1%}</strong> means 
+        that the listener count explains {r2:.1%} of the variance in the number of events.
+        The result is <strong>{"statistically significant " if p < 0.05 else "not statistically significant "}</strong>
         (p = {p:.4f}, n = {len(df1)}).
         </p>
     </div>
     <div class="insight-card">
         <h4>🔍 Interpretation</h4>
         <p>
-        Künstler mit mehr Last.fm Listeners tendieren dazu, 
-        {"mehr" if r > 0 else "weniger"} Konzerte zu veranstalten.
-        {"Dies unterstützt die Hypothese, dass digitale Popularität mit Live-Aktivität zusammenhängt."
+        Artists with more Last.fm listeners tend to perform 
+        {"more" if r > 0 else "fewer"} concerts.
+        {"This supports the hypothesis that digital popularity is related to live activity."
     if r > 0 and p < 0.05 and abs(r) >= 0.4 else
-    "Der Zusammenhang ist jedoch schwach — digitale Popularität allein prognostiziert die Tour-Skala nur bedingt."
+    "However, the relationship is weak — digital popularity alone only partially predicts tour scale."
     if abs(r) < 0.4 else
-    "Der Zusammenhang ist moderat — andere Faktoren wie Genre, Management und Budget spielen ebenfalls eine wichtige Rolle."}
+    "The relationship is moderate — other factors such as genre, management, and budget also play an important role."}
         <br><br>
-        <strong>Hinweis:</strong> Korrelation impliziert keine Kausalität. Ein hoher Listener Count 
-        könnte auch eine Folge vergangener Touren sein, nicht nur deren Vorhersage.
+        <strong>Note:</strong> Correlation does not imply causation. A high listener count 
+        could also be a result of past tours, not only a predictor of future ones.
         </p>
     </div>
     """, unsafe_allow_html=True)
 else:
-    st.warning("Zu wenig Datenpunkte nach Filterung. Filter bitte anpassen.")
+    st.warning("Too few data points after filtering. Please adjust the filters.")
 
 st.divider()
 
 # ══════════════════════════════════════════════════════
 # GRAPH 2 — Bar Chart (Quartile)
 # ══════════════════════════════════════════════════════
-st.markdown('<div class="section-title">📊 Graph 2 — Ø Events pro Listener-Quartil</div>',
+st.markdown('<div class="section-title">📊 Graph 2 — Avg. events per listener quartile</div>',
             unsafe_allow_html=True)
 
 st.markdown("""
-Um das Muster klarer zu zeigen, teilen wir Künstler in gleich große **Gruppen nach Listener-Count** auf.
-Das **Balkendiagramm** zeigt die durchschnittliche Event-Anzahl pro Gruppe.
-Im Gegensatz zum Scatterplot reduziert diese Ansicht Rauschen und macht strukturelle Trends
-sofort ablesbar — perfekt für eine zusammenfassende Aussage.
+To show the pattern more clearly, we divide artists into equally sized **groups based on listener count**.
+The **bar chart** shows the average number of events per group.
+Unlike the scatterplot, this view reduces noise and makes structural trends
+immediately visible — ideal for a summary statement.
 """)
 
 qa, qb = st.columns([1, 3])
 with qa:
     n_groups = st.select_slider(
-        "Anzahl Gruppen",
+        "Number of groups",
         options=[3, 4, 5, 6, 8, 10],
         value=4, key="g2_ng"
     )
-    agg = st.radio("Aggregation", ["Mittelwert", "Median"], index=0, key="g2_agg")
+    agg = st.radio("Aggregation", ["Mean", "Median"], index=0, key="g2_agg")
 
 try:
     df2 = df.copy()
     labels = [f"G{i + 1}" for i in range(n_groups)]
     df2["group"] = pd.qcut(df2["listeners"], q=n_groups, labels=labels, duplicates="drop")
-    agg_fn = "mean" if agg == "Mittelwert" else "median"
+    agg_fn = "mean" if agg == "Mean" else "median"
 
     grouped = df2.groupby("group", observed=True).agg(
         avg_events=("total_events", agg_fn),
@@ -343,16 +343,16 @@ try:
         ),
         customdata=grouped[["n_artists", "avg_listeners"]].values,
         hovertemplate=(
-            "<b>Gruppe %{x}</b><br>"
-            f"{agg} Events: %{{y:.1f}}<br>"
-            "Künstler: %{customdata[0]}<br>"
-            "Ø Listeners: %{customdata[1]:,.0f}<extra></extra>"
+            "<b>Group %{x}</b><br>"
+            f"{agg} events: %{{y:.1f}}<br>"
+            "Artists: %{customdata[0]}<br>"
+            "Avg. listeners: %{customdata[1]:,.0f}<extra></extra>"
         )
     ))
     fig2.update_layout(
-        title=f"{agg} Anzahl Events pro Listener-Gruppe  ({n_groups} Gruppen, G1=wenigste Listeners)",
-        xaxis_title="Listener-Gruppe",
-        yaxis_title=f"{agg} Events",
+        title=f"{agg} number of events per listener group  ({n_groups} groups, G1=fewest listeners)",
+        xaxis_title="Listener group",
+        yaxis_title=f"{agg} events",
         template="plotly_dark",
         paper_bgcolor="#0e0e0e", plot_bgcolor="#1a1a1a",
         font=dict(color="white"), height=400,
@@ -367,59 +367,59 @@ try:
     diff = gn_val - g1_val
     st.markdown(f"""
     <div class="insight-card">
-        <h4>📈 Gruppenvergleich</h4>
+        <h4>📈 Group comparison</h4>
         <p>
-        Künstler der Gruppe mit den <strong>meisten Listeners</strong> veranstalten im Schnitt
-        <strong style="color:#1DB954">{gn_val:.1f} Events</strong>, 
-        die Gruppe mit den wenigsten Listeners nur <strong>{g1_val:.1f} Events</strong> — 
-        eine Differenz von <strong style="color:#1DB954">{diff:+.1f} Events</strong>.
-        {"Das Muster ist über alle Gruppen konsistent und bestätigt den monotonen Zusammenhang." if diff > 2 else
-    "Der Unterschied zwischen den Gruppen ist gering — Listener-Count ist kein starker Prädiktor für Tour-Skala."}
+        Artists in the group with the <strong>highest number of listeners</strong> perform on average
+        <strong style="color:#1DB954">{gn_val:.1f} events</strong>, 
+        while the group with the fewest listeners performs only <strong>{g1_val:.1f} events</strong> — 
+        a difference of <strong style="color:#1DB954">{diff:+.1f} events</strong>.
+        {"The pattern is consistent across all groups and confirms a monotonic relationship." if diff > 2 else
+    "The difference between the groups is small — listener count is not a strong predictor of tour scale."}
         </p>
     </div>
     """, unsafe_allow_html=True)
 
 except Exception as e:
-    st.warning(f"Gruppierung fehlgeschlagen: {e}")
+    st.warning(f"Grouping failed: {e}")
 
 st.divider()
 
 # ══════════════════════════════════════════════════════
-# GRAPH 3 — Histogram (Verteilung)
+# GRAPH 3 — Histogram (Distribution)
 # ══════════════════════════════════════════════════════
-st.markdown('<div class="section-title">📉 Graph 3 — Verteilung der Last.fm Listeners</div>',
+st.markdown('<div class="section-title">📉 Graph 3 — Distribution of Last.fm listeners</div>',
             unsafe_allow_html=True)
 
 st.markdown("""
-Bevor wir Korrelationen interpretieren, müssen wir die **Datenverteilung** verstehen.
-Ein **Histogramm** zeigt, wie viele Künstler in welchen Listener-Bereichen liegen.
-Eine stark schiefe Verteilung (wenige Superstars, viele Mid-Tier-Künstler) beeinflusst
-den Pearson-Koeffizienten und muss bei der Interpretation berücksichtigt werden.
+Before interpreting correlations, we need to understand the **data distribution**.
+A **histogram** shows how many artists fall into which listener ranges.
+A strongly skewed distribution (a few superstars, many mid-tier artists) affects
+the Pearson coefficient and must be considered in the interpretation.
 """)
 
 ha, hb = st.columns([1, 3])
 with ha:
-    n_bins = st.slider("Anzahl Bins", 10, 80, 30, key="g3_bins")
-    log_x = st.checkbox("Logarithmische X-Achse", value=False, key="g3_log")
-    show_rug = st.checkbox("Einzelpunkte (Rug-Plot)", value=False, key="g3_rug")
+    n_bins = st.slider("Number of bins", 10, 80, 30, key="g3_bins")
+    log_x = st.checkbox("Logarithmic X-axis", value=False, key="g3_log")
+    show_rug = st.checkbox("Individual points (rug plot)", value=False, key="g3_rug")
 
 with hb:
     x_data = np.log10(df["listeners"] + 1) if log_x else df["listeners"]
-    x_lab = "log₁₀(Last.fm Listeners)" if log_x else "Last.fm Listeners"
+    x_lab = "log₁₀(Last.fm listeners)" if log_x else "Last.fm listeners"
 
     fig3 = go.Figure()
     fig3.add_trace(go.Histogram(
-        x=x_data, nbinsx=n_bins, name="Künstler",
+        x=x_data, nbinsx=n_bins, name="Artists",
         marker=dict(color="#1DB954", opacity=0.8,
                     line=dict(width=0.5, color="#0e0e0e")),
-        hovertemplate="Listeners: %{x}<br>Anzahl: %{y}<extra></extra>"
+        hovertemplate="Listeners: %{x}<br>Count: %{y}<extra></extra>"
     ))
     if show_rug:
         fig3.add_trace(go.Scatter(
             x=x_data, y=[-2] * len(x_data), mode="markers",
             marker=dict(symbol="line-ns", size=8, color="#1DB954", opacity=0.3,
                         line=dict(width=1, color="#1DB954")),
-            name="Einzelkünstler", hoverinfo="skip"
+            name="Individual artists", hoverinfo="skip"
         ))
 
     med = float(np.median(x_data))
@@ -432,8 +432,8 @@ with hb:
                    annotation_font_color="#ff6b6b", annotation_position="top left")
 
     fig3.update_layout(
-        title="Verteilung der Last.fm Listeners über alle Künstler",
-        xaxis_title=x_lab, yaxis_title="Anzahl Künstler",
+        title="Distribution of Last.fm listeners across all artists",
+        xaxis_title=x_lab, yaxis_title="Number of artists",
         template="plotly_dark",
         paper_bgcolor="#0e0e0e", plot_bgcolor="#1a1a1a",
         font=dict(color="white"), height=380,
@@ -444,70 +444,70 @@ with hb:
 
 skew = float(pd.Series(df["listeners"]).skew())
 st.markdown(f"""<div class="insight-card">
-<h4>📐 Verteilungsanalyse</h4>
+<h4>📐 Distribution analysis</h4>
 <p>
-Die Verteilung ist <strong>{"stark" if abs(skew) > 1 else "moderat"} 
-{"rechtsschief" if skew > 0 else "linksschief"}</strong> (Schiefe = {skew:.2f}).
-Das ist typisch für Popularitätsdaten — wenige globale Superstars dominieren,
-während die Mehrheit der Künstler weit weniger Listeners hat.
-{"Die logarithmische Transformation (Checkbox oben) normalisiert diese Verteilung." if abs(skew) > 1 else ""}
+The distribution is <strong>{"strongly" if abs(skew) > 1 else "moderately"} 
+{"right-skewed" if skew > 0 else "left-skewed"}</strong> (skewness = {skew:.2f}).
+This is typical for popularity data — a few global superstars dominate,
+while the majority of artists have far fewer listeners.
+{"The logarithmic transformation (checkbox above) normalizes this distribution." if abs(skew) > 1 else ""}
 <br/>
-<strong>Implikation für die Korrelation:</strong>
-Wenige Ausreißer (Superstars) können den Pearson-r stark beeinflussen.
-Nutze den Slider in Graph 1, um extreme Ausreißer zu entfernen und zu beobachten,
-wie sich r verändert — das zeigt die Robustheit der Korrelation.
+<strong>Implication for the correlation:</strong>
+A few outliers (superstars) can strongly influence Pearson r.
+Use the slider in Graph 1 to remove extreme outliers and observe
+how r changes — this shows the robustness of the correlation.
 </p>
 </div>""", unsafe_allow_html=True)
 
 st.divider()
 
 # ══════════════════════════════════════════════════════
-# ZUSAMMENFASSUNG F1
+# SUMMARY F1
 # ══════════════════════════════════════════════════════
-st.markdown('<div class="section-title">Zusammenfassung — Research Question 1</div>',
+st.markdown('<div class="section-title">Summary — Research Question 1</div>',
             unsafe_allow_html=True)
 
 if len(df) >= 5:
     r_all, p_all = stats.pearsonr(df["listeners"], df["total_events"])
     r2_all = r_all ** 2
-    st_all = "stark" if abs(r_all) >= 0.7 else "moderat" if abs(r_all) >= 0.4 else "schwach"
+    st_all = "strong" if abs(r_all) >= 0.7 else "moderate" if abs(r_all) >= 0.4 else "weak"
 
     st.markdown(f"""
-    | Metrik | Wert |
+    | Metric | Value |
     |--------|------|
-    | Stichprobengröße (n) | {len(df)} Künstler |
+    | Sample size (n) | {len(df)} artists |
     | Pearson r | {r_all:.3f} |
     | R² | {r2_all:.1%} |
-    | p-Wert | {p_all:.4f} |
-    | Statistisch signifikant | {'Ja (p < 0,05) ✅' if p_all < 0.05 else 'Nein (p ≥ 0,05) ⚠️'} |
-    | Korrelationsstärke | {st_all.capitalize()} |
+    | p-value | {p_all:.4f} |
+    | Statistically significant | {'Yes (p < 0.05) ' if p_all < 0.05 else 'No (p ≥ 0.05) '} |
+    | Correlation strength | {st_all.capitalize()} |
     """)
 
     answer = (
-            f"Es besteht eine **{st_all}e {"positive" if r_all > 0 else "negative"} Korrelation** "
-            f"(r = {r_all:.3f}) zwischen Last.fm Listener Count und Tour-Skala. "
-            f"Der Listener Count erklärt ca. **{r2_all:.1%}** der Varianz in der Anzahl geplanter Events. "
-            + ("Dies bestätigt, dass digitale Popularität mit realer Tourplanung zusammenhängt."
+            f"There is a **{st_all} {'positive' if r_all > 0 else 'negative'} correlation** "
+            f"(r = {r_all:.3f}) between Last.fm listener count and tour scale. "
+            f"The listener count explains about **{r2_all:.1%}** of the variance in the number of scheduled events. "
+            + ("This confirms that digital popularity is related to real-world tour planning."
                if p_all < 0.05 and r_all > 0.3 else
-               "Der Zusammenhang ist jedoch statistisch schwach — weitere Faktoren müssen berücksichtigt werden.")
+               "However, the relationship is statistically weak — additional factors must be taken into account.")
     )
     st.markdown(f"""<div class="insight-card">
-        <h4>🎯 Antwort auf Research Question 1</h4>
+        <h4>🎯 Answer to Research Question 1</h4>
         <p>{answer}</p>
     </div>""", unsafe_allow_html=True)
 
 st.markdown("""<div class="methodology-note">
     <p>
-    <strong>Methodische Anmerkung:</strong> Last.fm Listener Counts wurden als statischer Snapshot (März 2026)
-    erhoben, da Spotify im Februar 2026 die follower- und popularity-Felder für Development-Mode-Apps deaktiviert hat.
-    Ticketmaster-Eventdaten umfassen Januar 2022–Dezember 2026. Die Analyse beschränkt sich auf Künstler
-    mit mindestens einem Event auf Ticketmaster und vorhandenen Last.fm-Daten.
+    <strong>Methodological note:</strong> Last.fm listener counts were collected as a static snapshot (March 2026),
+    because Spotify disabled follower and popularity fields for development-mode apps in February 2026.
+    Ticketmaster event data covers January 2022–December 2026. The analysis is restricted to artists
+    with at least one Ticketmaster event and available Last.fm data.
     </p>
 </div>""", unsafe_allow_html=True)
 
 st.markdown('<div id="frage-2"></div>', unsafe_allow_html=True)
 # ══════════════════════════════════════════════════════════════════════════
-# RESEARCH QUESTION 2 — Streaming-Konzentration vs. Tour-Intensität
+# RESEARCH QUESTION 2 — Streaming concentration vs. tour intensity
 # ══════════════════════════════════════════════════════════════════════════
 
 st.divider()
@@ -517,31 +517,31 @@ st.markdown("""<div class="rq-box">
     relate to the intensity of their touring, measured by events per year?</p>
 </div>""", unsafe_allow_html=True)
 
-st.markdown("""**Was messen wir?**
+st.markdown("""**What are we measuring?**
 
-**Streaming-Konzentration** = Anteil der Top-5-Tracks am Gesamt-Playcount eines Artists.
-Ein hoher Wert (z.B. 80%) bedeutet: Fast alle Streams kommen von 5 Songs — klassisches
-"One-Hit-Wonder"-Muster oder sehr enger Fanfokus.
-Ein niedriger Wert (z.B. 30%) bedeutet: Streams verteilen sich gleichmäßig über viele Tracks
-— ein breiteres, tieferes Katalog-Publikum.
+**Streaming concentration** = share of the top 5 tracks in an artist's total playcount.
+A high value (e.g. 80%) means that almost all streams come from 5 songs — a classic
+"one-hit wonder" pattern or a very narrow fan focus.
+A low value (e.g. 30%) means that streams are distributed more evenly across many tracks
+— indicating a broader and deeper catalog audience.
 
-**Tour-Intensität** = Anzahl Events im letzten Jahr (Ticketmaster, letzte 12 Monate).
+**Tour intensity** = number of events in the last year (Ticketmaster, last 12 months).
 
-**Hypothese:** Künstler mit breitem Katalog (niedrige Konzentration) touren intensiver,
-weil sie ein loyaleres Stammpublikum haben das regelmäßig wiederkommt. Künstler mit
-hoher Konzentration leben von viralen Hits — ihr Live-Publikum ist weniger stabil.
+**Hypothesis:** Artists with a broad catalog (low concentration) tour more intensively,
+because they have a more loyal core audience that returns regularly. Artists with
+high concentration rely on viral hits — their live audience is less stable.
 """)
 
-# ── Daten prüfen ───────────────────────────────────────────────────────────
+# prove data
 f2_required = ["top5_share", "events_last_year"]
 f2_missing = [c for c in f2_required if c not in df.columns]
 
 if f2_missing:
-    st.error(f"⚠️  Fehlende Spalten: {f2_missing}")
+    st.error(f"Missing columns: {f2_missing}")
     st.code("""
-# Ausführungsreihenfolge:
-python scripts/collect_toptracks.py    # Last.fm Top-Tracks holen
-python scripts/join_data.py            # Konzentration berechnen + joinen
+# Execution order:
+python scripts/collect_toptracks.py    # Fetch Last.fm top tracks
+python scripts/join_data.py            # Calculate concentration + join
     """)
     st.stop()
 
@@ -553,10 +553,10 @@ df2 = df2.dropna(subset=["top5_share", "events_last_year"])
 n_f2 = len(df2)
 pct_cov_f2 = n_f2 / len(df) * 100
 
-st.info(f"📊 {n_f2} Artists mit vollständigen F2-Daten ({pct_cov_f2:.0f}% des Datensatzes)")
+st.info(f"📊 {n_f2} artists with complete F2 data ({pct_cov_f2:.0f}% of the dataset)")
 
 if n_f2 < 10:
-    st.warning("Zu wenig Datenpunkte. Bitte `collect_toptracks.py` ausführen.")
+    st.warning("Too few data points. Please run `collect_toptracks.py`.")
     st.stop()
 
 st.divider()
@@ -564,46 +564,46 @@ st.divider()
 # ══════════════════════════════════════════════════════════════════════════
 # F2 — GRAPH 1: Scatterplot top5_share vs events_last_year
 # ══════════════════════════════════════════════════════════════════════════
-st.markdown('<div class="section-title">📈 Graph 1 — Scatterplot: Streaming-Konzentration vs. Tour-Intensität</div>',
+st.markdown('<div class="section-title">📈 Graph 1 — Scatterplot: Streaming concentration vs. tour intensity</div>',
             unsafe_allow_html=True
             )
-st.markdown("""Jeder Punkt = ein Künstler. X-Achse = Top-5-Anteil (Konzentration), Y-Achse =
-Events letztes Jahr (Tour-Intensität). Die OLS-Trendlinie zeigt die Richtung
-des Zusammenhangs. Hover über Punkte für Artist-Details.""")
+st.markdown("""Each point = one artist. X-axis = top-5 share (concentration), Y-axis =
+events in the last year (tour intensity). The OLS trend line shows the direction
+of the relationship. Hover over points for artist details.""")
 
 sc1, sc2, sc3 = st.columns([2, 1, 1])
 with sc1:
     conc_metric = st.radio(
-        "Konzentrations-Metrik (X-Achse)",
+        "Concentration metric (X-axis)",
         ["top5_share", "top3_share", "top1_share", "hhi"],
         index=0,
         horizontal=True,
         key="f2s_metric"
     )
     metric_labels = {
-        "top5_share": "Anteil Top-5 Tracks am Gesamt-Playcount (%)",
-        "top3_share": "Anteil Top-3 Tracks am Gesamt-Playcount (%)",
-        "top1_share": "Anteil Track #1 am Gesamt-Playcount (%)",
-        "hhi": "Herfindahl-Index (Konzentrationsmaß 0–10000)",
+        "top5_share": "Share of top 5 tracks in total playcount (%)",
+        "top3_share": "Share of top 3 tracks in total playcount (%)",
+        "top1_share": "Share of track #1 in total playcount (%)",
+        "hhi": "Herfindahl index (concentration measure 0–10000)",
     }
 with sc2:
-    log_y_s = st.checkbox("Log Y (Events)", value=False, key="f2s_logy")
-    show_names_s = st.checkbox("Namen anzeigen", value=False, key="f2s_names")
+    log_y_s = st.checkbox("Log Y (events)", value=False, key="f2s_logy")
+    show_names_s = st.checkbox("Show names", value=False, key="f2s_names")
 with sc3:
     ev_max = st.slider(
-        "Max. Events/Jahr",
+        "Max. events/year",
         5, int(df2["events_last_year"].max()) + 5,
         int(df2["events_last_year"].quantile(0.97)),
         key="f2s_evmax"
     )
 
 sel_genres_f2 = st.multiselect(
-    "🎵 Genre-Filter", options=top_genres, default=[], key="f2s_genres"
+    "🎵 Genre filter", options=top_genres, default=[], key="f2s_genres"
 )
 
-# Metrik prüfen
+# prove metric
 if conc_metric not in df2.columns:
-    st.warning(f"Metrik `{conc_metric}` nicht im Dataset — nur top5_share verfügbar.")
+    st.warning(f"Metric `{conc_metric}` not in dataset — only top5_share is available.")
     conc_metric = "top5_share"
 
 df2f = df2[df2["events_last_year"] <= ev_max].copy()
@@ -620,15 +620,15 @@ if len(df2f) >= 5:
 
     r_f2, p_f2 = stats.pearsonr(x_vals, y_vals)
     r2_f2 = r_f2 ** 2
-    strength_f2 = "stark" if abs(r_f2) >= 0.7 else "moderat" if abs(r_f2) >= 0.4 else "schwach"
-    direction_f2 = "negativ" if r_f2 < 0 else "positiv"
+    strength_f2 = "strong" if abs(r_f2) >= 0.7 else "moderate" if abs(r_f2) >= 0.4 else "weak"
+    direction_f2 = "negative" if r_f2 < 0 else "positive"
 
     m1, m2, m3, m4 = st.columns(4)
-    m1.metric("n Artists", len(df2f))
+    m1.metric("n artists", len(df2f))
     m2.metric("Pearson r", f"{r_f2:.3f}")
     m3.metric("R²", f"{r2_f2:.1%}")
-    m4.metric("p-Wert", f"{p_f2:.4f}",
-              delta="signifikant ✅" if p_f2 < 0.05 else "nicht signifikant ⚠️",
+    m4.metric("p-value", f"{p_f2:.4f}",
+              delta="significant " if p_f2 < 0.05 else "not significant ",
               delta_color="normal" if p_f2 < 0.05 else "inverse")
 
     plot_df2 = df2f.copy()
@@ -642,7 +642,7 @@ if len(df2f) >= 5:
     if "tags" in plot_df2.columns:
         hover_f2["tags"] = True
 
-    # Manuelle OLS-Trendlinie
+    # Manuel OLS-Trendline
     _c_sc = np.polyfit(plot_df2[conc_metric], plot_df2["y_plot"], 1)
     _x_sc = np.linspace(plot_df2[conc_metric].min(), plot_df2[conc_metric].max(), 200)
     _y_sc = np.polyval(_c_sc, _x_sc)
@@ -654,14 +654,14 @@ if len(df2f) >= 5:
         hover_name="artist_name",
         hover_data=hover_f2,
         color=conc_metric,
-        color_continuous_scale="RdYlGn_r",  # rot=hoch konzentriert, grün=breit
+        color_continuous_scale="RdYlGn_r",
         text="artist_name" if show_names_s else None,
         labels={
             conc_metric: metric_labels.get(conc_metric, conc_metric),
-            "y_plot": f"{'log₁₀(' if log_y_s else ''}Events letztes Jahr{')' if log_y_s else ''}",
+            "y_plot": f"{'log₁₀(' if log_y_s else ''}Events last year{')' if log_y_s else ''}",
         },
         title=(
-            f"Streaming-Konzentration vs. Tour-Intensität  "
+            f"Streaming concentration vs. tour intensity  "
             f"|  r = {r_f2:.3f}  |  n = {len(df2f)}"
         ),
         template="plotly_dark"
@@ -693,62 +693,62 @@ if len(df2f) >= 5:
     st.plotly_chart(fig_sc, use_container_width=True)
 
     st.markdown(f"""<div class="insight-card">
-        <h4>📊 Statistisches Ergebnis</h4>
+        <h4>📊 Statistical result</h4>
         <p>
         Pearson r = <strong style="color:#1DB954">{r_f2:.3f}</strong> →
-        <strong>{strength_f2}e {direction_f2}e Korrelation</strong> zwischen
-        Streaming-Konzentration und Tour-Intensität.
+        <strong>{strength_f2} {direction_f2} correlation</strong> between
+        streaming concentration and tour intensity.
         R² = <strong style="color:#1DB954">{r2_f2:.1%}</strong>,
         p = {p_f2:.4f} →
-        <strong>{"statistisch signifikant ✅" if p_f2 < 0.05 else "nicht signifikant ⚠️"}</strong>.
+        <strong>{"statistically significant " if p_f2 < 0.05 else "not significant "}</strong>.
         </p>
     </div>
     <div class="insight-card">
         <h4>🔍 Interpretation</h4>
         <p>
         {
-    f"Künstler mit <strong>niedrigerer Streaming-Konzentration</strong> (Streams verteilen sich breiter) touren intensiver — konsistent mit der Hypothese: ein tiefes Katalog-Publikum trägt die Tour."
+    f"Artists with <strong>lower streaming concentration</strong> (streams are distributed more broadly) tour more intensively — consistent with the hypothesis that a deep catalog audience supports touring."
     if r_f2 < -0.2 and p_f2 < 0.05 else
-    f"Künstler mit <strong>höherer Streaming-Konzentration</strong> touren intensiver — das könnte bedeuten: ein viraler Hit treibt auch mehr Live-Nachfrage."
+    f"Artists with <strong>higher streaming concentration</strong> tour more intensively — this could mean that a viral hit also drives higher live demand."
     if r_f2 > 0.2 and p_f2 < 0.05 else
-    "Die Streaming-Konzentration hängt kaum mit der Tour-Intensität zusammen. Beide Dimensionen sind weitgehend unabhängig — weder Katalog-Tiefe noch Hit-Konzentration ist ein verlässlicher Vorhersagefaktor für Touring-Aktivität."
+    "Streaming concentration is barely related to tour intensity. The two dimensions are largely independent — neither catalog depth nor hit concentration is a reliable predictor of touring activity."
     }
         <br><br>
-        <strong>Im Kontext des Gesamtprojekts:</strong>
-        Kombiniert mit F1 (Listeners → Skala der Tour) zeigt dieses Ergebnis ob die
-        <em>Qualität</em> der Streaming-Aktivität (breit vs. konzentriert) eine andere
-        Vorhersagekraft hat als die <em>Quantität</em> (Gesamtlistener).
+        <strong>In the context of the overall project:</strong>
+        Combined with F1 (listeners → tour scale), this result shows whether the
+        <em>quality</em> of streaming activity (broad vs. concentrated) has a different
+        predictive power than the <em>quantity</em> (total listeners).
         </p>
     </div>""", unsafe_allow_html=True)
 else:
-    st.warning("Zu wenig Datenpunkte nach Filterung.")
+    st.warning("Too few data points after filtering.")
 
 st.divider()
 
 # ══════════════════════════════════════════════════════════════════════════
-# F2 — GRAPH 2: Boxplot — Events/Jahr nach Konzentrations-Kategorie
+# F2 — GRAPH 2: Boxplot — Events/year by concentration category
 # ══════════════════════════════════════════════════════════════════════════
-st.markdown('<div class="section-title">📦 Graph 2 — Tour-Intensität nach Konzentrations-Kategorie (Box Plot)</div>',
+st.markdown('<div class="section-title">📦 Graph 2 — Tour intensity by concentration category (box plot)</div>',
             unsafe_allow_html=True
             )
-st.markdown("""Künstler werden in **Konzentrations-Kategorien** eingeteilt — von "Breites Repertoire"
-(viele Tracks tragen zum Streaming bei) bis "Hochkonzentriert" (wenige Tracks dominieren).
-Der **Box Plot** zeigt die Verteilung der Tour-Intensität pro Kategorie und macht
-strukturelle Unterschiede sichtbar die im Scatterplot untergehen.""")
+st.markdown("""Artists are grouped into **concentration categories** — from "broad repertoire"
+(many tracks contribute to streaming) to "highly concentrated" (a few tracks dominate).
+The **box plot** shows the distribution of tour intensity by category and makes
+structural differences visible that may be hidden in the scatterplot.""")
 
 bx1, bx2 = st.columns([1, 3])
 with bx1:
-    n_cats = st.select_slider("Anzahl Kategorien", [3, 4, 5], value=4, key="f2b_nc")
-    bx_metric = st.radio("Y-Achse", ["Events letztes Jahr", "Events gesamt"], key="f2b_ym")
+    n_cats = st.select_slider("Number of categories", [3, 4, 5], value=4, key="f2b_nc")
+    bx_metric = st.radio("Y-axis", ["Events last year", "Total events"], key="f2b_ym")
 
 df2b = df2.dropna(subset=["top5_share", "events_last_year", "total_events"]).copy()
-y_col_bx = "events_last_year" if bx_metric == "Events letztes Jahr" else "total_events"
+y_col_bx = "events_last_year" if bx_metric == "Events last year" else "total_events"
 
 try:
     cat_labels = {
-        3: ["🟢 Breites\nRepertoire", "🟡 Moderat\nkonzentriert", "🔴 Hochkon-\nzentriert"],
-        4: ["🟢 Breit", "🟡 Moderat", "🟠 Fokussiert", "🔴 Konzentriert"],
-        5: ["🟢 Sehr breit", "🟢 Breit", "🟡 Moderat", "🟠 Fokussiert", "🔴 Konzentriert"],
+        3: ["🟢 Broad\nrepertoire", "🟡 Moderately\nconcentrated", "🔴 Highly\nconcentrated"],
+        4: ["🟢 Broad", "🟡 Moderate", "🟠 Focused", "🔴 Concentrated"],
+        5: ["🟢 Very broad", "🟢 Broad", "🟡 Moderate", "🟠 Focused", "🔴 Concentrated"],
     }[n_cats]
 
     df2b["cat"] = pd.qcut(
@@ -767,8 +767,8 @@ try:
         fig_bx2.add_trace(go.Box(
             y=sub,
             name=f"{cat}<br><sub>n={len(sub)}</sub>",
-            marker_color=bx_colors[i],  # type: ignore
-            line_color=bx_colors[i],  # type: ignore
+            marker_color=bx_colors[i],
+            line_color=bx_colors[i],
             fillcolor=hex_rgba(bx_colors[i]),
             boxpoints="outliers",
             marker=dict(size=5, opacity=0.7),
@@ -786,10 +786,10 @@ try:
         from scipy.stats import kruskal as kruskal_test
 
         kw_stat, kw_p = kruskal_test(*kw_groups)
-        kw_str = f"Kruskal-Wallis H = {kw_stat:.2f}, p = {kw_p:.4f} → {'signifikant ✅' if kw_p < 0.05 else 'nicht signifikant ⚠️'}"
+        kw_str = f"Kruskal-Wallis H = {kw_stat:.2f}, p = {kw_p:.4f} → {'significant ' if kw_p < 0.05 else 'not significant '}"
 
     fig_bx2.update_layout(
-        title=f"Tour-Intensität nach Konzentrations-Kategorie — {bx_metric}",
+        title=f"Tour intensity by concentration category — {bx_metric}",
         yaxis_title=bx_metric,
         template="plotly_dark",
         paper_bgcolor="#0e0e0e", plot_bgcolor="#1a1a1a",
@@ -803,27 +803,27 @@ try:
 
     if kw_str:
         st.markdown(f"""<div class="insight-card">
-            <h4>📊 Statistischer Test (Kruskal-Wallis)</h4>
+            <h4>📊 Statistical test (Kruskal-Wallis)</h4>
             <p>{kw_str}<br>
-            <em>Nicht-parametrischer Test — robust bei schiefer Verteilung von Event-Counts.</em></p>
+            <em>Non-parametric test — robust for skewed event-count distributions.</em></p>
         </div>""", unsafe_allow_html=True)
 
 except Exception as e:
     with bx2:
-        st.warning(f"Box Plot Fehler: {e}")
+        st.warning(f"Box plot error: {e}")
 
 st.divider()
 
 # ══════════════════════════════════════════════════════════════════════════
-# F2 — GRAPH 3: Top-Track-Konzentration Profil (Beispiel-Artists)
+# F2 — GRAPH 3: Top-track concentration profile (example artists)
 # ══════════════════════════════════════════════════════════════════════════
-st.markdown('<div class="section-title">🎵 Graph 3 — Streaming-Profil: Top Artists im Vergleich</div>', unsafe_allow_html=True)
-st.markdown("""Ein **gestapeltes Balkendiagramm** zeigt für ausgewählte Künstler wie sich der
-Gesamt-Playcount auf ihre Top-Tracks verteilt. Das macht die Konzentrations-Metrik
-anschaulich: Man sieht direkt wer "Ein-Hit-Wonder" ist und wer auf einen
-breiten Katalog aufbaut.""")
+st.markdown('<div class="section-title">🎵 Graph 3 — Streaming profile: comparing top artists</div>', unsafe_allow_html=True)
+st.markdown("""A **stacked bar chart** shows how the total playcount of selected artists
+is distributed across their top tracks. This makes the concentration metric intuitive:
+you can immediately see who is a "one-hit wonder" and who builds on a
+broader catalog.""")
 
-# Artists für Profilgraph wählen — standardmäßig die 2 extremen + 2 mittlere
+# Select artists for profile graph — by default the 2 extremes + 2 middle ones
 if len(df2) >= 4:
     most_conc = df2.nlargest(2, "top5_share")["artist_name"].tolist()
     least_conc = df2.nsmallest(2, "top5_share")["artist_name"].tolist()
@@ -832,7 +832,7 @@ else:
     default_sel = df2["artist_name"].tolist()[:4]
 
 sel_artists = st.multiselect(
-    "Artists auswählen (4–8 empfohlen)",
+    "Select artists (4–8 recommended)",
     options=sorted(df2["artist_name"].tolist()),
     default=default_sel[:6],
     key="f2p_artists"
@@ -843,7 +843,7 @@ if sel_artists and os.path.exists("data/raw/lastfm_toptracks.csv"):
     df_tracks_sel = df_tracks_raw[df_tracks_raw["artist_name"].isin(sel_artists)].copy()
     df_tracks_sel["playcount"] = pd.to_numeric(df_tracks_sel["playcount"], errors="coerce")
 
-    n_top_show = st.slider("Top N Tracks anzeigen", 3, 10, 5, key="f2p_ntracks")
+    n_top_show = st.slider("Show top N tracks", 3, 10, 5, key="f2p_ntracks")
 
     fig_profile = go.Figure()
     track_colors = [
@@ -871,7 +871,7 @@ if sel_artists and os.path.exists("data/raw/lastfm_toptracks.csv"):
                 hovertemplate=(
                     f"<b>{artist}</b><br>"
                     f"Track: {row['track_name']}<br>"
-                    f"Anteil: {pct:.1f}%<br>"
+                    f"Share: {pct:.1f}%<br>"
                     f"Plays: {int(row['playcount']):,}<extra></extra>"
                 ),
                 showlegend=(artist == sel_artists[0]),
@@ -880,9 +880,9 @@ if sel_artists and os.path.exists("data/raw/lastfm_toptracks.csv"):
 
     fig_profile.update_layout(
         barmode="stack",
-        title=f"Top-{n_top_show}-Track Anteil am Gesamt-Playcount",
+        title=f"Top-{n_top_show} track share of total playcount",
         xaxis_title="Artist",
-        yaxis_title="Anteil am Gesamt-Playcount (%)",
+        yaxis_title="Share of total playcount (%)",
         yaxis=dict(range=[0, 100], gridcolor="#333"),
         template="plotly_dark",
         paper_bgcolor="#0e0e0e", plot_bgcolor="#1a1a1a",
@@ -892,67 +892,67 @@ if sel_artists and os.path.exists("data/raw/lastfm_toptracks.csv"):
     )
     st.plotly_chart(fig_profile, use_container_width=True)
 
-    # Tabelle: Konzentration + Events
+    # table: concentration + events
     tbl_data = df2[df2["artist_name"].isin(sel_artists)][
         ["artist_name", "top5_share", "top3_share", "top1_share", "events_last_year", "total_events"]
     ].sort_values("top5_share", ascending=False)
-    tbl_data.columns = ["Artist", "Top-5 %", "Top-3 %", "Top-1 %", "Events/Jahr", "Events gesamt"]
+    tbl_data.columns = ["Artist", "Top-5 %", "Top-3 %", "Top-1 %", "Events/year", "Total events"]
     st.dataframe(tbl_data.set_index("Artist").style.format({
         "Top-5 %": "{:.1f}",
         "Top-3 %": "{:.1f}",
         "Top-1 %": "{:.1f}",
-        "Events/Jahr": "{:.0f}",
-        "Events gesamt": "{:.0f}",
+        "Events/year": "{:.0f}",
+        "Total events": "{:.0f}",
     }).background_gradient(cmap="RdYlGn_r", subset=["Top-5 %"])
-                 .background_gradient(cmap="YlGn", subset=["Events/Jahr"]),
+                 .background_gradient(cmap="YlGn", subset=["Events/year"]),
                  use_container_width=True)
 else:
-    st.info("Keine Artists ausgewählt oder `lastfm_toptracks.csv` fehlt.")
+    st.info("No artists selected or `lastfm_toptracks.csv` is missing.")
 
-# ── Zusammenfassung F2 ─────────────────────────────────────────────────────
+# Summary F2 
 st.divider()
-st.markdown('<div class="section-title">Zusammenfassung — Research Question 2</div>', unsafe_allow_html=True)
+st.markdown('<div class="section-title">Summary — Research Question 2</div>', unsafe_allow_html=True)
 
 if len(df2f) >= 5:
     st.markdown(f"""
-    | Metrik | Wert |
+    | Metric | Value |
     |--------|------|
-    | Artists mit vollständigen F2-Daten | {n_f2} ({pct_cov_f2:.0f}%) |
-    | Konzentrations-Metrik | Top-5-Track Anteil am Gesamt-Playcount |
-    | Tour-Intensität | Events im letzten Jahr (Ticketmaster) |
+    | Artists with complete F2 data | {n_f2} ({pct_cov_f2:.0f}%) |
+    | Concentration metric | Top-5 track share of total playcount |
+    | Tour intensity | Events in the last year (Ticketmaster) |
     | Pearson r | {r_f2:.3f} |
     | R² | {r2_f2:.1%} |
-    | p-Wert | {p_f2:.4f} |
-    | Signifikant | {'Ja ✅' if p_f2 < 0.05 else 'Nein ⚠️'} |
+    | p-value | {p_f2:.4f} |
+    | Significant | {'Yes ' if p_f2 < 0.05 else 'No '} |
     """)
 
     st.markdown(f"""<div class="insight-card">
-        <h4>🎯 Antwort auf Research Question 2</h4>
+        <h4>🎯 Answer to Research Question 2</h4>
         <p>
-        Die Streaming-Konzentration (Top-5-Anteil) zeigt eine
-        <strong>{strength_f2}e {direction_f2}e Korrelation</strong>
-        (r = {r_f2:.3f}, R² = {r2_f2:.1%}) mit der Tour-Intensität.
+        Streaming concentration (top-5 share) shows a
+        <strong>{strength_f2} {direction_f2} correlation</strong>
+        (r = {r_f2:.3f}, R² = {r2_f2:.1%}) with tour intensity.
         {
-    "Das stützt die Hypothese: Künstler mit breitem, gleichmäßig verteiltem Streaming-Profil touren intensiver — ihr Publikum ist loyaler und folgt ihnen auf Tour." if r_f2 < -0.2 and p_f2 < 0.05 else
-    "Überraschend: hohe Konzentration geht mit mehr Events einher — mögliche Erklärung: ein viraler Hit erhöht kurzfristig auch die Live-Nachfrage." if r_f2 > 0.2 and p_f2 < 0.05 else
-    "Die Konzentration der Streaming-Aktivität ist kein signifikanter Vorhersagefaktor für Tour-Intensität. Die Art der Popularität (breit vs. konzentriert) spielt für die physische Touraktivität keine entscheidende Rolle."
+    "This supports the hypothesis: artists with a broad and evenly distributed streaming profile tour more intensively — their audience is more loyal and follows them on tour." if r_f2 < -0.2 and p_f2 < 0.05 else
+    "Surprisingly, higher concentration is associated with more events — one possible explanation is that a viral hit also increases short-term live demand." if r_f2 > 0.2 and p_f2 < 0.05 else
+    "The concentration of streaming activity is not a significant predictor of tour intensity. The nature of popularity (broad vs. concentrated) does not play a decisive role for physical touring activity."
     }
         <br><br>
-        <strong>Im Gesamtkontext:</strong> Verglichen mit F1 (Listeners → Events: quantitative
-        Größe der Popularität) zeigt F2 dass die <em>Struktur</em> der Streaming-Aktivität
-        {"eine ergänzende Vorhersagekraft hat." if p_f2 < 0.05 else "keinen zusätzlichen Erklärungswert bietet."}
+        <strong>In the overall context:</strong> Compared with F1 (listeners → events: quantitative
+        size of popularity), F2 shows that the <em>structure</em> of streaming activity
+        {"provides additional predictive power." if p_f2 < 0.05 else "does not provide additional explanatory value."}
         </p>
     </div>""", unsafe_allow_html=True)
 
 st.markdown("""<div class="methodology-note">
     <p>
-    <strong>Methodische Anmerkung:</strong>
-    Streaming-Konzentration = Anteil der Top-5-Tracks am Gesamt-Playcount
-    der von Last.fm zurückgegebenen Top-20-Tracks (<code>artist.getTopTracks</code>).
-    Die Metrik unterschätzt leicht die Konzentration falls ein Artist mehr als 20
-    relevante Tracks hat. Tour-Intensität = Anzahl Ticketmaster-Events der letzten
-    12 Monate (Stichtag März 2026). Ergänzend wurde der Herfindahl-Hirschman Index (HHI)
-    als strengeres Konzentrationsmaß berechnet (verfügbar in Graph 1 via Metrik-Auswahl).
+    <strong>Methodological note:</strong>
+    Streaming concentration = share of the top 5 tracks in the total playcount
+    of the top 20 tracks returned by Last.fm (<code>artist.getTopTracks</code>).
+    This metric slightly underestimates concentration if an artist has more than 20
+    relevant tracks. Tour intensity = number of Ticketmaster events in the last
+    12 months (reference date: March 2026). Additionally, the Herfindahl-Hirschman Index (HHI)
+    was calculated as a stricter concentration measure (available in Graph 1 via the metric selection).
     </p>
 </div>""", unsafe_allow_html=True)
 
@@ -968,20 +968,20 @@ st.markdown("""<div class="rq-box">
     in Spotify Weekly Charts (Feb&nbsp;2023–Feb&nbsp;2026) and those who did not?</p>
 </div>""", unsafe_allow_html=True)
 
-st.markdown("""**Warum diese Frage?**
-Spotify-Charts und Last.fm-Listeners sind zwei unabhängige Popularitäts-Signale
-von verschiedenen Plattformen. Wenn Chart-Artists systematisch mehr Last.fm-Listeners haben,
-deutet das auf **cross-platform Popularität** hin — digitale Popularität ist plattformübergreifend kohärent.
-Wenn nicht, haben die Plattformen unterschiedliche Nutzer-Ökosysteme.
+st.markdown("""**Why this question?**
+Spotify charts and Last.fm listeners are two independent popularity signals
+from different platforms. If chart artists systematically have more Last.fm listeners,
+this points to **cross-platform popularity** — digital popularity is coherent across platforms.
+If not, the platforms reflect different user ecosystems.
 
-**Hypothese:** Artists die im globalen Spotify Weekly Chart waren, haben signifikant
-mehr Last.fm Listeners — weil beide Metriken allgemeine Popularität messen.
+**Hypothesis:** Artists who appeared in the global Spotify Weekly Chart have significantly
+more Last.fm listeners — because both metrics measure general popularity.
 
-**Test-Methode:** Mann-Whitney U (nicht-parametrisch, robust gegenüber den
-stark rechtsschiefen Listener-Verteilungen).""")
+**Test method:** Mann-Whitney U (non-parametric, robust against the
+strongly right-skewed listener distributions).""")
 
 
-# ── F3 Daten laden ─────────────────────────────────────────────────────────
+# F3 load data
 @st.cache_data
 def load_f3_data():
     p = "data/processed/spotify_charts/chart_artists.csv"
@@ -993,7 +993,7 @@ def load_f3_data():
 charts_df = load_f3_data()
 
 if charts_df is None:
-    st.error("⚠️  `data/processed/spotify_charts/chart_artists.csv` fehlt.")
+    st.error("  `data/processed/spotify_charts/chart_artists.csv` is missing.")
     st.code("python scripts/process_spotify_charts.py", language="bash")
     st.stop()
 
@@ -1003,7 +1003,7 @@ df3 = df.copy()
 df3["artist_norm"] = df3["artist_name"].str.lower().str.strip()
 df3["was_on_chart"] = df3["artist_norm"].isin(set(charts_df["artist_norm"]))
 
-# Chart-Metriken joinen
+# join Chart-Metrics
 chart_merge_cols = [c for c in ["artist_norm", "total_chart_streams", "chart_weeks",
                                 "peak_position", "first_chart_date", "last_chart_date"]
                     if c in charts_df.columns]
@@ -1029,35 +1029,35 @@ if len(grp_c) >= 5 and len(grp_nc) >= 5:
 # KPIs
 st.divider()
 k1, k2, k3, k4, k5 = st.columns(5)
-k1.metric("Chart Artists", n_chart, delta=f"{n_chart / (n_chart + n_non_chart) * 100:.0f}% des Datasets")
-k2.metric("Non-Chart Artists", n_non_chart)
-k3.metric("Ø Listeners Chart", f"{mean_c:,.0f}")
-k4.metric("Ø Listeners Non-Chart", f"{mean_nc:,.0f}")
+k1.metric("Chart artists", n_chart, delta=f"{n_chart / (n_chart + n_non_chart) * 100:.0f}% of dataset")
+k2.metric("Non-chart artists", n_non_chart)
+k3.metric("Ø listeners chart", f"{mean_c:,.0f}")
+k4.metric("Ø listeners non-chart", f"{mean_nc:,.0f}")
 k5.metric("Ratio", f"{ratio:.1f}×",
-          delta="Chart höher" if ratio > 1 else "kein Unterschied",
+          delta="Chart higher" if ratio > 1 else "no difference",
           delta_color="normal" if ratio > 1 else "off")
 st.divider()
 
 # ══════════════════════════════════════════════════════════════════════════
-# F3 — GRAPH 1: Box / Violin Plot — Listeners nach Chart-Status
+# F3 — GRAPH 1: Box / Violin Plot — listeners by chart status
 # ══════════════════════════════════════════════════════════════════════════
-st.markdown('<div class="section-title">📦 Graph 1 — Listener-Verteilung: Chart vs. Non-Chart</div>', unsafe_allow_html=True)
-st.markdown("""Der **Box Plot** zeigt Median, Quartile und Ausreißer für beide Gruppen im direkten Vergleich.""")
+st.markdown('<div class="section-title">📦 Graph 1 — Listener distribution: chart vs. non-chart</div>', unsafe_allow_html=True)
+st.markdown("""The **box plot** shows the median, quartiles, and outliers for both groups in direct comparison.""")
 
 g1, g2 = st.columns([1, 3])
 with g1:
-    show_pts = st.checkbox("Punkte anzeigen", value=True, key="f3_pts")
+    show_pts = st.checkbox("Show points", value=True, key="f3_pts")
 
 df3_plot = df3.copy()
 df3_plot["Gruppe"] = df3_plot["was_on_chart"].map(
-    {True: "✅ Im Spotify Chart", False: "❌ Nicht im Chart"}
+    {True: "✅ In Spotify Chart", False: "❌ Not in Chart"}
 )
 df3_plot["listeners_plot"] = df3_plot["listeners"]
-grp_order = ["❌ Nicht im Chart", "✅ Im Spotify Chart"]
+grp_order = ["❌ Not in Chart", "✅ In Spotify Chart"]
 
 COLORS_F3 = {
-    "✅ Im Spotify Chart": ("#6366f1", "rgba(99,102,241,0.2)"),
-    "❌ Nicht im Chart": ("#94a3b8", "rgba(148,163,184,0.15)"),
+    "✅ In Spotify Chart": ("#6366f1", "rgba(99,102,241,0.2)"),
+    "❌ Not in Chart": ("#94a3b8", "rgba(148,163,184,0.15)"),
 }
 pts_mode = "all" if show_pts else "outliers"
 
@@ -1080,8 +1080,8 @@ for grp in grp_order:
     ))
 
 fig_f3g1.update_layout(
-    title="Last.fm Listeners — Chart vs. Non-Chart Artists",
-    xaxis_title="Last.fm Listeners",
+    title="Last.fm listeners — chart vs. non-chart artists",
+    xaxis_title="Last.fm listeners",
     template="plotly_dark",
     paper_bgcolor="#080b14", plot_bgcolor="#161c2d",
     font=dict(color="white"), height=380,
@@ -1099,25 +1099,25 @@ if u_p is not None:
     t_stat2, t_p2 = stats.ttest_ind(log_c2, log_nc2, equal_var=False)
     pooled_std2 = np.sqrt((log_c2.std() ** 2 + log_nc2.std() ** 2) / 2)
     cohens_d2 = (log_c2.mean() - log_nc2.mean()) / pooled_std2 if pooled_std2 > 0 else 0
-    eff_lbl2 = ("groß" if abs(cohens_d2) >= 0.8 else
-                "mittel" if abs(cohens_d2) >= 0.5 else
-                "klein" if abs(cohens_d2) >= 0.2 else "vernachlässigbar")
+    eff_lbl2 = ("large" if abs(cohens_d2) >= 0.8 else
+                "medium" if abs(cohens_d2) >= 0.5 else
+                "small" if abs(cohens_d2) >= 0.2 else "negligible")
 
     st.markdown(f"""<div class="insight-card">
-        <h4>📊 Statistische Tests</h4>
+        <h4>📊 Statistical tests</h4>
         <p>
         <strong>Mann-Whitney U</strong> = {u_stat:.0f} &nbsp;|&nbsp;
         p = <strong style="color:#818cf8">{u_p:.4f}</strong> &nbsp;→&nbsp;
-        <strong>{"Signifikant ✅" if u_p < 0.05 else "Nicht signifikant ⚠️"}</strong>
+        <strong>{"Significant " if u_p < 0.05 else "Not significant "}</strong>
         <br>
-        Welch's t-Test (log): t = {t_stat2:.3f} &nbsp;|&nbsp; p = {t_p2:.4f}
+        Welch's t-test (log): t = {t_stat2:.3f} &nbsp;|&nbsp; p = {t_p2:.4f}
         <br>
-        Cohen's d = {cohens_d2:.3f} → <strong>{eff_lbl2}e Effektstärke</strong>
+        Cohen's d = {cohens_d2:.3f} → <strong>{eff_lbl2} effect size</strong>
         <br><br>
-        Chart Artists haben Ø <strong style="color:#6366f1">{ratio:.1f}×</strong> mehr Last.fm Listeners.
+        Chart artists have on average <strong style="color:#6366f1">{ratio:.1f}×</strong> more Last.fm listeners.
         {
-    " Die Popularitäts-Niveaus sind plattformübergreifend konsistent — wer auf Spotify chartet, hat auch auf Last.fm eine größere Hörerschaft." if u_p < 0.05 and ratio > 1
-    else " Kein signifikanter Unterschied — Spotify-Charts und Last.fm-Listeners messen teilweise unterschiedliche Nutzer-Ökosysteme."
+    " The popularity levels are consistent across platforms — artists who chart on Spotify also have a larger audience on Last.fm." if u_p < 0.05 and ratio > 1
+    else " There is no significant difference — Spotify charts and Last.fm listeners partly reflect different user ecosystems."
     }
         </p>
     </div>""", unsafe_allow_html=True)
@@ -1125,21 +1125,21 @@ if u_p is not None:
 st.divider()
 
 # ══════════════════════════════════════════════════════════════════════════
-# F3 — GRAPH 2: Histogram overlay — Listener-Verteilung beider Gruppen
+# F3 — GRAPH 2: Histogram overlay — listener distribution of both groups
 # ══════════════════════════════════════════════════════════════════════════
-st.markdown('<div class="section-title">📊 Graph 2 — Verteilung der Listeners (Überlagerung)</div>', unsafe_allow_html=True)
-st.markdown("""Überlagertes Histogramm beider Gruppen auf log-Skala.
-Die Verschiebung der Chart-Verteilung nach rechts visualisiert den Listener-Vorsprung.""")
+st.markdown('<div class="section-title">📊 Graph 2 — Listener distribution (overlay)</div>', unsafe_allow_html=True)
+st.markdown("""Overlay histogram of both groups on a log scale.
+The shift of the chart distribution to the right visualizes the listener advantage.""")
 
 h1, h2 = st.columns([1, 3])
 with h1:
     n_bins_f3 = st.slider("Bins", 15, 60, 30, key="f3_bins")
-    norm_hist = st.checkbox("Normiert (Dichte)", value=True, key="f3_norm")
+    norm_hist = st.checkbox("Normalized (density)", value=True, key="f3_norm")
 
 hist_mode = "probability density" if norm_hist else ""
 
 fig_f3g2 = go.Figure()
-for grp, col in [("❌ Nicht im Chart", "#94a3b8"), ("✅ Im Spotify Chart", "#6366f1")]:
+for grp, col in [("❌ Not in Chart", "#94a3b8"), ("✅ In Spotify Chart", "#6366f1")]:
     sub = df3_plot[df3_plot["Gruppe"] == grp]["listeners_plot"].dropna()
     fig_f3g2.add_trace(go.Histogram(
         x=sub, name=grp,
@@ -1152,9 +1152,9 @@ for grp, col in [("❌ Nicht im Chart", "#94a3b8"), ("✅ Im Spotify Chart", "#6
 
 fig_f3g2.update_layout(
     barmode="overlay",
-    title="Listener-Verteilung — Chart vs. Non-Chart",
-    xaxis_title="Last.fm Listeners",
-    yaxis_title="Dichte" if norm_hist else "Anzahl Artists",
+    title="Listener distribution — chart vs. non-chart",
+    xaxis_title="Last.fm listeners",
+    yaxis_title="Density" if norm_hist else "Number of artists",
     template="plotly_dark",
     paper_bgcolor="#080b14", plot_bgcolor="#161c2d",
     font=dict(color="white"), height=380,
@@ -1171,20 +1171,20 @@ st.divider()
 # F3 — GRAPH 3: Scatterplot chart_weeks vs. listeners
 # ══════════════════════════════════════════════════════════════════════════
 if "chart_weeks" in df3.columns and df3["chart_weeks"].notna().sum() >= 5:
-    st.markdown('<div class="section-title">📈 Graph 3 — Chart-Intensität vs. Last.fm Listeners</div>',
+    st.markdown('<div class="section-title">📈 Graph 3 — Chart intensity vs. Last.fm listeners</div>',
                 unsafe_allow_html=True)
-    st.markdown("Nur Chart-Artists. Je länger ein Artist im Spotify-Chart war, desto mehr Last.fm-Listeners? " +
-                tt("OLS", "OLS-Trendlinie") + " zeigt den Zusammenhang.", unsafe_allow_html=True)
+    st.markdown("Chart artists only. The longer an artist stayed in the Spotify chart, the more Last.fm listeners they have? " +
+                tt("OLS", "OLS trend line") + " shows the relationship.", unsafe_allow_html=True)
 
     s1, s2 = st.columns([1, 3])
     with s1:
-        x_metric_f3 = st.radio("X-Achse",
+        x_metric_f3 = st.radio("X-axis",
                                ["chart_weeks", "total_chart_streams"],
                                index=0, key="f3_x",
-                               format_func=lambda x: {"chart_weeks": "Wochen im Chart",
-                                                      "total_chart_streams": "Gesamt-Streams"}[x])
+                               format_func=lambda x: {"chart_weeks": "Weeks in chart",
+                                                      "total_chart_streams": "Total streams"}[x])
         log_y_f3 = st.checkbox("Log Y", value=True, key="f3_logy")
-        lbl_f3 = st.checkbox("Namen", value=False, key="f3_lbl")
+        lbl_f3 = st.checkbox("Names", value=False, key="f3_lbl")
 
     df_sc3 = df3.dropna(subset=[x_metric_f3, "listeners"]).copy()
     df_sc3 = df_sc3[df_sc3["was_on_chart"]]
@@ -1199,10 +1199,10 @@ if "chart_weeks" in df3.columns and df3["chart_weeks"].notna().sum() >= 5:
 
         r2_f3 = r_f3 ** 2
         m1f3, m2f3, m3f3 = st.columns(3)
-        m1f3.metric("n Chart Artists", len(df_sc3))
+        m1f3.metric("n chart artists", len(df_sc3))
         m2f3.metric("Pearson r", f"{r_f3:.3f}")
-        m3f3.metric("p-Wert", f"{p_f3:.4f}",
-                    delta="signifikant ✅" if p_f3 < 0.05 else "nicht signifikant ⚠️",
+        m3f3.metric("p-value", f"{p_f3:.4f}",
+                    delta="significant " if p_f3 < 0.05 else "not significant ",
                     delta_color="normal" if p_f3 < 0.05 else "inverse")
 
         fig_f3g3 = px.scatter(
@@ -1215,9 +1215,9 @@ if "chart_weeks" in df3.columns and df3["chart_weeks"].notna().sum() >= 5:
             text="artist_name" if lbl_f3 else None,
             labels={
                 "x_plot": f"log₁₀({x_metric_f3.replace('_', ' ').title()})",
-                "y_plot": "log₁₀(Last.fm Listeners)" if log_y_f3 else "Last.fm Listeners",
+                "y_plot": "log₁₀(Last.fm listeners)" if log_y_f3 else "Last.fm listeners",
             },
-            title=f"Chart-Intensität vs. Listeners  |  r = {r_f3:.3f}  |  n = {len(df_sc3)}",
+            title=f"Chart intensity vs. listeners  |  r = {r_f3:.3f}  |  n = {len(df_sc3)}",
             template="plotly_dark",
         )
         fig_f3g3.add_trace(go.Scatter(
@@ -1245,33 +1245,33 @@ if "chart_weeks" in df3.columns and df3["chart_weeks"].notna().sum() >= 5:
     st.divider()
 
 # ══════════════════════════════════════════════════════════════════════════
-# F3 — Zusammenfassung
+# F3 — Summary
 # ══════════════════════════════════════════════════════════════════════════
-st.markdown('<div class="section-title">Zusammenfassung — Research Question 3</div>', unsafe_allow_html=True)
+st.markdown('<div class="section-title">Summary — Research Question 3</div>', unsafe_allow_html=True)
 
-st.markdown(f"""| Metrik | Wert |
+st.markdown(f"""| Metric | Value |
 |--------|------|
-| Chart Artists (Feb 2023–Feb 2026) | {n_chart} ({n_chart / (n_chart + n_non_chart) * 100:.0f}%) |
-| Non-Chart Artists | {n_non_chart} |
-| Ø Listeners Chart Artists | {mean_c:,.0f} |
-| Ø Listeners Non-Chart Artists | {mean_nc:,.0f} |
+| Chart artists (Feb 2023–Feb 2026) | {n_chart} ({n_chart / (n_chart + n_non_chart) * 100:.0f}%) |
+| Non-chart artists | {n_non_chart} |
+| Ø listeners chart artists | {mean_c:,.0f} |
+| Ø listeners non-chart artists | {mean_nc:,.0f} |
 | Ratio | {ratio:.1f}× |
-| Mann-Whitney U p-Wert | {f"{u_p:.4f}" if u_p is not None else "n/a"} |
-| Signifikant (α=0.05) | {"Ja ✅" if u_p is not None and u_p < 0.05 else "Nein ⚠️"} |""")
+| Mann-Whitney U p-value | {f"{u_p:.4f}" if u_p is not None else "n/a"} |
+| Significant (α=0.05) | {"Yes " if u_p is not None and u_p < 0.05 else "No "} |""")
 
 if u_p is not None:
     st.markdown(f"""<div class="insight-card">
-        <h4>🎯 Antwort auf Research Question 3</h4>
+        <h4>🎯 Answer to Research Question 3</h4>
         <p>
-        Artists die zwischen Feb 2023 und Feb 2026 im globalen Spotify Weekly Chart erschienen,
-        haben Ø <strong style="color:#818cf8">{ratio:.1f}×</strong> mehr Last.fm Listeners
+        Artists who appeared in the global Spotify Weekly Chart between Feb 2023 and Feb 2026
+        have on average <strong style="color:#818cf8">{ratio:.1f}×</strong> more Last.fm listeners
         ({mean_c:,.0f} vs. {mean_nc:,.0f}).
         <br><br>
-        Der Unterschied ist <strong>{"statistisch signifikant ✅" if u_p < 0.05 else "nicht signifikant ⚠️"}</strong>
+        The difference is <strong>{"statistically significant " if u_p < 0.05 else "not statistically significant "}</strong>
         (Mann-Whitney U, p = {u_p:.4f}).
         {
-    " Das stützt die Hypothese: digitale Popularität ist plattformübergreifend kohärent — Spotify-Charterfolg und Last.fm-Hörerschaft messen dasselbe Konstrukt aus unterschiedlichen Blickwinkeln." if u_p < 0.05
-    else " Das widerlegt die Hypothese: Spotify-Charts und Last.fm-Listeners messen unterschiedliche Fanbasen — die Plattform-Ökosysteme sind nur schwach gekoppelt."
+    " This supports the hypothesis: digital popularity is coherent across platforms — Spotify chart success and Last.fm audience size reflect the same construct from different angles." if u_p < 0.05
+    else " This rejects the hypothesis: Spotify charts and Last.fm listeners reflect different fan bases — the platform ecosystems are only weakly connected."
     }
         </p>
     </div>
@@ -1279,11 +1279,11 @@ if u_p is not None:
 
 st.markdown("""<div class="methodology-note">
     <p>
-    Chart-Zuordnung über Normalisierung der Künstlernamen (lowercase, trimmed).
-    Bei Kollaborationen wird jeder beteiligte Artist einzeln gezählt.
-    Zeitraum: 1. Februar 2023 – 28. Februar 2026 (globale Spotify Weekly Charts).
-    Last.fm Listener-Counts: Stand März 2026 (aktuell zum Zeitpunkt der Datenerhebung).
-    Mann-Whitney U bevorzugt gegenüber t-Test da Listener-Verteilungen stark rechtsschief sind.
+    Chart assignment is based on normalization of artist names (lowercase, trimmed).
+    In collaborations, each participating artist is counted separately.
+    Period: February 1, 2023 – February 28, 2026 (global Spotify Weekly Charts).
+    Last.fm listener counts: March 2026 snapshot (current at the time of data collection).
+    Mann-Whitney U is preferred over the t-test because listener distributions are strongly right-skewed.
     </p>
 </div>
 """, unsafe_allow_html=True)

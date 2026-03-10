@@ -16,7 +16,7 @@ apply_styles()
 render_navbar()
 apply_glossary_styles()
 
-# ── Daten laden ────────────────────────────────────────────────────────────
+# load data
 data_path = "data/processed/final_dataset.csv"
 if os.path.exists(data_path):
     df = pd.read_csv(data_path)
@@ -35,49 +35,50 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # ══════════════════════════════════════════════════════════════════════════
-# DATENSATZ-KENNZAHLEN
+# DATASET METRICS
 # ══════════════════════════════════════════════════════════════════════════
 m1, m2, m3, m4 = st.columns(4)
 for col, val, label in [
-    (m1, n_artists, "Analysierte Artists"),
-    (m2, n_events, "Konzert-Events"),
-    (m3, n_countries, "Laender abgedeckt"),
-    (m4, avg_listen, "Ø Last.fm Listeners"),
+    (m1, n_artists, "Artists analyzed"),
+    (m2, n_events, "Concert events"),
+    (m3, n_countries, "Countries covered"),
+    (m4, avg_listen, "Ø Last.fm listeners"),
 ]:
     col.metric(label, val)
 
 st.markdown("<br>", unsafe_allow_html=True)
 
 # ══════════════════════════════════════════════════════════════════════════
-# WAS WIR UNTERSUCHEN
+# WHAT WE ANALYZE
 # ══════════════════════════════════════════════════════════════════════════
-st.markdown('<div class="section-title">🔭 Was wir untersuchen</div>', unsafe_allow_html=True)
+st.markdown('<div class="section-title">🔭 What we analyze</div>', unsafe_allow_html=True)
 st.markdown("""<div style="
     background:#161c2d; border:1px solid #232840; border-radius:14px;
     padding:32px 36px; margin-bottom:32px; max-width:900px;
 ">
     <p style="color:#cbd5e1 !important;font-size:1rem;line-height:1.8;margin:0 0 16px 0;">
-        Streaming-Plattformen wie Last.fm und Spotify erzeugen taeglich Millionen von Datenpunkten —
-        Listener-Zahlen, Playcounts, Chart-Positionen. Doch wie gut korrelieren diese digitalen Signale
-        mit dem, was Kuenstler tatsaechlich auf der Buehne tun?
+        Streaming platforms such as Last.fm and Spotify generate millions of data points every day —
+        listener counts, play counts, and chart rankings. But how strongly do these digital signals
+        relate to what artists actually do on stage?
     </p>
     <p style="color:#cbd5e1 !important;font-size:1rem;line-height:1.8;margin:0 0 16px 0;">
-        Wir verbinden <strong style="color:#818cf8 !important;">Last.fm-Daten</strong> von 499 internationalen
-        Kuenstlern mit deren <strong style="color:#fbbf24 !important;">Ticketmaster-Konzertdaten</strong>
-        aus dem Zeitraum 2022–2026 und analysieren drei Kernbereiche:
-        die Verbindung zwischen Streaming-Popularitaet und Tourumfang,
-        geografische Muster von Tourneen, sowie zeitliche Strukturen der Konzertplanung.
+        We combine <strong style="color:#818cf8 !important;">Last.fm data</strong> from 499 international
+        artists with their <strong style="color:#fbbf24 !important;">Ticketmaster concert data</strong>
+        from 2022–2026 and analyze three core dimensions:
+        the relationship between streaming popularity and tour scale,
+        geographic patterns of touring activity, and temporal structures
+        of concert planning.
     </p>
     <p style="color:#94a3b8 !important;font-size:.9rem;line-height:1.6;margin:0;font-style:italic;">
-        Datenerhebung: Maerz 2026 · Analysezeitraum: Jan 2022 – Feb 2026 · 499 Artists · 9 Forschungsfragen
+        Data collection: March 2026 · Analysis period: Jan 2022 – Feb 2026 · 499 artists · 9 research questions
     </p>
 </div>
 """, unsafe_allow_html=True)
 
 # ══════════════════════════════════════════════════════════════════════════
-# DIE DREI UNTERTHEMEN — CARDS
+# THE THREE SUBTOPICS — CARDS
 # ══════════════════════════════════════════════════════════════════════════
-st.markdown('<div class="section-title">📂 Die drei Analysebereiche</div>', unsafe_allow_html=True)
+st.markdown('<div class="section-title">📂 The three analysis areas</div>', unsafe_allow_html=True)
 
 c1, c2, c3 = st.columns(3)
 
@@ -92,12 +93,13 @@ for col, icon, title, color, border, bg, desc, qs, page in [
             c1, "🎟️",
             "Streaming & Ticket Power",
             "#818cf8", "#2e3557", "#12153a",
-            "Korreliert digitale Beliebtheit mit dem Umfang einer Tournee? "
-            "Wir untersuchen ob Artists mit mehr Last.fm-Listeners groessere Touren spielen, "
-            "wie konzentriert ihr Streaming auf wenige Hits ist — und ob Spotify-Chart-Praesenz "
-            "mit mehr Last.fm-Listeners einhergeht.",
-            ["Listeners vs. Tour-Umfang", "Streaming-Konzentration vs. Tour-Intensitaet",
-             "Chart-Artists vs. Non-Chart"],
+            "Does digital popularity correlate with the scale of an artist's tour? "
+            "We analyze whether artists with more Last.fm listeners perform larger tours, "
+            "how concentrated their streaming activity is around a few hit songs — "
+            "and whether Spotify chart appearances are associated with higher "
+            "Last.fm listener counts.",
+            ["Listeners vs. tour scale", "Streaming concentration vs. tour intensity",
+             "Chart artists vs. non-chart artists"],
             "pages/2_Streaming_Ticket.py"
     )
 ]:
@@ -111,7 +113,7 @@ for col, icon, title, color, border, bg, desc, qs, page in [
             <div style="border-top:1px solid {border};padding-top:16px;">
                 <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;
                     letter-spacing:.1em;color:#475569 !important;margin-bottom:10px;">
-                    Forschungsfragen
+                    Research questions
                 </div>
                 {''.join(f"""<div style="display:flex;align-items:center;gap:8px;margin-bottom:7px;">
                     <span style="background:{color}22;color:{color} !important;
@@ -124,23 +126,23 @@ for col, icon, title, color, border, bg, desc, qs, page in [
         </div>
         """, unsafe_allow_html=True)
         st.markdown("<br>", unsafe_allow_html=True)
-        st.page_link(page, label=f"Zur Analyse →", use_container_width=True)
+        st.page_link(page, label=f"Go to analysis →", use_container_width=True)
 
 st.markdown("<br>", unsafe_allow_html=True)
 
 # ══════════════════════════════════════════════════════════════════════════
-# METHODIK (kompakt)
+# METHODOLOGY
 # ══════════════════════════════════════════════════════════════════════════
-st.markdown('<div class="section-title">🔬 Methodik im Ueberblick</div>', unsafe_allow_html=True)
+st.markdown('<div class="section-title">🔬 Methodology overview</div>', unsafe_allow_html=True)
 
 me1, me2, me3, me4 = st.columns(4)
 for col, icon, title, text in [
-    (me1, "📥", "Datenerhebung",
-     "Last.fm API fuer Popularity-Metriken, Ticketmaster fuer Konzertdaten, RestCountries fuer Hauptstaedte."),
-    (me2, "🔗", "Datenjoin",
-     "Verknuepfung ueber normalisierten Kuenstlernamen. 499 Artists mit vollstaendigen Daten in beiden Quellen."),
-    (me3, "📊", "Analysen", "Korrelationsanalysen, Mann-Whitney U, Kruskal-Wallis, OLS-Regression, Jaccard-Similarity."),
-    (me4, "🖥️", "Visualisierung", "Interaktive Plotly-Charts in Streamlit. Alle Grafiken filterbar und zoombar."),
+    (me1, "📥", "Data collection",
+     "Last.fm API for popularity metrics, Ticketmaster for concert data, RestCountries for capital city information, Spotify Charts for weekly chart data."),
+    (me2, "🔗", "Data integration",
+     "Datasets merged via normalized artist names. 499 artists with complete data across both sources."),
+    (me3, "📊", "Analyses", "Correlation analysis, Mann-Whitney U, Kruskal-Wallis, OLS regression, Jaccard similarity."),
+    (me4, "🖥️", "Visualization", "Interactive Plotly charts in Streamlit. All graphs are filterable and zoomable."),
 ]:
     with col:
         st.markdown(f"""<div style="background:#161c2d;border:1px solid #232840;border-radius:10px;
@@ -153,34 +155,3 @@ for col, icon, title, text in [
         """, unsafe_allow_html=True)
 
 st.markdown("<br>", unsafe_allow_html=True)
-
-# ══════════════════════════════════════════════════════════════════════════
-# FAZIT / PROJEKTANTWORT
-# ══════════════════════════════════════════════════════════════════════════
-st.markdown('<div class="section-title">💡 Was wir aus dem Projekt mitnehmen</div>', unsafe_allow_html=True)
-st.markdown("""<div style="
-    background:linear-gradient(135deg,#12153a 0%,#0f1a2e 100%);
-    border:1px solid #4338ca; border-radius:16px; padding:36px 40px;
-">
-    <p style="color:#f1f5f9 !important;font-size:1.05rem;font-weight:500;
-        line-height:1.8;margin:0 0 18px 0;">
-        Unsere Analysen zeigen: <strong style="color:#818cf8 !important;">
-        Digitale Streaming-Popularitaet und physische Tourneerealitaet
-        haengen zusammen — aber nicht so direkt wie man erwarten wuerde.</strong>
-    </p>
-    <p style="color:#94a3b8 !important;font-size:.95rem;line-height:1.8;margin:0 0 18px 0;">
-        Populaere Artists spielen zwar groessere Touren, aber die Streuung ist erheblich.
-        Geografisch bevorzugen Artists Hauptstaedte und kehren regelmaessig in
-        bewaehlte Staedte zurueck — was auf strategische Tourplanung hindeutet.
-        Die Uebereinstimmung zwischen Streaming-Laendern und Tour-Laendern
-        ist moderat: Kuenstler erschliessen aktiv neue Maerkte jenseits ihres
-        digitalen Footprints.
-    </p>
-    <p style="color:#94a3b8 !important;font-size:.95rem;line-height:1.8;margin:0;">
-        Streaming-Daten sind ein nuetzliches, aber unvollstaendiges Signal fuer
-        Tourneeentscheidungen. Weitere Faktoren wie Venue-Verfuegbarkeit,
-        Management-Strategie und regionale Marketingbudgets spielen ebenfalls
-        eine wesentliche Rolle.
-    </p>
-</div>
-""", unsafe_allow_html=True)
