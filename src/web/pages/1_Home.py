@@ -96,31 +96,10 @@ for col, icon, title, color, border, bg, desc, qs, page in [
             "Wir untersuchen ob Artists mit mehr Last.fm-Listeners groessere Touren spielen, "
             "wie konzentriert ihr Streaming auf wenige Hits ist — und ob Spotify-Chart-Praesenz "
             "mit mehr Last.fm-Listeners einhergeht.",
-            ["Listeners vs. Tour-Umfang", "Streaming-Konzentration vs. Tour-Intensitaet", "Chart-Artists vs. Non-Chart"],
+            ["Listeners vs. Tour-Umfang", "Streaming-Konzentration vs. Tour-Intensitaet",
+             "Chart-Artists vs. Non-Chart"],
             "pages/2_Streaming_Ticket.py"
-    ),
-    (
-            c2, "🗺️",
-            "Geographic Analysis",
-            "#fbbf24", "#3d3010", "#1a1500",
-            "Wohin gehen Kuenstler auf Tournee — und deckt sich das mit ihrer geografischen "
-            "Streaming-Popularitaet? Wir analysieren ob Kuenstler Staedte wiederholt besuchen, "
-            "wie viele Konzerte in Hauptstaedten stattfinden, und ob Streaming-Laender "
-            "und Tour-Laender uebereinstimmen.",
-            ["Revisit vs. neue Staedte", "Hauptstaedte vs. Nicht-Hauptstaedte", "Streaming-Laender vs. Tour-Laender"],
-            "pages/3_Geographic.py"
-    ),
-    (
-            c3, "📅",
-            "Market Time & Scheduling",
-            "#10b981", "#0d3020", "#051a10",
-            "Wann und wie planen Kuenstler ihre Auftritte? Wir untersuchen wie viele Tage "
-            "zwischen Shows liegen, ob populaere Kuenstler haeufiger am Wochenende spielen, "
-            "und wie weit im Voraus Tickets in Abhaengigkeit von der Popularitaet in den "
-            "Vorverkauf gehen.",
-            ["Tage zwischen Shows", "Wochenend-Konzente", "Vorverkaufs-Vorlaufzeit"],
-            "pages/4_Scheduling.py"
-    ),
+    )
 ]:
     with col:
         st.markdown(f"""<div style="{card_style.format(border=border, bg=bg)}">
@@ -156,8 +135,10 @@ st.markdown('<div class="section-title">🔬 Methodik im Ueberblick</div>', unsa
 
 me1, me2, me3, me4 = st.columns(4)
 for col, icon, title, text in [
-    (me1, "📥", "Datenerhebung", "Last.fm API fuer Popularity-Metriken, Ticketmaster fuer Konzertdaten, RestCountries fuer Hauptstaedte."),
-    (me2, "🔗", "Datenjoin", "Verknuepfung ueber normalisierten Kuenstlernamen. 499 Artists mit vollstaendigen Daten in beiden Quellen."),
+    (me1, "📥", "Datenerhebung",
+     "Last.fm API fuer Popularity-Metriken, Ticketmaster fuer Konzertdaten, RestCountries fuer Hauptstaedte."),
+    (me2, "🔗", "Datenjoin",
+     "Verknuepfung ueber normalisierten Kuenstlernamen. 499 Artists mit vollstaendigen Daten in beiden Quellen."),
     (me3, "📊", "Analysen", "Korrelationsanalysen, Mann-Whitney U, Kruskal-Wallis, OLS-Regression, Jaccard-Similarity."),
     (me4, "🖥️", "Visualisierung", "Interaktive Plotly-Charts in Streamlit. Alle Grafiken filterbar und zoombar."),
 ]:
