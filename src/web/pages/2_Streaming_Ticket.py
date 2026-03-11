@@ -126,14 +126,9 @@ st.markdown("""
 
 st.markdown("""
 **What are we measuring?**
-We examine whether artists with more Last.fm listeners also tend to perform more live concerts.
-The Last.fm listener count indicates how many unique users have listened to an artist —
-a recognized academic proxy for digital popularity.
-Tour scale = total number of Ticketmaster events from 2022–2026.
-
-**Why is this relevant?**  
-If digital popularity predicts live activity, this supports the idea that streaming platforms
-can serve as a planning basis for the live music industry.
+We examine whether artists with more Last.fm listeners also tend to have larger tours. Digital popularity is measured using the current number of Last.fm listeners. Tour scale is measured as the total number of Ticketmaster events found for each artist between 2022 and 2026.
+**Why is this relevant?**
+If digital reach is associated with more live events, this suggests that online popularity may be a useful indicator of real-world live demand.
 """)
 
 st.divider()
@@ -145,10 +140,8 @@ st.markdown('<div class="section-title">📈 Graph 1 — Scatterplot: Last.fm li
             unsafe_allow_html=True)
 
 st.markdown("""
-A **scatterplot** directly shows the relationship between two numerical variables.
-Each point = one artist. The **trend line (OLS regression)** shows the direction of the correlation.
-The shaded band = 95% confidence interval.
-Use the filters to explore subsets of the data and see how r changes.
+Each point represents one artist. The x-axis shows the number of Last.fm listeners, and the y-axis shows the total number of Ticketmaster events. The green OLS trend line summarizes the overall direction of the relationship: if the line rises, artists with more listeners tend to have more events on average; if it falls, the opposite is true.
+The filters allow users to exclude outliers or focus on specific genres to see whether the pattern remains stable.
 """)
 
 # Filter Controls
@@ -303,10 +296,8 @@ st.markdown('<div class="section-title">📊 Graph 2 — Avg. events per listene
             unsafe_allow_html=True)
 
 st.markdown("""
-To show the pattern more clearly, we divide artists into equally sized **groups based on listener count**.
-The **bar chart** shows the average number of events per group.
-Unlike the scatterplot, this view reduces noise and makes structural trends
-immediately visible — ideal for a summary statement.
+For this graph, artists are sorted by their Last.fm listener count and then divided into equally sized groups. With four groups, these correspond to listener quartiles: G1 contains the 25% of artists with the fewest listeners, while G4 contains the 25% with the most listeners.
+For each group, we then calculate either the mean or median number of events. This makes it easier to see whether artists with higher digital popularity also tend to have more live events on average.
 """)
 
 qa, qb = st.columns([1, 3])
@@ -391,10 +382,7 @@ st.markdown('<div class="section-title">📉 Graph 3 — Distribution of Last.fm
             unsafe_allow_html=True)
 
 st.markdown("""
-Before interpreting correlations, we need to understand the **data distribution**.
-A **histogram** shows how many artists fall into which listener ranges.
-A strongly skewed distribution (a few superstars, many mid-tier artists) affects
-the Pearson coefficient and must be considered in the interpretation.
+This histogram shows how Last.fm listener counts are distributed across all artists in the dataset. It helps us assess whether a small number of very large artists dominate the data. A right-skewed distribution means that many artists have moderate or lower listener counts, while only a few have very high values.
 """)
 
 ha, hb = st.columns([1, 3])
@@ -454,8 +442,6 @@ while the majority of artists have far fewer listeners.
 <br/>
 <strong>Implication for the correlation:</strong>
 A few outliers (superstars) can strongly influence Pearson r.
-Use the slider in Graph 1 to remove extreme outliers and observe
-how r changes — this shows the robustness of the correlation.
 </p>
 </div>""", unsafe_allow_html=True)
 
@@ -483,14 +469,47 @@ if len(df) >= 5:
     | Correlation strength | {st_all.capitalize()} |
     """)
 
+    abs_r = abs(r_all)
+
+    if abs_r < 0.1:
+        relationship_text = "no meaningful linear relationship"
+    elif abs_r < 0.3:
+        relationship_text = f"a weak {'positive' if r_all > 0 else 'negative'} relationship"
+    elif abs_r < 0.5:
+        relationship_text = f"a moderate {'positive' if r_all > 0 else 'negative'} relationship"
+    else:
+        relationship_text = f"a strong {'positive' if r_all > 0 else 'negative'} relationship"
+
+    if p_all < 0.05:
+        significance_text = "The result is statistically significant."
+    else:
+        significance_text = "The result is not statistically significant."
+
+    if abs_r < 0.1:
+        interpretation_text = (
+            "Artists with more Last.fm listeners do not systematically have more scheduled events. "
+            "In this analysis, digital popularity measured by Last.fm listener count alone is not a useful predictor of tour scale."
+        )
+    elif abs_r < 0.3:
+        interpretation_text = (
+            f"Artists with more Last.fm listeners tend to have "
+            f"{'more' if r_all > 0 else 'fewer'} scheduled events, "
+            f"but the relationship is weak."
+        )
+    else:
+        interpretation_text = (
+            f"Artists with more Last.fm listeners tend to have "
+            f"{'more' if r_all > 0 else 'fewer'} scheduled events, "
+            f"and the relationship is {'moderate' if abs_r < 0.5 else 'strong'}."
+        )
+
     answer = (
-            f"There is a **{st_all} {'positive' if r_all > 0 else 'negative'} correlation** "
-            f"(r = {r_all:.3f}) between Last.fm listener count and tour scale. "
-            f"The listener count explains about **{r2_all:.1%}** of the variance in the number of scheduled events. "
-            + ("This confirms that digital popularity is related to real-world tour planning."
-               if p_all < 0.05 and r_all > 0.3 else
-               "However, the relationship is statistically weak — additional factors must be taken into account.")
+        f"There is {relationship_text} between Last.fm listener count and tour scale in our dataset "
+        f"(r = {r_all:.3f}, p = {p_all:.4f}). "
+        f"{significance_text} "
+        f"{interpretation_text}"
     )
+
     st.markdown(f"""<div class="insight-card">
         <h4>🎯 Answer to Research Question 1</h4>
         <p>{answer}</p>
@@ -519,17 +538,11 @@ st.markdown("""<div class="rq-box">
 
 st.markdown("""**What are we measuring?**
 
-**Streaming concentration** = share of the top 5 tracks in an artist's total playcount.
-A high value (e.g. 80%) means that almost all streams come from 5 songs — a classic
-"one-hit wonder" pattern or a very narrow fan focus.
-A low value (e.g. 30%) means that streams are distributed more evenly across many tracks
-— indicating a broader and deeper catalog audience.
+**Streaming concentration** describes how strongly an artist’s total streaming activity is concentrated in only a few top tracks. A high Top-5 share means that a large proportion of all streams comes from only a small number of songs. A lower value means that streams are spread more broadly across the artist’s catalog.
 
-**Tour intensity** = number of events in the last year (Ticketmaster, last 12 months).
-
-**Hypothesis:** Artists with a broad catalog (low concentration) tour more intensively,
-because they have a more loyal core audience that returns regularly. Artists with
-high concentration rely on viral hits — their live audience is less stable.
+**Tour intensity** is measured as the number of Ticketmaster events in the last year.
+            
+**Hypothesis:** Artists with a broader streaming profile may tour more steadily or more intensively because their audience is less dependent on a small number of hit songs.
 """)
 
 # prove data
@@ -567,9 +580,9 @@ st.divider()
 st.markdown('<div class="section-title">📈 Graph 1 — Scatterplot: Streaming concentration vs. tour intensity</div>',
             unsafe_allow_html=True
             )
-st.markdown("""Each point = one artist. X-axis = top-5 share (concentration), Y-axis =
-events in the last year (tour intensity). The OLS trend line shows the direction
-of the relationship. Hover over points for artist details.""")
+st.markdown("""Each point represents one artist with complete data on both streaming concentration and recent touring activity. The x-axis shows the selected concentration metric, and the y-axis shows the number of events in the last year. The trend line indicates whether more concentrated streaming is associated with higher or lower tour intensity.
+Because only 44 artists have complete data for this analysis, small differences should be interpreted cautiously.
+""")
 
 sc1, sc2, sc3 = st.columns([2, 1, 1])
 with sc1:
@@ -731,10 +744,8 @@ st.divider()
 st.markdown('<div class="section-title">📦 Graph 2 — Tour intensity by concentration category (box plot)</div>',
             unsafe_allow_html=True
             )
-st.markdown("""Artists are grouped into **concentration categories** — from "broad repertoire"
-(many tracks contribute to streaming) to "highly concentrated" (a few tracks dominate).
-The **box plot** shows the distribution of tour intensity by category and makes
-structural differences visible that may be hidden in the scatterplot.""")
+st.markdown("""The categories are created automatically from the data by sorting artists by streaming concentration and splitting them into equally sized groups. The box plot then shows how event counts are distributed within each group, not just the average.
+""")
 
 bx1, bx2 = st.columns([1, 3])
 with bx1:
@@ -781,12 +792,26 @@ try:
         for c in cat_labels
         if len(df2b[df2b["cat"] == c]) > 1
     ]
-    kw_str = ""
+
+    kw_text = ""
     if len(kw_groups) >= 2:
         from scipy.stats import kruskal as kruskal_test
 
         kw_stat, kw_p = kruskal_test(*kw_groups)
-        kw_str = f"Kruskal-Wallis H = {kw_stat:.2f}, p = {kw_p:.4f} → {'significant ' if kw_p < 0.05 else 'not significant '}"
+
+        if kw_p < 0.05:
+            kw_text = (
+                f"The box plots suggest differences between concentration categories, and "
+                f"the Kruskal-Wallis test confirms that these group differences are statistically significant "
+                f"(H = {kw_stat:.2f}, p = {kw_p:.4f})."
+            )
+        else:
+            kw_text = (
+                f"The box plots overlap strongly across all concentration categories, and the median event counts remain fairly similar. "
+                f"This suggests that tour intensity does not differ systematically between broader and more concentrated streaming profiles. "
+                f"This visual impression is supported by the Kruskal-Wallis test, which finds no statistically significant difference "
+                f"between the groups (H = {kw_stat:.2f}, p = {kw_p:.4f})."
+            )
 
     fig_bx2.update_layout(
         title=f"Tour intensity by concentration category — {bx_metric}",
@@ -798,14 +823,14 @@ try:
         yaxis=dict(gridcolor="#333"),
         showlegend=False
     )
+
     with bx2:
         st.plotly_chart(fig_bx2, use_container_width=True)
 
-    if kw_str:
+    if kw_text:
         st.markdown(f"""<div class="insight-card">
-            <h4>📊 Statistical test (Kruskal-Wallis)</h4>
-            <p>{kw_str}<br>
-            <em>Non-parametric test — robust for skewed event-count distributions.</em></p>
+            <h4>📊 Interpretation and statistical test</h4>
+            <p>{kw_text}</p>
         </div>""", unsafe_allow_html=True)
 
 except Exception as e:
@@ -926,37 +951,78 @@ if len(df2f) >= 5:
     | Significant | {'Yes ' if p_f2 < 0.05 else 'No '} |
     """)
 
+    abs_r_f2 = abs(r_f2)
+
+    if abs_r_f2 < 0.1:
+        relationship_text_f2 = "no meaningful linear relationship"
+    elif abs_r_f2 < 0.3:
+        relationship_text_f2 = f"a weak {direction_f2} relationship"
+    elif abs_r_f2 < 0.5:
+        relationship_text_f2 = f"a moderate {direction_f2} relationship"
+    else:
+        relationship_text_f2 = f"a strong {direction_f2} relationship"
+
+    if abs_r_f2 < 0.1:
+        main_interpretation_f2 = (
+            f"There is {relationship_text_f2} between streaming concentration and tour intensity "
+            f"in this dataset (r = {r_f2:.3f}, p = {p_f2:.4f}). "
+            f"Artists with a more concentrated streaming profile do not systematically have more or fewer events "
+            f"than artists with a broader profile. In this analysis, streaming concentration is not a useful predictor "
+            f"of tour intensity."
+        )
+    elif p_f2 < 0.05 and r_f2 < 0:
+        main_interpretation_f2 = (
+            f"There is {relationship_text_f2} between streaming concentration and tour intensity "
+            f"in this dataset (r = {r_f2:.3f}, p = {p_f2:.4f}). "
+            f"Artists with a broader and more evenly distributed streaming profile tend to have more events."
+        )
+    elif p_f2 < 0.05 and r_f2 > 0:
+        main_interpretation_f2 = (
+            f"There is {relationship_text_f2} between streaming concentration and tour intensity "
+            f"in this dataset (r = {r_f2:.3f}, p = {p_f2:.4f}). "
+            f"Artists with a more concentrated streaming profile tend to have more events."
+        )
+    else:
+        main_interpretation_f2 = (
+            f"There is {relationship_text_f2} between streaming concentration and tour intensity "
+            f"in this dataset (r = {r_f2:.3f}, p = {p_f2:.4f}). "
+            f"However, the result is not statistically significant, so the observed pattern should be interpreted with caution."
+        )
+
+    if p_f2 < 0.05:
+        context_text_f2 = (
+            "In the broader project context, this suggests that the structure of streaming activity "
+            "(broad vs. concentrated) may add explanatory value for touring activity."
+        )
+    else:
+        context_text_f2 = (
+            "In the broader project context, this suggests that the structure of streaming activity "
+            "(broad vs. concentrated) does not appear to add meaningful explanatory value for touring activity "
+            "in this dataset."
+        )
+
     st.markdown(f"""<div class="insight-card">
         <h4>🎯 Answer to Research Question 2</h4>
         <p>
-        Streaming concentration (top-5 share) shows a
-        <strong>{strength_f2} {direction_f2} correlation</strong>
-        (r = {r_f2:.3f}, R² = {r2_f2:.1%}) with tour intensity.
-        {
-    "This supports the hypothesis: artists with a broad and evenly distributed streaming profile tour more intensively — their audience is more loyal and follows them on tour." if r_f2 < -0.2 and p_f2 < 0.05 else
-    "Surprisingly, higher concentration is associated with more events — one possible explanation is that a viral hit also increases short-term live demand." if r_f2 > 0.2 and p_f2 < 0.05 else
-    "The concentration of streaming activity is not a significant predictor of tour intensity. The nature of popularity (broad vs. concentrated) does not play a decisive role for physical touring activity."
-    }
+        {main_interpretation_f2}
         <br><br>
-        <strong>In the overall context:</strong> Compared with F1 (listeners → events: quantitative
-        size of popularity), F2 shows that the <em>structure</em> of streaming activity
-        {"provides additional predictive power." if p_f2 < 0.05 else "does not provide additional explanatory value."}
+        <strong>In the broader project context:</strong> {context_text_f2}
         </p>
     </div>""", unsafe_allow_html=True)
 
-st.markdown("""<div class="methodology-note">
-    <p>
-    <strong>Methodological note:</strong>
-    Streaming concentration = share of the top 5 tracks in the total playcount
-    of the top 20 tracks returned by Last.fm (<code>artist.getTopTracks</code>).
-    This metric slightly underestimates concentration if an artist has more than 20
-    relevant tracks. Tour intensity = number of Ticketmaster events in the last
-    12 months (reference date: March 2026). Additionally, the Herfindahl-Hirschman Index (HHI)
-    was calculated as a stricter concentration measure (available in Graph 1 via the metric selection).
-    </p>
-</div>""", unsafe_allow_html=True)
+    st.markdown("""<div class="methodology-note">
+        <p>
+        <strong>Methodological note:</strong>
+        Streaming concentration = share of the top 5 tracks in the total playcount
+        of the top 20 tracks returned by Last.fm (<code>artist.getTopTracks</code>).
+        This metric slightly underestimates concentration if an artist has more than 20
+        relevant tracks. Tour intensity = number of Ticketmaster events in the last
+        12 months (reference date: March 2026). Additionally, the Herfindahl-Hirschman Index (HHI)
+        was calculated as a stricter concentration measure (available in Graph 1 via the metric selection).
+        </p>
+    </div>""", unsafe_allow_html=True)
 
-st.markdown('<div id="frage-3"></div>', unsafe_allow_html=True)
+    st.markdown('<div id="frage-3"></div>', unsafe_allow_html=True)
 # ══════════════════════════════════════════════════════════════════════════
 # RESEARCH QUESTION 3 — Chart Artists vs. Non-Chart Artists
 # ══════════════════════════════════════════════════════════════════════════
@@ -978,7 +1044,9 @@ If not, the platforms reflect different user ecosystems.
 more Last.fm listeners — because both metrics measure general popularity.
 
 **Test method:** Mann-Whitney U (non-parametric, robust against the
-strongly right-skewed listener distributions).""")
+strongly right-skewed listener distributions). 
+
+**Spotify Weekly Charts** are weekly rankings of the most-streamed songs on Spotify. In our analysis, an artist is classified as a “Chart Artist” if they appeared at least once in the global Spotify Weekly Charts between February 2023 and February 2026. Rather than using every weekly chart, we sampled one representative chart week per month to retain broad coverage over time while keeping the dataset manageable.""")
 
 
 # F3 load data
@@ -1042,7 +1110,8 @@ st.divider()
 # F3 — GRAPH 1: Box / Violin Plot — listeners by chart status
 # ══════════════════════════════════════════════════════════════════════════
 st.markdown('<div class="section-title">📦 Graph 1 — Listener distribution: chart vs. non-chart</div>', unsafe_allow_html=True)
-st.markdown("""The **box plot** shows the median, quartiles, and outliers for both groups in direct comparison.""")
+st.markdown("""This box plot compares the distribution of Last.fm listener counts between Chart Artists and Non-Chart Artists. The center line marks the median, the box contains the middle 50% of values, and the points show individual artists or outliers.
+This allows us to compare not only the average level of popularity, but the full spread of listener counts in both groups.""")
 
 g1, g2 = st.columns([1, 3])
 with g1:
@@ -1050,14 +1119,14 @@ with g1:
 
 df3_plot = df3.copy()
 df3_plot["Gruppe"] = df3_plot["was_on_chart"].map(
-    {True: "✅ In Spotify Chart", False: "❌ Not in Chart"}
+    {True: "In Spotify Chart ✅", False: "Not in Chart ❌"}
 )
 df3_plot["listeners_plot"] = df3_plot["listeners"]
-grp_order = ["❌ Not in Chart", "✅ In Spotify Chart"]
+grp_order = ["Not in Chart ❌", "In Spotify Chart ✅"]
 
 COLORS_F3 = {
-    "✅ In Spotify Chart": ("#6366f1", "rgba(99,102,241,0.2)"),
-    "❌ Not in Chart": ("#94a3b8", "rgba(148,163,184,0.15)"),
+    "In Spotify Chart ✅": ("#24f803", "rgba(99,102,241,0.2)"),
+    "Not in Chart ❌": ("#fa0303", "rgba(148,163,184,0.15)"),
 }
 pts_mode = "all" if show_pts else "outliers"
 
@@ -1103,33 +1172,36 @@ if u_p is not None:
                 "medium" if abs(cohens_d2) >= 0.5 else
                 "small" if abs(cohens_d2) >= 0.2 else "negligible")
 
-    st.markdown(f"""<div class="insight-card">
-        <h4>📊 Statistical tests</h4>
-        <p>
-        <strong>Mann-Whitney U</strong> = {u_stat:.0f} &nbsp;|&nbsp;
-        p = <strong style="color:#818cf8">{u_p:.4f}</strong> &nbsp;→&nbsp;
-        <strong>{"Significant " if u_p < 0.05 else "Not significant "}</strong>
-        <br>
-        Welch's t-test (log): t = {t_stat2:.3f} &nbsp;|&nbsp; p = {t_p2:.4f}
-        <br>
-        Cohen's d = {cohens_d2:.3f} → <strong>{eff_lbl2} effect size</strong>
-        <br><br>
-        Chart artists have on average <strong style="color:#6366f1">{ratio:.1f}×</strong> more Last.fm listeners.
-        {
-    " The popularity levels are consistent across platforms — artists who chart on Spotify also have a larger audience on Last.fm." if u_p < 0.05 and ratio > 1
-    else " There is no significant difference — Spotify charts and Last.fm listeners partly reflect different user ecosystems."
-    }
-        </p>
-    </div>""", unsafe_allow_html=True)
+    effect_text = f"The effect size is {eff_lbl2.lower()} (Cohen's d = {cohens_d2:.3f}), " if cohens_d2 is not None else ""
+
+if u_p < 0.05:
+    rq3_test_text = (
+        f"The difference in Last.fm listener counts between Chart Artists and Non-Chart Artists is "
+        f"statistically significant (Mann-Whitney U = {u_stat:.0f}, p = {u_p:.4f}). "
+        f"On average, Chart Artists have about {ratio:.1f}× more Last.fm listeners. "
+        f"{effect_text}this means the effect is present, although the two distributions still overlap substantially."
+    )
+else:
+    rq3_test_text = (
+        f"The difference in Last.fm listener counts between Chart Artists and Non-Chart Artists is "
+        f"not statistically significant (Mann-Whitney U = {u_stat:.0f}, p = {u_p:.4f}). "
+        f"Although Chart Artists have about {ratio:.1f}× as many Last.fm listeners on average, "
+        f"the observed difference is not strong enough to conclude a robust group effect in this dataset."
+    )
+
+st.markdown(f"""<div class="insight-card">
+    <h4>📊 Statistical test and interpretation</h4>
+    <p>{rq3_test_text}</p>
+</div>""", unsafe_allow_html=True)
 
 st.divider()
 
 # ══════════════════════════════════════════════════════════════════════════
 # F3 — GRAPH 2: Histogram overlay — listener distribution of both groups
 # ══════════════════════════════════════════════════════════════════════════
-st.markdown('<div class="section-title">📊 Graph 2 — Listener distribution (overlay)</div>', unsafe_allow_html=True)
-st.markdown("""Overlay histogram of both groups on a log scale.
-The shift of the chart distribution to the right visualizes the listener advantage.""")
+st.markdown('<div class="section-title">📊 Graph 2 — Listener Distribution: Chart vs. Non-Chart Artists</div>', unsafe_allow_html=True)
+st.markdown("""This overlaid histogram compares the distribution of Last.fm listener counts for Chart Artists and Non-Chart Artists. It shows where the two groups are concentrated along the listener scale and whether one distribution is shifted toward higher values.
+If the Chart Artist distribution lies further to the right, this indicates that charting artists typically have higher Last.fm listener counts.""")
 
 h1, h2 = st.columns([1, 3])
 with h1:
@@ -1139,7 +1211,7 @@ with h1:
 hist_mode = "probability density" if norm_hist else ""
 
 fig_f3g2 = go.Figure()
-for grp, col in [("❌ Not in Chart", "#94a3b8"), ("✅ In Spotify Chart", "#6366f1")]:
+for grp, col in [("Not in Chart ❌", "#fa0303"), ("In Spotify Chart ✅", "#24f803")]:
     sub = df3_plot[df3_plot["Gruppe"] == grp]["listeners_plot"].dropna()
     fig_f3g2.add_trace(go.Histogram(
         x=sub, name=grp,
@@ -1173,8 +1245,8 @@ st.divider()
 if "chart_weeks" in df3.columns and df3["chart_weeks"].notna().sum() >= 5:
     st.markdown('<div class="section-title">📈 Graph 3 — Chart intensity vs. Last.fm listeners</div>',
                 unsafe_allow_html=True)
-    st.markdown("Chart artists only. The longer an artist stayed in the Spotify chart, the more Last.fm listeners they have? " +
-                tt("OLS", "OLS trend line") + " shows the relationship.", unsafe_allow_html=True)
+    st.markdown("This scatterplot includes only artists who appeared in the global Spotify Weekly Charts between February 2023 and February 2026. The x-axis shows either chart duration or total chart streams, depending on the selected setting, while the y-axis shows current Last.fm listener counts. The graph tests whether stronger chart performance within the group of Chart Artists is associated with higher cross-platform popularity on Last.fm",
+                unsafe_allow_html=True)
 
     s1, s2 = st.columns([1, 3])
     with s1:
@@ -1260,30 +1332,39 @@ st.markdown(f"""| Metric | Value |
 | Significant (α=0.05) | {"Yes " if u_p is not None and u_p < 0.05 else "No "} |""")
 
 if u_p is not None:
+    if u_p < 0.05:
+        rq3_answer = (
+            f"Artists who appeared in the global Spotify Weekly Charts between Feb 2023 and Feb 2026 "
+            f"have, on average, about {ratio:.1f}× more Last.fm listeners than Non-Chart Artists "
+            f"({mean_c:,.0f} vs. {mean_nc:,.0f}). "
+            f"The difference is statistically significant (Mann-Whitney U, p = {u_p:.4f}). "
+            f"This is consistent with the hypothesis that Spotify chart success and Last.fm listener counts "
+            f"capture related aspects of digital popularity, although the two groups still overlap substantially."
+        )
+    else:
+        rq3_answer = (
+            f"Artists who appeared in the global Spotify Weekly Charts between Feb 2023 and Feb 2026 "
+            f"have, on average, about {ratio:.1f}× as many Last.fm listeners as Non-Chart Artists "
+            f"({mean_c:,.0f} vs. {mean_nc:,.0f}). "
+            f"However, the difference is not statistically significant (Mann-Whitney U, p = {u_p:.4f}). "
+            f"In this dataset, Spotify chart status does not provide clear evidence of a robust difference "
+            f"in Last.fm listener counts between the two groups."
+        )
+
     st.markdown(f"""<div class="insight-card">
         <h4>🎯 Answer to Research Question 3</h4>
-        <p>
-        Artists who appeared in the global Spotify Weekly Chart between Feb 2023 and Feb 2026
-        have on average <strong style="color:#818cf8">{ratio:.1f}×</strong> more Last.fm listeners
-        ({mean_c:,.0f} vs. {mean_nc:,.0f}).
-        <br><br>
-        The difference is <strong>{"statistically significant " if u_p < 0.05 else "not statistically significant "}</strong>
-        (Mann-Whitney U, p = {u_p:.4f}).
-        {
-    " This supports the hypothesis: digital popularity is coherent across platforms — Spotify chart success and Last.fm audience size reflect the same construct from different angles." if u_p < 0.05
-    else " This rejects the hypothesis: Spotify charts and Last.fm listeners reflect different fan bases — the platform ecosystems are only weakly connected."
-    }
-        </p>
+        <p>{rq3_answer}</p>
     </div>
     """, unsafe_allow_html=True)
 
 st.markdown("""<div class="methodology-note">
     <p>
-    Chart assignment is based on normalization of artist names (lowercase, trimmed).
-    In collaborations, each participating artist is counted separately.
-    Period: February 1, 2023 – February 28, 2026 (global Spotify Weekly Charts).
-    Last.fm listener counts: March 2026 snapshot (current at the time of data collection).
-    Mann-Whitney U is preferred over the t-test because listener distributions are strongly right-skewed.
+    Chart assignment is based on normalized artist names (lowercase, trimmed). 
+    In collaborations, each credited artist is counted separately. 
+    The analysis uses sampled global Spotify Weekly Charts from February 2023 to February 2026, 
+    with one representative chart week per month. 
+    Last.fm listener counts are based on a March 2026 snapshot. 
+    Mann-Whitney U was used because listener distributions are strongly right-skewed.
     </p>
 </div>
 """, unsafe_allow_html=True)
