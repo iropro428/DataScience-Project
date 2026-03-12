@@ -6,6 +6,7 @@ import streamlit as st
 
 PAGES = [
     {"label": "Streaming & Ticket", "page": "pages/2_Streaming_Ticket.py", "icon": "🎟️"},
+    {"label": "Scheduling", "page": "pages/4_Scheduling.py", "icon": "📅"},
 ]
 
 NAV_CSS = """
@@ -96,11 +97,16 @@ def render_navbar():
     """Rendert die horizontale Navbar. Ersetzt render_nav()."""
     st.markdown(NAV_CSS, unsafe_allow_html=True)
 
-    cols = st.columns([2] + [1] * len(PAGES) + [4])
-    with cols[0]:
-        st.page_link("pages/1_Home.py", label="🎵 From Streams to Stages")
-    for i, page in enumerate(PAGES):
-        with cols[i+1]:
-            st.page_link(page["page"], label=f"{page['icon']} {page['label']}")
+    # Brand-Link (klickbar → Home) + Nav-Items
+    st.markdown("""
+    <div class="navbar-wrapper">
+        <a class="navbar-brand" href="/">&#127925; From Streams to Stages</a>
+    </div>
+    """, unsafe_allow_html=True)
 
+    # Nav-Items als Columns (direkt nach dem Brand-Bar)
+    cols = st.columns([1] * len(PAGES) + [4])  # letzter leerer Spacer
+    for i, page in enumerate(PAGES):
+        with cols[i]:
+            st.page_link(page["page"], label=f"{page['icon']} {page['label']}")
     st.markdown('<hr style="margin: 0 0 1.5rem 0; border-color: #232840;">', unsafe_allow_html=True)

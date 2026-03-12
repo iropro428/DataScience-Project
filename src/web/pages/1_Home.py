@@ -93,16 +93,26 @@ for col, icon, title, color, border, bg, desc, qs, page in [
             c1, "🎟️",
             "Streaming & Ticket Power",
             "#818cf8", "#2e3557", "#12153a",
-            "Does digital popularity correlate with the scale of an artist's tour? "
-            "We analyze whether artists with more Last.fm listeners perform larger tours, "
-            "how concentrated their streaming activity is around a few hit songs — "
-            "and whether Spotify chart appearances are associated with higher "
-            "Last.fm listener counts.",
-            ["Listeners vs. tour scale", "Streaming concentration vs. tour intensity",
-             "Chart artists vs. non-chart artists"],
+            "Korreliert digitale Beliebtheit mit dem Umfang einer Tournee? "
+            "Wir untersuchen ob Artists mit mehr Last.fm-Listeners groessere Touren spielen, "
+            "wie konzentriert ihr Streaming auf wenige Hits ist — und ob Spotify-Chart-Praesenz "
+            "mit mehr Last.fm-Listeners einhergeht.",
+            ["Listeners vs. Tour-Umfang", "Streaming-Konzentration vs. Tour-Intensitaet", "Chart-Artists vs. Non-Chart"],
             "pages/2_Streaming_Ticket.py"
-    )
+    ),
+    (
+            c3, "📅",
+            "Market Time & Scheduling",
+            "#10b981", "#0d3020", "#051a10",
+            "Wann und wie planen Kuenstler ihre Auftritte? Wir untersuchen wie viele Tage "
+            "zwischen Shows liegen, ob populaere Kuenstler haeufiger am Wochenende spielen, "
+            "und wie weit im Voraus Tickets in Abhaengigkeit von der Popularitaet in den "
+            "Vorverkauf gehen.",
+            ["Tage zwischen Shows", "Wochenend-Konzente", "Vorverkaufs-Vorlaufzeit"],
+            "pages/4_Scheduling.py"
+    ),
 ]:
+
     with col:
         st.markdown(f"""<div style="{card_style.format(border=border, bg=bg)}">
             <div style="font-size:2rem;margin-bottom:14px;">{icon}</div>

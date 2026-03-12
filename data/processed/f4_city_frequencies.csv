@@ -5,7 +5,6 @@ $uicideboy$,Sacramento,United States Of America,1,2026-10-02,2026-10-02,False,38
 2hollis,Inglewood,United States Of America,1,2026-08-02,2026-08-02,False,33.95371247,-118.3368854,0
 2hollis,London,Great Britain,1,2026-08-22,2026-08-22,True,51.53929,-0.04047,0
 2hollis,Queens,United States Of America,1,2026-06-05,2026-06-05,False,40.71634,-73.82583,0
-2hollis,San Antonio,United States Of America,1,2026-03-06,2026-03-06,False,29.42471628,-98.49110126,0
 2hollis,Tampere,Finland,1,2026-08-21,2026-08-21,False,61.49263,23.76842,0
 5 Seconds of Summer,Amsterdam,Netherlands,1,2026-04-10,2026-04-10,True,52.31395,4.93837,0
 5 Seconds of Summer,Anaheim,United States Of America,1,2026-06-27,2026-06-27,False,33.80780364,-117.87653112,0
@@ -25,7 +24,7 @@ $uicideboy$,Sacramento,United States Of America,1,2026-10-02,2026-10-02,False,38
 5 Seconds of Summer,Cincinnati,United States Of America,1,2026-07-27,2026-07-27,False,39.052082,-84.416862,0
 5 Seconds of Summer,Ciudad de México,Mexico,1,2026-09-09,2026-09-09,False,19.4015408,-99.0980606,0
 5 Seconds of Summer,Clarkston,United States Of America,1,2026-08-06,2026-08-06,False,42.75098483,-83.3802299,0
-5 Seconds of Summer,Cleveland,United States Of America,1,2026-06-09,2026-06-09,False,41.4967035,-81.6894825,0
+5 Seconds of Summer,Cleveland,United States Of America,1,2026-06-09,2026-06-09,False,41.492401,-81.671204,0
 5 Seconds of Summer,Cologne,Germany,1,2026-04-13,2026-04-13,False,50.93855,6.97988,0
 5 Seconds of Summer,Darien Center,United States Of America,1,2026-08-03,2026-08-03,False,42.91319987,-78.38933898,0
 5 Seconds of Summer,Denver,United States Of America,1,2026-08-22,2026-08-22,False,39.73246,-105.01428,0
@@ -88,7 +87,7 @@ A$AP Rocky,Brussels,Belgium,1,2026-08-25,2026-08-25,True,50.90095,4.34368,0
 A$AP Rocky,Calgary,Canada,1,2026-07-04,2026-07-04,False,51.0385626,-114.0524879,0
 A$AP Rocky,Charlotte,United States Of America,1,2026-06-12,2026-06-12,False,35.225222,-80.839921,0
 A$AP Rocky,Chicago,United States Of America,1,2026-05-27,2026-05-27,False,41.88124412,-87.67427375,0
-A$AP Rocky,Cleveland,United States Of America,1,2026-05-29,2026-05-29,False,41.492401,-81.671204,0
+A$AP Rocky,Cleveland,United States Of America,1,2026-05-29,2026-05-29,False,41.4967035,-81.6894825,0
 A$AP Rocky,Cologne,Germany,1,2026-09-08,2026-09-08,False,50.93855,6.97988,0
 A$AP Rocky,Dallas,United States Of America,1,2026-06-18,2026-06-18,False,32.79067196,-96.81081803,0
 A$AP Rocky,Detroit,United States Of America,1,2026-07-08,2026-07-08,False,42.341089,-83.055434,0
@@ -97,10 +96,10 @@ A$AP Rocky,Edmonton,Canada,1,2026-07-03,2026-07-03,False,53.546911,-113.497237,0
 A$AP Rocky,Fornebu,Norway,1,2026-09-20,2026-09-20,False,59.9022,10.62254,0
 A$AP Rocky,Glasgow,Great Britain,1,2026-09-04,2026-09-04,False,55.86087,-4.288154,0
 A$AP Rocky,Hamburg,Germany,1,2026-09-16,2026-09-16,False,53.58894,9.899,0
-A$AP Rocky,Houston,United States Of America,1,2026-06-20,2026-06-20,False,29.7520386,-95.3623133,0
+A$AP Rocky,Houston,United States Of America,1,2026-06-20,2026-06-20,False,29.759399,-95.362999,0
 A$AP Rocky,Inglewood,United States Of America,1,2026-06-27,2026-06-27,False,33.9583,-118.341868,0
 A$AP Rocky,København S,Denmark,1,2026-09-18,2026-09-18,False,55.62575,12.5737,0
-A$AP Rocky,Las Vegas,United States Of America,1,2026-06-26,2026-06-26,False,36.124401,-115.145103,0
+A$AP Rocky,Las Vegas,United States Of America,1,2026-06-26,2026-06-26,False,36.1023376,-115.1694962,0
 A$AP Rocky,London,Great Britain,1,2026-08-30,2026-08-30,True,51.501581,0.005519,0
 A$AP Rocky,Manchester,Great Britain,1,2026-09-05,2026-09-05,False,53.48661136,-2.1995797,0
 A$AP Rocky,Miami,United States Of America,1,2026-06-15,2026-06-15,False,25.781232,-80.187805,0
@@ -136,8 +135,7 @@ AC/DC,South Bend,United States Of America,1,2026-09-04,2026-09-04,False,41.69432
 AC/DC,Toronto,Canada,1,2026-09-16,2026-09-16,False,43.75197,-79.47707,0
 AC/DC,Vancouver,Canada,1,2026-08-13,2026-08-13,False,49.2760688,-123.1127117,0
 Addison Rae,Dublin,Ireland,1,2026-06-03,2026-06-03,True,53.34310255,-6.30004764,0
-Adele,Arlington,United States Of America,3,2026-04-02,2026-04-04,False,32.68074,-97.107349,1
-Adele,Brookfield,United States Of America,3,2026-03-06,2026-03-08,False,43.03523,-88.16302,1
+Adele,Arlington,United States Of America,3,2026-04-02,2026-04-04,False,0.0,0.0,1
 Adele,Pittsburgh,United States Of America,3,2026-03-13,2026-03-15,False,40.408945,-79.914301,1
 Adele,West Nyack,United States Of America,3,2026-04-17,2026-04-19,False,41.098096,-73.957775,1
 Aerosmith,Atlanta,United States Of America,1,2026-03-29,2026-03-29,False,33.758688,-84.391449,0
@@ -160,6 +158,7 @@ Air,Napa,United States Of America,1,2026-10-09,2026-10-09,False,38.25399,-122.27
 Air,Niagara Falls,Canada,2,2026-06-26,2026-06-27,False,43.08313014,-79.08403497,1
 Air,Prior Lake,United States Of America,1,2026-03-27,2026-03-27,False,44.7296288,-93.4749922,0
 Air,Saint Louis,United States Of America,1,2026-03-29,2026-03-29,False,38.53548802,-90.26579954,0
+Air,San Diego,United States Of America,1,2026-10-03,2026-10-03,False,32.7169815,-117.22362958,0
 Air,Schenectady,United States Of America,1,2026-05-28,2026-05-28,False,42.8158,-73.942001,0
 Air,Shipshewana,United States Of America,1,2026-08-01,2026-08-01,False,41.654099,-85.599403,0
 Air,Sugar Land,United States Of America,1,2026-04-10,2026-04-10,False,29.5665,-95.621399,0
@@ -192,7 +191,7 @@ Akon,Holmdel,United States Of America,1,2026-07-19,2026-07-19,False,40.410434,-7
 Akon,Inglewood,United States Of America,1,2026-08-21,2026-08-21,False,33.94432,-118.34285,0
 Akon,Kansas City,United States Of America,1,2026-08-07,2026-08-07,False,39.16288,-94.6368,0
 Akon,København S,Denmark,1,2026-05-24,2026-05-24,False,55.62575,12.5737,0
-Akon,Las Vegas,United States Of America,1,2026-08-14,2026-08-14,False,36.1023376,-115.1694962,0
+Akon,Las Vegas,United States Of America,1,2026-08-14,2026-08-14,False,36.124401,-115.145103,0
 Akon,Leeds,Great Britain,1,2026-04-30,2026-04-30,False,53.804616,-1.544073,0
 Akon,London,Great Britain,4,2026-05-08,2026-05-14,True,51.501581,0.005519,1
 Akon,Manchester,Great Britain,3,2026-05-01,2026-05-06,False,53.48661136,-2.1995797,1
@@ -283,11 +282,11 @@ America,Denver,United States Of America,1,2026-06-13,2026-06-13,False,39.744362,
 America,Fayetteville,United States Of America,1,2026-05-30,2026-05-30,False,33.47264,-84.50678,0
 America,Ft Lauderdale,United States Of America,1,2026-05-02,2026-05-02,False,26.1193,-80.149426,0
 America,Hershey,United States Of America,1,2026-05-09,2026-05-09,False,40.28510461,-76.64877823,0
-America,Highland,United States Of America,1,2026-03-07,2026-03-07,False,34.1353,-117.153198,0
 America,Louisville,United States Of America,1,2026-04-02,2026-04-02,False,38.253601,-85.749802,0
 America,Minneapolis,United States Of America,1,2026-04-23,2026-04-23,False,44.9768315,-93.2766876,0
 America,Nashville,United States Of America,1,2026-05-28,2026-05-28,False,36.167198,-86.783997,0
 America,Reno,United States Of America,1,2026-05-21,2026-05-21,False,39.5306921,-119.81531385,0
+America,San Diego,United States Of America,1,2026-10-24,2026-10-24,False,32.7169815,-117.22362958,0
 America,Sarasota,United States Of America,1,2026-05-01,2026-05-01,False,27.3396,-82.539597,0
 America,Seattle,United States Of America,1,2026-06-11,2026-06-11,False,47.6135664,-122.3319103,0
 America,Tysons,United States Of America,1,2026-06-20,2026-06-20,False,38.925348,-77.212058,0
@@ -338,14 +337,13 @@ Ariana Grande,London,Great Britain,10,2026-08-15,2026-09-01,True,51.501581,0.005
 Ariana Grande,Los Angeles,United States Of America,2,2026-06-13,2026-06-14,False,34.043003,-118.267253,1
 Ariana Grande,Montreal,Canada,3,2026-07-28,2026-07-31,False,45.496129,-73.570472,1
 Ariana Grande,Oakland,United States Of America,3,2026-06-06,2026-06-10,False,37.7515541,-122.2015715,1
-Ariana Grande,Sunrise,United States Of America,3,2026-06-30,2026-07-03,False,26.238701,-80.370499,1
+Ariana Grande,Sunrise,United States Of America,3,2026-06-30,2026-07-03,False,26.155362,-80.33023,1
 Artemas,Boston,United States Of America,1,2026-03-11,2026-03-11,False,42.365977,-71.0617,0
 Artemas,Miami Beach,United States Of America,1,2026-03-21,2026-03-21,False,25.792917,-80.13314,0
 Artemas,Montreal,Canada,1,2026-03-10,2026-03-10,False,45.5105348,-73.563372,0
 Artemas,New York,United States Of America,1,2026-03-14,2026-03-14,False,40.765202,-73.985298,0
 Artemas,Raleigh,United States Of America,1,2026-03-18,2026-03-18,False,35.815896,-78.619991,0
 Artemas,St Petersburg,United States Of America,1,2026-03-20,2026-03-20,False,27.771666,-82.636035,0
-Artemas,Toronto,Canada,1,2026-03-07,2026-03-07,False,43.66684147,-79.31351149,0
 Artemas,Washington,United States Of America,1,2026-03-17,2026-03-17,False,38.91795,-77.02373,0
 Ashnikko,Adelaide,Australia,1,2026-09-27,2026-09-27,False,-34.92326164,138.5939274,0
 Ashnikko,Atlanta,United States Of America,1,2026-05-02,2026-05-02,False,33.89024,-84.469717,0
@@ -465,7 +463,6 @@ Bad Omens,Derby,Great Britain,3,2026-06-10,2026-06-14,False,52.828337,-1.372481,
 Bad Omens,Dessel,Belgium,2,2026-06-20,2026-06-21,False,51.23257,5.07662,1
 Bad Omens,Glendale,United States Of America,1,2026-03-24,2026-03-24,False,33.531484,-112.26167,0
 Bad Omens,Inglewood,United States Of America,1,2026-03-26,2026-03-26,False,33.9583,-118.341868,0
-Bad Omens,Laval,Canada,1,2026-03-08,2026-03-08,False,45.555195,-73.722521,0
 Bad Omens,Mansfield,United States Of America,1,2026-07-18,2026-07-18,False,40.783852,-82.50264,0
 Bad Omens,Nashville,United States Of America,1,2026-03-17,2026-03-17,False,36.159949,-86.77857,0
 Bad Omens,Newark,United States Of America,1,2026-03-10,2026-03-10,False,40.73340555,-74.17121214,0
@@ -474,7 +471,6 @@ Bad Omens,Oklahoma City,United States Of America,1,2026-03-22,2026-03-22,False,3
 Bad Omens,Philadelphia,United States Of America,1,2026-03-13,2026-03-13,False,39.904551,-75.1736273,0
 Bad Omens,Raleigh,United States Of America,1,2026-03-16,2026-03-16,False,35.803242,-78.722936,0
 Bad Omens,San Antonio,United States Of America,1,2026-03-20,2026-03-20,False,29.4330386,-98.4337987,0
-Bad Omens,Toronto,Canada,1,2026-03-06,2026-03-06,False,43.6439254,-79.3783234,0
 Bad Omens,Warsaw,Poland,2,2026-06-18,2026-06-19,True,52.22497,20.92934,1
 Bee Gees,San Leandro,United States Of America,1,2026-05-31,2026-05-31,False,37.708592,-122.133066,0
 Benson Boone,Birmingham,Great Britain,1,2026-03-15,2026-03-15,False,52.479932,-1.914924,0
@@ -500,10 +496,8 @@ Billy Joel,Toronto,Canada,1,2026-03-14,2026-03-14,False,43.6417384,-79.3917447,0
 Black Eyed Peas,Milton Keynes,Great Britain,1,2026-06-28,2026-06-28,False,52.009341,-0.734484,0
 Blondie,York,Great Britain,1,2026-09-18,2026-09-18,False,53.9548326,-1.0938596,0
 Blood Orange,Atlanta,United States Of America,2,2026-03-09,2026-09-19,False,33.758688,-84.391449,1
-Blood Orange,Austin,United States Of America,1,2026-03-07,2026-03-07,False,30.2721,-97.742401,0
 Blood Orange,Biddinghuizen,Netherlands,1,2026-08-21,2026-08-21,False,52.43793,5.76792,0
 Blood Orange,Göteborg,Sweden,1,2026-08-15,2026-08-15,False,57.70126,11.96705,0
-Blood Orange,Houston,United States Of America,1,2026-03-06,2026-03-06,False,29.7628087,-95.3672891,0
 Blood Orange,Manchester,United States Of America,1,2026-06-12,2026-06-12,False,35.51218796,-86.06871796,0
 Blood Orange,Queens,United States Of America,1,2026-06-06,2026-06-06,False,40.71634,-73.82583,0
 Blood Orange,Zürich,Switzerland,1,2026-08-25,2026-08-25,False,47.3881,8.49989,0
@@ -571,7 +565,7 @@ Bruce Springsteen,Phoenix,United States Of America,1,2026-04-16,2026-04-16,False
 Bruce Springsteen,Pittsburgh,United States Of America,1,2026-05-19,2026-05-19,False,40.4388401,-79.9908551,0
 Bruce Springsteen,Portland,United States Of America,1,2026-04-03,2026-04-03,False,45.53118896,-122.66645813,0
 Bruce Springsteen,San Francisco,United States Of America,1,2026-04-13,2026-04-13,False,37.76797,-122.387464,0
-Bruce Springsteen,Sunrise,United States Of America,1,2026-04-23,2026-04-23,False,26.238701,-80.370499,0
+Bruce Springsteen,Sunrise,United States Of America,1,2026-04-23,2026-04-23,False,26.155362,-80.33023,0
 Bruce Springsteen,Washington,United States Of America,1,2026-05-27,2026-05-27,False,38.873005,-77.007412,0
 Bruno Mars,Amsterdam,Netherlands,4,2026-07-02,2026-07-07,True,0.0,0.0,1
 Bruno Mars,Arlington,United States Of America,2,2026-04-18,2026-04-19,False,32.747242,-97.083796,1
@@ -596,7 +590,7 @@ Bruno Mars,Madrid,Spain,2,2026-07-10,2026-07-11,True,0.0,0.0,1
 Bruno Mars,Miami,United States Of America,2,2026-09-19,2026-09-20,False,25.957928,-80.238866,1
 Bruno Mars,Milan,Italy,2,2026-07-14,2026-07-15,False,0.0,0.0,1
 Bruno Mars,Minneapolis,United States Of America,1,2026-05-13,2026-05-13,False,44.973617,-93.257528,0
-Bruno Mars,Nashville,United States Of America,1,2026-05-06,2026-05-06,False,36.164398,-86.767403,0
+Bruno Mars,Nashville,United States Of America,1,2026-05-06,2026-05-06,False,36.166208,-86.771413,0
 Bruno Mars,New Orleans,United States Of America,1,2026-09-16,2026-09-16,False,29.950971,-90.081091,0
 Bruno Mars,Philadelphia,United States Of America,2,2026-09-01,2026-09-02,False,39.900706,-75.167406,1
 Bruno Mars,Pittsburgh,United States Of America,1,2026-08-29,2026-08-29,False,40.446093,-80.015884,0
@@ -620,13 +614,11 @@ Calvin Harris,Glasgow,Great Britain,2,2026-08-01,2026-08-02,False,55.825241,-4.2
 Calvin Harris,Manchester,Great Britain,2,2026-06-20,2026-06-21,False,53.53608707,-2.2545072,1
 Calvin Harris,Newport,Great Britain,2,2026-06-18,2026-06-20,False,50.706682,-1.289538,1
 Cardi B,Atlanta,United States Of America,2,2026-04-17,2026-04-18,False,33.757796,-84.394569,1
-Cardi B,Austin,United States Of America,1,2026-03-06,2026-03-06,False,30.280735,-97.730837,0
 Cardi B,Baltimore,United States Of America,1,2026-04-04,2026-04-04,False,39.288494,-76.6187,0
 Cardi B,Boston,United States Of America,1,2026-04-02,2026-04-02,False,42.365841,-71.060724,0
 Cardi B,Charlotte,United States Of America,1,2026-04-12,2026-04-12,False,35.225222,-80.839921,0
 Cardi B,Chicago,United States Of America,1,2026-03-21,2026-03-21,False,41.88124412,-87.67427375,0
 Cardi B,Cincinnati,United States Of America,1,2026-03-19,2026-03-19,False,39.097929,-84.504088,0
-Cardi B,Dallas,United States Of America,1,2026-03-07,2026-03-07,False,32.79067196,-96.81081803,0
 Cardi B,Denver,United States Of America,1,2026-03-09,2026-03-09,False,39.74724,-105.010166,0
 Cardi B,Detroit,United States Of America,1,2026-03-15,2026-03-15,False,42.341089,-83.055434,0
 Cardi B,Hamilton,Canada,1,2026-03-31,2026-03-31,True,43.2599752,-79.8728598,0
@@ -638,13 +630,12 @@ Cardi B,New York,United States Of America,2,2026-03-25,2026-03-26,False,40.74970
 Cardi B,Newark,United States Of America,1,2026-03-28,2026-03-28,False,40.73340555,-74.17121214,0
 Cardi B,Philadelphia,United States Of America,1,2026-04-07,2026-04-07,False,39.904551,-75.1736273,0
 Cardi B,Raleigh,United States Of America,1,2026-04-11,2026-04-11,False,35.803242,-78.722936,0
-Cardi B,Sunrise,United States Of America,1,2026-04-14,2026-04-14,False,26.238701,-80.370499,0
+Cardi B,Sunrise,United States Of America,1,2026-04-14,2026-04-14,False,26.155362,-80.33023,0
 Cardi B,Toronto,Canada,1,2026-03-30,2026-03-30,False,43.6439254,-79.3783234,0
 Cardi B,Washington,United States Of America,1,2026-04-08,2026-04-08,False,38.897412,-77.020029,0
 Cavetown,Bristol,Great Britain,1,2026-03-15,2026-03-15,False,51.454142,-2.600849,0
 Cavetown,Brooklyn,United States Of America,1,2026-10-25,2026-10-25,False,40.69137302,-73.98124051,0
 Cavetown,Chicago,United States Of America,1,2026-09-27,2026-09-27,False,41.9063,-87.659,0
-Cavetown,Dublin,Ireland,2,2026-03-07,2026-03-08,True,53.34804959,-6.26185298,1
 Cavetown,Glasgow,Great Britain,1,2026-03-10,2026-03-10,False,55.855063,-4.236938,0
 Cavetown,London,Great Britain,2,2026-03-19,2026-03-20,True,51.5397,-0.142995,1
 Cavetown,Los Angeles,United States Of America,1,2026-10-08,2026-10-08,False,34.06141494,-118.30879207,0
@@ -681,7 +672,7 @@ Charlie Puth,Kansas City,United States Of America,1,2026-05-13,2026-05-13,False,
 Charlie Puth,London,Great Britain,1,2026-07-15,2026-07-15,True,51.490693,-0.224423,0
 Charlie Puth,Manchester,Great Britain,1,2026-07-22,2026-07-22,False,53.464386,-2.232225,0
 Charlie Puth,Minneapolis,United States Of America,1,2026-05-16,2026-05-16,False,44.975183,-93.263512,0
-Charlie Puth,Nashville,United States Of America,1,2026-06-09,2026-06-09,False,36.149399,-86.790001,0
+Charlie Puth,Nashville,United States Of America,1,2026-06-09,2026-06-09,False,36.159682,-86.771194,0
 Charlie Puth,New York,United States Of America,1,2026-05-29,2026-05-29,False,40.7497062,-73.9916006,0
 Charlie Puth,Orlando,United States Of America,1,2026-06-06,2026-06-06,False,28.6064557,-81.1985302,0
 Charlie Puth,Phoenix,United States Of America,1,2026-04-24,2026-04-24,False,33.448775,-112.079564,0
@@ -715,7 +706,7 @@ Chevelle,Glasgow,Great Britain,1,2026-07-11,2026-07-11,False,55.8504496,-4.25878
 Chevelle,Highland,United States Of America,1,2026-04-21,2026-04-21,False,34.1353,-117.153198,0
 Chevelle,Holmdel,United States Of America,1,2026-09-06,2026-09-06,False,40.410434,-74.1377399,0
 Chevelle,Kansas City,United States Of America,1,2026-09-24,2026-09-24,False,39.16288,-94.6368,0
-Chevelle,Las Vegas,United States Of America,1,2026-10-02,2026-10-02,False,36.087535,-115.174742,0
+Chevelle,Las Vegas,United States Of America,1,2026-10-02,2026-10-02,False,36.0853,-115.146599,0
 Chevelle,London,Great Britain,1,2026-07-17,2026-07-17,True,51.465355,-0.115176,0
 Chevelle,Manchester,Great Britain,1,2026-07-16,2026-07-16,False,53.4643707,-2.2853054,0
 Chevelle,Maryland Heights,United States Of America,1,2026-09-25,2026-09-25,False,38.7456419,-90.469956,0
@@ -747,7 +738,6 @@ Chris Isaak,Boulder,United States Of America,1,2026-03-10,2026-03-10,False,40.04
 Chris Isaak,Leicester,Great Britain,1,2026-07-08,2026-07-08,False,52.626216,-1.120134,0
 Chris Isaak,London,Great Britain,1,2026-07-05,2026-07-05,True,51.513008,-0.120258,0
 Chris Isaak,Manchester,Great Britain,1,2026-07-07,2026-07-07,False,53.475741,-2.244913,0
-Chris Isaak,Valley Center,United States Of America,1,2026-03-07,2026-03-07,False,33.26638607,-116.9544699,0
 Chris Isaak,Weert,Netherlands,1,2026-07-12,2026-07-12,False,0.0,0.0,0
 Chris Isaak,İstanbul,Turkey,1,2026-06-20,2026-06-20,False,41.0466423135735,28.98994383678517,0
 Chris Isaak,İzmir,Turkey,1,2026-06-16,2026-06-16,False,38.42886457201354,27.148272269662595,0
@@ -757,11 +747,11 @@ Christina Aguilera,Ciudad de México,Mexico,1,2026-03-17,2026-03-17,False,19.401
 Christina Aguilera,Durant,United States Of America,1,2026-03-14,2026-03-14,False,33.952206,-96.414088,0
 Clean Bandit,Milton Keynes,Great Britain,1,2026-06-27,2026-06-27,False,52.009341,-0.734484,0
 Coldplay,Derby,Great Britain,1,2026-06-20,2026-06-20,False,52.926209,-1.479575,0
+Coldplay,Hertford,Great Britain,1,2026-07-25,2026-07-25,False,,,0
 Coldplay,Leeds,Great Britain,1,2026-07-17,2026-07-17,False,53.809656,-1.570275,0
 Coldplay,Nuneaton,Great Britain,1,2026-12-18,2026-12-18,False,52.522554,-1.473177,0
 Coldplay,Southampton,Great Britain,1,2026-08-21,2026-08-21,False,50.8989811,-1.4004633,0
 Conan Gray,Amsterdam,Netherlands,1,2026-05-14,2026-05-14,True,52.31778,4.93636,0
-Conan Gray,Atlanta,United States Of America,1,2026-03-06,2026-03-06,False,33.757796,-84.394569,0
 Conan Gray,Auckland,New Zealand,1,2026-09-26,2026-09-26,False,-36.847021,174.77687,0
 Conan Gray,Berlin,Germany,1,2026-05-28,2026-05-28,True,52.54634,13.40574,0
 Conan Gray,Birmingham,Great Britain,1,2026-05-07,2026-05-07,False,52.453057,-1.720073,0
@@ -781,7 +771,6 @@ Conan Gray,London,Great Britain,3,2026-05-12,2026-07-12,True,51.507432,-0.165708
 Conan Gray,Madrid,Spain,1,2026-06-06,2026-06-06,True,40.386,-3.7385,0
 Conan Gray,Manchester,Great Britain,1,2026-05-09,2026-05-09,False,53.488164,-2.244066,0
 Conan Gray,Merksem (Antwerpen),Belgium,1,2026-05-15,2026-05-15,False,51.23024,4.44176,0
-Conan Gray,Orlando,United States Of America,1,2026-03-07,2026-03-07,False,28.539293,-81.383957,0
 Conan Gray,Ottawa,Canada,1,2026-07-15,2026-07-15,True,45.4281756,-75.7357305,0
 Conan Gray,Praha 9,Czech Republic,1,2026-05-31,2026-05-31,False,50.10479,14.49377,0
 Conan Gray,Sacramento,United States Of America,1,2026-03-18,2026-03-18,False,38.580372,-121.500231,0
@@ -972,9 +961,9 @@ Don Toliver,Denver,United States Of America,1,2026-07-05,2026-07-05,False,39.747
 Don Toliver,Detroit,United States Of America,1,2026-06-04,2026-06-04,False,42.341089,-83.055434,0
 Don Toliver,Frauenfeld,Switzerland,1,2026-07-09,2026-07-09,False,47.57904,8.90218,0
 Don Toliver,Hartford,United States Of America,1,2026-05-29,2026-05-29,False,41.768353,-72.676384,0
-Don Toliver,Houston,United States Of America,1,2026-05-14,2026-05-14,False,29.7520386,-95.3623133,0
+Don Toliver,Houston,United States Of America,1,2026-05-14,2026-05-14,False,29.759399,-95.362999,0
 Don Toliver,Kansas City,United States Of America,1,2026-06-17,2026-06-17,False,39.1015411,-94.5676009,0
-Don Toliver,Las Vegas,United States Of America,1,2026-07-03,2026-07-03,False,36.124401,-115.145103,0
+Don Toliver,Las Vegas,United States Of America,1,2026-07-03,2026-07-03,False,36.1023376,-115.1694962,0
 Don Toliver,Los Angeles,United States Of America,2,2026-06-28,2026-06-29,False,34.043003,-118.267253,1
 Don Toliver,Milwaukee,United States Of America,1,2026-06-19,2026-06-19,False,43.027552,-87.897661,0
 Don Toliver,Minneapolis,United States Of America,1,2026-06-20,2026-06-20,False,44.979657,-93.274889,0
@@ -1010,8 +999,7 @@ Duran Duran,Tilburg,Netherlands,1,2026-06-22,2026-06-22,False,51.56166,5.0707,0
 Eagles,Arlington,United States Of America,1,2026-05-16,2026-05-16,False,32.747242,-97.083796,0
 Eagles,Atlanta,United States Of America,1,2026-05-05,2026-05-05,False,33.890304,-84.468127,0
 Eagles,Las Vegas,United States Of America,6,2026-03-20,2026-04-11,False,36.1207267,-115.1642896,1
-Eagles,Nashville,United States Of America,1,2026-05-09,2026-05-09,False,36.1418,-86.805397,0
-Eagles,San Leandro,United States Of America,1,2026-03-06,2026-03-06,False,37.708592,-122.133066,0
+Eagles,Nashville,United States Of America,1,2026-05-09,2026-05-09,False,36.1448593,-86.8055152,0
 "Earth, Wind & Fire",Atlanta,United States Of America,2,2026-03-26,2026-07-19,False,33.757796,-84.394569,1
 "Earth, Wind & Fire",Augusta,United States Of America,1,2026-04-25,2026-04-25,False,33.471204,-81.966101,0
 "Earth, Wind & Fire",Austin,United States Of America,1,2026-08-14,2026-08-14,False,30.280735,-97.730837,0
@@ -1085,7 +1073,6 @@ Electric Light Orchestra,Lexington,United States Of America,1,2026-04-08,2026-04
 Electric Light Orchestra,Nashville,United States Of America,1,2026-04-09,2026-04-09,False,39.197639,-86.238487,0
 Electric Light Orchestra,Northfield,United States Of America,1,2026-04-10,2026-04-10,False,41.35002986,-81.5266107,0
 Electric Light Orchestra,Staten Island,United States Of America,1,2026-03-13,2026-03-13,False,40.6422839,-74.077484,0
-Electric Light Orchestra,Troy,United States Of America,1,2026-03-06,2026-03-06,False,42.730438,-73.691376,0
 Electric Light Orchestra,Virginia Beach,United States Of America,1,2026-04-04,2026-04-04,False,36.8009643,-76.1210594,0
 Electric Light Orchestra,Washington,United States Of America,1,2026-03-12,2026-03-12,False,38.8961209,-77.0296101,0
 Elton John,Quebec,Canada,1,2026-05-08,2026-05-08,False,46.813254,-71.2142151,0
@@ -1213,7 +1200,6 @@ Florence + the Machine,Glendale,United States Of America,1,2026-05-09,2026-05-09
 Florence + the Machine,Helsinki,Finland,1,2026-08-16,2026-08-16,True,60.18422,24.9754,0
 Florence + the Machine,Houston,United States Of America,1,2026-05-05,2026-05-05,False,29.7520386,-95.3623133,0
 Florence + the Machine,Inglewood,United States Of America,2,2026-05-19,2026-05-20,False,33.9583,-118.341868,1
-Florence + the Machine,Krakow,Poland,1,2026-03-07,2026-03-07,False,50.0678,19.9912,0
 Florence + the Machine,Leeds,Great Britain,1,2026-08-28,2026-08-28,False,53.87016,-1.380345,0
 Florence + the Machine,Limerick City,Ireland,1,2026-06-27,2026-06-27,False,52.67412802,-8.64253879,0
 Florence + the Machine,Miami,United States Of America,1,2026-04-29,2026-04-29,False,25.781232,-80.187805,0
@@ -1256,19 +1242,6 @@ Foo Fighters,Washington,United States Of America,1,2026-08-17,2026-08-17,False,3
 Foster the People,Austin,United States Of America,1,2026-03-14,2026-03-14,False,30.26258968,-97.75149889,0
 Foster the People,Louisville,United States Of America,1,2026-09-25,2026-09-25,False,38.192998,-85.740523,0
 Frank Sinatra,Berlin,Germany,35,2026-04-04,2026-12-19,True,52.50482,13.33901,1
-Franz Ferdinand,Berlin,Germany,1,2026-04-01,2026-04-01,True,52.50152,13.38175,0
-Franz Ferdinand,Birmingham,Great Britain,1,2026-03-06,2026-03-06,False,52.473277,-1.900215,0
-Franz Ferdinand,Cardiff,Great Britain,1,2026-03-08,2026-03-08,False,51.488279,-3.178502,0
-Franz Ferdinand,Cologne,Germany,1,2026-04-04,2026-04-04,False,50.96949,7.01777,0
-Franz Ferdinand,Forest (Brussels),Belgium,1,2026-04-03,2026-04-03,False,50.80999,4.32601,0
-Franz Ferdinand,Frankfurt am Main,Germany,1,2026-04-11,2026-04-11,False,50.09914,8.51972,0
-Franz Ferdinand,Landgraaf,Netherlands,1,2026-06-20,2026-06-20,False,50.88219,6.02,0
-Franz Ferdinand,London,Great Britain,1,2026-03-11,2026-03-11,True,51.465355,-0.115176,0
-Franz Ferdinand,Montreal,Canada,1,2026-07-31,2026-07-31,False,45.506426,-73.526001,0
-Franz Ferdinand,Munich,Germany,1,2026-03-31,2026-03-31,False,48.1947,11.60784,0
-Franz Ferdinand,Napoli,Italy,1,2026-07-23,2026-07-23,False,40.824487,14.191572,0
-Franz Ferdinand,Queens,United States Of America,1,2026-08-09,2026-08-09,False,40.758005,-73.844599,0
-Franz Ferdinand,Werchter,Belgium,2,2026-07-03,2026-07-05,False,50.97278,4.70007,1
 Freddie Gibbs,Allentown,United States Of America,1,2026-06-04,2026-06-04,False,40.60126,-75.47697,0
 Freddie Gibbs,Anaheim,United States Of America,1,2026-06-21,2026-06-21,False,33.8095868,-117.9229975,0
 Freddie Gibbs,Berlin,Germany,1,2026-04-01,2026-04-01,True,52.48684,13.42145,0
@@ -1332,7 +1305,6 @@ Givēon,Berlin,Germany,1,2026-03-12,2026-03-12,True,52.50512,13.44341,0
 Givēon,Dublin,Ireland,1,2026-03-17,2026-03-17,True,53.347512,-6.228482,0
 Givēon,Dübendorf,Switzerland,1,2026-03-26,2026-03-26,False,47.39608,8.59753,0
 Givēon,Düsseldorf,Germany,1,2026-03-22,2026-03-22,False,51.20639,6.80892,0
-Givēon,Fornebu,Norway,1,2026-03-08,2026-03-08,False,59.9022,10.62254,0
 Givēon,London,Great Britain,1,2026-03-19,2026-03-19,True,51.501581,0.005519,0
 Givēon,Manchester,Great Britain,1,2026-03-20,2026-03-20,False,53.488164,-2.244066,0
 Gorillaz,Atlanta,United States Of America,1,2026-09-20,2026-09-20,False,33.7842414,-84.3639749,0
@@ -1427,7 +1399,6 @@ Harry Styles,Ciudad de México,Mexico,6,2026-07-31,2026-08-10,False,19.405199,-9
 Harry Styles,Docklands,Australia,3,2026-11-27,2026-12-02,False,-37.816518,144.94554,1
 Harry Styles,London,Great Britain,11,2026-06-12,2026-07-04,True,51.557807,-0.279581,1
 Harry Styles,London,United Kingdom,1,2026-06-19,2026-06-19,True,0.0,0.0,0
-Harry Styles,Manchester,Great Britain,1,2026-03-06,2026-03-06,False,53.48661136,-2.1995797,0
 Harry Styles,New York,United States Of America,30,2026-08-26,2026-10-31,False,40.7497062,-73.9916006,1
 Harry Styles,Sydney Olympic Park,Australia,2,2026-12-12,2026-12-13,False,-33.848603,151.061717,1
 Hearts2Hearts,Brooklyn,United States Of America,1,2026-03-19,2026-03-19,False,40.69137302,-73.98124051,0
@@ -1465,7 +1436,7 @@ J. Cole,Inglewood,United States Of America,2,2026-09-03,2026-09-04,False,33.9443
 J. Cole,Johannesburg,South Africa,1,2026-12-12,2026-12-12,False,-26.23374,27.97973,0
 J. Cole,Kansas City,United States Of America,1,2026-08-19,2026-08-19,False,39.1015411,-94.5676009,0
 J. Cole,København S,Denmark,1,2026-11-09,2026-11-09,False,55.62575,12.5737,0
-J. Cole,Las Vegas,United States Of America,1,2026-09-06,2026-09-06,False,36.102807,-115.178313,0
+J. Cole,Las Vegas,United States Of America,1,2026-09-06,2026-09-06,False,36.124401,-115.145103,0
 J. Cole,London,Great Britain,3,2026-10-19,2026-11-02,True,51.501581,0.005519,1
 J. Cole,Los Angeles,United States Of America,2,2026-09-01,2026-09-07,False,34.043003,-118.267253,1
 J. Cole,Manchester,Great Britain,2,2026-10-28,2026-10-29,False,53.48661136,-2.1995797,1
@@ -1494,7 +1465,6 @@ JID,Bristol,Great Britain,1,2026-04-03,2026-04-03,False,51.44896002,-2.57363452,
 JID,Cologne,Germany,1,2026-03-19,2026-03-19,False,50.94918,6.91012,0
 JID,Dublin,Ireland,1,2026-04-07,2026-04-07,True,53.344318,-6.266114,0
 JID,Frankfurt am Main,Germany,1,2026-03-22,2026-03-22,False,50.12083,8.75172,0
-JID,Hamburg,Germany,1,2026-03-08,2026-03-08,False,53.55119,9.95788,0
 JID,London,Great Britain,1,2026-04-02,2026-04-02,True,51.465355,-0.115176,0
 JID,Manchester,Great Britain,1,2026-04-06,2026-04-06,False,53.48008,-2.25446,0
 JID,Montreal,Canada,1,2026-07-31,2026-07-31,False,45.506426,-73.526001,0
@@ -1512,8 +1482,7 @@ Jane Remover,Queens,United States Of America,1,2026-06-06,2026-06-06,False,40.71
 Jason Derulo,Bergen,Norway,1,2026-03-11,2026-03-11,False,60.38658,5.3357,0
 Jeff Buckley,Dublin,Ireland,1,2026-09-06,2026-09-06,True,53.344318,-6.266114,0
 Jennie,Queens,United States Of America,1,2026-06-07,2026-06-07,False,40.71634,-73.82583,0
-Jennifer Lopez,Las Vegas,United States Of America,8,2026-03-06,2026-03-28,False,36.116156,-115.175058,1
-Jhené Aiko,Miami,United States Of America,1,2026-03-07,2026-03-07,False,25.957928,-80.238866,0
+Jennifer Lopez,Las Vegas,United States Of America,6,2026-03-13,2026-03-28,False,36.116156,-115.175058,1
 Joey Valence & Brae,Amsterdam,Netherlands,1,2026-05-16,2026-05-16,True,52.36483,4.88127,0
 Joey Valence & Brae,Auckland,New Zealand,1,2026-04-09,2026-04-09,False,-36.8661613,174.761322,0
 Joey Valence & Brae,Belfast,Great Britain,1,2026-05-06,2026-05-06,False,54.59266713,-5.92730641,0
@@ -1527,7 +1496,6 @@ Joey Valence & Brae,Hamburg,Germany,1,2026-05-20,2026-05-20,False,53.54928,9.964
 Joey Valence & Brae,Johanneshov,Sweden,1,2026-05-23,2026-05-23,False,59.29172,18.07638,0
 Joey Valence & Brae,Liverpool,Great Britain,1,2026-05-09,2026-05-09,False,53.4091275,-2.9771058,0
 Joey Valence & Brae,London,Great Britain,1,2026-05-12,2026-05-12,True,51.543051,-0.151324,0
-Joey Valence & Brae,Los Angeles,United States Of America,2,2026-03-06,2026-03-07,False,34.0573,-118.25837,1
 Joey Valence & Brae,Munich,Germany,1,2026-05-31,2026-05-31,False,48.1328,11.5892,0
 Joey Valence & Brae,Oslo,Norway,1,2026-05-22,2026-05-22,True,59.91552,10.7518,0
 Joey Valence & Brae,San Diego,United States Of America,1,2026-03-10,2026-03-10,False,32.748097,-117.131213,0
@@ -1572,8 +1540,6 @@ Jordana,Saint Louis,United States Of America,1,2026-03-31,2026-03-31,False,38.60
 Jordana,Tucson,United States Of America,1,2026-04-04,2026-04-04,False,32.225101,-110.969001,0
 Julia Wolf,Birmingham,Great Britain,1,2026-03-10,2026-03-10,False,52.479932,-1.914924,0
 Julia Wolf,Dublin,Ireland,1,2026-03-12,2026-03-12,True,53.347512,-6.228482,0
-Julia Wolf,Glasgow,Great Britain,1,2026-03-08,2026-03-08,False,55.86087,-4.288154,0
-Julia Wolf,Manchester,Great Britain,1,2026-03-07,2026-03-07,False,53.48661136,-2.1995797,0
 KATSEYE,Queens,United States Of America,1,2026-06-05,2026-06-05,False,40.71634,-73.82583,0
 KAYTRANADA,Amsterdam,Netherlands,1,2026-06-01,2026-06-01,True,52.31395,4.93837,0
 KAYTRANADA,Berlin,Germany,1,2026-06-04,2026-06-04,True,52.50573,13.44314,0
@@ -1695,8 +1661,7 @@ Kodak Black,Jacksonville,United States Of America,1,2026-03-21,2026-03-21,False,
 Kodak Black,Sunrise,United States Of America,1,2026-03-13,2026-03-13,False,26.238701,-80.370499,0
 Korn,Ciudad de México,Mexico,1,2026-05-19,2026-05-19,False,19.4015408,-99.0980606,0
 Korn,Las Vegas,United States Of America,1,2026-04-25,2026-04-25,False,36.141833,-115.158757,0
-Labrinth,San Francisco,United States Of America,3,2026-08-07,2026-08-09,False,37.7660618,-122.4643124,1
-Lady Gaga,Austin,United States Of America,2,2026-03-08,2026-03-09,False,30.280735,-97.730837,1
+Lady Gaga,Austin,United States Of America,1,2026-03-09,2026-03-09,False,30.280735,-97.730837,0
 Lady Gaga,Boston,United States Of America,2,2026-03-29,2026-03-30,False,42.365841,-71.060724,1
 Lady Gaga,Miami,United States Of America,1,2026-03-13,2026-03-13,False,25.781232,-80.187805,0
 Lady Gaga,Montreal,Canada,3,2026-04-02,2026-04-06,False,45.496129,-73.570472,1
@@ -1704,8 +1669,7 @@ Lady Gaga,New York,United States Of America,3,2026-03-19,2026-04-13,False,40.749
 Lady Gaga,Saint Paul,United States Of America,2,2026-04-09,2026-04-10,False,44.94489438,-93.10121819,1
 Lady Gaga,Washington,United States Of America,2,2026-03-23,2026-03-24,False,38.897412,-77.020029,1
 Laufey,Auckland,New Zealand,1,2026-08-12,2026-08-12,False,-36.847021,174.77687,0
-Laufey,Dublin,Ireland,1,2026-03-06,2026-03-06,True,53.347512,-6.228482,0
-Laufey,London,Great Britain,2,2026-03-08,2026-03-09,True,51.501581,0.005519,1
+Laufey,London,Great Britain,1,2026-03-09,2026-03-09,True,51.501581,0.005519,0
 Laufey,Singapore,Singapore,1,2026-05-19,2026-05-19,True,,,0
 Lauv,Atlanta,United States Of America,1,2026-06-04,2026-06-04,False,33.8768817,-84.3972168,0
 Lauv,Austin,United States Of America,1,2026-06-19,2026-06-19,False,30.272177,-97.734858,0
@@ -1720,7 +1684,7 @@ Lauv,Irving,United States Of America,1,2026-06-17,2026-06-17,False,32.872469,-96
 Lauv,Las Vegas,United States Of America,1,2026-05-16,2026-05-16,False,36.10961689,-115.17247058,0
 Lauv,Laval,Canada,1,2026-05-26,2026-05-26,False,45.555195,-73.722521,0
 Lauv,Los Angeles,United States Of America,1,2026-06-24,2026-06-24,False,34.11948811,-118.29629093,0
-Lauv,Morrison,United States Of America,1,2026-05-18,2026-05-18,False,39.66774,-105.208969,0
+Lauv,Morrison,United States Of America,1,2026-05-18,2026-05-18,False,39.598999,-105.228104,0
 Lauv,Nashville,United States Of America,1,2026-06-03,2026-06-03,False,36.1562716,-86.7741112,0
 Lauv,New York,United States Of America,1,2026-06-12,2026-06-12,False,40.7599136,-73.9803981,0
 Lauv,Philadelphia,United States Of America,1,2026-06-07,2026-06-07,False,39.981508,-75.224066,0
@@ -1749,20 +1713,19 @@ Leon Thomas,Columbus,United States Of America,1,2026-05-20,2026-05-20,False,40.0
 Leon Thomas,Detroit,United States Of America,2,2026-05-09,2026-05-10,False,42.339924,-83.045543,1
 Leon Thomas,Dublin,Ireland,1,2026-03-31,2026-03-31,True,53.344318,-6.266114,0
 Leon Thomas,Glasgow,Great Britain,1,2026-03-29,2026-03-29,False,55.863711,-4.298214,0
-Leon Thomas,Glendale,United States Of America,2,2026-04-14,2026-04-15,False,33.527308,-112.262258,1
+Leon Thomas,Glendale,United States Of America,2,2026-04-14,2026-04-15,False,33.5312,-112.2202,1
 Leon Thomas,Houston,United States Of America,1,2026-04-22,2026-04-22,False,29.684885,-95.410875,0
 Leon Thomas,Landover,United States Of America,2,2026-05-02,2026-05-03,False,38.907729,-76.864433,1
 Leon Thomas,Las Vegas,United States Of America,2,2026-04-10,2026-04-11,False,36.0909,-115.1833,1
 Leon Thomas,London,Great Britain,2,2026-04-03,2026-08-15,True,51.4997496,-0.2874585,1
 Leon Thomas,Manchester,Great Britain,1,2026-03-27,2026-03-27,False,53.464386,-2.232225,0
 Leon Thomas,Minneapolis,United States Of America,1,2026-05-13,2026-05-13,False,44.973617,-93.257528,0
-Leon Thomas,Nashville,United States Of America,1,2026-05-06,2026-05-06,False,36.166208,-86.771413,0
-Leon Thomas,Oslo,Norway,1,2026-03-08,2026-03-08,True,59.91552,10.7518,0
+Leon Thomas,Nashville,United States Of America,1,2026-05-06,2026-05-06,False,36.164398,-86.767403,0
 Leon Thomas,Toronto,Canada,5,2026-05-23,2026-05-30,False,43.75197,-79.47707,1
 Leon Thomas,Warsaw,Poland,1,2026-03-12,2026-03-12,True,52.21159,21.01023,0
 Lil Wayne,Napa,United States Of America,3,2026-05-22,2026-05-24,False,38.29758318,-122.27770996,1
 Lil Yachty,Eau Claire,United States Of America,1,2026-07-25,2026-07-25,False,44.80111758,-91.52645577,0
-Lily Allen,Atlanta,United States Of America,1,2026-04-21,2026-04-21,False,33.7714,-84.377403,0
+Lily Allen,Atlanta,United States Of America,1,2026-04-21,2026-04-21,False,33.77264345,-84.38506842,0
 Lily Allen,Auckland,New Zealand,1,2026-10-21,2026-10-21,False,-36.847021,174.77687,0
 Lily Allen,Berlin,Germany,1,2026-07-18,2026-07-18,True,52.51452,13.24326,0
 Lily Allen,Birmingham,Great Britain,1,2026-06-26,2026-06-26,False,52.453057,-1.720073,0
@@ -1779,11 +1742,10 @@ Lily Allen,London,Great Britain,6,2026-03-20,2026-07-07,True,51.501581,0.005519,
 Lily Allen,Los Angeles,United States Of America,2,2026-04-25,2026-04-26,False,34.04263554,-118.25558624,1
 Lily Allen,Manchester,Great Britain,4,2026-03-10,2026-06-20,False,53.488164,-2.244066,1
 Lily Allen,New York,United States Of America,1,2026-04-14,2026-04-14,False,40.7599136,-73.9803981,0
-Lily Allen,Newcastle Upon Tyne,Great Britain,2,2026-03-08,2026-06-16,False,54.963809,-1.623338,1
+Lily Allen,Newcastle Upon Tyne,Great Britain,1,2026-06-16,2026-06-16,False,54.963809,-1.623338,0
 Lily Allen,Nottingham,Great Britain,2,2026-03-14,2026-06-23,False,52.952649,-1.139291,1
 Lily Allen,Philadelphia,United States Of America,1,2026-04-17,2026-04-17,False,39.969938,-75.160278,0
 Lily Allen,San Francisco,United States Of America,1,2026-04-28,2026-04-28,False,37.791419,-122.413293,0
-Lily Allen,Sheffield,Great Britain,1,2026-03-07,2026-03-07,False,53.38118,-1.471079,0
 Lily Allen,Toronto,Canada,2,2026-04-07,2026-04-08,False,43.6541869,-79.3789975,1
 Lily Allen,Wabern bei Bern,Switzerland,2,2026-07-15,2026-07-16,False,46.91855,7.44105,1
 Lily Allen,Washington,United States Of America,1,2026-04-19,2026-04-19,False,38.8961209,-77.0296101,0
@@ -1807,7 +1769,6 @@ Linkin Park,Zürich,Switzerland,1,2026-06-30,2026-06-30,False,47.38265,8.50377,0
 Lisa,Hollywood,United States Of America,1,2026-03-13,2026-03-13,False,26.0503384,-80.2109577,0
 Lisa,Inglewood,United States Of America,1,2026-03-28,2026-03-28,False,33.94982,-118.3436,0
 Lisa,Lincoln,United States Of America,1,2026-05-08,2026-05-08,False,38.84026,-121.31368,0
-Lisa,Rosemont,United States Of America,1,2026-03-08,2026-03-08,False,41.979238,-87.867325,0
 Lit,Columbus,United States Of America,1,2026-05-15,2026-05-15,False,40.0089948,-82.9912198,0
 Lit,Detroit,United States Of America,1,2026-04-03,2026-04-03,False,42.339324,-83.067158,0
 Lit,Lake Charles,United States Of America,1,2026-09-06,2026-09-06,False,30.2078543,-93.2581132,0
@@ -2003,10 +1964,8 @@ Miguel,Munich,Germany,1,2026-04-27,2026-04-27,False,48.1328,11.5892,0
 Miguel,New Orleans,United States Of America,1,2026-03-22,2026-03-22,False,29.949399,-90.064806,0
 Miguel,New York,United States Of America,1,2037-12-31,2037-12-31,False,40.7599136,-73.9803981,0
 Miguel,Phoenix,United States Of America,1,2026-03-16,2026-03-16,False,33.448775,-112.079564,0
-Miguel,Portland,United States Of America,1,2026-03-08,2026-03-08,False,45.512731,-122.679117,0
 Miguel,Praha 7,Czech Republic,1,2026-04-29,2026-04-29,False,50.09938,14.44477,0
 Miguel,Raleigh,United States Of America,1,2026-03-25,2026-03-25,False,35.815896,-78.619991,0
-Miguel,Salt Lake City,United States Of America,1,2026-03-06,2026-03-06,False,40.782001,-111.7519,0
 Miguel,San Diego,United States Of America,1,2026-03-14,2026-03-14,False,32.77478601,-117.0712325,0
 Miguel,San Francisco,United States Of America,1,2026-03-12,2026-03-12,False,37.778479,-122.417473,0
 Miguel,Seattle,United States Of America,1,2026-03-09,2026-03-09,False,47.596704,-122.332085,0
@@ -2018,11 +1977,11 @@ Mitski,Ciudad de México,Mexico,1,2026-03-23,2026-03-23,False,19.424648,-99.1948
 Mitski,Forest (Brussels),Belgium,1,2026-05-09,2026-05-09,False,50.80999,4.32601,0
 Mitski,London,Great Britain,1,2026-05-21,2026-05-21,True,51.501277,-0.177552,0
 Mitski,Los Angeles,United States Of America,5,2026-03-30,2026-04-04,False,34.0998,-118.326897,1
-Mitski,New York,United States Of America,3,2026-03-06,2026-03-09,False,40.75,-73.996696,1
+Mitski,New York,United States Of America,1,2026-03-09,2026-03-09,False,40.75,-73.996696,0
 Mitski,İstanbul,Turkey,1,2026-05-02,2026-05-02,False,41.043126,28.993066,0
 Mother Mother,Manchester,United States Of America,1,2026-06-12,2026-06-12,False,35.51218796,-86.06871796,0
 Mother Mother,Montreal,Canada,1,2026-07-31,2026-07-31,False,45.506426,-73.526001,0
-Mother Mother,Spokane,United States Of America,1,2026-07-11,2026-07-11,False,47.667,-117.438103,0
+Mother Mother,Spokane,United States Of America,1,2026-07-11,2026-07-11,False,48.25408,-117.31281,0
 Mother Mother,Toronto,Canada,1,2026-09-11,2026-09-11,False,43.771766,-79.513819,0
 Mumford & Sons,Albuquerque,United States Of America,1,2026-10-03,2026-10-03,False,34.9887105,-106.615429,0
 Mumford & Sons,Atlanta,United States Of America,1,2026-08-04,2026-08-04,False,33.757796,-84.394569,0
@@ -2030,7 +1989,7 @@ Mumford & Sons,Auckland,New Zealand,1,2026-05-02,2026-05-02,False,-36.847021,174
 Mumford & Sons,Bangor,United States Of America,1,2026-06-16,2026-06-16,False,44.79504302,-68.77376966,0
 Mumford & Sons,Berlin,Germany,1,2026-07-09,2026-07-09,True,52.51318,13.22987,0
 Mumford & Sons,Birmingham,United States Of America,1,2026-09-29,2026-09-29,False,33.53391,-86.81174,0
-Mumford & Sons,Boston,United States Of America,1,2026-06-22,2026-06-22,False,42.3464072,-71.0986584,0
+Mumford & Sons,Boston,United States Of America,1,2026-06-22,2026-06-22,False,42.346901,-71.102501,0
 Mumford & Sons,Boulder,United States Of America,1,2026-06-06,2026-06-06,False,40.040199,-105.362602,0
 Mumford & Sons,Bozeman,United States Of America,1,2026-06-04,2026-06-04,False,45.689098,-110.929497,0
 Mumford & Sons,Bristow,United States Of America,1,2026-06-19,2026-06-19,False,38.7861199,-77.587777,0
@@ -2049,7 +2008,7 @@ Mumford & Sons,Inglewood,United States Of America,2,2026-10-06,2026-10-07,False,
 Mumford & Sons,Kansas City,United States Of America,1,2026-08-02,2026-08-02,False,39.16288,-94.6368,0
 Mumford & Sons,London,Great Britain,1,2026-07-04,2026-07-04,True,51.507432,-0.165708,0
 Mumford & Sons,Louisville,United States Of America,1,2026-09-25,2026-09-25,False,38.192998,-85.740523,0
-Mumford & Sons,Madison,United States Of America,1,2026-09-23,2026-09-23,False,43.016399,-89.420097,0
+Mumford & Sons,Madison,United States Of America,1,2026-09-23,2026-09-23,False,43.069828,-89.395924,0
 Mumford & Sons,Montreal,Canada,2,2026-08-15,2026-08-16,False,45.506426,-73.526001,1
 Mumford & Sons,Mountain View,United States Of America,1,2026-10-08,2026-10-08,False,37.426718,-122.080722,0
 Mumford & Sons,New York,United States Of America,3,2026-08-11,2026-08-13,False,40.7497062,-73.9916006,1
@@ -2075,7 +2034,7 @@ My Chemical Romance,London,Great Britain,3,2026-07-08,2026-07-11,True,51.557807,
 My Chemical Romance,Louisville,United States Of America,1,2026-09-18,2026-09-18,False,38.192998,-85.740523,0
 My Chemical Romance,Madrid,Spain,1,2026-07-18,2026-07-18,True,40.32866,-3.71094,0
 My Chemical Romance,Minneapolis,United States Of America,1,2026-08-24,2026-08-24,False,44.981422,-93.27847,0
-My Chemical Romance,Nashville,United States Of America,1,2026-08-13,2026-08-13,False,36.166208,-86.771413,0
+My Chemical Romance,Nashville,United States Of America,1,2026-08-13,2026-08-13,False,36.164398,-86.767403,0
 My Chemical Romance,Phoenix,United States Of America,1,2026-09-06,2026-09-06,False,33.444799,-112.066662,0
 My Chemical Romance,Queens,United States Of America,1,2026-08-09,2026-08-09,False,40.758005,-73.844599,0
 My Chemical Romance,Sacramento,United States Of America,1,2026-10-01,2026-10-01,False,38.630932,-121.5606703,0
@@ -2154,24 +2113,16 @@ Ne-Yo,West Palm Beach,United States Of America,1,2026-07-15,2026-07-15,False,26.
 Ne-Yo,Winnipeg,Canada,1,2026-06-23,2026-06-23,False,49.8933677,-97.1437156,0
 Ne-Yo,Zürich,Switzerland,1,2026-05-19,2026-05-19,False,47.41161,8.55166,0
 Ne-Yo,Łódź ,Poland,1,2026-05-31,2026-05-31,False,51.75718,19.42526,0
-Neil Young,Cardiff,Great Britain,1,2026-07-05,2026-07-05,False,51.49139777,-3.18915144,0
-Neil Young,Glasgow,Great Britain,1,2026-06-29,2026-06-29,False,55.847332,-4.313765,0
-Neil Young,Manchester,Great Britain,1,2026-06-19,2026-06-19,False,53.53608707,-2.2545072,0
-Neil Young,Tramore Rd Cork,Ireland,1,2026-07-01,2026-07-01,False,51.88220672,-8.47192883,0
-Neil Young,Weert,Netherlands,1,2026-07-08,2026-07-08,False,51.27468,5.6705,0
-Neil Young,Woodstock,Great Britain,1,2026-07-03,2026-07-03,False,51.841356,-1.360949,0
 Nickelback,Derby,Great Britain,1,2026-06-06,2026-06-06,False,52.926209,-1.479575,0
 Nickelback,London,Great Britain,1,2026-03-14,2026-03-14,True,51.475524,-0.03838,0
 Nickelback,Nuneaton,Great Britain,1,2026-05-16,2026-05-16,False,52.522554,-1.473177,0
 Nickelback,Southampton,Great Britain,1,2026-08-22,2026-08-22,False,50.8989811,-1.4004633,0
 Nine Inch Nails,Anaheim,United States Of America,1,2026-03-10,2026-03-10,False,33.80780364,-117.87653112,0
-Nine Inch Nails,Glendale,United States Of America,1,2026-03-06,2026-03-06,False,33.531484,-112.26167,0
-Nine Inch Nails,Las Vegas,United States Of America,1,2026-03-07,2026-03-07,False,36.124401,-115.145103,0
 Nine Inch Nails,Sacramento,United States Of America,1,2026-03-16,2026-03-16,False,38.580372,-121.500231,0
-Nine Inch Nails,Salt Lake City,United States Of America,1,2026-03-13,2026-03-13,False,40.756599,-111.8992,0
+Nine Inch Nails,Salt Lake City,United States Of America,1,2026-03-13,2026-03-13,False,40.767798,-111.901096,0
 Nine Inch Nails,San Diego,United States Of America,1,2026-03-09,2026-03-09,False,32.755267,-117.212196,0
 Nine Inch Nails,San Francisco,United States Of America,1,2026-03-15,2026-03-15,False,37.76797,-122.387464,0
-Nirvana,Las Vegas,United States Of America,1,2026-03-06,2026-03-06,False,36.087535,-115.174742,0
+Nirvana,Dublin,Ireland,1,2026-09-12,2026-09-12,True,53.34795,-6.26199,0
 No Doubt,Las Vegas,United States Of America,18,2026-05-06,2026-06-13,False,36.1207267,-115.1642896,1
 Noah Kahan,Arlington,United States Of America,1,2026-07-30,2026-07-30,False,32.747242,-97.083796,0
 Noah Kahan,Atlanta,United States Of America,1,2026-07-27,2026-07-27,False,33.890304,-84.468127,0
@@ -2213,7 +2164,7 @@ Olivia Dean,Denver,United States Of America,2,2026-07-25,2026-07-26,False,39.747
 Olivia Dean,Dublin,Ireland,2,2026-06-20,2026-06-21,True,53.36312,-6.23567,1
 Olivia Dean,Forest (Brussels),Belgium,1,2026-05-08,2026-05-08,False,50.80999,4.32601,0
 Olivia Dean,Glasgow,Great Britain,2,2026-04-22,2026-04-23,False,55.86087,-4.288154,1
-Olivia Dean,Houston,United States Of America,1,2026-08-25,2026-08-25,False,29.7520386,-95.3623133,0
+Olivia Dean,Houston,United States Of America,1,2026-08-25,2026-08-25,False,29.759399,-95.362999,0
 Olivia Dean,København S,Denmark,1,2026-05-14,2026-05-14,False,55.62575,12.5737,0
 Olivia Dean,Las Vegas,United States Of America,1,2026-07-18,2026-07-18,False,36.124401,-115.145103,0
 Olivia Dean,London,Great Britain,6,2026-04-29,2026-06-12,True,51.501581,0.005519,1
@@ -2415,7 +2366,7 @@ Post Malone,Fort Lauderdale,United States Of America,3,2026-04-10,2026-04-12,Fal
 Post Malone,Indianapolis,United States Of America,1,2026-06-12,2026-06-12,False,39.76007,-86.163821,0
 Post Malone,Kansas City,United States Of America,1,2026-07-15,2026-07-15,False,39.0510186,-94.4806194,0
 Post Malone,Milwaukee,United States Of America,1,2026-06-27,2026-06-27,False,43.027552,-87.897661,0
-Post Malone,Missoula,United States Of America,1,2026-07-21,2026-07-21,False,46.861099,-113.986,0
+Post Malone,Missoula,United States Of America,1,2026-07-21,2026-07-21,False,46.8605725,-113.9821243,0
 Post Malone,Nashville,United States Of America,1,2026-06-30,2026-06-30,False,36.166208,-86.771413,0
 Post Malone,Salt Lake City,United States Of America,1,2026-07-28,2026-07-28,False,40.7596422,-111.850261,0
 Post Malone,Tampa,United States Of America,1,2026-05-29,2026-05-29,False,27.975976,-82.503474,0
@@ -2450,7 +2401,6 @@ Prince,San Francisco,United States Of America,1,2026-05-14,2026-05-14,False,37.7
 Prince,Tampa,United States Of America,1,2026-04-26,2026-04-26,False,27.942743,-82.451772,0
 Prince,Toronto,Canada,1,2026-05-29,2026-05-29,False,43.6439254,-79.3783234,0
 Prince,Washington,United States Of America,1,2026-04-05,2026-04-05,False,38.897412,-77.020029,0
-Queen,Atlantic City,United States Of America,1,2026-03-07,2026-03-07,False,39.35814,-74.4215137,0
 Queen,Glenside,United States Of America,1,2026-04-25,2026-04-25,False,40.1012,-75.172203,0
 Queen,Kingston,United States Of America,1,2026-03-13,2026-03-13,True,41.929119,-74.004568,0
 Queen,Reading,United States Of America,1,2026-04-11,2026-04-11,False,40.337856,-75.926357,0
@@ -2468,7 +2418,7 @@ Queens of the Stone Age,London,Great Britain,2,2026-07-13,2026-07-15,True,51.600
 Queens of the Stone Age,Louisville,United States Of America,1,2026-09-24,2026-09-24,False,38.192998,-85.740523,0
 Queens of the Stone Age,Nashville,United States Of America,1,2026-08-15,2026-08-15,False,36.164398,-86.767403,0
 Queens of the Stone Age,Philadelphia,United States Of America,1,2026-08-13,2026-08-13,False,39.900706,-75.167406,0
-Queens of the Stone Age,Portland,United States Of America,1,2026-04-27,2026-04-27,False,45.516856,-122.681188,0
+Queens of the Stone Age,Portland,United States Of America,1,2026-04-27,2026-04-27,False,45.5201,-122.6884,0
 Queens of the Stone Age,Rancho Mirage,United States Of America,1,2026-04-25,2026-04-25,False,33.782501,-116.413597,0
 Queens of the Stone Age,Regina,Canada,1,2026-09-15,2026-09-15,False,50.45181695,-104.63317218,0
 Queens of the Stone Age,Sacramento,United States Of America,1,2026-10-04,2026-10-04,False,38.630932,-121.5606703,0
@@ -2480,10 +2430,10 @@ Queens of the Stone Age,Warsaw,Poland,2,2026-07-18,2026-07-19,True,52.23958,21.0
 Queens of the Stone Age,Washington,United States Of America,1,2026-08-17,2026-08-17,False,38.873005,-77.007412,0
 R.E.M.,Belfast,Great Britain,1,2026-10-10,2026-10-10,False,54.58886889,-5.93326092,0
 R.E.M.,Derby,Great Britain,1,2026-06-19,2026-06-19,False,52.926209,-1.479575,0
-R.E.M.,Kinross,Great Britain,1,2026-03-07,2026-03-07,False,56.208672,-3.42367,0
 R.E.M.,Portlaoise,Ireland,1,2026-10-09,2026-10-09,False,53.03443937,-7.29746997,0
 R.E.M.,Southampton,Great Britain,1,2026-03-21,2026-03-21,False,50.932847,-1.383409,0
 R.E.M.,St Albans,Great Britain,1,2026-04-11,2026-04-11,False,51.750295,-0.329006,0
+R.E.M.,St Helens,Great Britain,1,2027-03-06,2027-03-06,False,53.451902,-2.739906,0
 RAYE,Atlanta,United States Of America,1,2026-04-28,2026-04-28,False,33.89024,-84.469717,0
 RAYE,Austin,United States Of America,1,2026-05-04,2026-05-04,False,30.272177,-97.734858,0
 RAYE,Boston,United States Of America,1,2026-04-20,2026-04-20,False,42.346806,-71.097272,0
@@ -2571,14 +2521,13 @@ Reneé Rapp,Manchester,Great Britain,1,2026-03-18,2026-03-18,False,53.488164,-2.
 Reneé Rapp,Merksem (Antwerpen),Belgium,1,2026-03-11,2026-03-11,False,51.23024,4.44176,0
 Reneé Rapp,Werchter,Belgium,2,2026-07-04,2026-07-05,False,50.97278,4.70007,1
 Rosé,Berlin,Germany,1,2026-05-24,2026-05-24,True,52.50277,13.44546,0
-Sam Smith,San Francisco,United States Of America,6,2026-03-06,2026-03-14,False,37.762013,-122.434696,1
+Sam Smith,San Francisco,United States Of America,4,2026-03-10,2026-03-14,False,37.762013,-122.434696,1
 Sean Paul,Hamburg,United States Of America,1,2026-09-11,2026-09-11,False,42.73664324,-78.82040547,0
 Sean Paul,Saint-Jean-sur-Richelieu,Canada,1,2026-08-15,2026-08-15,False,45.2957,-73.28707,0
 Sean Paul,Toronto,Canada,1,2026-08-28,2026-08-28,False,43.6294544,-79.4149193,0
 Sean Paul,Vienna,Austria,1,2026-05-19,2026-05-19,True,48.18538,16.41852,0
 Sean Paul,Wabern bei Bern,Switzerland,1,2026-07-15,2026-07-15,False,46.91855,7.44105,0
 Sean Paul,Warsaw,Poland,1,2026-05-20,2026-05-20,True,52.22245,21.04219,0
-Seventeen,Singapore,Singapore,1,2026-03-07,2026-03-07,True,,,0
 Sienna Spiro,Birmingham,Great Britain,1,2026-05-17,2026-05-17,False,52.475756,-1.887562,0
 Sienna Spiro,Boston,United States Of America,1,2026-03-14,2026-03-14,False,42.3528999,-71.1326128,0
 Sienna Spiro,Cologne,Germany,1,2026-05-21,2026-05-21,False,50.99741,6.94019,0
@@ -2593,7 +2542,6 @@ Sienna Spiro,San Francisco,United States Of America,3,2026-08-07,2026-08-09,Fals
 Sienna Spiro,Toronto,Canada,1,2026-03-10,2026-03-10,False,0.0,0.0,0
 Sienna Spiro,Tønsberg,Norway,1,2026-07-09,2026-07-09,False,59.26434,10.40447,0
 Sienna Spiro,Washington,United States Of America,1,2026-03-12,2026-03-12,False,38.91819,-77.02241,0
-Sienna Spiro,West Hollywood,United States Of America,1,2026-03-06,2026-03-06,False,34.0942,-118.3815,0
 Slayyyter,Queens,United States Of America,1,2026-06-07,2026-06-07,False,40.71634,-73.82583,0
 Sleeping With Sirens,Daytona Beach,United States Of America,1,2026-05-10,2026-05-10,False,29.1857775,-81.0696113,0
 Sleeping With Sirens,Louisville,United States Of America,1,2026-09-18,2026-09-18,False,38.192998,-85.740523,0
@@ -2691,7 +2639,6 @@ System of a Down,London,Great Britain,2,2026-07-13,2026-07-15,True,51.600819,-0.
 System of a Down,Stockholm,Sweden,1,2026-06-29,2026-06-29,True,59.37254,18.00041,0
 System of a Down,Warsaw,Poland,2,2026-07-18,2026-07-19,True,52.23958,21.04598,1
 TV Girl,Belfast,Great Britain,2,2026-05-26,2026-05-27,False,54.59779511,-5.92035413,1
-TV Girl,México,Mexico,1,2026-03-07,2026-03-07,False,19.3934097,-99.1758118,0
 TWICE,Amsterdam,Netherlands,2,2026-05-30,2026-05-31,True,52.31395,4.93837,1
 TWICE,Austin,United States Of America,2,2026-04-17,2026-04-18,False,30.280735,-97.730837,1
 TWICE,Barcelona,Spain,1,2026-05-12,2026-05-12,False,41.36337,2.15259,0
@@ -2702,7 +2649,6 @@ TWICE,Chicago,United States Of America,2,2026-04-06,2026-04-07,False,41.88124412
 TWICE,Cologne,Germany,1,2026-05-26,2026-05-26,False,50.93855,6.97988,0
 TWICE,Denver,United States Of America,1,2026-04-14,2026-04-14,False,39.74724,-105.010166,0
 TWICE,Detroit,United States Of America,1,2026-04-10,2026-04-10,False,42.341089,-83.055434,0
-TWICE,Hamilton,Canada,2,2026-03-06,2026-03-07,True,43.2599752,-79.8728598,1
 TWICE,London,Great Britain,2,2026-06-03,2026-06-04,True,51.501581,0.005519,1
 TWICE,Orlando,United States Of America,2,2026-03-27,2026-03-28,False,28.539293,-81.383957,1
 TWICE,Saint Paul,United States Of America,1,2026-04-12,2026-04-12,False,44.94489438,-93.10121819,0
@@ -2792,7 +2738,7 @@ The Doors,Minneapolis,United States Of America,1,2026-04-23,2026-04-23,False,44.
 The Doors,Virginia Beach,United States Of America,1,2026-08-27,2026-08-27,False,36.8493416,-76.0194075,0
 The Goo Goo Dolls,Abbotsford,Canada,1,2026-03-20,2026-03-20,False,49.030235,-122.287062,0
 The Goo Goo Dolls,Bend,United States Of America,1,2026-07-26,2026-07-26,False,44.048328,-121.321527,0
-The Goo Goo Dolls,Billings,United States Of America,1,2026-07-30,2026-07-30,False,45.6311,-108.351898,0
+The Goo Goo Dolls,Billings,United States Of America,1,2026-07-30,2026-07-30,False,45.7990694,-108.4819363,0
 The Goo Goo Dolls,Bloomington,United States Of America,1,2026-08-09,2026-08-09,False,40.47817273,-88.99613608,0
 The Goo Goo Dolls,Brandon,United States Of America,1,2026-08-19,2026-08-19,False,32.2833,-89.984424,0
 The Goo Goo Dolls,Burgettstown,United States Of America,1,2026-08-14,2026-08-14,False,40.4197818,-80.4342124,0
@@ -2819,7 +2765,7 @@ The Goo Goo Dolls,London,Canada,1,2026-04-04,2026-04-04,True,42.982341,-81.25187
 The Goo Goo Dolls,Macon,United States Of America,1,2026-08-27,2026-08-27,False,32.81757,-83.69203,0
 The Goo Goo Dolls,Milwaukee,United States Of America,1,2026-08-06,2026-08-06,False,43.02752063,-87.89798287,0
 The Goo Goo Dolls,Moncton,Canada,1,2026-04-11,2026-04-11,False,46.085958,-64.784148,0
-The Goo Goo Dolls,Nampa,United States Of America,1,2026-07-27,2026-07-27,False,43.611401,-116.533302,0
+The Goo Goo Dolls,Nampa,United States Of America,1,2026-07-27,2026-07-27,False,43.606732,-116.512342,0
 The Goo Goo Dolls,Ocean City,United States Of America,1,2026-09-26,2026-09-26,False,38.3779123,-75.069073,0
 The Goo Goo Dolls,Orange Beach,United States Of America,1,2026-08-21,2026-08-21,False,30.29259,-87.62681,0
 The Goo Goo Dolls,Oshawa,Canada,1,2026-04-01,2026-04-01,False,43.8993128,-78.8513168,0
@@ -2962,7 +2908,6 @@ The Offspring,Columbus,United States Of America,1,2026-05-15,2026-05-15,False,40
 The Offspring,Daytona Beach,United States Of America,1,2026-05-08,2026-05-08,False,29.1857775,-81.0696113,0
 The Offspring,Dessel,Belgium,1,2026-06-18,2026-06-18,False,51.23257,5.07662,0
 The Offspring,London,Great Britain,1,2026-06-28,2026-06-28,True,51.419769,-0.07182,0
-The Offspring,Plant City,United States Of America,1,2026-03-07,2026-03-07,False,28.0184,-82.113403,0
 The Offspring,Redondo Beach,United States Of America,1,2026-05-02,2026-05-02,False,33.843867,-118.39284,0
 The Offspring,Sacramento,United States Of America,1,2026-10-01,2026-10-01,False,38.630932,-121.5606703,0
 The Offspring,Saint-Jean-sur-Richelieu,Canada,1,2026-08-08,2026-08-08,False,45.2957,-73.28707,0
@@ -3005,9 +2950,9 @@ Thee Sacred Souls,Carnation,United States Of America,1,2026-08-08,2026-08-08,Fal
 Thee Sacred Souls,Chicago,United States Of America,1,2026-09-26,2026-09-26,False,41.9063,-87.659,0
 Thee Sacred Souls,Cincinnati,United States Of America,1,2026-09-23,2026-09-23,False,39.09674,-84.51345,0
 Thee Sacred Souls,Denver,United States Of America,1,2026-08-20,2026-08-20,False,39.73246,-105.01428,0
-Thee Sacred Souls,Dillon,United States Of America,1,2026-08-21,2026-08-21,False,39.652199,-106.121902,0
+Thee Sacred Souls,Dillon,United States Of America,1,2026-08-21,2026-08-21,False,39.6266,-106.04727,0
 Thee Sacred Souls,El Paso,United States Of America,1,2026-08-25,2026-08-25,False,31.765721,-106.442271,0
-Thee Sacred Souls,Forest Grove,United States Of America,1,2026-08-11,2026-08-11,False,45.521108,-123.086022,0
+Thee Sacred Souls,Forest Grove,United States Of America,1,2026-08-11,2026-08-11,False,45.6684,-123.3405,0
 Thee Sacred Souls,Fresno,United States Of America,1,2026-08-16,2026-08-16,False,36.8086726,-119.7394542,0
 Thee Sacred Souls,Houston,United States Of America,1,2026-09-11,2026-09-11,False,29.76539,-95.36416,0
 Thee Sacred Souls,Irving,United States Of America,1,2026-09-12,2026-09-12,False,32.872469,-96.942954,0
@@ -3017,7 +2962,7 @@ Thee Sacred Souls,Phoenix,United States Of America,1,2026-08-26,2026-08-26,False
 Thee Sacred Souls,Queens,United States Of America,1,2026-06-06,2026-06-06,False,40.71634,-73.82583,0
 Thee Sacred Souls,San Antonio,United States Of America,1,2026-09-10,2026-09-10,False,29.42597,-98.4428439,0
 Thee Sacred Souls,San Diego,United States Of America,1,2026-08-28,2026-08-28,False,32.70709659,-117.15680771,0
-Thee Sacred Souls,Sandy,United States Of America,1,2026-08-18,2026-08-18,False,40.5769,-111.888397,0
+Thee Sacred Souls,Sandy,United States Of America,1,2026-08-18,2026-08-18,False,40.58303,-111.89334,0
 Thee Sacred Souls,Toronto,Canada,1,2026-09-20,2026-09-20,False,43.6294544,-79.4149193,0
 Thee Sacred Souls,Vancouver,Canada,1,2026-08-09,2026-08-09,False,49.283883,-123.037117,0
 Thee Sacred Souls,Vienna,United States Of America,1,2026-09-17,2026-09-17,True,38.935398,-77.272102,0
@@ -3026,7 +2971,6 @@ Three Days Grace,Belmont Park,United States Of America,1,2026-03-12,2026-03-12,F
 Three Days Grace,Biloxi,United States Of America,1,2026-10-23,2026-10-23,False,30.391294,-88.973907,0
 Three Days Grace,Cincinnati,United States Of America,1,2026-03-10,2026-03-10,False,39.097929,-84.504088,0
 Three Days Grace,Clearwater,United States Of America,1,2026-03-20,2026-03-20,False,27.9445,-82.7883,0
-Three Days Grace,Columbus,United States Of America,1,2026-03-08,2026-03-08,False,39.96939661,-83.00636203,0
 Three Days Grace,Denver,United States Of America,1,2026-11-11,2026-11-11,False,39.74724,-105.010166,0
 Three Days Grace,Edmonton,Canada,1,2026-07-11,2026-07-11,False,53.570576,-113.5076,0
 Three Days Grace,Halifax,Canada,1,2026-05-08,2026-05-08,False,44.648273,-63.576835,0
@@ -3037,7 +2981,6 @@ Three Days Grace,Inglewood,United States Of America,1,2026-11-22,2026-11-22,Fals
 Three Days Grace,Kansas City,United States Of America,1,2026-11-09,2026-11-09,False,39.1015411,-94.5676009,0
 Three Days Grace,Kelowna,Canada,1,2026-04-21,2026-04-21,False,49.893551,-119.4949161,0
 Three Days Grace,London,Canada,1,2026-07-18,2026-07-18,True,0.0,0.0,0
-Three Days Grace,Minneapolis,United States Of America,1,2026-03-06,2026-03-06,False,44.970299,-93.286102,0
 Three Days Grace,Moncton,Canada,1,2026-05-07,2026-05-07,False,46.085958,-64.784148,0
 Three Days Grace,Nampa,United States Of America,1,2026-11-14,2026-11-14,False,43.634102,-116.4991,0
 Three Days Grace,Nashville,United States Of America,1,2026-11-01,2026-11-01,False,36.159949,-86.77857,0
@@ -3087,13 +3030,11 @@ Toto,Bend,United States Of America,1,2026-08-19,2026-08-19,False,44.048328,-121.
 Toto,Bethel,United States Of America,1,2026-07-15,2026-07-15,False,41.69688884,-74.8779738,0
 Toto,Boston,United States Of America,1,2026-07-21,2026-07-21,False,42.34851323,-71.03587836,0
 Toto,Brandon,United States Of America,1,2026-08-05,2026-08-05,False,32.2833,-89.984424,0
-Toto,Catoosa,United States Of America,1,2026-03-06,2026-03-06,False,36.1721,-95.694603,0
 Toto,Charlotte,United States Of America,1,2026-07-28,2026-07-28,False,35.327362,-80.7106699,0
 Toto,Chula Vista,United States Of America,1,2026-08-12,2026-08-12,False,32.58830386,-117.00640802,0
 Toto,Clarkston,United States Of America,1,2026-08-29,2026-08-29,False,42.75098483,-83.3802299,0
 Toto,Denver,United States Of America,1,2026-08-22,2026-08-22,False,39.74724,-105.010166,0
 Toto,Des Moines,United States Of America,1,2026-03-11,2026-03-11,False,41.588643,-93.638339,0
-Toto,Durant,United States Of America,1,2026-03-07,2026-03-07,False,33.952206,-96.414088,0
 Toto,Grand Rapids,United States Of America,1,2026-08-28,2026-08-28,False,42.95954185,-85.6766238,0
 Toto,Holmdel,United States Of America,1,2026-07-18,2026-07-18,False,40.410434,-74.1377399,0
 Toto,Kansas City,United States Of America,1,2026-08-24,2026-08-24,False,39.16288,-94.6368,0
@@ -3140,14 +3081,12 @@ U2,San Juan Capistrano,United States Of America,1,2026-05-22,2026-05-22,False,33
 V,New York City,United States Of America,1,2026-06-06,2026-06-06,False,40.757201,-73.985763,0
 Waka Flocka Flame,Atlanta,United States Of America,1,2026-04-09,2026-04-09,False,33.757796,-84.394569,0
 Waka Flocka Flame,Brooklyn,United States Of America,1,2026-03-28,2026-03-28,False,40.68285,-73.97519,0
-Waka Flocka Flame,Charlotte,United States Of America,1,2026-03-07,2026-03-07,False,35.225222,-80.839921,0
 Waka Flocka Flame,Chicago,United States Of America,1,2026-04-23,2026-04-23,False,41.88124412,-87.67427375,0
 Waka Flocka Flame,Detroit,United States Of America,1,2026-04-03,2026-04-03,False,42.341089,-83.055434,0
 Waka Flocka Flame,Fort Worth,United States Of America,1,2026-03-14,2026-03-14,False,32.741072,-97.368507,0
 Waka Flocka Flame,Inglewood,United States Of America,1,2026-03-22,2026-03-22,False,33.9583,-118.341868,0
 Waka Flocka Flame,Philadelphia,United States Of America,1,2026-03-27,2026-03-27,False,39.9797685,-75.1576471,0
 Waka Flocka Flame,Pittsburgh,United States Of America,1,2026-04-04,2026-04-04,False,40.443061,-79.962273,0
-Waka Flocka Flame,Washington,United States Of America,1,2026-03-08,2026-03-08,False,38.897412,-77.020029,0
 Wet Leg,Dublin,Ireland,1,2026-07-01,2026-07-01,True,53.343899,-6.25329,0
 Wet Leg,Glasgow,Great Britain,1,2026-06-30,2026-06-30,False,55.847332,-4.313765,0
 Wet Leg,Landgraaf,Netherlands,1,2026-06-21,2026-06-21,False,50.88219,6.02,0
@@ -3192,7 +3131,7 @@ Wiz Khalifa,Holmdel,United States Of America,1,2026-06-09,2026-06-09,False,40.41
 Wiz Khalifa,Kansas City,United States Of America,1,2026-06-23,2026-06-23,False,39.16288,-94.6368,0
 Wiz Khalifa,Maryland Heights,United States Of America,1,2026-06-19,2026-06-19,False,38.7456419,-90.469956,0
 Wiz Khalifa,Morrison,United States Of America,1,2026-04-19,2026-04-19,False,39.598999,-105.228104,0
-Wiz Khalifa,Nampa,United States Of America,1,2026-06-27,2026-06-27,False,43.611401,-116.533302,0
+Wiz Khalifa,Nampa,United States Of America,1,2026-06-27,2026-06-27,False,43.606732,-116.512342,0
 Wiz Khalifa,Noblesville,United States Of America,1,2026-06-20,2026-06-20,False,40.00373203,-85.93427182,0
 Wiz Khalifa,Raleigh,United States Of America,1,2026-06-02,2026-06-02,False,35.75054,-78.578298,0
 Wiz Khalifa,Ridgefield,United States Of America,1,2026-07-01,2026-07-01,False,45.750612,-122.674434,0
@@ -3213,7 +3152,7 @@ Wolf Alice,Glasgow,Great Britain,1,2026-06-19,2026-06-19,False,55.851214,-4.2369
 Wolf Alice,London,Great Britain,2,2026-03-29,2026-07-05,True,51.564635,-0.105881,1
 Wolf Alice,Montreal,Canada,1,2026-07-31,2026-07-31,False,45.506426,-73.526001,0
 Wolf Alice,México,Mexico,1,2026-05-20,2026-05-20,False,19.3934097,-99.1758118,0
-Wolf Alice,New York,United States Of America,1,2026-07-29,2026-07-29,False,40.7056185,-74.001798,0
+Wolf Alice,New York,United States Of America,1,2026-07-29,2026-07-29,False,40.708801,-74.002899,0
 Wolf Alice,Newcastle,Great Britain,1,2026-07-12,2026-07-12,False,54.9859248,-1.6148629,0
 Wolf Alice,South Yarra,Australia,1,2026-12-05,2026-12-05,False,-37.831632,144.977278,0
 Wolf Alice,Sydney,Australia,1,2026-12-04,2026-12-04,False,-33.869579,151.210004,0
@@ -3229,6 +3168,7 @@ ZAYN,Charlotte,United States Of America,1,2026-11-12,2026-11-12,False,35.225222,
 ZAYN,Chicago,United States Of America,1,2026-07-27,2026-07-27,False,41.88124412,-87.67427375,0
 ZAYN,Ciudad de México,Mexico,1,2026-06-20,2026-06-20,False,19.405199,-99.095618,0
 ZAYN,Detroit,United States Of America,1,2026-11-08,2026-11-08,False,42.341089,-83.055434,0
+ZAYN,Dublin,Ireland,1,2026-05-14,2026-05-14,True,53.347512,-6.228482,0
 ZAYN,Glasgow,Great Britain,1,2026-05-16,2026-05-16,False,55.86087,-4.288154,0
 ZAYN,Indianapolis,United States Of America,1,2026-07-28,2026-07-28,False,39.764064,-86.155507,0
 ZAYN,Inglewood,United States Of America,1,2026-08-28,2026-08-28,False,33.94432,-118.34285,0
@@ -3268,14 +3208,12 @@ Zach Bryan,Liverpool,Great Britain,1,2026-06-12,2026-06-12,False,53.43123902,-2.
 Zach Bryan,London,Great Britain,2,2026-06-16,2026-06-17,True,51.600819,-0.06787,1
 Zach Bryan,Louisville,United States Of America,1,2026-04-11,2026-04-11,False,38.204245,-85.756917,0
 Zach Bryan,Mississippi State,United States Of America,1,2026-05-02,2026-05-02,False,33.451599,-88.788803,0
-Zach Bryan,Saint Louis,United States Of America,1,2026-03-07,2026-03-07,False,38.630801,-90.191488,0
 Zach Bryan,Salt Lake City,United States Of America,1,2026-08-07,2026-08-07,False,40.7596422,-111.850261,0
 Zach Bryan,San Antonio,United States Of America,1,2026-03-21,2026-03-21,False,29.41705466,-98.4791514,0
 Zach Bryan,San Diego,United States Of America,2,2026-07-31,2026-08-01,False,32.78451,-117.1212,1
 Zach Bryan,Tampa,United States Of America,1,2026-03-14,2026-03-14,False,27.975976,-82.503474,0
 Zach Bryan,Toronto,Canada,2,2026-09-21,2026-09-22,False,43.6417384,-79.3917447,1
 Zach Bryan,Tulsa,United States Of America,2,2026-04-03,2026-04-04,False,36.146,-95.953697,1
-Zara Larsson,Anaheim,United States Of America,1,2026-03-07,2026-03-07,False,33.8095868,-117.9229975,0
 Zara Larsson,Atlanta,United States Of America,1,2026-04-05,2026-04-05,False,33.758688,-84.391449,0
 Zara Larsson,Auckland,New Zealand,2,2026-10-25,2026-10-26,False,-36.847021,174.77687,1
 Zara Larsson,Austin,United States Of America,1,2026-04-10,2026-04-10,False,30.268487,-97.736192,0
@@ -3288,7 +3226,7 @@ Zara Larsson,Chicago,United States Of America,1,2026-03-15,2026-03-15,False,41.9
 Zara Larsson,Cleveland,United States Of America,1,2026-03-20,2026-03-20,False,41.481201,-81.698402,0
 Zara Larsson,Columbus,United States Of America,1,2026-03-21,2026-03-21,False,39.965099,-83.0,0
 Zara Larsson,Dallas,United States Of America,1,2026-04-11,2026-04-11,False,32.7827,-96.775803,0
-Zara Larsson,Denver,United States Of America,1,2026-03-11,2026-03-11,False,39.75333786,-104.99507141,0
+Zara Larsson,Denver,United States Of America,1,2026-03-11,2026-03-11,False,39.740611,-104.977194,0
 Zara Larsson,Detroit,United States Of America,1,2026-03-17,2026-03-17,False,42.351852,-83.060335,0
 Zara Larsson,Edinburgh,Great Britain,1,2026-08-25,2026-08-25,False,55.941952,-3.37116,0
 Zara Larsson,Göteborg,Sweden,1,2026-08-15,2026-08-15,False,57.70126,11.96705,0
@@ -3308,7 +3246,6 @@ Zara Larsson,México,Mexico,1,2026-05-16,2026-05-16,False,19.402829,-99.089247,0
 Zara Larsson,Nashville,United States Of America,1,2026-04-04,2026-04-04,False,36.149399,-86.790001,0
 Zara Larsson,Orlando,United States Of America,1,2026-04-08,2026-04-08,False,28.370393,-81.504616,0
 Zara Larsson,Philadelphia,United States Of America,1,2026-03-30,2026-03-30,False,39.965803,-75.134686,0
-Zara Larsson,Phoenix,United States Of America,1,2026-03-08,2026-03-08,False,33.451085,-112.079228,0
 Zara Larsson,Pittsburgh,United States Of America,1,2026-03-22,2026-03-22,False,40.448101,-79.990898,0
 Zara Larsson,Raleigh,United States Of America,1,2026-04-03,2026-04-03,False,35.815896,-78.619991,0
 Zara Larsson,Royal Oak,United States Of America,1,2026-03-17,2026-03-17,False,42.4907,-83.137901,0
@@ -3318,17 +3255,15 @@ Zara Larsson,Washington,United States Of America,1,2026-03-31,2026-03-31,False,3
 Zedd,Chicago,United States Of America,1,2026-06-06,2026-06-06,False,41.86426286,-87.60883784,0
 Zedd,Hollywood,United States Of America,1,2026-03-14,2026-03-14,False,0.0,0.0,0
 Zedd,Inglewood,United States Of America,1,2026-08-02,2026-08-02,False,33.95371247,-118.3368854,0
-Zedd,Las Vegas,United States Of America,10,2026-03-06,2026-09-05,False,36.271265,-115.001879,1
+Zedd,Las Vegas,United States Of America,9,2026-03-13,2026-09-05,False,36.271265,-115.001879,1
 Zedd,Napa,United States Of America,3,2026-05-22,2026-05-24,False,38.29758318,-122.27770996,1
 Zedd,Saint Paul,United States Of America,1,2026-06-26,2026-06-26,False,44.952881,-93.165217,0
 Zedd,San Bernardino,United States Of America,2,2026-03-27,2026-03-28,False,34.089696,-117.291653,1
 Zedd,San Francisco,United States Of America,1,2026-06-28,2026-06-28,False,37.7309,-122.386002,0
 bbno$,Amsterdam,Netherlands,1,2026-05-19,2026-05-19,True,52.31236,4.94415,0
-bbno$,Atlanta,United States Of America,1,2026-03-07,2026-03-07,False,33.89024,-84.469717,0
 bbno$,Berlin,Germany,1,2026-05-26,2026-05-26,True,52.48461,13.3914,0
 bbno$,Boston,United States Of America,1,2026-03-11,2026-03-11,False,42.346806,-71.097272,0
 bbno$,Buffalo,United States Of America,1,2026-03-20,2026-03-20,False,42.856098,-78.864403,0
-bbno$,Charlotte,United States Of America,1,2026-03-08,2026-03-08,False,35.239095,-80.845519,0
 bbno$,Chicago,United States Of America,1,2026-03-17,2026-03-17,False,41.9063,-87.659,0
 bbno$,Cleveland,United States Of America,1,2026-03-18,2026-03-18,False,41.481201,-81.698402,0
 bbno$,Cologne,Germany,2,2026-05-16,2026-05-17,False,50.96949,7.01777,1
@@ -3370,6 +3305,31 @@ i-dle,Orlando,United States Of America,1,2026-08-11,2026-08-11,False,28.539293,-
 i-dle,Philadelphia,United States Of America,1,2026-08-06,2026-08-06,False,39.904551,-75.1736273,0
 i-dle,San Antonio,United States Of America,1,2026-08-13,2026-08-13,False,29.4330386,-98.4337987,0
 i-dle,Seattle,United States Of America,1,2026-08-23,2026-08-23,False,47.6221261,-122.35401604,0
+nettspend,Anaheim,United States Of America,1,2026-05-20,2026-05-20,False,33.8095868,-117.9229975,0
+nettspend,Atlanta,United States Of America,1,2026-05-07,2026-05-07,False,33.7136,-84.332802,0
+nettspend,Austin,United States Of America,1,2026-05-14,2026-05-14,False,30.239574,-97.728048,0
+nettspend,Baltimore,United States Of America,1,2026-04-30,2026-04-30,False,39.290443,-76.612333,0
+nettspend,Boston,United States Of America,1,2026-04-25,2026-04-25,False,42.3471841,-71.0957036,0
+nettspend,Charlotte,United States Of America,1,2026-05-06,2026-05-06,False,35.239095,-80.845519,0
+nettspend,Columbus,United States Of America,1,2026-04-22,2026-04-22,False,39.990601,-83.0,0
+nettspend,Denver,United States Of America,1,2026-04-13,2026-04-13,False,39.75333786,-104.99507141,0
+nettspend,Detroit,United States Of America,1,2026-04-17,2026-04-17,False,42.3323449,-83.041464,0
+nettspend,Hollywood,United States Of America,1,2026-05-28,2026-05-28,False,34.09850537,-118.32421313,0
+nettspend,Indianapolis,United States Of America,1,2026-04-21,2026-04-21,False,39.77464676,-86.15145874,0
+nettspend,Krakow,Poland,1,2026-06-03,2026-06-03,False,50.0678,19.9912,0
+nettspend,Las Vegas,United States Of America,1,2026-05-26,2026-05-26,False,36.087535,-115.174742,0
+nettspend,New York,United States Of America,1,2026-04-28,2026-04-28,False,40.765202,-73.985298,0
+nettspend,Oakland,United States Of America,1,2026-05-22,2026-05-22,False,37.8077176,-122.2700597,0
+nettspend,Orlando,United States Of America,1,2026-05-08,2026-05-08,False,28.538255,-81.402071,0
+nettspend,Philadelphia,United States Of America,1,2026-04-24,2026-04-24,False,39.964001,-75.147697,0
+nettspend,Raleigh,United States Of America,1,2026-05-03,2026-05-03,False,35.815896,-78.619991,0
+nettspend,Richmond,United States Of America,1,2026-05-04,2026-05-04,False,37.5411,-77.434601,0
+nettspend,Sacramento,United States Of America,1,2026-05-23,2026-05-23,False,38.56620977,-121.4788189,0
+nettspend,San Diego,United States Of America,1,2026-05-19,2026-05-19,False,32.748097,-117.131213,0
+nettspend,Seattle,United States Of America,1,2026-04-08,2026-04-08,False,47.576599,-122.331596,0
+nettspend,Silver Spring,United States Of America,1,2026-04-29,2026-04-29,False,38.99734055,-77.02746183,0
+nettspend,Tempe,United States Of America,1,2026-05-17,2026-05-17,False,33.43699137,-111.94398356,0
+nettspend,Toronto,Canada,2,2026-08-28,2026-08-29,False,43.771766,-79.513819,1
 sombr,Biddinghuizen,Netherlands,1,2026-08-21,2026-08-21,False,52.43793,5.76792,0
 sombr,Birmingham,Great Britain,1,2026-03-13,2026-03-13,False,52.473277,-1.900215,0
 sombr,Dublin,Ireland,1,2026-03-16,2026-03-16,True,53.347512,-6.228482,0
@@ -3377,7 +3337,7 @@ sombr,Glasgow,Great Britain,1,2026-03-15,2026-03-15,False,55.8504496,-4.2587809,
 sombr,Göteborg,Sweden,1,2026-08-15,2026-08-15,False,57.70126,11.96705,0
 sombr,Helsinki,Finland,1,2026-08-16,2026-08-16,True,60.18422,24.9754,0
 sombr,Leeds,Great Britain,1,2026-08-30,2026-08-30,False,53.87016,-1.380345,0
-sombr,London,Great Britain,3,2026-03-08,2026-03-10,True,51.465355,-0.115176,1
+sombr,London,Great Britain,2,2026-03-09,2026-03-10,True,51.465355,-0.115176,1
 sombr,Manchester,Great Britain,1,2026-03-12,2026-03-12,False,53.48008,-2.25446,0
 sombr,Montreal,Canada,1,2026-07-31,2026-07-31,False,45.506426,-73.526001,0
 sombr,Munich,Germany,1,2026-09-01,2026-09-01,False,48.17429,11.55524,0

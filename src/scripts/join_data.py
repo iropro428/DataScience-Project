@@ -54,7 +54,9 @@ _first_event = _df_future.groupby("artist_name")["event_date_dt"].min().rename("
 _first_onsale = _df_future.groupby("artist_name")["onsale_date_dt"].min().rename("first_onsale_date")
 _lead_df = pd.concat([_first_event, _first_onsale], axis=1).dropna()
 _lead_df["lead_time_days"] = (_lead_df["first_event_date"] - _lead_df["first_onsale_date"]).dt.days
-_lead_df.loc[_lead_df["lead_time_days"] < 0, "lead_time_days"] = None  # data error
+# Exclude unrealistic lead times
+_lead_df.loc[_lead_df["lead_time_days"] < 0, "lead_time_days"] = None
+_lead_df.loc[_lead_df["lead_time_days"] >= 1095, "lead_time_days"] = None
 n_lead = _lead_df["lead_time_days"].notna().sum()
 print(f"lead_time_days: {n_lead} Artists mit zukuenftigem Event + onsale_date "
       f"(Median: {_lead_df['lead_time_days'].median():.0f} Tage)")

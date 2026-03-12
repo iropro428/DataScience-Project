@@ -134,6 +134,11 @@ def get_events(artist_id, artist_name):
                                 pd.to_datetime(event_date) -
                                 pd.to_datetime(onsale_date).normalize()
                         ).days
+
+                        # Only keep realistic lead times (< 3 years)
+                        if lead_time_days is not None and lead_time_days >= 1095:
+                            lead_time_days = None
+
                     except:
                         pass
 

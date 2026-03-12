@@ -172,7 +172,7 @@ with c3:
         options=top_genres, default=[], key="g1_genres"
     )
 with c4:
-    show_labels = st.checkbox("Show artist names", value=False, key="g1_lbl")
+    show_labels = st.checkbox("Show names", value=False, key="g1_lbl")
 
 # Apply filters
 df1 = df[
@@ -1156,7 +1156,7 @@ if len(df2f) >= 5:
     """)
 
     abs_r_f2 = abs(r_f2)
-
+    direction_f2 = "positive" if r_f2 > 0 else "negative"
     if abs_r_f2 < 0.1:
         relationship_text_f2 = "no meaningful linear relationship"
     elif abs_r_f2 < 0.3:
@@ -1634,7 +1634,7 @@ if "chart_weeks" in df3.columns and df3["chart_weeks"].notna().sum() >= 5:
             )
             log_x_f3 = st.checkbox("Log X", value=log_x_f3, key="f3_logx")
             log_y_f3 = st.checkbox("Log Y", value=log_y_f3, key="f3_logy")
-            lbl_f3 = st.checkbox("Names", value=lbl_f3, key="f3_lbl")
+            lbl_f3 = st.checkbox("Show names", value=lbl_f3, key="f3_lbl")
 
 
         # Relationship interpretation
@@ -1687,7 +1687,7 @@ if "chart_weeks" in df3.columns and df3["chart_weeks"].notna().sum() >= 5:
                 "x_plot": x_axis_label,
                 "y_plot": y_axis_label,
             },
-            title=f"Chart intensity vs. listeners  |  r = {r_f3:.3f}  |  n = {len(df_sc3)}",
+            title=f"Chart intensity vs. listeners",
             template="plotly_dark",
         )
 
