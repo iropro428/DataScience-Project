@@ -11,203 +11,263 @@ import streamlit as st
 
 TERMS = {
     "Pearson r": {
-        "kurz": "Stärke des Zusammenhangs zwischen zwei Variablen (-1 bis +1)",
+        "kurz": "Strength of the linear relationship between two variables (-1 to +1)",
         "lang": """
-**Pearson r** misst wie stark zwei Zahlen zusammenhängen.
+**Pearson r** measures how strongly two variables are linearly related.
 
-| Wert | Bedeutung |
-|------|-----------|
-| **+1** | Steigt X → steigt Y immer mit |
-| **0** | Kein Zusammenhang |
-| **-1** | Steigt X → fällt Y immer |
+| Value | Meaning |
+|-------|---------|
+| **+1** | Perfect positive relationship |
+| **0** | No relationship |
+| **-1** | Perfect negative relationship |
 
-**Faustregel:** < 0.2 = vernachlässigbar · 0.2–0.4 = schwach · 0.4–0.7 = moderat · > 0.7 = stark
+**Rule of thumb:** < 0.2 = negligible · 0.2–0.4 = weak · 0.4–0.7 = moderate · > 0.7 = strong
 """,
-        "emoji": "📏", "kategorie": "Statistik",
+        "emoji": "📏", "kategorie": "Statistics",
     },
-    "p-Wert": {
-        "kurz": "Wahrscheinlichkeit dass das Ergebnis reiner Zufall ist (< 0.05 = signifikant)",
+    "p-Value": {
+        "kurz": "Probability that the result is due to chance (< 0.05 = significant)",
         "lang": """
-**p-Wert** beantwortet: *Koennte dieses Ergebnis reiner Zufall sein?*
+**p-value** answers: *Could this result be pure chance?*
 
-| p-Wert | Bedeutung |
-|--------|-----------|
-| **< 0.05** | Signifikant — sehr unwahrscheinlich Zufall |
-| **0.05–0.10** | Schwacher Hinweis |
-| **> 0.10** | Kein belastbares Ergebnis |
+| p-value | Meaning |
+|---------|---------|
+| **< 0.05** | Significant — very unlikely to be chance |
+| **0.05–0.10** | Weak indication |
+| **> 0.10** | No reliable result |
 
-p = 0.0109 bedeutet: nur 1.09% Wahrscheinlichkeit dass der Zusammenhang Zufall ist.
+p = 0.021 means: only a 2.1% probability that the relationship occurred by chance.
 """,
-        "emoji": "🎯", "kategorie": "Statistik",
+        "emoji": "🎯", "kategorie": "Statistics",
     },
     "R²": {
-        "kurz": "Wie viel Prozent der Variation erklärt das Modell? (0-100%)",
+        "kurz": "How much of the variation is explained by the model? (0–100%)",
         "lang": """
-**R²** = Pearson r zum Quadrat.
+**R²** = Pearson r squared.
 
-Sagt wie viel Prozent der Unterschiede zwischen Artists die X-Variable erklärt.
+Tells you what percentage of the differences between artists is explained by the X variable.
 
-r = 0.21 → R² = 4.4% → Nur 4.4% der Listener-Unterschiede erklärt durch Chart-Wochen.
+r = 0.21 → R² = 4.4% → Only 4.4% of the variation in the outcome is explained by listener count.
 """,
-        "emoji": "📐", "kategorie": "Statistik",
+        "emoji": "📐", "kategorie": "Statistics",
     },
     "OLS": {
-        "kurz": "Trendlinie die am besten durch alle Punkte passt (Methode der kleinsten Quadrate)",
+        "kurz": "Trend line that best fits all data points (Ordinary Least Squares)",
         "lang": """
 **OLS** = Ordinary Least Squares.
 
-Berechnet automatisch die gerade Linie die durchschnittlich am nächsten an allen Punkten liegt.
+Automatically calculates the straight line that is on average closest to all data points.
 
-- Linie steigt → positiver Zusammenhang
-- Linie fällt → negativer Zusammenhang
-- Flache Linie → kein Zusammenhang
+- Rising line → positive relationship
+- Falling line → negative relationship
+- Flat line → no relationship
 """,
-        "emoji": "📈", "kategorie": "Statistik",
+        "emoji": "📈", "kategorie": "Statistics",
     },
     "Mann-Whitney U": {
-        "kurz": "Vergleicht zwei Gruppen ohne Annahmen ueber die Verteilung",
+        "kurz": "Compares two groups without assumptions about the distribution",
         "lang": """
-**Mann-Whitney U** vergleicht zwei Gruppen — robust bei schiefen Verteilungen.
+**Mann-Whitney U** compares two groups — robust for skewed distributions.
 
-Warum nicht t-Test? Listener-Zahlen sind extrem schief (Taylor Swift vs. Indie-Artist).
-Mann-Whitney sortiert alle Artists nach Listeners und prueft ob Chart-Artists
-systematisch weiter oben stehen.
+Why not a t-test? Listener counts are extremely skewed (Taylor Swift vs. indie artist).
+Mann-Whitney ranks all artists by listeners and checks whether one group systematically ranks higher.
 """,
-        "emoji": "⚖️", "kategorie": "Statistik",
+        "emoji": "⚖️", "kategorie": "Statistics",
     },
     "Kruskal-Wallis": {
-        "kurz": "Vergleicht 3 oder mehr Gruppen — Erweiterung von Mann-Whitney",
+        "kurz": "Compares 3 or more groups — extension of Mann-Whitney",
         "lang": """
-**Kruskal-Wallis** wie Mann-Whitney U, aber fuer 3+ Gruppen.
+**Kruskal-Wallis** works like Mann-Whitney U, but for 3 or more groups.
 
-H-Statistik: je groesser, desto mehr unterscheiden sich die Gruppen.
-p-Wert < 0.05 → mindestens zwei Gruppen unterscheiden sich signifikant.
+H-statistic: the larger, the more the groups differ.
+p-value < 0.05 → at least two groups differ significantly.
 """,
-        "emoji": "📊", "kategorie": "Statistik",
+        "emoji": "📊", "kategorie": "Statistics",
     },
     "Cohen's d": {
-        "kurz": "Wie gross ist der Unterschied zwischen zwei Gruppen wirklich?",
+        "kurz": "How large is the difference between two groups in practice?",
         "lang": """
-**Cohen's d** misst die praktische Bedeutung — unabhängig von Signifikanz.
+**Cohen's d** measures practical significance — independent of statistical significance.
 
-| d | Effektstärke |
-|---|--------------|
-| < 0.2 | Vernachlässigbar |
-| 0.2–0.5 | Klein |
-| 0.5–0.8 | Mittel |
-| > 0.8 | Gross |
+| d | Effect size |
+|---|-------------|
+| < 0.2 | Negligible |
+| 0.2–0.5 | Small |
+| 0.5–0.8 | Medium |
+| > 0.8 | Large |
 """,
-        "emoji": "📏", "kategorie": "Statistik",
+        "emoji": "📏", "kategorie": "Statistics",
     },
-    "Signifikant": {
-        "kurz": "Ergebnis ist sehr wahrscheinlich kein Zufall (p < 0.05)",
+    "Significant": {
+        "kurz": "Result is very unlikely to be due to chance (p < 0.05)",
         "lang": """
-**Statistisch signifikant** = das Muster wuerde bei zufälligen Daten
-nur in weniger als 5% der Fälle auftreten.
+**Statistically significant** = the observed pattern would occur in random data
+in fewer than 5% of cases.
 
-Wichtig: Signifikant ≠ wichtig oder gross — nur 'nicht zufällig'.
+Important: significant ≠ important or large — it only means 'not random'.
 """,
-        "emoji": "✅", "kategorie": "Statistik",
+        "emoji": "✅", "kategorie": "Statistics",
     },
     "Median": {
-        "kurz": "Mittlerer Wert — 50% liegen darunter, 50% darueber",
+        "kurz": "Middle value — 50% of values are below, 50% above",
         "lang": """
-**Median** ist der Wert genau in der Mitte (sortierte Reihe).
+**Median** is the value exactly in the middle of a sorted list.
 
-Robuster als Mittelwert bei schiefen Daten — Taylor Swift verfälscht
-den Durchschnitt, den Median kaum.
+More robust than the mean for skewed data — one superstar artist barely shifts
+the median, but can heavily distort the average.
 """,
-        "emoji": "📍", "kategorie": "Statistik",
+        "emoji": "📍", "kategorie": "Statistics",
     },
-    "Quartil": {
-        "kurz": "Teilt Daten in 4 gleich grosse Gruppen (je 25%)",
+    "Quartile": {
+        "kurz": "Divides data into 4 equally sized groups (25% each)",
         "lang": """
-**Quartile:** Q1 = untere 25% · Q2 = 50% · Q3 = 75% · Q4 = obere 25%
+**Quartiles:** Q1 = bottom 25% · Q2 = 50% · Q3 = 75% · Q4 = top 25%
 
-Verwendung: Artists nach Popularity-Tier gruppieren.
+Used in this project to group artists into popularity tiers.
 """,
-        "emoji": "📦", "kategorie": "Statistik",
+        "emoji": "📦", "kategorie": "Statistics",
     },
     "n": {
-        "kurz": "Anzahl der Datenpunkte in der Analyse",
+        "kurz": "Number of data points in the analysis",
         "lang": """
-**n** = Stichprobengroesse.
+**n** = sample size.
 
-Grosses n → zuverlässiger, auch kleine Effekte werden signifikant.
-Kleines n → braucht stärkere Effekte um signifikant zu werden.
+Large n → more reliable; even small effects can become significant.
+Small n → requires stronger effects to reach significance.
 """,
-        "emoji": "🔢", "kategorie": "Statistik",
-    },
-    "HHI": {
-        "kurz": "Misst wie konzentriert Streams auf wenige Top-Tracks sind (0-10.000)",
-        "lang": """
-**HHI** = Herfindahl-Hirschman Index.
-
-Nah 0 → Streams gleichmässig verteilt (breiter Katalog)
-Nah 10.000 → Fast alles von einem Track (One-Hit-Wonder)
-""",
-        "emoji": "🎵", "kategorie": "Metriken",
+        "emoji": "🔢", "kategorie": "Statistics",
     },
     "Top-5-Share": {
-        "kurz": "Anteil der Top-5-Tracks am Gesamt-Playcount (%)",
+        "kurz": "Share of the top 5 tracks in total play count (%)",
         "lang": """
-**Top-5-Share** = Wie viel % aller Streams kommen von den 5 meistgehoerten Tracks?
+**Top-5-Share** = What percentage of all streams come from the 5 most-played tracks?
 
-90% → sehr konzentriert (One-Hit-Wonder-Effekt)
-30% → breiter Katalog
+90% → very concentrated (one-hit-wonder effect)
+30% → broad catalogue
 """,
-        "emoji": "🎧", "kategorie": "Metriken",
+        "emoji": "🎧", "kategorie": "Metrics",
     },
     "pct_capital": {
-        "kurz": "Anteil der Konzerte in Hauptstädten (%)",
+        "kurz": "Share of concerts held in capital cities (%)",
         "lang": """
-**pct_capital** = Konzerte in Hauptstädten / Alle Konzerte × 100
+**pct_capital** = Concerts in capital cities / All concerts × 100
 
-Hauptstädte bieten groessere Venues, mehr Presse, dichtere Fanbase.
+Capital cities tend to offer larger venues, more media coverage, and denser fanbases.
 """,
-        "emoji": "🏛️", "kategorie": "Metriken",
+        "emoji": "🏛️", "kategorie": "Metrics",
     },
-    "pct_revisit": {
-        "kurz": "Anteil der Städte die ein Artist mehr als einmal besucht (%)",
+    "Revisit Rate": {
+        "kurz": "Share of cities visited more than once on a tour (%)",
         "lang": """
-**pct_revisit_cities** = Städte mit ≥ 2 Besuchen / Alle Städte × 100
+**Revisit Rate** = Cities with 2 or more visits / All cities × 100
 
-Hoch → starke lokale Fanbasen · Niedrig → Expansions-Strategie
+High revisit rate → strong local fanbases, consolidation strategy.
+Low revisit rate → expansion strategy, reaching new markets.
 """,
-        "emoji": "🔄", "kategorie": "Metriken",
+        "emoji": "🔄", "kategorie": "Metrics",
+    },
+    "Jaccard Similarity": {
+        "kurz": "Overlap between two sets — here: streaming countries vs. tour countries (0 to 1)",
+        "lang": """
+**Jaccard Similarity** = |A ∩ B| / |A ∪ B|
+
+Measures how much two sets overlap, regardless of their size.
+
+| Value | Meaning |
+|-------|---------|
+| **1.0** | Perfect overlap — same countries in both sets |
+| **0.5** | Half of all countries appear in both sets |
+| **0.0** | No overlap at all |
+
+In this project: compares the set of countries where an artist is popular on Last.fm
+with the set of countries where they have Ticketmaster events.
+""",
+        "emoji": "🔀", "kategorie": "Metrics",
+    },
+    "Weighted Coverage": {
+        "kurz": "Share of an artist's global listener reach covered by their tour countries",
+        "lang": """
+**Weighted Coverage** is the main geo-alignment metric in this project.
+
+Unlike Jaccard, it weights each country by how many listeners the artist has there.
+
+| Score | Meaning |
+|-------|---------|
+| **1.0** | The artist performs in every country where they have significant listeners |
+| **0.0** | The artist tours in none of the countries where they have listeners |
+
+A score of 0.6 means 60% of the artist's total listener reach is covered by their tour.
+""",
+        "emoji": "🌍", "kategorie": "Metrics",
+    },
+    "Tour Coverage": {
+        "kurz": "Share of tour countries that are also top streaming countries (%)",
+        "lang": """
+**Tour Coverage** answers: of all the countries an artist tours in,
+how many are also countries where they have a significant streaming presence?
+
+High Tour Coverage → the artist mainly tours where fans already exist.
+Low Tour Coverage → the artist tours heavily into markets without an established audience.
+""",
+        "emoji": "🗺️", "kategorie": "Metrics",
+    },
+    "Streaming Reach": {
+        "kurz": "Share of streaming countries that are actually toured (%)",
+        "lang": """
+**Streaming Reach** answers: of all the countries where an artist has significant listeners,
+how many are actually visited on tour?
+
+High Streaming Reach → the artist converts their digital presence into live shows effectively.
+Low Streaming Reach → many listener markets remain unreached by live performances.
+""",
+        "emoji": "📡", "kategorie": "Metrics",
+    },
+    "Geo-Alignment": {
+        "kurz": "How well an artist's tour geography matches their streaming audience geography",
+        "lang": """
+**Geo-Alignment** is the central concept of Research Question 3.
+
+It measures whether artists perform in the same countries where their digital fanbase is located.
+A perfectly aligned artist tours exactly where their listeners are.
+A misaligned artist either tours regionally despite a global fanbase,
+or tours globally into markets where they have little streaming presence.
+
+Measured using three metrics: Jaccard Similarity, Weighted Coverage, and Streaming Reach.
+""",
+        "emoji": "🧭", "kategorie": "Metrics",
     },
     "Scatterplot": {
-        "kurz": "Diagramm wo jeder Punkt ein Artist ist — X und Y sind zwei Messwerte",
+        "kurz": "Chart where each dot is one artist — X and Y are two measured values",
         "lang": """
-**Scatterplot** zeigt den Zusammenhang zwischen zwei Variablen.
+**Scatterplot** shows the relationship between two variables.
 
-Punkte auf einer Linie → Zusammenhang.
-Zufällig verteilt → kein Zusammenhang.
-OLS-Linie zeigt den Durchschnittstrend.
+Points aligned along a line → relationship exists.
+Randomly distributed → no relationship.
+The OLS line shows the average trend across all artists.
 """,
-        "emoji": "🔵", "kategorie": "Visualisierung",
+        "emoji": "🔵", "kategorie": "Visualisation",
     },
     "Box Plot": {
-        "kurz": "Zeigt Minimum, Maximum, Median und Streuung einer Gruppe kompakt",
+        "kurz": "Shows minimum, maximum, median and spread of a group in one compact chart",
         "lang": """
-**Box Plot** zeigt 5 Kennzahlen:
+**Box Plot** displays 5 key values:
 
-- Box = mittlere 50% der Daten (Q1 bis Q3)
-- Linie in Box = Median
-- Striche = Bereich ohne extreme Ausreisser
-- Punkte aussen = Ausreisser
+- Box = middle 50% of the data (Q1 to Q3)
+- Line inside box = median
+- Whiskers = range excluding extreme outliers
+- Dots outside = outliers
 """,
-        "emoji": "📦", "kategorie": "Visualisierung",
+        "emoji": "📦", "kategorie": "Visualisation",
     },
-    "Log-Skala": {
-        "kurz": "Skala wo gleiche Abstände gleiche Verhältnisse bedeuten (x10, x100...)",
+    "Log Scale": {
+        "kurz": "Scale where equal distances represent equal ratios (×10, ×100...)",
         "lang": """
-**Log-Skala** loest das Problem wenn Daten sehr unterschiedliche
-Groessenordnungen haben (100k bis 50 Mio Listeners).
+**Log Scale** solves the problem when data spans very different orders of magnitude
+(e.g. 100k to 50 million listeners).
 
-Jeder Schritt = x10. So werden alle Artists sichtbar — nicht nur die Superstars.
+Each step = ×10. This makes all artists visible in one chart — not just the superstars.
 """,
-        "emoji": "📐", "kategorie": "Visualisierung",
+        "emoji": "📐", "kategorie": "Visualisation",
     },
 }
 
@@ -300,16 +360,16 @@ def tt(term: str, label: str = None) -> str:
 
 
 def glossar_seite():
-    """Vollständige Glossar-Seite — alle Begriffe nach Kategorie."""
+    """Complete glossary page — all terms grouped by category."""
     kategorien = {}
     for term, t in TERMS.items():
-        k = t.get("kategorie", "Sonstiges")
+        k = t.get("kategorie", "Other")
         kategorien.setdefault(k, []).append(term)
 
     kat_icons = {
-        "Statistik": "📊",
-        "Metriken": "📏",
-        "Visualisierung": "🎨",
+        "Statistics": "📊",
+        "Metrics": "📏",
+        "Visualisation": "🎨",
     }
 
     for kat, terms in kategorien.items():
