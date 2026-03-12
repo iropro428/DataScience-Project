@@ -101,6 +101,17 @@ for col, icon, title, color, border, bg, desc, qs, page in [
             "pages/2_Streaming_Ticket.py"
     ),
     (
+            c2, "🗺️",
+            "Geographic Analysis",
+            "#fbbf24", "#3d3010", "#1a1500",
+            "Wohin gehen Kuenstler auf Tournee — und deckt sich das mit ihrer geografischen "
+            "Streaming-Popularitaet? Wir analysieren ob Kuenstler Staedte wiederholt besuchen, "
+            "wie viele Konzerte in Hauptstaedten stattfinden, und ob Streaming-Laender "
+            "und Tour-Laender uebereinstimmen.",
+            ["Revisit vs. neue Staedte", "Hauptstaedte vs. Nicht-Hauptstaedte", "Streaming-Laender vs. Tour-Laender"],
+            "pages/3_Geographic.py"
+    ),
+    (
             c3, "📅",
             "Market Time & Scheduling",
             "#10b981", "#0d3020", "#051a10",

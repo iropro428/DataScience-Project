@@ -6,7 +6,10 @@ import streamlit as st
 
 PAGES = [
     {"label": "Streaming & Ticket", "page": "pages/2_Streaming_Ticket.py", "icon": "🎟️"},
+    {"label": "Geographic", "page": "pages/3_Geographic.py", "icon": "🗺️"},
     {"label": "Scheduling", "page": "pages/4_Scheduling.py", "icon": "📅"},
+    {"label": "Glossar", "page": "pages/5_Glossar.py", "icon": "📖"},
+    {"label": "About Us", "page": "pages/6_About.py", "icon": "👥"},
 ]
 
 NAV_CSS = """
