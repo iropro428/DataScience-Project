@@ -542,22 +542,21 @@ st.divider()
 st.markdown("""<div class="rq-box">
     <h3>🔬 Research Question 2</h3>
     <p>How does the concentration of an artist's streaming activity on a few top tracks
-    relate to the intensity of their touring, measured by events per year?</p>
+    relate to the intensity of their touring, measured by total events?</p>
 </div>""", unsafe_allow_html=True)
 
-st.markdown("""**What are we measuring?**
+st.markdown("""
+**What are we measuring?**
 
-**Streaming concentration** describes how strongly an artist’s total streaming activity is concentrated in only a few top tracks. A high Top-5 share means that a large proportion of all streams comes from only a small number of songs. A lower value means that streams are spread more broadly across the artist’s catalog.
+**Streaming concentration** describes how strongly an artist's total streaming activity is concentrated in only a few top tracks. A high Top-5 share means that a large proportion of all streams comes from only a small number of songs — a lower value means streams are spread more broadly across the catalogue.
 
-**Tour intensity** is measured as the number of Ticketmaster events in the last year.
-            
-**Hypothesis:** Artists with a broader streaming profile may tour more steadily or more intensively because their audience is less dependent on a small number of hit songs.
+**Tour scale** is measured as the total number of Ticketmaster events across all available data.
+
+**Hypothesis:** Artists with a broader streaming profile may tour more extensively because their audience engages with a wider range of their music, which could sustain demand for live performances across a longer period.
 """)
 
-# prove data
-f2_required = ["top5_share", "events_last_year"]
+f2_required = ["top5_share", "total_events"]
 f2_missing = [c for c in f2_required if c not in df.columns]
-
 if f2_missing:
     st.error(f"Missing columns: {f2_missing}")
     st.code("""
@@ -567,15 +566,14 @@ python scripts/join_data.py            # Calculate concentration + join
     """)
     st.stop()
 
-df2 = df.dropna(subset=["top5_share", "events_last_year"]).copy()
+df2 = df.dropna(subset=["top5_share", "total_events"]).copy()
 df2["top5_share"] = pd.to_numeric(df2["top5_share"], errors="coerce")
-df2["events_last_year"] = pd.to_numeric(df2["events_last_year"], errors="coerce")
-df2 = df2.dropna(subset=["top5_share", "events_last_year"])
+df2["total_events"] = pd.to_numeric(df2["total_events"], errors="coerce")
+df2 = df2.dropna(subset=["top5_share", "total_events"])
 
 n_f2 = len(df2)
 pct_cov_f2 = n_f2 / len(df) * 100
-
-st.info(f"📊 {n_f2} artists with complete F2 data ({pct_cov_f2:.0f}% of the dataset)")
+st.info(f"📊 {n_f2} artists with complete data for this analysis ({pct_cov_f2:.0f}% of the dataset)")
 
 if n_f2 < 10:
     st.warning("Too few data points. Please run `collect_toptracks.py`.")
