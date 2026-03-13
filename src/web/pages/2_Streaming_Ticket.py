@@ -867,7 +867,7 @@ st.divider()
 # ══════════════════════════════════════════════════════════════════════════
 # F2 — GRAPH 3: Top-track concentration profile (example artists)
 # ══════════════════════════════════════════════════════════════════════════
-st.markdown('<div class="section-title">🎵 Graph 3 — Explore individual artist streaming profiles</div>', unsafe_allow_html=True)
+st.markdown('<div class="section-title">🎵 Explore individual artist streaming profiles</div>', unsafe_allow_html=True)
 st.markdown("""
 Select any artists below to compare how their total playcount is distributed across their top tracks. 
 Artists on the left side of the chart spread their plays across many songs — those on the right are dominated by just a few. 
@@ -913,7 +913,7 @@ if sel_artists and os.path.exists("data/raw/lastfm_toptracks.csv"):
 
     for artist in sel_artists:
         sub = df_tracks_sel[df_tracks_sel["artist_name"] == artist] \
-            .sort_values("rank").head(n_top_show)
+            .sort_values("playcount", ascending=False).head(n_top_show)
         total_pc = df_tracks_sel[df_tracks_sel["artist_name"] == artist]["playcount"].sum()
         if total_pc == 0 or len(sub) == 0:
             continue
