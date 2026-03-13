@@ -550,7 +550,7 @@ st.markdown("""
 
 **Streaming concentration** describes how strongly an artist's total streaming activity is concentrated in only a few top tracks. A high Top-5 share means that a large proportion of all streams comes from only a small number of songs — a lower value means streams are spread more broadly across the catalogue.
 
-**Tour scale** is measured as the total number of Ticketmaster events across all available data.
+**Tour scale** is measured as the total number of Ticketmaster events.
 
 **Hypothesis:** Artists with a broader streaming profile may tour more extensively because their audience engages with a wider range of their music, which could sustain demand for live performances across a longer period.
 """)
