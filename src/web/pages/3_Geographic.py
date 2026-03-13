@@ -605,32 +605,48 @@ st.divider()
 st.markdown('<div class="section-title">Summary — Research Question 1: Revisit Cities</div>',
             unsafe_allow_html=True)
 
-corr_tmp = df_f4.dropna(subset=["pct_revisit_cities", "total_events"])
-r_s, p_s = stats.pearsonr(corr_tmp["pct_revisit_cities"], corr_tmp["total_events"])
-r2_s = r_s ** 2
+if global_pct > 50:
+    pattern_text = (
+        f"Across all artists in the dataset, {global_pct:.1f}% of all touring activity takes place "
+        f"in cities that artists have visited before. This suggests that returning to proven markets "
+        f"is the dominant touring strategy — artists tend to consolidate rather than expand geographically."
+    )
+elif global_pct > 25:
+    pattern_text = (
+        f"Across all artists in the dataset, {global_pct:.1f}% of all touring activity takes place "
+        f"in cities that artists have visited before. Both geographic expansion and consolidation "
+        f"play a role — artists balance between exploring new locations and returning to familiar ones."
+    )
+else:
+    pattern_text = (
+        f"Across all artists in the dataset, only {global_pct:.1f}% of all touring activity takes place "
+        f"in cities that artists have visited before. Geographic expansion is clearly the dominant strategy — "
+        f"most artists prioritise reaching new cities over returning to ones they already know."
+    )
 
-st.markdown(f"""
-| Metric | Value |
-|--------|------|
-| Analysed Artists | {len(df_f4)} |
-| Ø Revisit-Rate (% Cities) | {mean_pct:.1f}% |
-| Median Revisit-Rate | {median_pct:.1f}% |
-| Global Ratio (revisit / new) | {global_ratio:.3f} |
-| % of all Tourings = Revisit | {global_pct:.1f}% |
-| Pearson r (% Revisit vs. Events) | {r_s:.3f} |
-| R² | {r2_s:.1%} |
-| p-Value | {p_s:.4f} |
-| Signifikant | {'Yes' if p_s < 0.05 else 'No'} |
-""")
+if global_ratio > 1:
+    ratio_text = (
+        f"With a global ratio of {global_ratio:.2f} revisit cities per new city, artists on average "
+        f"return to more cities than they visit for the first time. "
+        f"This points to a consolidation-first approach across the dataset."
+    )
+else:
+    ratio_text = (
+        f"With a global ratio of {global_ratio:.2f} revisit cities per new city, artists on average "
+        f"visit far more new cities than they return to. "
+        f"For every city an artist revisits, there are {1/global_ratio:.1f} new cities being added to the tour."
+    )
 
 st.markdown(f"""
 <div class="insight-card">
-    <h4>🎯 Summary — Research Question 1: Revisit Cities</h4>
+    <h4>🎯 Answer to Research Question 1</h4>
     <p>
-    On average, 15.2% of the cities artists visit are revisit cities. This means that artists return to only about one out of seven cities they have already played in.
-    The global ratio of 0.16 supports this pattern: for every new city an artist visits, there are only 0.16 cities that they revisit. This shows that geographic expansion is the main touring strategy, meaning that artists usually prefer to perform in new cities rather than returning to the same ones.
+    {pattern_text}
     <br><br>
-    However, there is a positive relationship between tour size and the revisit rate (r = 0.212). This suggests that larger artists are more likely to return to cities where they have already performed successfully. In other words, the bigger the tour, the stronger the tendency to revisit known markets, while smaller artists explore more new cities.
+    {ratio_text} The average revisit rate of {mean_pct:.1f}% confirms this picture — 
+    only about one in {round(100/mean_pct) if mean_pct > 0 else "many"} cities an artist plays 
+    is a city they have been to before. This suggests that for most artists in this dataset, 
+    touring is primarily a tool for geographic expansion rather than market consolidation.
     </p>
 </div>
 """, unsafe_allow_html=True)
@@ -638,15 +654,14 @@ st.markdown(f"""
 st.markdown("""
 <div class="methodology-note">
     <p>
-    <strong>Methodological Note:</strong>
-    A “Revisit City” is defined as a city where the Ticketmaster dataset (2022–2026) records two or more events by the same artist. Cities are identified by city name only, not by venue. 
-    If an artist performs multiple concerts in the same city on the same day, these are counted as separate events. Events without a city name are excluded from the analysis.
+    <strong>Methodological note:</strong> A "Revisit City" is defined as a city where the Ticketmaster 
+    dataset (2022–2026) records two or more events by the same artist. Cities are identified by name only, 
+    not by venue. Events without a city name are excluded from the analysis.
     </p>
 </div>
 """, unsafe_allow_html=True)
 
 st.divider()
-
 st.markdown('<div id="geo-frage-2"></div>', unsafe_allow_html=True)
 
 
