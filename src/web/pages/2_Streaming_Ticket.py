@@ -1072,20 +1072,21 @@ st.markdown("""<div class="rq-box">
     in Spotify Weekly Charts (Feb&nbsp;2023–Feb&nbsp;2026) and those who did not?</p>
 </div>""", unsafe_allow_html=True)
 
-st.markdown("""**Why this question?**
-Spotify charts and Last.fm listeners are two independent popularity signals
-from different platforms. If chart artists systematically have more Last.fm listeners,
-this points to **cross-platform popularity** — digital popularity is coherent across platforms.
-If not, the platforms reflect different user ecosystems.
+st.markdown("""
+**Why this question?**
+Spotify charts and Last.fm listeners are two independent popularity signals from different platforms. 
+If Chart Artists systematically have more Last.fm listeners, this points to cross-platform popularity — 
+meaning digital popularity is consistent across platforms. If not, the two platforms may reflect 
+different user ecosystems or listening habits.
 
-**Hypothesis:** Artists who appeared in the global Spotify Weekly Chart have significantly
-more Last.fm listeners — because both metrics measure general popularity.
+**Hypothesis:** Artists who appeared in the global Spotify Weekly Charts tend to have more Last.fm 
+listeners, because both metrics capture general popularity — just from different angles.
 
-**Test method:** Mann-Whitney U (non-parametric, robust against the
-strongly right-skewed listener distributions). 
-
-**Spotify Weekly Charts** are weekly rankings of the most-streamed songs on Spotify. In our analysis, an artist is classified as a “Chart Artist” if they appeared at least once in the global Spotify Weekly Charts between February 2023 and February 2026. Rather than using every weekly chart, we sampled one representative chart week per month to retain broad coverage over time while keeping the dataset manageable.""")
-
+**What counts as a Chart Artist?**
+An artist is classified as a Chart Artist if they appeared at least once in the global Spotify Weekly 
+Charts between February 2023 and February 2026. Rather than using every weekly chart, one representative 
+chart week per month was sampled to retain broad coverage while keeping the dataset manageable.
+""")
 
 # F3 load data
 @st.cache_data
@@ -1095,21 +1096,17 @@ def load_f3_data():
         return None
     return pd.read_csv(p)
 
-
 charts_df = load_f3_data()
-
 if charts_df is None:
-    st.error("  `data/processed/spotify_charts/chart_artists.csv` is missing.")
+    st.error("`data/processed/spotify_charts/chart_artists.csv` is missing.")
     st.code("python scripts/process_spotify_charts.py", language="bash")
     st.stop()
 
-# Join: was_on_chart
 charts_df["artist_norm"] = charts_df["artist"].str.lower().str.strip()
 df3 = df.copy()
 df3["artist_norm"] = df3["artist_name"].str.lower().str.strip()
 df3["was_on_chart"] = df3["artist_norm"].isin(set(charts_df["artist_norm"]))
 
-# join Chart-Metrics
 chart_merge_cols = [c for c in ["artist_norm", "total_chart_streams", "chart_weeks",
                                 "peak_position", "first_chart_date", "last_chart_date"]
                     if c in charts_df.columns]
@@ -1124,14 +1121,6 @@ n_non_chart = int((~df3["was_on_chart"]).sum())
 mean_c = df3[df3["was_on_chart"]]["listeners"].mean()
 mean_nc = df3[~df3["was_on_chart"]]["listeners"].mean()
 ratio = mean_c / mean_nc if mean_nc and mean_nc > 0 else 0
-
-grp_c = df3[df3["was_on_chart"]]["listeners"].dropna()
-grp_nc = df3[~df3["was_on_chart"]]["listeners"].dropna()
-
-u_stat = u_p = None
-if len(grp_c) >= 5 and len(grp_nc) >= 5:
-    u_stat, u_p = stats.mannwhitneyu(grp_c, grp_nc, alternative="two-sided")
-
 
 
 # ══════════════════════════════════════════════════════════════════════════
@@ -1536,7 +1525,7 @@ if "chart_weeks" in df3.columns and df3["chart_weeks"].notna().sum() >= 5:
 # ══════════════════════════════════════════════════════════════════════════
 # F3 — Summary
 # ══════════════════════════════════════════════════════════════════════════
-st.markdown('<div class="section-title">Summary — Research Question 3</div>', unsafe_allow_html=True)
+st.markdown('<div class="section-title">Summary Research Question 3</div>', unsafe_allow_html=True)
 
 if ratio > 1:
     answer_text = (
