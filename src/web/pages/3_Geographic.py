@@ -1459,77 +1459,47 @@ This graph gives a concrete, artist-level answer to Research Question 3 by makin
 
 st.divider()
 
-# Summary
-st.markdown('<div class="section-title">Summary — Question 3: Geo-Alignment</div>',
+# ══════════════════════════════════════════════════════════════════════════
+# Summary Q2
+# ══════════════════════════════════════════════════════════════════════════
+st.markdown('<div class="section-title">Summary — Research Question 2: Capital Cities</div>',
             unsafe_allow_html=True)
 
-if mean_jac > 0.4:
-    jac_label = "Strong"
-    jac_text = "strong"
-elif mean_jac > 0.2:
-    jac_label = "Moderate"
-    jac_text = "moderate"
-else:
-    jac_label = "Weak"
-    jac_text = "weak"
-
-if r_g1 > 0:
-    pearson_direction = "positive relationship"
-else:
-    pearson_direction = "negative relationship"
-
-
-st.markdown(f"""
-| Metric | Average | Note |
-|--------|---------|------|
-| **Weighted Coverage** | {mean_wc:.1%} | Share of listener reach covered by tour countries |
-| **Jaccard Similarity** | {mean_jac:.3f} | {jac_label} overlap between streaming and tour countries |
-| **Tour Coverage** | {mean_tc:.1%} | Share of tour countries that are also top streaming countries |
-| **Streaming Reach** | {mean_sr:.1%} | Share of streaming countries that are actually toured |
-| **Pearson r (Listeners vs. Weighted Coverage)** | {r_g1:.3f} | {pearson_direction} |
-""")
-
-if r_g1 > 0.1 and p_g1 < 0.05:
-    pearson_conclusion = (
-        "The significant positive correlation (r = " + f"{r_g1:.3f}" + ") suggests that more popular artists "
-        "are better at aligning their tours with where their listeners are — possibly because they have "
-        "more resources and data to plan tours around actual demand."
+if mean_cap_pct > 50:
+    overall_text = (
+        f"On average, more than half of all artist performances in this dataset take place in capital cities "
+        f"({mean_cap_pct:.1f}%). This suggests that capitals dominate live music activity — "
+        f"artists strongly concentrate their touring in political and administrative centres."
     )
-elif r_g1 < -0.1 and p_g1 < 0.05:
-    pearson_conclusion = (
-        "The significant negative correlation (r = " + f"{r_g1:.3f}" + ") shows that more popular artists "
-        "actually cover a smaller share of their streaming markets through touring. "
-        "As artists grow in popularity, their fanbase spreads into more countries than their tours can realistically reach, "
-        "creating a widening gap between digital reach and live presence."
+elif mean_cap_pct > 25:
+    overall_text = (
+        f"On average, {mean_cap_pct:.1f}% of all artist performances take place in capital cities. "
+        f"Capitals play a significant but not dominant role — artists split their touring "
+        f"between capital and non-capital cities, with non-capitals still accounting for the majority."
     )
 else:
-    pearson_conclusion = (
-        "With r = " + f"{r_g1:.3f}" + " and p = " + f"{p_g1:.4f}" + ", there is no significant relationship "
-        "between an artist's popularity and how well their tour geography matches their streaming footprint. "
-        "Geo-alignment appears to be an individual characteristic rather than something driven by overall popularity."
+    overall_text = (
+        f"On average, only {mean_cap_pct:.1f}% of all artist performances take place in capital cities. "
+        f"Non-capital cities clearly dominate touring activity — artists perform the large majority "
+        f"of their concerts outside of national capitals."
     )
-
-if mean_jac > 0.4:
-    jac_conclusion = "The average Jaccard similarity of " + f"{mean_jac:.3f}" + " indicates that, on average, artists tour in a strong share of the countries where they have significant listener presence."
-elif mean_jac > 0.2:
-    jac_conclusion = "The average Jaccard similarity of " + f"{mean_jac:.3f}" + " indicates a moderate overlap — artists do tour in many of their key streaming markets, but a notable share of those markets remains unreached by live performances."
-else:
-    jac_conclusion = "The average Jaccard similarity of " + f"{mean_jac:.3f}" + " reveals a weak overlap between streaming presence and touring geography — many countries where artists have significant listeners are never visited on tour."
 
 st.markdown(f"""
 <div class="insight-card">
-    <h4>Answer to Research Question 3</h4>
+    <h4>🎯 Answer to Research Question 2</h4>
     <p>
-    {jac_conclusion}
+    {overall_text}
     <br><br>
-    On average, <strong style="color:#f59e0b">{mean_tc:.1%}</strong> of an artist's tour countries
-    are also among their top streaming countries — meaning that the large majority of touring
-    does happen in markets where at least some listener base already exists.
-    However, only <strong style="color:#10b981">{mean_sr:.1%}</strong> of streaming countries
-    are actually visited on tour, which means that a significant share of listener markets
-    remain unreached by live performances.
+    When looking at city routing rather than event counts, an average of 
+    <strong>{mean_cap_cities_pct:.1f}%</strong> of the distinct cities artists visit are capitals. 
+    This is {"higher" if mean_cap_cities_pct > mean_cap_pct else "lower"} than the event share, 
+    which {"suggests that artists tend to play multiple shows in the same capital city" if mean_cap_cities_pct < mean_cap_pct 
+    else "suggests that capitals are visited broadly but not necessarily revisited more than other cities"}.
     <br><br>
-    {pearson_conclusion}
+    Overall, this points to capitals being 
+    {"a central pillar of tour planning" if mean_cap_pct > 40 
+    else "an important but not exclusive part of tour routing" if mean_cap_pct > 20 
+    else "one stop among many, with non-capital cities driving the majority of live activity"}.
     </p>
 </div>
 """, unsafe_allow_html=True)
@@ -1537,13 +1507,11 @@ st.markdown(f"""
 st.markdown("""
 <div class="methodology-note">
     <p>
-    <strong>Methodological note:</strong>
-    Streaming countries are defined as countries where the artist appears in Last.fm's
-    geo.getTopArtists list (Top 50 per country).
-    Tour countries are defined as countries with at least one Ticketmaster event.
-    Jaccard Similarity is calculated as |Streaming ∩ Tour| / |Streaming ∪ Tour|,
-    making it robust to differences in dataset size across artists.
-    Only artists with data available in both sources are included in this analysis.
+    <strong>Methodological note:</strong> A capital city is defined based on a pre-compiled list of 
+    national capitals matched against Ticketmaster venue city names. Events without a city name 
+    are excluded. The event share and city share may differ — the event share counts every 
+    performance individually, while the city share counts each city only once per artist 
+    regardless of how many shows were played there.
     </p>
 </div>
 """, unsafe_allow_html=True)
