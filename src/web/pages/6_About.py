@@ -36,7 +36,7 @@ st.markdown("""
     <p style="color:#cbd5e1 !important; font-size:1.05rem; line-height:1.8; margin:0 0 20px 0;">
         We are four students of Computer Science and Business Informatics at
         <strong style="color:#f1f5f9 !important;">Christian-Albrechts-Universität zu Kiel</strong>,
-        and developed this project as part of the Data Science praktikum in our fifth semester.
+        and developed this project as part of the Data Science Project in our fifth semester.
     </p>
     <p style="color:#cbd5e1 !important; font-size:1.05rem; line-height:1.8; margin:0 0 20px 0;">
         The central question of this project is straightforward in its formulation,
