@@ -312,50 +312,49 @@ st.divider()
 st.markdown('<div class="section-title">📦 Graph 2 — Revisit Rate by Tour Size</div>',
             unsafe_allow_html=True)
 
-y_met = st.radio(
-    "Y-axis",
-    ["pct_revisit_cities", "revisit_ratio", "pct_events_revisit"],
-    index=0, key="f4b_y",
-    format_func=lambda x: {
-        "pct_revisit_cities": "% Revisit Cities",
-        "revisit_ratio": "Ratio (Revisit / New)",
-        "pct_events_revisit": "% Events in Revisit Cities"
-    }[x]
-)
-
 metric_descriptions = {
     "pct_revisit_cities": (
         "The y-axis shows the **share of revisit cities** out of all cities an artist visited. "
         "A value of 30% means that 30% of the cities on a tour were cities the artist had already "
-        "played before. This metric focuses on the geographic variety of the tour — "
+        "played before. This metric focuses on geographic variety — "
         "how many distinct locations were new versus already known."
     ),
     "revisit_ratio": (
         "The y-axis shows the **ratio of revisit cities to new cities**. "
-        "A value of 1.0 means an artist visited exactly as many cities for the second time as they "
-        "visited for the first time. Values above 1 indicate more revisits than new locations, "
-        "values below 1 indicate more new locations than revisits. "
-        "This metric makes the balance between consolidation and expansion directly readable."
+        "A value of 1.0 means an artist visited exactly as many cities for the second time as for "
+        "the first time. Values above 1 indicate more revisits than new locations, "
+        "values below 1 indicate more new locations than revisits."
     ),
     "pct_events_revisit": (
-        "The y-axis shows the **share of all events that took place in revisit cities**. "
+        "The y-axis shows the **share of all events in revisit cities**. "
         "This is typically higher than the city share, because revisit cities appear multiple times "
         "in the event count — an artist playing 3 shows in the same city contributes 3 events "
-        "but only 1 city. This metric captures how much of the actual touring activity "
+        "but only 1 city. This captures how much of the actual touring activity "
         "is concentrated in already-familiar locations."
     ),
 }
 
-st.markdown(f"""
+st.markdown("""
 Artists are divided into equally sized groups based on their total number of tour events — 
 from small to very large. For each group, the box plot shows the distribution of the selected metric. 
-
-{metric_descriptions[y_met]}
+Use the controls on the left to switch between different ways of measuring revisit behaviour.
 """)
 
 b1, b2 = st.columns([1, 3])
 with b1:
     n_grp = st.select_slider("Groups", [3, 4, 5], value=4, key="f4b_ng")
+    y_met = st.radio(
+        "Y-axis",
+        ["pct_revisit_cities", "revisit_ratio", "pct_events_revisit"],
+        index=0, key="f4b_y",
+        format_func=lambda x: {
+            "pct_revisit_cities": "% Revisit Cities",
+            "revisit_ratio": "Ratio (Revisit / New)",
+            "pct_events_revisit": "% Events in Revisit Cities"
+        }[x]
+    )
+    st.markdown("---")
+    st.caption(metric_descriptions[y_met])
 
 df_bx = df_f4.dropna(subset=[y_met, "total_events"]).copy()
 G_LBLS = {
