@@ -867,13 +867,13 @@ st.divider()
 # ══════════════════════════════════════════════════════════════════════════
 # F2 — GRAPH 3: Top-track concentration profile (example artists)
 # ══════════════════════════════════════════════════════════════════════════
-st.markdown('<div class="section-title">🎵 Graph 3 — Streaming profile: comparing top artists</div>', unsafe_allow_html=True)
-st.markdown("""A **stacked bar chart** shows how the total playcount of selected artists
-is distributed across their top tracks. This makes the concentration metric intuitive:
-you can immediately see who is a "one-hit wonder" and who builds on a
-broader catalog.""")
+st.markdown('<div class="section-title">🎵 Graph 3 — Explore individual artist streaming profiles</div>', unsafe_allow_html=True)
+st.markdown("""
+Select any artists below to compare how their total playcount is distributed across their top tracks. 
+Artists on the left side of the chart spread their plays across many songs — those on the right are dominated by just a few. 
+Use the controls to explore different combinations and see who relies on a broad catalogue versus a handful of hits.
+""")
 
-# Select artists for profile graph — by default the 2 extremes + 2 middle ones
 if len(df2) >= 4:
     most_conc = df2.nlargest(2, "top5_share")["artist_name"].tolist()
     least_conc = df2.nsmallest(2, "top5_share")["artist_name"].tolist()
@@ -882,7 +882,7 @@ else:
     default_sel = df2["artist_name"].tolist()[:4]
 
 sel_artists = st.multiselect(
-    "Select artists (4–8 recommended)",
+    "Select artists to compare (4–8 recommended)",
     options=sorted(df2["artist_name"].tolist()),
     default=default_sel[:6],
     key="f2p_artists"
@@ -893,14 +893,23 @@ if sel_artists and os.path.exists("data/raw/lastfm_toptracks.csv"):
     df_tracks_sel = df_tracks_raw[df_tracks_raw["artist_name"].isin(sel_artists)].copy()
     df_tracks_sel["playcount"] = pd.to_numeric(df_tracks_sel["playcount"], errors="coerce")
 
-    n_top_show = st.slider("Show top N tracks", 3, 10, 5, key="f2p_ntracks")
+    n_top_show = st.slider("Show top N tracks per artist", 3, 10, 5, key="f2p_ntracks")
+
+    # Purple-toned color palette for tracks
+    track_colors = [
+        "#c084fc",  # Track 1 — light purple
+        "#a855f7",  # Track 2
+        "#9333ea",  # Track 3
+        "#7c3aed",  # Track 4
+        "#6d28d9",  # Track 5
+        "#5b21b6",  # Track 6
+        "#4c1d95",  # Track 7
+        "#3b0764",  # Track 8
+        "#2e1065",  # Track 9
+        "#1e0a4a",  # Track 10
+    ]
 
     fig_profile = go.Figure()
-    track_colors = [
-        "#1DB954", "#17a844", "#139033", "#0f7828",
-        "#0b6022", "#f0c040", "#e08030", "#e05050",
-        "#cc3030", "#444"
-    ]
 
     for artist in sel_artists:
         sub = df_tracks_sel[df_tracks_sel["artist_name"] == artist] \
@@ -912,7 +921,7 @@ if sel_artists and os.path.exists("data/raw/lastfm_toptracks.csv"):
         for j, (_, row) in enumerate(sub.iterrows()):
             pct = row["playcount"] / total_pc * 100
             fig_profile.add_trace(go.Bar(
-                name=row["track_name"] if j == 0 else row["track_name"],
+                name=f"Track {j+1}",
                 x=[artist],
                 y=[pct],
                 marker_color=track_colors[j % len(track_colors)],
@@ -930,32 +939,57 @@ if sel_artists and os.path.exists("data/raw/lastfm_toptracks.csv"):
 
     fig_profile.update_layout(
         barmode="stack",
-        title=f"Top-{n_top_show} track share of total playcount",
+        title=f"Share of total playcount by top {n_top_show} tracks",
         xaxis_title="Artist",
         yaxis_title="Share of total playcount (%)",
         yaxis=dict(range=[0, 100], gridcolor="#333"),
         template="plotly_dark",
-        paper_bgcolor="#0e0e0e", plot_bgcolor="#1a1a1a",
-        font=dict(color="white"), height=430,
-        legend=dict(orientation="h", y=-0.2, font=dict(size=10)),
-        xaxis=dict(tickangle=-20)
+        paper_bgcolor="#0e0e0e",
+        plot_bgcolor="#1a1a1a",
+        font=dict(color="white"),
+        height=450,
+        legend=dict(
+            title=dict(text="Track rank", font=dict(size=11, color="white")),
+            orientation="v",
+            x=1.02,
+            y=1,
+            font=dict(size=10),
+            bgcolor="rgba(0,0,0,0)",
+        ),
+        xaxis=dict(tickangle=-20, gridcolor="#333"),
+        margin=dict(r=120)
     )
+
     st.plotly_chart(fig_profile, use_container_width=True)
 
-    # table: concentration + events
+    # Table
     tbl_data = df2[df2["artist_name"].isin(sel_artists)][
-        ["artist_name", "top5_share", "top3_share", "top1_share", "events_last_year", "total_events"]
-    ].sort_values("top5_share", ascending=False)
-    tbl_data.columns = ["Artist", "Top-5 %", "Top-3 %", "Top-1 %", "Events/year", "Total events"]
-    st.dataframe(tbl_data.set_index("Artist").style.format({
-        "Top-5 %": "{:.1f}",
-        "Top-3 %": "{:.1f}",
-        "Top-1 %": "{:.1f}",
-        "Events/year": "{:.0f}",
-        "Total events": "{:.0f}",
-    }).background_gradient(cmap="RdYlGn_r", subset=["Top-5 %"])
-                 .background_gradient(cmap="YlGn", subset=["Events/year"]),
-                 use_container_width=True)
+        ["artist_name", "top5_share", "top3_share", "top1_share", "total_events"]
+    ].sort_values("top5_share", ascending=False).copy()
+    tbl_data.columns = ["Artist", "Top-5 share %", "Top-3 share %", "Top-1 share %", "Total events"]
+
+    st.markdown("#### 📋 Concentration & touring overview")
+    st.dataframe(
+        tbl_data.set_index("Artist").style
+        .format({
+            "Top-5 share %": "{:.1f}",
+            "Top-3 share %": "{:.1f}",
+            "Top-1 share %": "{:.1f}",
+            "Total events": "{:.0f}",
+        })
+        .background_gradient(cmap="Purples", subset=["Top-5 share %", "Top-3 share %", "Top-1 share %"])
+        .background_gradient(cmap="YlGn", subset=["Total events"])
+        .set_properties(**{
+            "font-size": "13px",
+            "text-align": "center",
+        })
+        .set_table_styles([{
+            "selector": "th",
+            "props": [("font-size", "13px"), ("text-align", "center"), ("padding", "6px 12px")]
+        }]),
+        use_container_width=True
+    )
+
 else:
     st.info("No artists selected or `lastfm_toptracks.csv` is missing.")
 
