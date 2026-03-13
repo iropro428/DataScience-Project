@@ -5,7 +5,7 @@ from components.navbar import render_navbar
 from components.glossary import apply_glossary_styles, tt, glossar_seite, TERMS
 
 apply_glossary_styles()  # einmal pro Page aufrufen
-st.markdown("Der " + tt("Pearson r") + " beträgt 0.21", unsafe_allow_html=True)
+
 
 st.set_page_config(
     page_title="Glossar",

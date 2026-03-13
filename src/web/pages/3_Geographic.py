@@ -25,7 +25,7 @@ apply_styles()
 render_navbar()
 apply_glossary_styles()
 
-# ── Header ────────────────────────────────────────────────────────────────
+# Header
 st.markdown("""
 <div class="page-header">
     <h1>🗺️ Geographic Analysis</h1>
@@ -42,35 +42,32 @@ st.markdown("""
     </div>
     <div style="display:flex;flex-direction:column;gap:10px;">
         <a href="#geo-frage-1" style="display:flex;align-items:flex-start;gap:12px;
-            text-decoration:none;padding:12px 14px;border-radius:10px;
-            background:#182235;border:1px solid #27324A;
-            transition:all .2s ease;">
-            <span style="background:#2A1F4D;color:#EDE9FE !important;border-radius:50%;
+            text-decoration:none;padding:10px 14px;border-radius:8px;
+            background:#1d2440;border:1px solid #2e3557;transition:all .15s;">
+            <span style="background:#4338ca;color:white !important;border-radius:50%;
                 width:24px;height:24px;display:flex;align-items:center;justify-content:center;
-                font-size:.75rem;font-weight:700;flex-shrink:0;border:1px solid #5B46A8;">1</span>
-            <span style="color:#D7E0F0 !important;font-size:.9rem;line-height:1.45;">
+                font-size:.75rem;font-weight:700;flex-shrink:0;">1</span>
+            <span style="color:#cbd5e1 !important;font-size:.9rem;">
                 What is the ratio of revisit cities to new cities on an artist's current tour?
             </span>
         </a>
         <a href="#geo-frage-2" style="display:flex;align-items:flex-start;gap:12px;
-            text-decoration:none;padding:12px 14px;border-radius:10px;
-            background:#182235;border:1px solid #27324A;
-            transition:all .2s ease;">
-            <span style="background:#2A1F4D;color:#EDE9FE !important;border-radius:50%;
+            text-decoration:none;padding:10px 14px;border-radius:8px;
+            background:#1d2440;border:1px solid #2e3557;transition:all .15s;">
+            <span style="background:#4338ca;color:white !important;border-radius:50%;
                 width:24px;height:24px;display:flex;align-items:center;justify-content:center;
-                font-size:.75rem;font-weight:700;flex-shrink:0;border:1px solid #5B46A8;">2</span>
-            <span style="color:#D7E0F0 !important;font-size:.9rem;line-height:1.45;">
+                font-size:.75rem;font-weight:700;flex-shrink:0;">2</span>
+            <span style="color:#cbd5e1 !important;font-size:.9rem;">
                 What proportion of an artist's performances take place in capital cities compared to non-capital cities?
             </span>
         </a>
-        <a href="#geo-frage-2" style="display:flex;align-items:flex-start;gap:12px;
-            text-decoration:none;padding:12px 14px;border-radius:10px;
-            background:#182235;border:1px solid #27324A;
-            transition:all .2s ease;">
-            <span style="background:#2A1F4D;color:#EDE9FE !important;border-radius:50%;
+        <a href="#geo-frage-3" style="display:flex;align-items:flex-start;gap:12px;
+            text-decoration:none;padding:10px 14px;border-radius:8px;
+            background:#1d2440;border:1px solid #2e3557;transition:all .15s;">
+            <span style="background:#4338ca;color:white !important;border-radius:50%;
                 width:24px;height:24px;display:flex;align-items:center;justify-content:center;
-                font-size:.75rem;font-weight:700;flex-shrink:0;border:1px solid #5B46A8;">3</span>
-            <span style="color:#D7E0F0 !important;font-size:.9rem;line-height:1.45;">
+                font-size:.75rem;font-weight:700;flex-shrink:0;">3</span>
+            <span style="color:#cbd5e1 !important;font-size:.9rem;">
                 How well do the countries where an artist has the highest listener reach on Last.fm align with the countries where they perform on their Ticketmaster tour?
             </span>
         </a>
@@ -81,7 +78,7 @@ st.markdown("""
 st.markdown('<div id="geo-frage-1"></div>', unsafe_allow_html=True)
 
 
-# ── Daten laden ────────────────────────────────────────────────────────────
+# Load Data
 @st.cache_data
 def load_data():
     f1 = "data/processed/final_dataset.csv"
@@ -113,7 +110,7 @@ if any(c not in df.columns for c in F4_COLS):
 
 df_f4 = df.dropna(subset=["revisit_cities", "new_cities"]).copy()
 
-# Globale Kennzahlen
+# Global Metrics
 total_rev = df_f4["revisit_cities"].sum()
 total_new = df_f4["new_cities"].sum()
 total_cities = total_rev + total_new
@@ -122,7 +119,7 @@ global_pct = total_rev / total_cities * 100 if total_cities > 0 else 0
 mean_pct = df_f4["pct_revisit_cities"].mean()
 median_pct = df_f4["pct_revisit_cities"].median()
 
-# ── Sidebar ────────────────────────────────────────────────────────────────
+# Sidebar
 with st.sidebar:
     st.markdown("## 🗺️ Geographic Analysis")
     st.divider()
@@ -485,7 +482,7 @@ st.markdown(f"""
 | Pearson r (% Revisit vs. Events) | {r_s:.3f} |
 | R² | {r2_s:.1%} |
 | p-Value | {p_s:.4f} |
-| Signifikant | {'Yes ✅' if p_s < 0.05 else 'No ⚠️'} |
+| Signifikant | {'Yes' if p_s < 0.05 else 'No'} |
 """)
 
 st.markdown(f"""
@@ -519,7 +516,7 @@ st.markdown('<div id="geo-frage-2"></div>', unsafe_allow_html=True)
 # RESEARCH QUESTION 2
 # ══════════════════════════════════════════════════════════════════════════
 
-# ── F6 Daten laden ─────────────────────────────────────────────────────────
+# Load F6 data 
 @st.cache_data
 def load_f6_data():
     p1 = "data/processed/f6_capitals_visited.csv"
@@ -537,7 +534,7 @@ f6_missing = [c for c in F6_COLS if c not in df.columns]
 
 st.markdown("""
 <div class="rq-box">
-    <h3>🏛️ Research Question 2</h3>
+    <h3>🗺️ Research Question 2</h3>
     <p>What proportion of an artist's performances take place in capital cities
     compared to non-capital cities?</p>
 </div>
@@ -737,7 +734,7 @@ if len(df_sc6) >= 5:
     m2.metric("Pearson r", f"{r6:.3f}")
     m3.metric("R²", f"{r2_6:.1%}")
     m4.metric("p-Wert", f"{p6:.4f}",
-              delta="signifikant ✅" if p6 < 0.05 else "not signifikant ⚠️",
+              delta="signifikant" if p6 < 0.05 else "not signifikant",
               delta_color="normal" if p6 < 0.05 else "inverse")
 
     df_sc6["x_plot"] = x_v.values
@@ -792,7 +789,7 @@ if len(df_sc6) >= 5:
     <div style="color:#C8D6E8;font-size:.9rem;line-height:1.65;">
     Pearson r = <strong>{r6:.3f}</strong>, R² = <strong>{r2_6:.1%}</strong>, p = <strong>{p6:.4f}</strong>
     → <strong>{strength} {"positive" if r6 > 0 else "negative"} correlation</strong>,
-    {"statistically significant ✅" if p6 < 0.05 else "not statistically significant ⚠️"}.
+    {"statistically significant" if p6 < 0.05 else "not statistically significant"}.
     Pearson r measures the strength and direction of the relationship between streaming popularity and capital-city share — a value near 0 indicates virtually no linear relationship.
     R² = <strong>{r2_6:.1%}</strong> means that listener popularity explains only {r2_6:.1%} of the variance in capital-city share; the remaining {100 - r2_6*100:.1f}% is driven by other factors such as genre, touring region, or booking strategy.
     {"A p-value of " + f"{p6:.4f}" + " confirms this result is statistically significant — the relationship is unlikely to be a random artefact." if p6 < 0.05 else "A p-value of " + f"{p6:.4f}" + " means this result is not statistically significant — the observed correlation could easily be due to chance in a sample of this size."}
@@ -827,7 +824,7 @@ Look for whether the ranking is dominated by a few mega-hubs or distributed more
 
 if cap_global is not None and len(cap_global) > 0:
 
-    # ── Daten bereinigen ───────────────────────────────────────────────
+    # Clean up data
     cap_global_clean = cap_global.copy()
     cap_global_clean["city"] = cap_global_clean["city"].astype(str).str.strip().str.title()
     cap_global_clean["country"] = cap_global_clean["country"].astype(str).str.strip()
@@ -840,7 +837,7 @@ if cap_global is not None and len(cap_global) > 0:
     cap_global_clean["n_artists"] = pd.to_numeric(cap_global_clean["n_artists"], errors="coerce")
     cap_global_clean = cap_global_clean.dropna(subset=["total_visits", "city"])
 
-    # ── Duplikate zusammenführen ───────────────────────────────────────
+    # Merge duplicates
     cap_global_clean = (
         cap_global_clean
         .groupby("city", as_index=False)
@@ -1032,7 +1029,7 @@ st.markdown('<div id="geo-frage-3"></div>', unsafe_allow_html=True)
 st.divider()
 st.markdown("""
 <div class="rq-box">
-    <h3> Research Question 3</h3>
+    <h3>🗺️ Research Question 3</h3>
     <p>How well do the countries where an artist has the highest <strong>listener reach</strong>
     on Last.fm align with the countries where they perform on their Ticketmaster tour?
     </p>
@@ -1069,7 +1066,7 @@ with c3:
     </div>""", unsafe_allow_html=True)
 
 
-# ── Daten laden ────────────────────────────────────────────────────────────
+# Load data
 @st.cache_data
 def load_geo_align():
     p = "data/processed/geo_alignment.csv"
@@ -1206,7 +1203,7 @@ fig_g1.update_layout(
 with g1b:
     st.plotly_chart(fig_g1, use_container_width=True)
 
-# ── Texte vorbereiten ──────────────────────────────────────────────────────
+# Prepare interpretation
 sig_label = "significant " if p_g1 < 0.05 else "not significant ⚠️"
 sig_sentence = (
     "This result is statistically significant — the relationship is unlikely to have occurred by chance."
@@ -1320,7 +1317,7 @@ if len(kw_groups) >= 2:
 
 title_g2 = "Geo-Alignment by Popularity Tier"
 if kw_p is not None:
-    title_g2 += f"  |  Kruskal-Wallis H={kw_h:.1f}  p={kw_p:.3f}  {'✅' if kw_p < 0.05 else '⚠️'}"
+    title_g2 += f"  |  Kruskal-Wallis H={kw_h:.1f}  p={kw_p:.3f}"
 
 fig_g2.update_layout(
     title=title_g2,
@@ -1365,7 +1362,7 @@ st.divider()
 # ══════════════════════════════════════════════════════════════════════════
 # GA2 — GRAPH 3: Top & Bottom Artists — Heatmap Streaming vs. Tour Countries
 # ══════════════════════════════════════════════════════════════════════════
-st.markdown('<div class="section-title">🔥 Graph 3 — Best and Worst Aligned Artists: Streaming vs. Tour Countries</div>',
+st.markdown('<div class="section-title">📊 Graph 3 — Best and Worst Aligned Artists: Streaming vs. Tour Countries</div>',
             unsafe_allow_html=True)
 
 st.markdown("""
@@ -1418,16 +1415,31 @@ fig_g3.add_trace(go.Bar(
     hovertemplate="%{y}<br>Aligned: %{x} countries  Jaccard=%{customdata:.3f}<extra></extra>",
     customdata=top_df["jaccard"],
 ))
+
+legend_y = -0.35 + min(n_show * 0.01, 0.15)
+
 fig_g3.update_layout(
     title=show_type + " — Streaming vs. Tour Countries",
     barmode="group",
     xaxis_title="Number of Countries",
     template="plotly_dark",
-    paper_bgcolor="#080b14", plot_bgcolor="#161c2d",
-    font=dict(color="white"), height=max(300, n_show * 35),
-    xaxis=dict(gridcolor="#232840"),
+    paper_bgcolor="#080b14",
+    plot_bgcolor="#161c2d",
+    font=dict(color="white"),
+    height=max(420, n_show * 42),
+    xaxis=dict(
+        gridcolor="#232840",
+        title_standoff=6
+    ),
     yaxis=dict(gridcolor="#232840"),
-    legend=dict(orientation="h", y=-0.15),
+    legend=dict(
+        orientation="h",
+        yanchor="top",
+        y=legend_y,
+        xanchor="center",
+        x=0.5
+    ),
+    margin=dict(b=170)
 )
 with g3b:
     st.plotly_chart(fig_g3, use_container_width=True)
@@ -1445,7 +1457,7 @@ This graph gives a concrete, artist-level answer to Research Question 3 by makin
 
 st.divider()
 
-# ── Summary ────────────────────────────────────────────────────────────────
+# Summary
 st.markdown('<div class="section-title">Summary — Question 3: Geo-Alignment</div>',
             unsafe_allow_html=True)
 
@@ -1464,7 +1476,6 @@ if r_g1 > 0:
 else:
     pearson_direction = "negative relationship"
 
-pearson_sig = "✅" if p_g1 < 0.05 else "⚠️ not significant"
 
 st.markdown(f"""
 | Metric | Average | Note |
@@ -1473,7 +1484,7 @@ st.markdown(f"""
 | **Jaccard Similarity** | {mean_jac:.3f} | {jac_label} overlap between streaming and tour countries |
 | **Tour Coverage** | {mean_tc:.1%} | Share of tour countries that are also top streaming countries |
 | **Streaming Reach** | {mean_sr:.1%} | Share of streaming countries that are actually toured |
-| **Pearson r (Listeners vs. Weighted Coverage)** | {r_g1:.3f} | {pearson_direction} {pearson_sig} |
+| **Pearson r (Listeners vs. Weighted Coverage)** | {r_g1:.3f} | {pearson_direction} |
 """)
 
 if r_g1 > 0.1 and p_g1 < 0.05:

@@ -69,7 +69,8 @@ c1, c2, c3 = st.columns(3)
 card_style = """
     border-radius:16px; padding:32px 28px 28px;
     border:1px solid {border}; background:{bg};
-    position:relative; overflow:hidden; height:100%;
+    position:relative; overflow:hidden;
+    min-height: 610px;
 """
 for col, icon, title, color, border, bg, desc, qs, page in [
     (
@@ -109,10 +110,10 @@ for col, icon, title, color, border, bg, desc, qs, page in [
             <div style="font-size:2rem;margin-bottom:14px;">{icon}</div>
             <h3 style="color:{color} !important;font-size:1.05rem;font-weight:700;
                 margin:0 0 14px 0;line-height:1.3;">{title}</h3>
-            <p style="color:#94a3b8 !important;font-size:.875rem;line-height:1.7;
-                margin:0 0 20px 0;">{desc}</p>
+            <p style="color:#94a3b8 !important;font-size:.95rem;line-height:1.7;
+                margin:0 0 20px 0; min-height: 150px;">{desc}</p>
             <div style="border-top:1px solid {border};padding-top:16px;">
-                <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;
+                <div style="font-size:.95rem;font-weight:700;text-transform:uppercase;
                     letter-spacing:.1em;color:#475569 !important;margin-bottom:10px;">
                     Research Questions
                 </div>
@@ -120,8 +121,8 @@ for col, icon, title, color, border, bg, desc, qs, page in [
                     <span style="background:{color}22;color:{color} !important;
                         border-radius:50%;width:20px;height:20px;display:flex;
                         align-items:center;justify-content:center;
-                        font-size:.7rem;font-weight:700;flex-shrink:0;">{i + 1}</span>
-                    <span style="color:#cbd5e1 !important;font-size:.82rem;">{q}</span>
+                        font-size:.8rem;font-weight:700;flex-shrink:0;">{i + 1}</span>
+                    <span style="color:#cbd5e1 !important;font-size:.9rem;">{q}</span>
                 </div>""" for i, q in enumerate(qs))}
             </div>
         </div>
@@ -145,7 +146,7 @@ for col, icon, title, text in [
 ]:
     with col:
         st.markdown(f"""<div style="background:#161c2d;border:1px solid #232840;border-radius:10px;
-            padding:18px;text-align:center;height:100%;">
+            padding:18px;text-align:center;min-height:180px;">
             <div style="font-size:1.6rem;margin-bottom:8px;">{icon}</div>
             <div style="color:#f1f5f9 !important;font-weight:600;font-size:.85rem;
                 margin-bottom:8px;">{title}</div>

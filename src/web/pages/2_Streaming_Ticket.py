@@ -116,8 +116,13 @@ top_genres = sorted(list(all_genres))[:50]
 # ══════════════════════════════════════════════════════
 # RESEARCH QUESTION 1
 # ══════════════════════════════════════════════════════
+st.markdown(
+    '<a id="frage-1" style="display:block; position:relative; top:-80px;"></a>',
+    unsafe_allow_html=True
+)
+
 st.markdown("""
-<div class="rq-box">
+<div class="rq-box" style="margin-top: 28px;">
     <h3>🔬 Research Question 1</h3>
     <p>How does the number of Last.fm listeners correlate with the scale of an artist's tour,
     measured by the number of events scheduled?</p>

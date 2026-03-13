@@ -5,9 +5,9 @@ Ersetzt die vertikale Sidebar komplett.
 import streamlit as st
 
 PAGES = [
-    {"label": "Streaming & Ticket", "page": "pages/2_Streaming_Ticket.py", "icon": "🎟️"},
-    {"label": "Geographic", "page": "pages/3_Geographic.py", "icon": "🗺️"},
-    {"label": "Scheduling", "page": "pages/4_Scheduling.py", "icon": "📅"},
+    {"label": "Streaming & Ticket Power", "page": "pages/2_Streaming_Ticket.py", "icon": "🎟️"},
+    {"label": "Geographic Analysis", "page": "pages/3_Geographic.py", "icon": "🗺️"},
+    {"label": "Market Time & Scheduling", "page": "pages/4_Scheduling.py", "icon": "📅"},
     {"label": "Glossar", "page": "pages/5_Glossar.py", "icon": "📖"},
     {"label": "About Us", "page": "pages/6_About.py", "icon": "👥"},
 ]
@@ -33,7 +33,7 @@ NAV_CSS = """
     border-bottom: 1px solid #232840;
     padding: 0 24px;
     height: 56px;
-    margin: -0.5rem -2.5rem 1.5rem -2.5rem;
+    margin: -0.5rem -2.5rem 2rem -2.5rem;
     position: sticky;
     top: 0;
     z-index: 999;
@@ -61,7 +61,7 @@ div[data-testid="stHorizontalBlock"] [data-testid="stPageLink"] a {
     align-items: center !important;
     justify-content: center !important;
     height: 56px !important;
-    padding: 0 16px !important;
+    padding: 10px 16px !important;
     border-radius: 0 !important;
     border: none !important;
     background: transparent !important;

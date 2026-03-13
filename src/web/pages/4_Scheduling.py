@@ -31,7 +31,7 @@ render_navbar()
 apply_glossary_styles()
 
 
-# ── Load data ─────────────────────────────────────────────────────────────
+# Load data
 @st.cache_data
 def load_data():
     p = "data/processed/final_dataset.csv"
@@ -47,7 +47,7 @@ def load_data():
 
 df = load_data()
 
-# ── Header ───────────────────────────────────────────────────────────────────
+# Header
 st.markdown("""
 <div class="page-header">
     <h1>📅 Market Time &amp; Scheduling</h1>
@@ -56,7 +56,7 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-# ── Research question overview ────────────────────────────────────────────────
+# Research question overview
 st.markdown("""
 <div style="background:#161c2d;border:1px solid #232840;border-radius:14px;
     padding:24px 28px;margin-bottom:28px;">
@@ -104,7 +104,7 @@ if df is None:
     st.code("python scripts/join_data.py", language="bash")
     st.stop()
 
-# ── KPI summary ─────────────────────────────────────────────────────────────
+# KPI summary
 k1, k2, k3, k4, k5 = st.columns(5)
 k1.metric("Artists", len(df))
 if "avg_days_between_shows" in df.columns:
@@ -167,11 +167,11 @@ else:
     m1a.metric("n Artists", len(df1))
     m1b.metric("Pearson r", f"{r1:.3f}")
     m1c.metric("p-value", f"{p1:.4f}",
-               delta="significant ✅" if p1 < 0.05 else "not significant ⚠️",
+               delta="significant" if p1 < 0.05 else "not significant",
                delta_color="normal" if p1 < 0.05 else "inverse")
     m1d.metric("Spearman r", f"{r1_s:.3f}")
 
-    # ── Graph 1a: Scatterplot ────────────────────────────────────────────────
+    # Graph 1a: Scatterplot
     st.markdown(
         '<div class="section-title">📈 Graph 1 — Listeners vs. days between shows</div>',
         unsafe_allow_html=True
@@ -351,7 +351,7 @@ else:
     # Use the same filter as Graph 1
     df1b = df1[df1[col_f1] <= max_days].copy()
 
-    # --- Robust tier handling ------------------------------------------------
+    # Robust tier handling
     def tier_rank(val: str) -> int:
         s = str(val).replace("\n", " ").lower()
         if "q1" in s:
@@ -390,7 +390,7 @@ else:
         "Q4 (high)": "#fbbf24",
     }
 
-    # --- Kruskal-Wallis on filtered data ------------------------------------
+    # Kruskal-Wallis on filtered data
     kw_groups = [
         df1b[df1b["Popularity-Tier"] == t][col_f1].dropna().values
         for t in present_tiers_raw
@@ -401,7 +401,7 @@ else:
     if len(kw_groups) >= 2:
         kw1_h, kw1_p = stats.kruskal(*kw_groups)
 
-    # --- Box plot ------------------------------------------------------------
+    # Box plot
     fig1b = go.Figure()
 
     for raw_tier in present_tiers_raw:
@@ -440,7 +440,7 @@ else:
 
     st.plotly_chart(fig1b, use_container_width=True)
 
-    # --- Tier summary table --------------------------------------------------
+    # Tier summary table
     tier_table = (
         df1b.groupby("Popularity-Tier", observed=True)[col_f1]
         .agg(Mean="mean", Median="median", n="count")
@@ -459,7 +459,7 @@ else:
 
     st.dataframe(tier_table, use_container_width=True)
 
-    # --- Statistical analysis text ------------------------------------------
+    # Statistical analysis text
     if kw1_h is not None and kw1_p is not None:
         if kw1_p < 0.05:
             stat_text_1b = (
@@ -474,7 +474,7 @@ else:
     else:
         stat_text_1b = "Not enough valid groups were available to compute the Kruskal-Wallis test."
 
-    # --- Interpretation text -------------------------------------------------
+    # Interpretation text
     median_map = {
         tier_label_en(row["Popularity-Tier"]): row["Median"]
         for _, row in (
@@ -526,7 +526,7 @@ else:
     </div>
     """, unsafe_allow_html=True)
 
-    # ── Summary: Research Question 1 ───────────────────────────────────────
+    # Summary: Research Question 1
     st.markdown(
         '<div class="section-title">Summary — Research Question 1</div>',
         unsafe_allow_html=True
@@ -628,11 +628,11 @@ else:
     m2a.metric("n Artists", len(df2))
     m2b.metric("Pearson r", f"{r2:.3f}")
     m2c.metric("p-value", f"{p2:.4f}",
-               delta="significant ✅" if p2 < 0.05 else "not significant ⚠️",
+               delta="significant" if p2 < 0.05 else "not significant",
                delta_color="normal" if p2 < 0.05 else "inverse")
     m2d.metric("Spearman ρ", f"{r2_s:.3f}")
 
-    # ── Graph 2a: Scatterplot ────────────────────────────────────────────────
+    # Graph 2a: Scatterplot
     st.markdown(
         '<div class="section-title">📈 Graph 1 — Playcount vs. weekend share</div>',
         unsafe_allow_html=True
@@ -801,7 +801,7 @@ else:
     else:
         st.warning("Too few data points to compute a reliable correlation.")
 
-    # ── Graph 2b: Histogram of weekend share ────────────────────────────────
+    # Graph 2b: Histogram of weekend share
     st.markdown(
         '<div class="section-title">📊 Graph 2 — Distribution of weekend share</div>',
         unsafe_allow_html=True
@@ -939,7 +939,7 @@ else:
 </div>
 """, unsafe_allow_html=True)
 
-    # ── Summary: Research Question 2 ───────────────────────────────────────
+    # Summary: Research Question 2
     st.markdown(
         '<div class="section-title">Summary — Research Question 2</div>',
         unsafe_allow_html=True
@@ -1045,11 +1045,11 @@ else:
         m3a.metric("n Artists", len(df3))
         m3b.metric("Pearson r", f"{r3:.3f}")
         m3c.metric("p-value", f"{p3:.4f}",
-                   delta="significant ✅" if p3 < 0.05 else "not significant ⚠️",
+                   delta="significant" if p3 < 0.05 else "not significant",
                    delta_color="normal" if p3 < 0.05 else "inverse")
         m3d.metric("Spearman ρ", f"{r3_s:.3f}")
 
-        # ── Graph 3a: Scatterplot ────────────────────────────────────────────────
+        # Graph 3a: Scatterplot
         st.markdown(
             '<div class="section-title">📈 Graph 1 — Listeners vs. lead time</div>',
             unsafe_allow_html=True
@@ -1211,7 +1211,7 @@ else:
         else:
             st.warning("Too few data points after filtering to compute a reliable correlation.")
 
-        # ── Graph 3b: Box Plot by tier ─────────────────────────────────────────
+        # Graph 3b: Box Plot by tier
         st.markdown(
             '<div class="section-title">📦 Graph 2 — Lead time by popularity tier</div>',
             unsafe_allow_html=True
@@ -1393,7 +1393,7 @@ else:
         </div>
         """, unsafe_allow_html=True)
 
-        # ── Summary: Research Question 3 ───────────────────────────────────────
+        # Summary: Research Question 3
         st.markdown(
             '<div class="section-title">Summary — Research Question 3</div>',
             unsafe_allow_html=True

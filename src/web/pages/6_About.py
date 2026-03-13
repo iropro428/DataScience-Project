@@ -84,9 +84,9 @@ s_cols = st.columns(2)
 for i, src in enumerate(sources):
     with s_cols[i % 2]:
         st.markdown(f"""
-        <div class="insight-card" style="margin-bottom:12px;">
-            <h4>{src['icon']} {src['name']}</h4>
-            <p>{src['desc']}</p>
+        <div class="insight-card" style="margin-bottom:12px; min-height:140px;">
+            <h4 style="font-size:1.2rem;">{src['icon']} {src['name']}</h4>
+            <p style="font-size:0.9rem;">{src['desc']}</p>
         </div>
         """, unsafe_allow_html=True)
 
