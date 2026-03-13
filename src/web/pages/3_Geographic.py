@@ -1382,9 +1382,20 @@ g3a, g3b = st.columns([1, 3])
 with g3a:
     n_show = st.slider("Number of Artists", 5, 20, 10, key="ga2_n")
     show_type = st.radio("Show", ["Best Aligned", "Worst Aligned"], key="ga2_type")
-    sort_col = st.selectbox("Sort by",
-                            [c for c in ["weighted_coverage", "jaccard", "tour_coverage", "streaming_reach"] if c in ga.columns],
-                            format_func=lambda x: metric_labels.get(x, x), key="ga2_sort")
+    
+    metric_labels = {
+    "weighted_coverage": "Weighted Coverage",
+    "jaccard": "Jaccard Similarity",
+    "tour_coverage": "Tour Coverage",
+    "streaming_reach": "Streaming Reach"
+    }
+
+    sort_col = st.selectbox(
+        "Sort by",
+        [c for c in ["weighted_coverage", "jaccard", "tour_coverage", "streaming_reach"] if c in ga.columns],
+        format_func=lambda x: metric_labels.get(x, x),
+        key="ga2_sort"
+    )
 
 top_df = (ga.dropna(subset=["jaccard", "n_tour_countries", "n_streaming"])
           .nlargest(n_show, sort_col) if show_type == "Best Aligned"
