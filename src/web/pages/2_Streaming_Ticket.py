@@ -1538,50 +1538,39 @@ if "chart_weeks" in df3.columns and df3["chart_weeks"].notna().sum() >= 5:
 # ══════════════════════════════════════════════════════════════════════════
 st.markdown('<div class="section-title">Summary — Research Question 3</div>', unsafe_allow_html=True)
 
-st.markdown(f"""| Metric | Value |
-|--------|------|
-| Chart artists (Feb 2023–Feb 2026) | {n_chart} ({n_chart / (n_chart + n_non_chart) * 100:.0f}%) |
-| Non-chart artists | {n_non_chart} |
-| Ø listeners chart artists | {mean_c:,.0f} |
-| Ø listeners non-chart artists | {mean_nc:,.0f} |
-| Ratio | {ratio:.1f}× |
-| Mann-Whitney U p-value | {f"{u_p:.4f}" if u_p is not None else "n/a"} |
-| Significant (α=0.05) | {"Yes " if u_p is not None and u_p < 0.05 else "No "} |""")
+if ratio > 1:
+    answer_text = (
+        f"Artists who appeared in the global Spotify Weekly Charts between February 2023 and February 2026 "
+        f"have on average about {ratio:.1f}× more Last.fm listeners than Non-Chart Artists "
+        f"({mean_c:,.0f} vs. {mean_nc:,.0f}). "
+        f"This suggests that Spotify chart presence and Last.fm audience size are related — "
+        f"artists with broader chart success tend to also have a larger following on Last.fm. "
+        f"At the same time, the two groups overlap considerably, meaning chart status alone "
+        f"does not fully determine how widely an artist is followed across platforms."
+    )
+else:
+    answer_text = (
+        f"Chart Artists and Non-Chart Artists in this dataset have similar average Last.fm listener counts "
+        f"({mean_c:,.0f} vs. {mean_nc:,.0f}, ratio: {ratio:.1f}×). "
+        f"This suggests that appearing in the Spotify charts does not consistently go hand in hand "
+        f"with a larger Last.fm audience in this dataset."
+    )
 
-if u_p is not None:
-    if u_p < 0.05:
-        rq3_answer = (
-            f"Artists who appeared in the global Spotify Weekly Charts between Feb 2023 and Feb 2026 "
-            f"have, on average, about {ratio:.1f}× more Last.fm listeners than Non-Chart Artists "
-            f"({mean_c:,.0f} vs. {mean_nc:,.0f}). "
-            f"The difference is statistically significant (Mann-Whitney U, p = {u_p:.4f}). "
-            f"This is consistent with the hypothesis that Spotify chart success and Last.fm listener counts "
-            f"capture related aspects of digital popularity, although the two groups still overlap substantially."
-        )
-    else:
-        rq3_answer = (
-            f"Artists who appeared in the global Spotify Weekly Charts between Feb 2023 and Feb 2026 "
-            f"have, on average, about {ratio:.1f}× as many Last.fm listeners as Non-Chart Artists "
-            f"({mean_c:,.0f} vs. {mean_nc:,.0f}). "
-            f"However, the difference is not statistically significant (Mann-Whitney U, p = {u_p:.4f}). "
-            f"In this dataset, Spotify chart status does not provide clear evidence of a robust difference "
-            f"in Last.fm listener counts between the two groups."
-        )
+st.markdown(f"""
+<div class="insight-card">
+    <h4>🎯 Answer to Research Question 3</h4>
+    <p>{answer_text}</p>
+</div>
+""", unsafe_allow_html=True)
 
-    st.markdown(f"""<div class="insight-card">
-        <h4>🎯 Answer to Research Question 3</h4>
-        <p>{rq3_answer}</p>
-    </div>
-    """, unsafe_allow_html=True)
-
-st.markdown("""<div class="methodology-note">
+st.markdown("""
+<div class="methodology-note">
     <p>
-    Chart assignment is based on normalized artist names (lowercase, trimmed). 
-    In collaborations, each credited artist is counted separately. 
+    <strong>Methodological note:</strong> Chart assignment is based on normalized artist names 
+    (lowercase, trimmed). In collaborations, each credited artist is counted separately. 
     The analysis uses sampled global Spotify Weekly Charts from February 2023 to February 2026, 
-    with one representative chart week per month. 
-    Last.fm listener counts are based on a March 2026 snapshot. 
-    Mann-Whitney U was used because listener distributions are strongly right-skewed.
+    with one representative chart week per month. Last.fm listener counts are based on a 
+    March 2026 snapshot.
     </p>
 </div>
 """, unsafe_allow_html=True)
