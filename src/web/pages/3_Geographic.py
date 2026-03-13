@@ -1051,78 +1051,63 @@ st.divider()
 # ══════════════════════════════════════════════════════════════════════════
 # ZUSAMMENFASSUNG Q2
 # ══════════════════════════════════════════════════════════════════════════
-st.markdown('<div class="section-title">Summary — Question 2: Capital Cities</div>',
+mean_cap_pct = float(df_f6["pct_capital"].mean()) if "pct_capital" in df_f6.columns else 0.0
+mean_cap_cities_pct = float(df_f6["pct_capital_cities"].mean()) if "pct_capital_cities" in df_f6.columns else 0.0
+
+st.markdown('<div class="section-title">Summary — Research Question 2: Capital Cities</div>',
             unsafe_allow_html=True)
 
-corr6 = df_f6.dropna(subset=["pct_capital", "listeners"]).copy()
-corr6["listeners"] = pd.to_numeric(corr6["listeners"], errors="coerce")
-corr6 = corr6.dropna(subset=["listeners"])
-r6_s = p6_s = None
-if len(corr6) >= 5:
-    r6_s, p6_s = stats.pearsonr(np.log10(corr6["listeners"] + 1), corr6["pct_capital"])
-
-r6_str = f"{r6_s:.3f}" if r6_s is not None else "n/a"
-p6_str = f"{p6_s:.4f}" if p6_s is not None else "n/a"
-avg_capitals = f"{df_f6['unique_capitals'].mean():.1f}"
-avg_pct_cap_cities = f"{df_f6['pct_capital_cities'].mean():.1f}"
+if mean_cap_pct > 50:
+    overall_text = (
+        f"On average, more than half of all artist performances in this dataset take place in capital cities "
+        f"({mean_cap_pct:.1f}%). This suggests that capitals dominate live music activity — "
+        f"artists strongly concentrate their touring in political and administrative centres."
+    )
+elif mean_cap_pct > 25:
+    overall_text = (
+        f"On average, {mean_cap_pct:.1f}% of all artist performances take place in capital cities. "
+        f"Capitals play a significant but not dominant role — artists split their touring "
+        f"between capital and non-capital cities, with non-capitals still accounting for the majority."
+    )
+else:
+    overall_text = (
+        f"On average, only {mean_cap_pct:.1f}% of all artist performances take place in capital cities. "
+        f"Non-capital cities clearly dominate touring activity — artists perform the large majority "
+        f"of their concerts outside of national capitals."
+    )
 
 st.markdown(f"""
-| Metric | Value |
-|--------|-------|
-| Artists analysed | {len(df_f6)} |
-| Global capital share (events) | {glob_pct:.1f}% |
-| Avg. pct_capital per artist | {mean_pct:.1f}% |
-| Median pct_capital | {med_pct:.1f}% |
-| Ratio capital / non-capital | {glob_ratio:.3f} |
-| Avg. capitals visited per artist | {avg_capitals} |
-| Avg. pct_capital_cities | {avg_pct_cap_cities}% |
-| Pearson r (log listeners to pct_capital) | {r6_str} |
-| p-value | {p6_str} |
-""")
-
-if r6_s is not None:
-    strength6 = "strong" if abs(r6_s) >= 0.7 else "moderate" if abs(r6_s) >= 0.4 else "weak"
-
-    if r6_s > 0.2 and p6_s < 0.05:
-        popularity_conclusion = "More popular artists tend to concentrate their shows in capital cities."
-    elif r6_s < -0.2 and p6_s < 0.05:
-        popularity_conclusion = "More popular artists tour more broadly — their capital share is actually lower."
-    else:
-        popularity_conclusion = "Streaming popularity is not a meaningful driver of capital-city share — touring decisions appear to be shaped by other factors such as region, genre, or booking strategy."
-
-    sig_text = "statistically significant" if p6_s < 0.05 else "not statistically significant"
-
-    st.markdown(f"""
-    <div class="insight-card">
-        <h4>Answer to Research Question 2</h4>
-        <p>
-        On average, <strong style="color:#1DB954">{mean_pct:.1f}%</strong> of all concerts
-        take place in capital cities, and each artist visits an average of
-        <strong style="color:#1DB954">{avg_capitals}</strong> different capitals.
-        However, this share is heavily driven by a small number of dominant hubs —
-        particularly London, Berlin, and Dublin — rather than a general preference for capitals across all countries.
-        <br><br>
-        The relationship between streaming popularity (Last.fm listeners) and capital-city share
-        is <strong>{strength6}</strong> (r = {r6_str}, {sig_text}).
-        {popularity_conclusion}
-        </p>
-    </div>
-    """, unsafe_allow_html=True)
-
-st.markdown("""
-<div class="methodology-note">
+<div class="insight-card">
+    <h4>🎯 Answer to Research Question 2</h4>
     <p>
-    <strong>Methodological note:</strong>
-    Capital cities classified via the RestCountries API (<code>get_capitals.py</code>) —
-    245 capitals worldwide. Matching is performed by city name (case-insensitive).
-    Cities that serve as both a capital and a major economic centre (e.g. London, Paris)
-    may inflate the capital share. Events without a city name are excluded.
+    {overall_text}
+    <br><br>
+    When looking at city routing rather than event counts, an average of 
+    <strong>{mean_cap_cities_pct:.1f}%</strong> of the distinct cities artists visit are capitals. 
+    This is {"higher" if mean_cap_cities_pct > mean_cap_pct else "lower"} than the event share, 
+    which {"suggests that artists tend to play multiple shows in the same capital city" if mean_cap_cities_pct < mean_cap_pct 
+    else "suggests that capitals are visited broadly but not necessarily revisited more than other cities"}.
+    <br><br>
+    Overall, this points to capitals being 
+    {"a central pillar of tour planning" if mean_cap_pct > 40 
+    else "an important but not exclusive part of tour routing" if mean_cap_pct > 20 
+    else "one stop among many, with non-capital cities driving the majority of live activity"}.
     </p>
 </div>
 """, unsafe_allow_html=True)
 
-st.divider()
-st.markdown('<div id="geo-frage-3"></div>', unsafe_allow_html=True)
+st.markdown("""
+<div class="methodology-note">
+    <p>
+    <strong>Methodological note:</strong> A capital city is defined based on a pre-compiled list of 
+    national capitals matched against Ticketmaster venue city names. Events without a city name 
+    are excluded. The event share and city share may differ — the event share counts every 
+    performance individually, while the city share counts each city only once per artist 
+    regardless of how many shows were played there.
+    </p>
+</div>
+""", unsafe_allow_html=True)
+
 # ══════════════════════════════════════════════════════════════════════════
 # RESEARCH QUESTION 3
 # ══════════════════════════════════════════════════════════════════════════
@@ -1471,61 +1456,5 @@ This graph gives a concrete, artist-level answer to Research Question 3 by makin
 st.divider()
 
 # ══════════════════════════════════════════════════════════════════════════
-# Summary Q2
+# Summary Q3
 # ══════════════════════════════════════════════════════════════════════════
-mean_cap_pct = float(df_f6["pct_capital"].mean()) if "pct_capital" in df_f6.columns else 0.0
-mean_cap_cities_pct = float(df_f6["pct_capital_cities"].mean()) if "pct_capital_cities" in df_f6.columns else 0.0
-
-st.markdown('<div class="section-title">Summary — Research Question 2: Capital Cities</div>',
-            unsafe_allow_html=True)
-
-if mean_cap_pct > 50:
-    overall_text = (
-        f"On average, more than half of all artist performances in this dataset take place in capital cities "
-        f"({mean_cap_pct:.1f}%). This suggests that capitals dominate live music activity — "
-        f"artists strongly concentrate their touring in political and administrative centres."
-    )
-elif mean_cap_pct > 25:
-    overall_text = (
-        f"On average, {mean_cap_pct:.1f}% of all artist performances take place in capital cities. "
-        f"Capitals play a significant but not dominant role — artists split their touring "
-        f"between capital and non-capital cities, with non-capitals still accounting for the majority."
-    )
-else:
-    overall_text = (
-        f"On average, only {mean_cap_pct:.1f}% of all artist performances take place in capital cities. "
-        f"Non-capital cities clearly dominate touring activity — artists perform the large majority "
-        f"of their concerts outside of national capitals."
-    )
-
-st.markdown(f"""
-<div class="insight-card">
-    <h4>🎯 Answer to Research Question 2</h4>
-    <p>
-    {overall_text}
-    <br><br>
-    When looking at city routing rather than event counts, an average of 
-    <strong>{mean_cap_cities_pct:.1f}%</strong> of the distinct cities artists visit are capitals. 
-    This is {"higher" if mean_cap_cities_pct > mean_cap_pct else "lower"} than the event share, 
-    which {"suggests that artists tend to play multiple shows in the same capital city" if mean_cap_cities_pct < mean_cap_pct 
-    else "suggests that capitals are visited broadly but not necessarily revisited more than other cities"}.
-    <br><br>
-    Overall, this points to capitals being 
-    {"a central pillar of tour planning" if mean_cap_pct > 40 
-    else "an important but not exclusive part of tour routing" if mean_cap_pct > 20 
-    else "one stop among many, with non-capital cities driving the majority of live activity"}.
-    </p>
-</div>
-""", unsafe_allow_html=True)
-
-st.markdown("""
-<div class="methodology-note">
-    <p>
-    <strong>Methodological note:</strong> A capital city is defined based on a pre-compiled list of 
-    national capitals matched against Ticketmaster venue city names. Events without a city name 
-    are excluded. The event share and city share may differ — the event share counts every 
-    performance individually, while the city share counts each city only once per artist 
-    regardless of how many shows were played there.
-    </p>
-</div>
-""", unsafe_allow_html=True)
