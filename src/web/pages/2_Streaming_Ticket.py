@@ -347,7 +347,7 @@ try:
     df2 = df.copy()
     labels = [f"G{i + 1}" for i in range(n_groups)]
     df2["group"] = pd.qcut(df2["listeners"], q=n_groups, labels=labels, duplicates="drop")
-    agg_fn = "mean" if agg == "Mean" else "median"
+    agg_fn = "mean" if "Mean" in agg else "median"
 
     grouped = df2.groupby("group", observed=True).agg(
         avg_events=("total_events", agg_fn),
