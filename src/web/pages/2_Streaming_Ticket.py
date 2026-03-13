@@ -212,7 +212,7 @@ if len(df1) >= 5:
 
     significance_label = "Yes" if p < 0.05 else "No"
 
-    m1 = st.columns(1)
+    m1, = st.columns(1)
     m1.metric("n artists", len(df1))
 
 
