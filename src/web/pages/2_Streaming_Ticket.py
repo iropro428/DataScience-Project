@@ -532,14 +532,6 @@ st.markdown(f"""<div class="insight-card">
     </p>
 </div>""", unsafe_allow_html=True)
 
-st.markdown("""<div class="methodology-note">
-    <p>
-    <strong>Methodological note:</strong> Last.fm listener counts were collected as a static snapshot (March 2026),
-    because Spotify disabled follower and popularity fields for development-mode apps in February 2026.
-    Ticketmaster event data covers January 2022–December 2026. The analysis is restricted to artists
-    with at least one Ticketmaster event and available Last.fm data.
-    </p>
-</div>""", unsafe_allow_html=True)
 
 st.markdown('<div id="frage-2"></div>', unsafe_allow_html=True)
 # ══════════════════════════════════════════════════════════════════════════
