@@ -968,30 +968,36 @@ if sel_artists and os.path.exists("data/raw/lastfm_toptracks.csv"):
     ].sort_values("top5_share", ascending=False).copy()
     tbl_data.columns = ["Artist", "Top-5 share %", "Top-3 share %", "Top-1 share %", "Total events"]
 
-    st.markdown("#### 📋 Concentration & touring overview")
-    st.dataframe(
-        tbl_data.set_index("Artist").style
-        .format({
-            "Top-5 share %": "{:.1f}",
-            "Top-3 share %": "{:.1f}",
-            "Top-1 share %": "{:.1f}",
-            "Total events": "{:.0f}",
-        })
-        .background_gradient(cmap="Purples", subset=["Top-5 share %", "Top-3 share %", "Top-1 share %"])
-        .background_gradient(cmap="YlGn", subset=["Total events"])
-        .set_properties(**{
-            "font-size": "13px",
-            "text-align": "center",
-        })
-        .set_table_styles([{
-            "selector": "th",
-            "props": [("font-size", "13px"), ("text-align", "center"), ("padding", "6px 12px")]
-        }]),
-        use_container_width=True
-    )
+st.markdown('<div class="section-title">📋 Concentration & touring overview</div>', unsafe_allow_html=True)
 
-else:
-    st.info("No artists selected or `lastfm_toptracks.csv` is missing.")
+st.dataframe(
+    tbl_data.set_index("Artist").style
+    .format({
+        "Top-5 share %": "{:.1f}",
+        "Top-3 share %": "{:.1f}",
+        "Top-1 share %": "{:.1f}",
+        "Total events": "{:.0f}",
+    })
+    .background_gradient(cmap="Purples", subset=["Top-5 share %", "Top-3 share %", "Top-1 share %"])
+    .background_gradient(cmap="YlGn", subset=["Total events"])
+    .set_properties(**{
+        "font-size": "13px",
+        "text-align": "center",
+        "color": "white",
+        "background-color": "#1a1a1a",
+    })
+    .set_table_styles([{
+        "selector": "th",
+        "props": [
+            ("font-size", "13px"),
+            ("text-align", "center"),
+            ("padding", "6px 12px"),
+            ("color", "white"),
+            ("background-color", "#2a2a2a"),
+        ]
+    }]),
+    use_container_width=True
+)
 
 # Summary F2 
 st.divider()
