@@ -744,23 +744,44 @@ st.divider()
 # ══════════════════════════════════════════════════════════════════════════
 # Q2 — GRAPH 1: Scatterplot pct_capital vs Listeners
 # ══════════════════════════════════════════════════════════════════════════
-st.markdown('<div class="section-title">📈 Graph 1 — Capital City Share vs. Last.fm Listener Popularity</div>',
+st.markdown('<div class="section-title">📈 Graph 2 — Capital City Share vs. Last.fm Listeners</div>',
             unsafe_allow_html=True)
 
-st.markdown("""
-This scatterplot examines the continuous relationship between an artist's streaming popularity and the proportion of their concerts held in capital cities. The x-axis shows Last.fm listener counts on a log scale to compress the wide range of popularity values, while the y-axis shows the selected capital-city metric. A green OLS regression line is overlaid to capture the overall trend across all artists, and each dot can be hovered to inspect individual cases.
-""")
+metric_descriptions = {
+    "pct_capital": (
+        "Each dot represents one artist. The x-axis shows their Last.fm listener count (log scale), "
+        "the y-axis shows what <strong>share of their total events</strong> took place in capital cities. "
+        "The trend line shows whether artists with more listeners tend to play a larger or smaller "
+        "proportion of their concerts in capitals."
+    ),
+    "pct_capital_cities": (
+        "Each dot represents one artist. The x-axis shows their Last.fm listener count (log scale), "
+        "the y-axis shows what <strong>share of the cities they visited</strong> are national capitals. "
+        "Unlike the events metric, each city counts only once — this shows how capitals feature "
+        "in an artist's tour routing independent of how many shows they played there."
+    ),
+}
+
+description_placeholder = st.empty()
 
 sc6_1, sc6_2 = st.columns([1, 3])
 with sc6_1:
-    sc6_y = st.radio("X-Axis",
-                     ["pct_capital", "pct_capital_cities"],
-                     index=0, key="f6s_y",
-                     format_func=lambda x: {"pct_capital": "% Capital Events",
-                                            "pct_capital_cities": "% Capital Cities"}[x])
-    sc6_logy = st.checkbox("Log Y-Axis", value=False, key="f6s_logy")
+    sc6_y = st.radio(
+        "Y-Axis",
+        ["pct_capital", "pct_capital_cities"],
+        index=0, key="f6s_y",
+        format_func=lambda x: {
+            "pct_capital": "% Capital Events",
+            "pct_capital_cities": "% Capital Cities"
+        }[x]
+    )
     sc6_lbls = st.checkbox("Show Names", value=False, key="f6s_lbl")
-    sc6_min = st.slider("Min-Events", 1, 20, 3, key="f6s_min")
+    sc6_min = st.slider("Min. Events", 1, 20, 3, key="f6s_min")
+
+description_placeholder.markdown(
+    metric_descriptions[sc6_y],
+    unsafe_allow_html=True
+)
 
 df_sc6 = df_f6[df_f6["total_events"] >= sc6_min].dropna(
     subset=[sc6_y, "listeners"]).copy()
@@ -769,53 +790,52 @@ df_sc6 = df_sc6.dropna(subset=["listeners"])
 
 if len(df_sc6) >= 5:
     x_v = np.log10(df_sc6["listeners"] + 1)
-    y_v = np.log10(df_sc6[sc6_y] + 1) if sc6_logy else df_sc6[sc6_y]
-    r6, p6 = stats.pearsonr(x_v, y_v)
-    r2_6 = r6 ** 2
-
-    m1, m2, m3, m4 = st.columns(4)
-    m1.metric("n Artists", len(df_sc6))
-    m2.metric("Pearson r", f"{r6:.3f}")
-    m3.metric("R²", f"{r2_6:.1%}")
-    m4.metric("p-Wert", f"{p6:.4f}",
-              delta="signifikant" if p6 < 0.05 else "not signifikant",
-              delta_color="normal" if p6 < 0.05 else "inverse")
+    y_v = df_sc6[sc6_y]
 
     df_sc6["x_plot"] = x_v.values
     df_sc6["y_plot"] = y_v.values
 
-    y_lbl_map = {"pct_capital": "% Capital Events", "pct_capital_cities": "% Capital Cities"}
+    y_lbl_map = {
+        "pct_capital": "% Capital Events",
+        "pct_capital_cities": "% Capital Cities"
+    }
 
     coef = np.polyfit(df_sc6["x_plot"], df_sc6["y_plot"], 1)
     x_line = np.linspace(df_sc6["x_plot"].min(), df_sc6["x_plot"].max(), 200)
     y_line = np.polyval(coef, x_line)
+    slope = coef[0]
 
     fig_sc6 = px.scatter(
         df_sc6, x="x_plot", y="y_plot",
         hover_name="artist_name",
         hover_data={"x_plot": False, "y_plot": False,
                     "listeners": ":,", sc6_y: ":.1f", "total_events": True},
-        color="pct_capital",
+        color=sc6_y,
         color_continuous_scale="RdYlGn",
         text="artist_name" if sc6_lbls else None,
-        labels={"x_plot": "log₁₀(Last.fm Listeners)",
-                "y_plot": ("log₁₀(" if sc6_logy else "") + y_lbl_map[sc6_y] + (")" if sc6_logy else "")},
-        title=f"{y_lbl_map[sc6_y]} vs. Last.fm Listeners  |  r = {r6:.3f}  |  n = {len(df_sc6)}",
+        labels={
+            "x_plot": "log₁₀(Last.fm Listeners)",
+            "y_plot": y_lbl_map[sc6_y]
+        },
+        title=f"{y_lbl_map[sc6_y]} vs. Last.fm Listeners  |  n = {len(df_sc6)}",
         template="plotly_dark",
     )
     fig_sc6.add_trace(go.Scatter(
         x=x_line, y=y_line,
-        mode="lines", name="OLS",
+        mode="lines", name="Trend line",
         line=dict(color="#1DB954", width=2.5),
         hoverinfo="skip",
     ))
-    fig_sc6.update_traces(marker=dict(size=9, opacity=0.85,
-                                      line=dict(width=0.5, color="white")),
-                          selector=dict(mode="markers"))
+    fig_sc6.update_traces(
+        marker=dict(size=9, opacity=0.85, line=dict(width=0.5, color="white")),
+        selector=dict(mode="markers")
+    )
     if sc6_lbls:
-        fig_sc6.update_traces(textposition="top center",
-                              textfont=dict(size=8, color="white"),
-                              selector=dict(mode="markers+text"))
+        fig_sc6.update_traces(
+            textposition="top center",
+            textfont=dict(size=8, color="white"),
+            selector=dict(mode="markers+text")
+        )
     fig_sc6.update_layout(
         height=510, paper_bgcolor="#0e0e0e", plot_bgcolor="#1a1a1a",
         font=dict(color="white"),
@@ -825,35 +845,42 @@ if len(df_sc6) >= 5:
     with sc6_2:
         st.plotly_chart(fig_sc6, use_container_width=True)
 
-    strength = "strong" if abs(r6) >= 0.7 else "moderate" if abs(r6) >= 0.4 else "weak"
+    y_label_plain = y_lbl_map[sc6_y]
+    metric_plain = "events in capital cities" if sc6_y == "pct_capital" else "cities visited that are capitals"
+
+    if abs(slope) < 0.5:
+        interp_text = (
+            f"The trend line is nearly flat, suggesting that Last.fm listener count has little "
+            f"to no consistent relationship with the {y_label_plain.lower()}. "
+            f"Artists across all popularity levels show a similar proportion of {metric_plain} — "
+            f"touring decisions appear to be driven by other factors such as region, genre, or "
+            f"venue availability rather than audience size."
+        )
+    elif slope > 0:
+        interp_text = (
+            f"The trend line slopes upward, suggesting that artists with more Last.fm listeners "
+            f"tend to have a higher {y_label_plain.lower()}. "
+            f"More popular artists appear to concentrate a greater share of their {metric_plain}, "
+            f"which could reflect that larger artists benefit from the higher demand and bigger "
+            f"venues that capital cities typically offer."
+        )
+    else:
+        interp_text = (
+            f"The trend line slopes downward, suggesting that artists with more Last.fm listeners "
+            f"actually show a lower {y_label_plain.lower()}. "
+            f"More popular artists appear to spread their performances more broadly — "
+            f"a smaller share of their {metric_plain}, possibly because extensive touring "
+            f"requires reaching beyond capitals into non-capital markets."
+        )
 
     st.markdown(f"""
-    <div style="background:#0f1829;border:1px solid #1e2d45;border-left:3px solid #6366f1;border-radius:10px;padding:18px 22px;margin-bottom:12px;">
-    <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:#818cf8;margin-bottom:10px;">📊 Statistical Analysis</div>
-    <div style="color:#C8D6E8;font-size:.9rem;line-height:1.65;">
-    Pearson r = <strong>{r6:.3f}</strong>, R² = <strong>{r2_6:.1%}</strong>, p = <strong>{p6:.4f}</strong>
-    → <strong>{strength} {"positive" if r6 > 0 else "negative"} correlation</strong>,
-    {"statistically significant" if p6 < 0.05 else "not statistically significant"}.
-    Pearson r measures the strength and direction of the relationship between streaming popularity and capital-city share — a value near 0 indicates virtually no linear relationship.
-    R² = <strong>{r2_6:.1%}</strong> means that listener popularity explains only {r2_6:.1%} of the variance in capital-city share; the remaining {100 - r2_6*100:.1f}% is driven by other factors such as genre, touring region, or booking strategy.
-    {"A p-value of " + f"{p6:.4f}" + " confirms this result is statistically significant — the relationship is unlikely to be a random artefact." if p6 < 0.05 else "A p-value of " + f"{p6:.4f}" + " means this result is not statistically significant — the observed correlation could easily be due to chance in a sample of this size."}
-    </div>
-    </div>
-    """, unsafe_allow_html=True)
-
-    st.markdown(f"""
-    <div style="background:#0f1829;border:1px solid #1e2d45;border-left:3px solid #10b981;border-radius:10px;padding:18px 22px;margin-bottom:16px;">
-    <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:#10b981;margin-bottom:10px;">🔍 Interpretation</div>
-    <div style="color:#C8D6E8;font-size:.9rem;line-height:1.65;">
-    {"More popular artists play proportionally more shows in capitals — larger venues and stronger media presence in capitals make them attractive targets. This supports the hypothesis in Research Question 2." if r6 > 0.2 and p6 < 0.05
-    else "More popular artists actually show a lower capital share — extensive touring requires going beyond capitals into non-capital markets. This challenges the hypothesis in Research Question 2." if r6 < -0.2 and p6 < 0.05
-    else "Listener popularity is not a meaningful predictor of capital-city share — touring decisions in Research Question 2 appear driven by other factors such as region, genre, or booking strategy."}
-    </div>
+    <div class="insight-card">
+        <h4>🔍 Interpretation</h4>
+        <p>{interp_text}</p>
     </div>
     """, unsafe_allow_html=True)
 
 st.divider()
-
 # ══════════════════════════════════════════════════════════════════════════
 # Q2 — GRAPH 2: Meistbesuchte Hauptstädte (global)
 # ══════════════════════════════════════════════════════════════════════════
