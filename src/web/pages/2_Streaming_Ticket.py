@@ -147,7 +147,7 @@ unsafe_allow_html=True
 )
 
 st.markdown("""
-Each point represents one artist. The x-axis shows the number of Last.fm listeners, and the y-axis shows the total number of Ticketmaster events. The green OLS trend line summarizes the overall direction of the relationship: if the line rises, artists with more listeners tend to have more events on average; if it stays flat, there is little to no linear relationship.
+Each point represents one artist. The x-axis shows the number of Last.fm listeners, and the y-axis shows the total number of Ticketmaster events. The green trend line summarizes the overall direction of the relationship: if the line rises, artists with more listeners tend to have more events on average; if it stays flat, there is little to no linear relationship.
 The filters allow users to exclude outliers or focus on specific genres to see whether the pattern remains stable.
 """)
 
@@ -212,16 +212,9 @@ if len(df1) >= 5:
 
     significance_label = "Yes" if p < 0.05 else "No"
 
-    m1, m2, m3, m4 = st.columns(4)
+    m1 = st.columns(1)
     m1.metric("n artists", len(df1))
-    m2.metric("Pearson r", f"{r:.3f}")
-    m3.metric("R²", f"{r2:.1%}")
-    m4.metric(
-        "p-value",
-        f"{p:.4f}",
-        delta="significant" if p < 0.05 else "not significant",
-        delta_color="normal" if p < 0.05 else "inverse"
-    )
+
 
     # Plot
     hover = {"listeners": ":,", "total_events": True}
@@ -250,7 +243,7 @@ if len(df1) >= 5:
         template="plotly_dark"
     )
     fig1.add_trace(go.Scatter(
-        x=_x1, y=_y1, mode="lines", name="OLS",
+        x=_x1, y=_y1, mode="lines", name="trend line",
         line=dict(color="#1DB954", width=2.5),
         hoverinfo="skip",
     ))
@@ -279,20 +272,7 @@ if len(df1) >= 5:
     )
     st.plotly_chart(fig1, use_container_width=True)
 
-    # Statistical analysis
-    stat_text = (
-        f"Pearson correlation: r = {r:.3f}, p = {p:.4f}, R² = {r2:.1%}. "
-    )
-    if p < 0.05:
-        stat_text += (
-            f"The result is statistically significant and indicates {relationship_text} "
-            f"between Last.fm listener count and tour scale."
-        )
-    else:
-        stat_text += (
-            f"The result is not statistically significant and does not provide reliable evidence "
-            f"for a linear relationship between Last.fm listener count and tour scale in this dataset."
-        )
+
 
     # Interpretation
     if abs_r < 0.1:
@@ -319,10 +299,6 @@ if len(df1) >= 5:
         )
 
     st.markdown(f"""
-    <div class="insight-card">
-        <h4>📊 Statistical analysis</h4>
-        <p>{stat_text}</p>
-    </div>
     <div class="insight-card">
         <h4>🔍 Interpretation</h4>
         <p>
