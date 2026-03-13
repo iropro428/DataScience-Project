@@ -747,23 +747,23 @@ st.divider()
 # F2 — GRAPH 2: Boxplot — Events/year by concentration category
 # ══════════════════════════════════════════════════════════════════════════
 st.markdown(
-    '<div class="section-title">📦 Graph 2 — Tour intensity by concentration category (box plot)</div>',
+    '<div class="section-title">📦 Graph 2 — Do artists with broader or more concentrated streaming profiles tour more?</div>',
     unsafe_allow_html=True
 )
 
 st.markdown("""
-Artists are sorted by streaming concentration and then divided into equally sized categories, ranging from broader to more concentrated profiles. 
-For each category, the box plot shows the distribution of tour intensity: the line inside the box marks the median, the box contains the middle 50% of values, and the whiskers indicate the typical range. 
-Individual points represent outliers. The label n below each category shows how many artists are included in that box.
+Artists are divided into equally sized categories based on how concentrated their streaming activity is — 
+from broad profiles where plays are spread across many tracks, to concentrated profiles where a few tracks 
+dominate. For each category, the box plot shows the spread of total Ticketmaster events: the line inside 
+the box marks the median, the box contains the middle 50% of values, and the whiskers show the typical range. 
+Individual points are outliers. The label n shows how many artists are in each category.
 """, unsafe_allow_html=True)
 
 bx1, bx2 = st.columns([1, 3])
 with bx1:
     n_cats = st.select_slider("Number of categories", [3, 4, 5], value=4, key="f2b_nc")
-    bx_metric = st.radio("Y-axis", ["Events last year", "Total events"], key="f2b_ym")
 
-df2b = df2.dropna(subset=["top5_share", "events_last_year", "total_events"]).copy()
-y_col_bx = "events_last_year" if bx_metric == "Events last year" else "total_events"
+df2b = df2.dropna(subset=["top5_share", "total_events"]).copy()
 
 try:
     cat_labels = {
@@ -781,7 +781,7 @@ try:
 
     fig_bx2 = go.Figure()
     for i, cat in enumerate(cat_labels):
-        sub = df2b[df2b["cat"] == cat][y_col_bx]
+        sub = df2b[df2b["cat"] == cat]["total_events"]
         if len(sub) < 2:
             continue
         fig_bx2.add_trace(go.Box(
@@ -795,22 +795,9 @@ try:
             hovertemplate="Events: %{y}<extra></extra>"
         ))
 
-    # Kruskal-Wallis
-    kw_groups = [
-        df2b[df2b["cat"] == c][y_col_bx].values
-        for c in cat_labels
-        if len(df2b[df2b["cat"] == c]) > 1
-    ]
-
-    kw_stat = None
-    kw_p = None
-    if len(kw_groups) >= 2:
-        from scipy.stats import kruskal as kruskal_test
-        kw_stat, kw_p = kruskal_test(*kw_groups)
-
     fig_bx2.update_layout(
-        title=f"Tour intensity by concentration category — {bx_metric}",
-        yaxis_title=bx_metric,
+        title="Total Ticketmaster events by streaming concentration category",
+        yaxis_title="Total events",
         template="plotly_dark",
         paper_bgcolor="#0e0e0e",
         plot_bgcolor="#1a1a1a",
@@ -824,63 +811,47 @@ try:
     with bx2:
         st.plotly_chart(fig_bx2, use_container_width=True)
 
-    # Statistical analysis
-    if kw_stat is not None and kw_p is not None:
-        stat_text_bx = (
-            f"Kruskal-Wallis test: H = {kw_stat:.2f}, p = {kw_p:.4f}. "
-        )
-        if kw_p < 0.05:
-            stat_text_bx += (
-                "The result is statistically significant, indicating that at least one concentration category differs "
-                "from the others in tour intensity."
-            )
-        else:
-            stat_text_bx += (
-                "The result is not statistically significant, so the grouped data do not provide reliable evidence "
-                "for differences in tour intensity across concentration categories."
-            )
-    else:
-        stat_text_bx = (
-            "Not enough valid category groups were available to compute a Kruskal-Wallis test."
-        )
+    # Interpretation based on median pattern only
+    medians = (
+        df2b.groupby("cat", observed=True)["total_events"]
+        .median()
+        .reindex(cat_labels)
+        .tolist()
+    )
+    medians_clean = [m for m in medians if m is not None and not pd.isna(m)]
 
-    # Interpretation
-    medians = df2b.groupby("cat", observed=True)[y_col_bx].median().tolist()
+    median_diff = max(medians_clean) - min(medians_clean) if medians_clean else 0
+    monotonic_up = all(medians_clean[i] <= medians_clean[i+1] for i in range(len(medians_clean)-1))
+    monotonic_down = all(medians_clean[i] >= medians_clean[i+1] for i in range(len(medians_clean)-1))
 
-    monotonic_up = all(medians[i] <= medians[i + 1] for i in range(len(medians) - 1)) if len(medians) >= 2 else False
-    monotonic_down = all(medians[i] >= medians[i + 1] for i in range(len(medians) - 1)) if len(medians) >= 2 else False
-
-    if kw_p is not None and kw_p >= 0.05:
+    if median_diff < 5:
         interp_text_bx = (
-            "The box plots overlap strongly across the concentration categories, and the median event counts remain fairly similar. "
-            "This suggests that tour intensity does not differ systematically between broader and more concentrated streaming profiles."
+            "The median total event counts are very similar across all concentration categories. "
+            "This suggests that whether an artist's streams are spread broadly or focused on a few tracks "
+            "does not consistently relate to how many live events they have had overall."
         )
-    elif kw_p is not None and kw_p < 0.05 and monotonic_down:
+    elif monotonic_down:
         interp_text_bx = (
-            "The medians tend to decrease from broader to more concentrated profiles. "
-            "This suggests that artists with broader streaming profiles may have higher tour intensity."
+            "The median event count tends to decrease from broader to more concentrated profiles. "
+            "Artists whose plays are spread across many tracks appear to have accumulated more "
+            "Ticketmaster events in total. This could reflect that a diverse catalogue sustains "
+            "audience interest over a longer and more active touring career."
         )
-    elif kw_p is not None and kw_p < 0.05 and monotonic_up:
+    elif monotonic_up:
         interp_text_bx = (
-            "The medians tend to increase from broader to more concentrated profiles. "
-            "This suggests that artists with more concentrated streaming profiles may have higher tour intensity."
-        )
-    elif kw_p is not None and kw_p < 0.05:
-        interp_text_bx = (
-            "The categories differ significantly, but the pattern is not strictly step-by-step across all groups. "
-            "This suggests that concentration may matter, but not in a simple linear way."
+            "The median event count tends to increase from broader to more concentrated profiles. "
+            "Artists with a few dominant tracks appear to have more Ticketmaster events in total on average. "
+            "One possible explanation is that breakout tracks create stronger and more sustained demand "
+            "for live performances over time."
         )
     else:
         interp_text_bx = (
-            "The box plot provides a grouped comparison of tour intensity across concentration categories, "
-            "but the result should be interpreted cautiously."
+            "The median event counts vary across the concentration categories, but without a clear "
+            "step-by-step pattern from broad to concentrated. This suggests that streaming concentration "
+            "alone does not reliably predict how extensively an artist has toured."
         )
 
     st.markdown(f"""
-    <div class="insight-card">
-        <h4>📊 Statistical analysis</h4>
-        <p>{stat_text_bx}</p>
-    </div>
     <div class="insight-card">
         <h4>🔍 Interpretation</h4>
         <p>{interp_text_bx}</p>
