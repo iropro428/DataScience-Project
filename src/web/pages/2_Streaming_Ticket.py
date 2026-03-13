@@ -1388,21 +1388,18 @@ if "chart_weeks" in df3.columns and df3["chart_weeks"].notna().sum() >= 5:
     )
 
     st.markdown("""
-    This scatterplot includes only artists who appeared in the sampled global Spotify Weekly Charts between February 2023 and February 2026.
-    The x-axis shows either the number of chart weeks or total chart streams, while the y-axis shows current Last.fm listener counts.
-    Logarithmic scaling can be enabled for either axis to compress very large values and make broad patterns easier to compare.
-    The trend line summarizes whether stronger chart presence is associated with higher Last.fm audience size within the group of Chart Artists.
+    This scatterplot includes only artists who appeared in the sampled global Spotify Weekly Charts 
+    between February 2023 and February 2026. The x-axis shows either the number of chart weeks or 
+    total chart streams, while the y-axis shows current Last.fm listener counts. The trend line 
+    summarizes whether stronger chart presence tends to go along with a higher Last.fm audience 
+    within this group.
     """, unsafe_allow_html=True)
 
-
-    # Control values are defined here and rendered later next to the chart
     x_metric_f3 = st.session_state.get("f3_x", "chart_weeks")
     log_x_f3 = st.session_state.get("f3_logx", True)
     log_y_f3 = st.session_state.get("f3_logy", True)
     lbl_f3 = st.session_state.get("f3_lbl", False)
 
-
-    # Data preparation
     x_metric_f3 = st.session_state.get("f3_x", x_metric_f3)
     log_x_f3 = st.session_state.get("f3_logx", log_x_f3)
     log_y_f3 = st.session_state.get("f3_logy", log_y_f3)
@@ -1414,27 +1411,7 @@ if "chart_weeks" in df3.columns and df3["chart_weeks"].notna().sum() >= 5:
     df_sc3["x_plot"] = np.log10(df_sc3[x_metric_f3] + 1) if log_x_f3 else df_sc3[x_metric_f3]
     df_sc3["y_plot"] = np.log10(df_sc3["listeners"] + 1) if log_y_f3 else df_sc3["listeners"]
 
-
     if len(df_sc3) >= 5:
-
-        r_f3, p_f3 = stats.pearsonr(df_sc3["x_plot"], df_sc3["y_plot"])
-        r2_f3 = r_f3 ** 2
-        abs_r_f3 = abs(r_f3)
-
-
-        # KPI boxes — must appear above the chart title/plot
-        st.markdown("<div style='height:0.2rem'></div>", unsafe_allow_html=True)
-        k1, k2, k3, k4 = st.columns(4)
-        k1.metric("N chart artists", len(df_sc3))
-        k2.metric("Pearson r", f"{r_f3:.3f}")
-        k3.metric("R²", f"{r2_f3:.1%}")
-        k4.metric(
-            "p-value",
-            f"{p_f3:.4f}",
-            delta="significant" if p_f3 < 0.05 else "not significant",
-            delta_color="normal" if p_f3 < 0.05 else "inverse"
-        )
-        st.markdown("<div style='height:0.2rem'></div>", unsafe_allow_html=True)
 
         s1, s2 = st.columns([1, 3])
 
@@ -1454,39 +1431,19 @@ if "chart_weeks" in df3.columns and df3["chart_weeks"].notna().sum() >= 5:
             log_y_f3 = st.checkbox("Log Y", value=log_y_f3, key="f3_logy")
             lbl_f3 = st.checkbox("Show names", value=lbl_f3, key="f3_lbl")
 
-
-        # Relationship interpretation
-        if abs_r_f3 < 0.1:
-            relationship_text_f3 = "no meaningful linear relationship"
-        elif abs_r_f3 < 0.3:
-            relationship_text_f3 = f"a weak {'positive' if r_f3 > 0 else 'negative'} relationship"
-        elif abs_r_f3 < 0.5:
-            relationship_text_f3 = f"a moderate {'positive' if r_f3 > 0 else 'negative'} relationship"
-        else:
-            relationship_text_f3 = f"a strong {'positive' if r_f3 > 0 else 'negative'} relationship"
-
-
-        # Regression line
         coef_f3 = np.polyfit(df_sc3["x_plot"], df_sc3["y_plot"], 1)
         x_line_f3 = np.linspace(df_sc3["x_plot"].min(), df_sc3["x_plot"].max(), 200)
         y_line_f3 = np.polyval(coef_f3, x_line_f3)
+        slope_f3 = coef_f3[0]
 
-
-        # Axis labels
         x_axis_label = {
             "chart_weeks": "Weeks in chart",
             "total_chart_streams": "Total chart streams"
         }[x_metric_f3]
-
         if log_x_f3:
             x_axis_label = f"log₁₀({x_axis_label})"
+        y_axis_label = "log₁₀(Last.fm listeners)" if log_y_f3 else "Last.fm listeners"
 
-        y_axis_label = "Last.fm listeners"
-
-        if log_y_f3:
-            y_axis_label = "log₁₀(Last.fm listeners)"
-
-        # Plot
         fig_f3g3 = px.scatter(
             df_sc3,
             x="x_plot",
@@ -1505,7 +1462,7 @@ if "chart_weeks" in df3.columns and df3["chart_weeks"].notna().sum() >= 5:
                 "x_plot": x_axis_label,
                 "y_plot": y_axis_label,
             },
-            title=f"Chart intensity vs. listeners",
+            title="Chart intensity vs. Last.fm listeners",
             template="plotly_dark",
         )
 
@@ -1513,7 +1470,7 @@ if "chart_weeks" in df3.columns and df3["chart_weeks"].notna().sum() >= 5:
             x=x_line_f3,
             y=y_line_f3,
             mode="lines",
-            name="OLS",
+            name="Trend line",
             line=dict(color="#f59e0b", width=2.5),
             hoverinfo="skip",
         ))
@@ -1543,57 +1500,37 @@ if "chart_weeks" in df3.columns and df3["chart_weeks"].notna().sum() >= 5:
         with s2:
             st.plotly_chart(fig_f3g3, use_container_width=True)
 
-        # Statistical explanation
-        stat_text_f3g3 = (
-            f"Pearson correlation: r = {r_f3:.3f}, p = {p_f3:.4f}, R² = {r2_f3:.1%}. "
-        )
+        x_label_plain = "weeks in the chart" if x_metric_f3 == "chart_weeks" else "total chart streams"
 
-        if p_f3 < 0.05:
-            stat_text_f3g3 += (
-                f"The result is statistically significant and indicates {relationship_text_f3} "
-                f"between chart intensity and Last.fm listener count within the Chart Artist group."
-            )
-        else:
-            stat_text_f3g3 += (
-                "The result is not statistically significant and does not provide reliable evidence "
-                "for a linear relationship between chart intensity and Last.fm listener count within the Chart Artist group."
-            )
-
-
-        if abs_r_f3 < 0.1:
+        if abs(slope_f3) < 0.05:
             interp_text_f3g3 = (
-                "Within the group of Chart Artists, stronger chart presence does not systematically correspond "
-                "to higher Last.fm listener counts. This suggests that chart intensity alone is not a useful predictor "
-                "of cross-platform audience size."
+                f"The trend line is nearly flat, suggesting that among Chart Artists, "
+                f"the number of {x_label_plain} does not consistently relate to how large "
+                f"their Last.fm audience is. Some artists with few chart appearances have "
+                f"large followings on Last.fm, and vice versa."
             )
-        elif p_f3 < 0.05 and r_f3 > 0:
+        elif slope_f3 > 0:
             interp_text_f3g3 = (
-                "Chart Artists with stronger chart presence tend to have higher Last.fm listener counts. "
-                "This suggests that repeated or more intense chart success is associated with somewhat broader audience reach across platforms, "
-                "although the effect remains limited."
-            )
-        elif p_f3 < 0.05 and r_f3 < 0:
-            interp_text_f3g3 = (
-                "Chart Artists with stronger chart presence tend to have lower Last.fm listener counts. "
-                "This indicates a negative association within the Chart Artist group, although the practical meaning should be interpreted with caution."
+                f"The trend line slopes upward, suggesting that Chart Artists with more "
+                f"{x_label_plain} tend to also have larger Last.fm audiences. "
+                f"This points toward a broader pattern: stronger chart presence appears to "
+                f"go hand in hand with higher cross-platform visibility, at least within "
+                f"this group of artists."
             )
         else:
             interp_text_f3g3 = (
-                f"The observed pattern points to {relationship_text_f3}, but the result is not statistically significant. "
-                "This means the apparent trend should be interpreted cautiously and may reflect random variation within the Chart Artist sample."
+                f"The trend line slopes downward, suggesting that among Chart Artists, "
+                f"those with more {x_label_plain} do not necessarily have larger Last.fm audiences. "
+                f"This could reflect that some artists achieve repeated chart success through "
+                f"a concentrated fanbase rather than broad cross-platform reach."
             )
 
         st.markdown(f"""
-        <div class="insight-card">
-            <h4>📊 Statistical analysis</h4>
-            <p>{stat_text_f3g3}</p>
-        </div>
         <div class="insight-card">
             <h4>🔍 Interpretation</h4>
             <p>{interp_text_f3g3}</p>
         </div>
         """, unsafe_allow_html=True)
-
 
     st.divider()
 # ══════════════════════════════════════════════════════════════════════════
