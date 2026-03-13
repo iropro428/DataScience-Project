@@ -502,7 +502,7 @@ if city_df is not None:
         )
         .reset_index()
     )
-    city_agg = city_agg[city_agg["n_artists"] >= min_art]
+    city_agg = city_agg[city_agg["n_artists"]]
     city_top = city_agg.nlargest(top_n, "total_visits").sort_values("total_visits")
 
     if col_metric == "Total Visits":
