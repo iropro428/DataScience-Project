@@ -999,95 +999,70 @@ st.dataframe(
     use_container_width=True
 )
 
-# Summary F2 
+# ══════════════════════════════════════════════════════════════════════════
+# F2 — Summary
+# ══════════════════════════════════════════════════════════════════════════
 st.divider()
 st.markdown('<div class="section-title">Summary — Research Question 2</div>', unsafe_allow_html=True)
 
+# Derive answer from trendline slope computed in Graph 1
 if len(df2f) >= 5:
+    if abs(slope) < 2:
+        answer_f2 = (
+            "Across the artists in this dataset, the concentration of streaming activity — whether plays "
+            "are focused on a few tracks or spread broadly — does not appear to consistently relate to "
+            "how many live events an artist has. Artists with very different streaming profiles show "
+            "similar levels of touring activity overall."
+        )
+        context_f2 = (
+            "This suggests that the structure of an artist's streaming catalogue is not a strong indicator "
+            "of tour scale. Other factors, such as overall audience size or genre, may play a larger role."
+        )
+    elif slope < 0:
+        answer_f2 = (
+            "Artists with a broader streaming profile — where plays are distributed more evenly across "
+            "many tracks — tend to have more Ticketmaster events in total. This pattern suggests that "
+            "a diverse catalogue may support a more sustained and extensive touring career."
+        )
+        context_f2 = (
+            "Compared to overall listener count, the structure of streaming activity adds a different "
+            "perspective: it is not just how many people listen, but how broadly they engage with an "
+            "artist's catalogue that may relate to touring scale."
+        )
+    else:
+        answer_f2 = (
+            "Artists with a more concentrated streaming profile — where a large share of plays comes "
+            "from just a few tracks — tend to have more Ticketmaster events in total. This could reflect "
+            "that having one or a few standout tracks creates stronger and more sustained demand for "
+            "live performances."
+        )
+        context_f2 = (
+            "This finding contrasts with the idea that only broadly popular artists tour extensively. "
+            "Even artists known primarily for a handful of hits appear to maintain an active live presence."
+        )
+
     st.markdown(f"""
-    | Metric | Value |
-    |--------|------|
-    | Artists with complete F2 data | {n_f2} ({pct_cov_f2:.0f}%) |
-    | Concentration metric | Top-5 track share of total playcount |
-    | Tour intensity | Events in the last year (Ticketmaster) |
-    | Pearson r | {r_f2:.3f} |
-    | R² | {r2_f2:.1%} |
-    | p-value | {p_f2:.4f} |
-    | Significant | {'Yes ' if p_f2 < 0.05 else 'No '} |
-    """)
-
-    abs_r_f2 = abs(r_f2)
-    direction_f2 = "positive" if r_f2 > 0 else "negative"
-    if abs_r_f2 < 0.1:
-        relationship_text_f2 = "no meaningful linear relationship"
-    elif abs_r_f2 < 0.3:
-        relationship_text_f2 = f"a weak {direction_f2} relationship"
-    elif abs_r_f2 < 0.5:
-        relationship_text_f2 = f"a moderate {direction_f2} relationship"
-    else:
-        relationship_text_f2 = f"a strong {direction_f2} relationship"
-
-    if abs_r_f2 < 0.1:
-        main_interpretation_f2 = (
-            f"There is {relationship_text_f2} between streaming concentration and tour intensity "
-            f"in this dataset (r = {r_f2:.3f}, p = {p_f2:.4f}). "
-            f"Artists with a more concentrated streaming profile do not systematically have more or fewer events "
-            f"than artists with a broader profile. In this analysis, streaming concentration is not a useful predictor "
-            f"of tour intensity."
-        )
-    elif p_f2 < 0.05 and r_f2 < 0:
-        main_interpretation_f2 = (
-            f"There is {relationship_text_f2} between streaming concentration and tour intensity "
-            f"in this dataset (r = {r_f2:.3f}, p = {p_f2:.4f}). "
-            f"Artists with a broader and more evenly distributed streaming profile tend to have more events."
-        )
-    elif p_f2 < 0.05 and r_f2 > 0:
-        main_interpretation_f2 = (
-            f"There is {relationship_text_f2} between streaming concentration and tour intensity "
-            f"in this dataset (r = {r_f2:.3f}, p = {p_f2:.4f}). "
-            f"Artists with a more concentrated streaming profile tend to have more events."
-        )
-    else:
-        main_interpretation_f2 = (
-            f"There is {relationship_text_f2} between streaming concentration and tour intensity "
-            f"in this dataset (r = {r_f2:.3f}, p = {p_f2:.4f}). "
-            f"However, the result is not statistically significant, so the observed pattern should be interpreted with caution."
-        )
-
-    if p_f2 < 0.05:
-        context_text_f2 = (
-            "In the broader project context, this suggests that the structure of streaming activity "
-            "(broad vs. concentrated) may add explanatory value for touring activity."
-        )
-    else:
-        context_text_f2 = (
-            "In the broader project context, this suggests that the structure of streaming activity "
-            "(broad vs. concentrated) does not appear to add meaningful explanatory value for touring activity "
-            "in this dataset."
-        )
-
-    st.markdown(f"""<div class="insight-card">
+    <div class="insight-card">
         <h4>🎯 Answer to Research Question 2</h4>
-        <p>
-        {main_interpretation_f2}
-        <br><br>
-        <strong>In the broader project context:</strong> {context_text_f2}
-        </p>
-    </div>""", unsafe_allow_html=True)
+        <p>{answer_f2}</p>
+        <br>
+        <p><strong>Broader context:</strong> {context_f2}</p>
+    </div>
+    """, unsafe_allow_html=True)
 
-    st.markdown("""<div class="methodology-note">
+    st.markdown("""
+    <div class="methodology-note">
         <p>
-        <strong>Methodological note:</strong>
-        Streaming concentration = share of the top 5 tracks in the total playcount
-        of the top 20 tracks returned by Last.fm (<code>artist.getTopTracks</code>).
-        This metric slightly underestimates concentration if an artist has more than 20
-        relevant tracks. Tour intensity = number of Ticketmaster events in the last
-        12 months (reference date: March 2026). Additionally, the Herfindahl-Hirschman Index (HHI)
-        was calculated as a stricter concentration measure (available in Graph 1 via the metric selection).
+        <strong>Methodological note:</strong> Streaming concentration is measured as the share of the 
+        top 5 tracks in the total playcount of the top 20 tracks returned by Last.fm 
+        (<code>artist.getTopTracks</code>). Tour scale is measured as total Ticketmaster events across 
+        all available data (no date filter applied). Artists without complete data on both dimensions 
+        were excluded from Graphs 1 and 2.
         </p>
-    </div>""", unsafe_allow_html=True)
+    </div>
+    """, unsafe_allow_html=True)
 
-    st.markdown('<div id="frage-3"></div>', unsafe_allow_html=True)
+st.markdown('<div id="frage-3"></div>', unsafe_allow_html=True)
 # ══════════════════════════════════════════════════════════════════════════
 # RESEARCH QUESTION 3 — Chart Artists vs. Non-Chart Artists
 # ══════════════════════════════════════════════════════════════════════════
