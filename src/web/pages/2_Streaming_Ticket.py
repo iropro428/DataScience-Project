@@ -592,8 +592,11 @@ st.markdown(
 )
 
 st.markdown("""
-Each point represents one artist with complete data on both streaming concentration and recent touring activity. The x-axis shows the selected concentration metric, and the y-axis shows the number of events in the last year. The green OLS trend line summarizes the overall direction of the relationship: if it rises, higher concentration tends to be associated with higher tour intensity; if it falls, broader streaming profiles tend to be associated with higher tour intensity.
-Because only artists with complete data can be included here, small differences should be interpreted cautiously.
+Each point represents one artist with complete data on both streaming concentration and recent touring activity. 
+The x-axis shows the selected concentration metric, and the y-axis shows the number of events in the last year. 
+The green trend line summarizes the overall direction of the relationship: if it rises, higher concentration 
+tends to be associated with higher tour intensity; if it falls, a broader streaming profile tends to go 
+along with more events.
 """)
 
 sc1, sc2 = st.columns([2, 1])
@@ -619,7 +622,6 @@ sel_genres_f2 = st.multiselect(
     "🎵 Genre filter", options=top_genres, default=[], key="f2s_genres"
 )
 
-# prove metric
 if conc_metric not in df2.columns:
     st.warning(f"Metric `{conc_metric}` not in dataset — only top5_share is available.")
     conc_metric = "top5_share"
@@ -636,30 +638,6 @@ if len(df2f) >= 5:
     x_vals = df2f[conc_metric]
     y_vals = np.log10(df2f["events_last_year"] + 1) if log_y_s else df2f["events_last_year"]
 
-    r_f2, p_f2 = stats.pearsonr(x_vals, y_vals)
-    r2_f2 = r_f2 ** 2
-    abs_r_f2 = abs(r_f2)
-
-    if abs_r_f2 < 0.1:
-        relationship_text_f2 = "no meaningful linear relationship"
-    elif abs_r_f2 < 0.3:
-        relationship_text_f2 = f"a weak {'positive' if r_f2 > 0 else 'negative'} relationship"
-    elif abs_r_f2 < 0.5:
-        relationship_text_f2 = f"a moderate {'positive' if r_f2 > 0 else 'negative'} relationship"
-    else:
-        relationship_text_f2 = f"a strong {'positive' if r_f2 > 0 else 'negative'} relationship"
-
-    m1, m2, m3, m4 = st.columns(4)
-    m1.metric("n artists", len(df2f))
-    m2.metric("Pearson r", f"{r_f2:.3f}")
-    m3.metric("R²", f"{r2_f2:.1%}")
-    m4.metric(
-        "p-value",
-        f"{p_f2:.4f}",
-        delta="significant" if p_f2 < 0.05 else "not significant",
-        delta_color="normal" if p_f2 < 0.05 else "inverse"
-    )
-
     plot_df2 = df2f.copy()
     plot_df2["y_plot"] = y_vals.values
 
@@ -675,6 +653,8 @@ if len(df2f) >= 5:
     _x_sc = np.linspace(plot_df2[conc_metric].min(), plot_df2[conc_metric].max(), 200)
     _y_sc = np.polyval(_c_sc, _x_sc)
 
+    trend_direction = "positive" if _c_sc[0] > 0 else "negative"
+
     fig_sc = px.scatter(
         plot_df2,
         x=conc_metric,
@@ -688,12 +668,12 @@ if len(df2f) >= 5:
             conc_metric: metric_labels.get(conc_metric, conc_metric),
             "y_plot": f"{'log₁₀(' if log_y_s else ''}Events last year{')' if log_y_s else ''}",
         },
-        title=f"Streaming concentration vs. tour intensity",
+        title="Streaming concentration vs. tour intensity",
         template="plotly_dark"
     )
 
     fig_sc.add_trace(go.Scatter(
-        x=_x_sc, y=_y_sc, mode="lines", name="OLS",
+        x=_x_sc, y=_y_sc, mode="lines", name="Trend line",
         line=dict(color="#1DB954", width=2.5),
         hoverinfo="skip",
     ))
@@ -723,56 +703,27 @@ if len(df2f) >= 5:
 
     st.plotly_chart(fig_sc, use_container_width=True)
 
-    stat_text_f2 = (
-        f"Pearson correlation: r = {r_f2:.3f}, p = {p_f2:.4f}, R² = {r2_f2:.1%}. "
-    )
-
-    if p_f2 < 0.05:
-        stat_text_f2 += (
-            f"The result is statistically significant and indicates {relationship_text_f2} "
-            f"between streaming concentration and tour intensity."
-        )
-    else:
-        stat_text_f2 += (
-            "The result is not statistically significant and does not provide reliable evidence "
-            "for a linear relationship between streaming concentration and tour intensity in this dataset."
-        )
-
-    if abs_r_f2 < 0.1:
+    if trend_direction == "negative":
         interp_text_f2 = (
-            "Artists with more concentrated streaming profiles do not systematically have more or fewer events "
-            "than artists with broader profiles. In this analysis, streaming concentration is not a useful predictor "
-            "of tour intensity."
-        )
-    elif p_f2 < 0.05 and r_f2 < 0:
-        interp_text_f2 = (
-            "Artists with broader and more evenly distributed streaming profiles tend to have more events. "
-            "This suggests that a wider spread of audience attention across multiple tracks may be associated with higher touring activity."
-        )
-    elif p_f2 < 0.05 and r_f2 > 0:
-        interp_text_f2 = (
-            "Artists with more concentrated streaming profiles tend to have more events. "
-            "This suggests that strong attention focused on a few tracks may coincide with higher touring activity in this dataset."
+            f"The trend line slopes downward, which suggests that artists with a broader streaming profile — "
+            f"where playcount is spread more evenly across multiple tracks — tend to have more events per year. "
+            f"Artists whose audience is concentrated on just a {conc_metric.replace('top', '').replace('_share', '')} "
+            f"track appear to tour somewhat less intensively on average. "
+            "This could reflect that artists with a diverse catalogue attract audiences across different tastes, "
+            "which may support a more active touring schedule."
         )
     else:
         interp_text_f2 = (
-            f"The observed pattern points to {relationship_text_f2}, but the result is not statistically significant. "
-            "This means the apparent trend should be interpreted cautiously and may reflect random variation in the filtered sample."
+            f"The trend line slopes upward, suggesting that artists with a more concentrated streaming profile — "
+            f"where a large share of total playcount comes from just a few tracks — tend to have more events per year. "
+            "This might indicate that having one or a few breakout tracks can drive demand for live performances, "
+            "giving these artists more reason and opportunity to tour."
         )
 
     st.markdown(f"""
     <div class="insight-card">
-        <h4>📊 Statistical analysis</h4>
-        <p>{stat_text_f2}</p>
-    </div>
-    <div class="insight-card">
         <h4>🔍 Interpretation</h4>
-        <p>
-        {interp_text_f2}
-        <br><br>
-        <strong>Context:</strong> Compared with RQ1, this graph focuses on the structure of streaming activity
-        (broad vs. concentrated) rather than its overall size.
-        </p>
+        <p>{interp_text_f2}</p>
     </div>
     """, unsafe_allow_html=True)
 
@@ -780,7 +731,6 @@ else:
     st.warning("Too few data points after filtering.")
 
 st.divider()
-
 # ══════════════════════════════════════════════════════════════════════════
 # F2 — GRAPH 2: Boxplot — Events/year by concentration category
 # ══════════════════════════════════════════════════════════════════════════
