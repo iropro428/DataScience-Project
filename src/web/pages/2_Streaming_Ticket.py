@@ -440,20 +440,19 @@ st.markdown(
     '<div class="section-title">📉 Graph 3 — Distribution of Last.fm listeners</div>',
     unsafe_allow_html=True
 )
-
 st.markdown("""
-This histogram shows how Last.fm listener counts are distributed across all artists in the dataset. The x-axis represents listener count, and the y-axis shows how many artists fall into each range. The dashed and dotted vertical lines mark the median and mean. A right-skewed distribution means that many artists have lower or mid-range listener counts, while only a few have very high values.
+This histogram shows how Last.fm listener counts are distributed across all artists in the dataset. 
+The x-axis represents listener count, and the y-axis shows how many artists fall into each range. 
+The dashed and dotted vertical lines mark the median and mean.
 """)
 
 ha, hb = st.columns([1, 3])
 with ha:
     n_bins = st.slider("Number of bins", 10, 50, 30, key="g3_bins")
     log_x = st.checkbox("Logarithmic X-axis", value=False, key="g3_log")
-
 with hb:
     x_data = np.log10(df["listeners"] + 1) if log_x else df["listeners"]
     x_lab = "log₁₀(Last.fm listeners)" if log_x else "Last.fm listeners"
-
     fig3 = go.Figure()
     fig3.add_trace(go.Histogram(
         x=x_data,
@@ -466,10 +465,8 @@ with hb:
         ),
         hovertemplate="Listeners: %{x}<br>Count: %{y}<extra></extra>"
     ))
-
     med = float(np.median(x_data))
     avg = float(np.mean(x_data))
-
     fig3.add_vline(
         x=med,
         line=dict(color="#f0c040", width=2, dash="dash"),
@@ -483,7 +480,6 @@ with hb:
         annotation_font_color="#ff6b6b",
         annotation_position="top left"
     )
-
     fig3.update_layout(
         title="Distribution of Last.fm listeners across all artists",
         xaxis_title=x_lab,
@@ -499,50 +495,20 @@ with hb:
     )
     st.plotly_chart(fig3, use_container_width=True)
 
-skew = float(pd.Series(df["listeners"]).skew())
-
-if abs(skew) > 1:
-    skew_label = "strongly"
-elif abs(skew) > 0.5:
-    skew_label = "moderately"
-else:
-    skew_label = "slightly"
-
-skew_direction = "right-skewed" if skew > 0 else "left-skewed"
-
-stat_text = (
-    f"The listener distribution is {skew_label} {skew_direction} "
-    f"(skewness = {skew:.2f}). "
-)
-
 if log_x:
-    stat_text += (
-        "The logarithmic x-axis compresses very large values and makes the overall shape of the distribution easier to compare."
-    )
+    scale_note = "The logarithmic x-axis spreads out the lower range and compresses the long upper tail, making the shape easier to read."
 else:
-    stat_text += (
-        "This indicates that listener counts are not evenly distributed across artists."
-    )
-
-if skew > 0:
-    interp_text = (
-        "Most artists in the dataset have relatively low or mid-range listener counts, while a small number of very large artists form a long upper tail. "
-        "This means that a few superstar-level artists may influence averages and correlation estimates more strongly than the majority of the dataset."
-    )
-else:
-    interp_text = (
-        "The distribution is concentrated more strongly at higher values, with fewer artists at the lower end. "
-        "This shape should be taken into account when interpreting summary statistics."
-    )
+    scale_note = "The long tail toward the right shows that only a few artists reach very high listener counts."
 
 st.markdown(f"""
 <div class="insight-card">
-    <h4>📊 Statistical analysis</h4>
-    <p>{stat_text}</p>
-</div>
-<div class="insight-card">
     <h4>🔍 Interpretation</h4>
-    <p>{interp_text}</p>
+    <p>
+        Most artists in this dataset have relatively modest listener counts, while a small number of highly popular artists 
+        stand far above the rest. This uneven distribution is worth keeping in mind when thinking about the relationship 
+        between listeners and tour scale: the artists driving any visible correlation are likely a small group at the top, 
+        rather than a broad pattern across all artists. {scale_note}
+    </p>
 </div>
 """, unsafe_allow_html=True)
 
