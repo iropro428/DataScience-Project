@@ -518,54 +518,19 @@ st.divider()
 # SUMMARY F1
 # ══════════════════════════════════════════════════════
 st.markdown('<div class="section-title">Summary — Research Question 1</div>',
-            unsafe_allow_html=True)
+    unsafe_allow_html=True)
 
-
-    abs_r = abs(r_all)
-
-    if abs_r < 0.1:
-        relationship_text = "no meaningful linear relationship"
-    elif abs_r < 0.3:
-        relationship_text = f"a weak {'positive' if r_all > 0 else 'negative'} relationship"
-    elif abs_r < 0.5:
-        relationship_text = f"a moderate {'positive' if r_all > 0 else 'negative'} relationship"
-    else:
-        relationship_text = f"a strong {'positive' if r_all > 0 else 'negative'} relationship"
-
-    if p_all < 0.05:
-        significance_text = "The result is statistically significant."
-    else:
-        significance_text = "The result is not statistically significant."
-
-    if abs_r < 0.1:
-        interpretation_text = (
-            "Artists with more Last.fm listeners do not systematically have more scheduled events. "
-            "In this analysis, digital popularity measured by Last.fm listener count alone is not a useful predictor of tour scale."
-        )
-    elif abs_r < 0.3:
-        interpretation_text = (
-            f"Artists with more Last.fm listeners tend to have "
-            f"{'more' if r_all > 0 else 'fewer'} scheduled events, "
-            f"but the relationship is weak."
-        )
-    else:
-        interpretation_text = (
-            f"Artists with more Last.fm listeners tend to have "
-            f"{'more' if r_all > 0 else 'fewer'} scheduled events, "
-            f"and the relationship is {'moderate' if abs_r < 0.5 else 'strong'}."
-        )
-
-    answer = (
-        f"There is {relationship_text} between Last.fm listener count and tour scale in our dataset "
-        f"(r = {r_all:.3f}, p = {p_all:.4f}). "
-        f"{significance_text} "
-        f"{interpretation_text}"
-    )
-
-    st.markdown(f"""<div class="insight-card">
-        <h4>🎯 Answer to Research Question 1</h4>
-        <p>{answer}</p>
-    </div>""", unsafe_allow_html=True)
+st.markdown(f"""<div class="insight-card">
+    <h4>🎯 Answer to Research Question 1</h4>
+    <p>
+        The graphs suggest that artists with a larger Last.fm audience tend to schedule more events overall, 
+        but this pattern is not uniform across all artists. Most of the dataset consists of artists with 
+        mid-range listener counts, while a small number of highly popular artists stand out clearly. 
+        Among those top artists, a higher listener count does appear to go hand in hand with a broader 
+        tour presence — more dates, more cities, more events. For the majority of artists in the dataset, 
+        however, listener count alone does not reliably predict how extensively they tour.
+    </p>
+</div>""", unsafe_allow_html=True)
 
 st.markdown("""<div class="methodology-note">
     <p>
