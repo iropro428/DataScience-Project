@@ -694,52 +694,47 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 if f6_missing:
-    st.error(f"⚠️  Daten für Frage 2 fehlen: {f6_missing} — `join_data.py` erneut ausführen.")
+    st.error(f"⚠️ Missing data for Question 2: {f6_missing} — please re-run `join_data.py`.")
     st.stop()
 
 st.markdown("""
 **Definitions**
 
 | Term | Meaning |
-|---------|-----------|
-| **Capital Event** | Concert in a capital city (classified using the RestCountries API) |
-| **pct_capital** | Capital Events / Total Events × 100 - measures the share of the total concert volume |
-| **pct_capital_cities** | Unique capital cities / all unique cities × 100 — measures geographic breadth |
-| **capital_ratio** | Capital Events / Non-Capital Events - indicates how many non-capital shows occur per capital show |
-| **unique_capitals** | Number of different capital cities an artist visits |
+|------|---------|
+| **Capital Event** | A concert held in a national capital city — for example, a show in Berlin, Paris, or Tokyo counts as a capital event, while a show in Hamburg or Lyon does not |
+| **pct_capital** | Out of all concerts an artist played, what percentage were in capital cities? An artist with 10 shows, 3 of which were in capitals, has a pct_capital of 30% |
+| **pct_capital_cities** | Out of all the cities an artist visited, what percentage were capitals? Each city counts only once — so an artist who played 5 shows in Berlin and 1 in Munich visited 2 cities, one of which is a capital: 50% |
 
-**Why two metrics (pct_capital vs. pct_capital_cities)?**
-An artist who performs three times in Berlin and once in Munich has
-pct_capital = 75% but pct_capital_cities = 50%.
-Both perspectives are relevant - one reflects performance volume, while the other captures geographic strategy.
+**Why do both metrics exist?**
+They can tell very different stories. An artist who plays 10 shows in London and 1 in Manchester
+has a pct_capital of 91% — but only visited 2 cities, so pct_capital_cities is 50%.
+pct_capital reflects how much of the actual touring activity happens in capitals.
+pct_capital_cities reflects how broadly capitals feature in the tour routing.
 
-**Hypothesis**: More popular artists (with a higher number of listeners) perform proportionally more often in capital cities, as capitals typically offer larger venues, greater media exposure, and a denser fan base.
+**Hypothesis:** More popular artists perform proportionally more often in capital cities,
+as capitals typically offer larger venues, greater media exposure, and a denser fan base.
 """)
 
-# Daten vorbereiten
 for c in F6_COLS:
     df[c] = pd.to_numeric(df[c], errors="coerce")
 
 df_f6 = df.dropna(subset=["capital_events", "non_capital_events"]).copy()
 
-# Globale Kennzahlen
 total_cap = df_f6["capital_events"].sum()
 total_non = df_f6["non_capital_events"].sum()
 total_all = total_cap + total_non
 glob_pct = total_cap / total_all * 100 if total_all > 0 else 0
-glob_ratio = total_cap / total_non if total_non > 0 else 0
 mean_pct = df_f6["pct_capital"].mean()
 med_pct = df_f6["pct_capital"].median()
 
 st.divider()
-k1, k2, k3, k4, k5 = st.columns(5)
-k1.metric("Ø pct_capital", f"{mean_pct:.1f}%", delta=f"Median {med_pct:.1f}%")
-k2.metric("Global Capital-Anteil", f"{glob_pct:.1f}%")
-k3.metric("Capital Events gesamt", f"{total_cap:.0f}")
-k4.metric("Non-Capital Events", f"{total_non:.0f}")
-k5.metric("Ratio Capital / Non-Capital", f"{glob_ratio:.3f}")
+k1, k2, k3, k4 = st.columns(4)
+k1.metric("Avg. Capital Share", f"{mean_pct:.1f}%", delta=f"Median {med_pct:.1f}%")
+k2.metric("Global Capital Share", f"{glob_pct:.1f}%")
+k3.metric("Total Capital Events", f"{total_cap:.0f}")
+k4.metric("Total Non-Capital Events", f"{total_non:.0f}")
 st.divider()
-
 
 # ══════════════════════════════════════════════════════════════════════════
 # Q2 — GRAPH 1: Scatterplot pct_capital vs Listeners
