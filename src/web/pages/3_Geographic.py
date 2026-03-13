@@ -471,7 +471,7 @@ if city_df is not None:
             ["Total Visits", "Number of Artists", "Capital city?"],
             index=0, key="f4c_col"
         )
-        min_art = st.slider("Minimum Artists", 1, 10, 2, key="f4c_ma")
+        
 
     col_descriptions = {
         "Total Visits": (
