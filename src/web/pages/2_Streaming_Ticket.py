@@ -469,15 +469,15 @@ with hb:
     avg = float(np.mean(x_data))
     fig3.add_vline(
         x=med,
-        line=dict(color="#f0c040", width=2, dash="dash"),
+        line=dict(color="#00d4ff", width=2, dash="dash"),
         annotation_text=f"Median: {10 ** med:,.0f}" if log_x else f"Median: {med:,.0f}",
-        annotation_font_color="#f0c040"
+        annotation_font_color="#00d4ff"
     )
     fig3.add_vline(
         x=avg,
-        line=dict(color="#ff6b6b", width=2, dash="dot"),
+        line=dict(color="#ff8c00", width=2, dash="dot"),
         annotation_text=f"Mean: {10 ** avg:,.0f}" if log_x else f"Mean: {avg:,.0f}",
-        annotation_font_color="#ff6b6b",
+        annotation_font_color="#ff8c00",
         annotation_position="top left"
     )
     fig3.update_layout(
