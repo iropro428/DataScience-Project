@@ -654,8 +654,8 @@ if len(df2f) >= 5:
     _x_sc = np.linspace(plot_df2[conc_metric].min(), plot_df2[conc_metric].max(), 200)
     _y_sc = np.polyval(_c_sc, _x_sc)
 
-    trend_direction = "positive" if _c_sc[0] > 0 else "negative"
-
+    slope = _c_sc[0]
+    trend_direction = "positive" if slope > 0 else "negative"
     top_n_label = conc_metric.replace("top", "").replace("_share", "")
 
     fig_sc = px.scatter(
@@ -706,21 +706,30 @@ if len(df2f) >= 5:
 
     st.plotly_chart(fig_sc, use_container_width=True)
 
-    if trend_direction == "negative":
+    if abs(slope) < 2:
+        interp_text_f2 = (
+            f"The trend line is nearly flat, meaning that the share of plays coming from the "
+            f"top {top_n_label} track(s) shows little to no consistent relationship with total "
+            f"event count across artists in this dataset. "
+            "Streaming concentration alone does not appear to be a meaningful indicator of "
+            "how extensively an artist tours."
+        )
+    elif trend_direction == "negative":
         interp_text_f2 = (
             f"The trend line slopes downward, suggesting that artists with a broader streaming profile — "
-            f"where plays are spread across many tracks rather than concentrated on a few — tend to have "
-            f"more Ticketmaster events in total. Artists whose audience focuses heavily on just their "
-            f"top {top_n_label} track(s) appear to tour somewhat less extensively overall. "
-            "A diverse catalogue may help sustain a larger and more varied live audience over time."
+            f"where plays are spread across many tracks — tend to have more Ticketmaster events in total. "
+            "However, total event count also reflects how long an artist has been active, "
+            "so established artists with large catalogues may simply have had more time to accumulate both "
+            "a diverse streaming profile and a long touring history."
         )
     else:
         interp_text_f2 = (
             f"The trend line slopes upward, suggesting that artists with a more concentrated streaming profile — "
             f"where a large share of plays comes from just the top {top_n_label} track(s) — tend to have "
             f"more Ticketmaster events in total. "
-            "Having one or a few standout tracks may create stronger demand for live shows, "
-            "which could translate into a more extensive touring history overall."
+            "This pattern should be read carefully: total event count grows over an artist's entire career, "
+            "so artists who have been active longer naturally accumulate more events regardless of their "
+            "streaming profile."
         )
 
     st.markdown(f"""
