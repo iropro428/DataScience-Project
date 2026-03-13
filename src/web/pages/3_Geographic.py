@@ -744,7 +744,7 @@ st.divider()
 # ══════════════════════════════════════════════════════════════════════════
 # Q2 — GRAPH 1: Scatterplot pct_capital vs Listeners
 # ══════════════════════════════════════════════════════════════════════════
-st.markdown('<div class="section-title">📈 Graph 2 — Capital City Share vs. Last.fm Listeners</div>',
+st.markdown('<div class="section-title">📈 Graph 1 — Capital City Share vs. Last.fm Listeners</div>',
             unsafe_allow_html=True)
 
 metric_descriptions = {
@@ -887,15 +887,9 @@ st.divider()
 st.markdown('<div class="section-title">📊 Graph 2 — Most Visited Capital Cities Across All Artists</div>',
             unsafe_allow_html=True)
 
-st.markdown("""
-This chart ranks capital cities by the total number of artist visits across all artists in the dataset.
-Each bar represents one capital city — the longer the bar, the more artists performed there.
-Look for whether the ranking is dominated by a few mega-hubs or distributed more evenly across many capitals.
-""")
+description_placeholder = st.empty()
 
 if cap_global is not None and len(cap_global) > 0:
-
-    # Clean up data
     cap_global_clean = cap_global.copy()
     cap_global_clean["city"] = cap_global_clean["city"].astype(str).str.strip().str.title()
     cap_global_clean["country"] = cap_global_clean["country"].astype(str).str.strip()
@@ -907,8 +901,6 @@ if cap_global is not None and len(cap_global) > 0:
     cap_global_clean["total_visits"] = pd.to_numeric(cap_global_clean["total_visits"], errors="coerce")
     cap_global_clean["n_artists"] = pd.to_numeric(cap_global_clean["n_artists"], errors="coerce")
     cap_global_clean = cap_global_clean.dropna(subset=["total_visits", "city"])
-
-    # Merge duplicates
     cap_global_clean = (
         cap_global_clean
         .groupby("city", as_index=False)
@@ -925,6 +917,19 @@ if cap_global is not None and len(cap_global) > 0:
 
     cap_top = cap_global_clean.nlargest(top_n_h, "total_visits").sort_values("total_visits")
 
+    # Dynamic description based on current selection
+    top1 = cap_top.iloc[-1]["city"]
+    top1_visits = int(cap_top.iloc[-1]["total_visits"])
+    top3 = cap_top.nlargest(3, "total_visits")["city"].tolist()
+    most_diverse = cap_global_clean.nlargest(1, "n_artists").iloc[0]
+
+    description_placeholder.markdown(
+        f"This chart ranks the top {top_n_h} most visited capital cities by total artist visits across the dataset. "
+        f"Each bar represents one capital — the longer the bar, the more performances took place there. "
+        f"Currently the most visited capital is <strong>{top1}</strong> with {top1_visits} total visits.",
+        unsafe_allow_html=True
+    )
+
     fig_h = px.bar(
         cap_top,
         x="total_visits", y="city", orientation="h",
@@ -933,36 +938,61 @@ if cap_global is not None and len(cap_global) > 0:
         hover_data={"city": False, "country": True,
                     "total_visits": True, "n_artists": True},
         labels={"total_visits": "Total Visits", "city": ""},
-        title=f"Top {top_n_h} Most Visited Capital Cities",
+        title=f"Top {top_n_h} most visited capital cities",
         template="plotly_dark",
     )
     fig_h.update_layout(
-        height=max(340, top_n_h * 22),
+        height=max(500, top_n_h * 32),
         paper_bgcolor="#0e0e0e", plot_bgcolor="#1a1a1a",
         font=dict(color="white"),
-        xaxis=dict(gridcolor="#333"), yaxis=dict(gridcolor="#333"),
+        xaxis=dict(gridcolor="#333"),
+        yaxis=dict(
+            gridcolor="#333",
+            tickfont=dict(size=12),
+            automargin=True,
+        ),
+        margin=dict(l=120),
         coloraxis_colorbar=dict(title="Visits"),
     )
     with h2:
         st.plotly_chart(fig_h, use_container_width=True)
 
-    top3 = cap_top.nlargest(3, "total_visits")["city"].tolist()
-    most_diverse = cap_global_clean.nlargest(1, "n_artists").iloc[0]
+    # Check if visits drop steeply after top 3
+    visits_sorted = cap_top.sort_values("total_visits", ascending=False)["total_visits"].tolist()
+    top3_avg = sum(visits_sorted[:3]) / 3 if len(visits_sorted) >= 3 else 0
+    rest_avg = sum(visits_sorted[3:]) / len(visits_sorted[3:]) if len(visits_sorted) > 3 else 0
+    steep_dropoff = top3_avg > rest_avg * 2 if rest_avg > 0 else False
+
+    if steep_dropoff:
+        pattern_text = (
+            f"There is a steep drop-off after the top few cities — "
+            f"{', '.join(top3)} stand far above the rest. "
+            f"This suggests that artists do not visit capitals evenly but concentrate heavily "
+            f"in a small number of commercially dominant music hubs."
+        )
+    else:
+        pattern_text = (
+            f"Visits are distributed relatively evenly across the top {top_n_h} capitals, "
+            f"without a dramatic drop-off after the top cities. "
+            f"This suggests that artists spread their capital city performances across a broader "
+            f"range of destinations rather than concentrating in just a few hubs."
+        )
 
     st.markdown(f"""
-    <div style="background:#0f1829;border:1px solid #1e2d45;border-left:3px solid #10b981;border-radius:10px;padding:18px 22px;margin-bottom:16px;">
-    <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:#10b981;margin-bottom:10px;">🔍 Interpretation</div>
-    <div style="color:#C8D6E8;font-size:.9rem;line-height:1.65;">
-    The top 3 most-visited capital cities are <strong style="color:#1DB954">{", ".join(top3)}</strong>, 
-    with {most_diverse['city']} attracting the most distinct artists ({int(most_diverse['n_artists'])} artists, {int(most_diverse['total_visits'])} total visits).
-    The steep drop-off after the top 3–5 cities shows that artists are not drawn to capitals in general — 
-    they concentrate in a few commercially dominant music hubs.
-    </div>
+    <div class="insight-card">
+        <h4>🔍 Interpretation</h4>
+        <p>
+        The most visited capital in this selection is <strong>{top1}</strong> with {top1_visits} total visits. 
+        {most_diverse['city']} attracts the highest number of distinct artists 
+        ({int(most_diverse['n_artists'])} artists, {int(most_diverse['total_visits'])} total visits).
+        <br><br>
+        {pattern_text}
+        </p>
     </div>
     """, unsafe_allow_html=True)
 
 else:
-    st.info("⚠️  `f6_capitals_visited.csv` not found — run `join_data.py`.")
+    st.info("⚠️ `f6_capitals_visited.csv` not found — run `join_data.py`.")
 
 st.divider()
 
