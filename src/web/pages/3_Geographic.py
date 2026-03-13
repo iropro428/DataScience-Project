@@ -457,100 +457,147 @@ st.divider()
 st.markdown('<div class="section-title">📊 Graph 3 — Most Visited Cities Across All Artists</div>',
             unsafe_allow_html=True)
 
-st.markdown("""
-This horizontal bar chart ranks cities by their total number of artist visits across the entire dataset, showing which cities function as the central hubs of live music activity. The colour encoding can be switched to show the number of distinct artists who performed there, or to highlight which cities are national capitals. A minimum artist threshold filters out cities that only appear in a single artist's data, ensuring the results reflect genuinely shared touring destinations.
-""")
+description_placeholder = st.empty()
 
 if city_df is not None:
-    # Fix Problem 2: Leerzeichen entfernen vor dem Gruppieren
     city_df["city"] = city_df["city"].str.strip()
     city_df["country"] = city_df["country"].str.strip()
 
     c1, c2 = st.columns([1, 3])
     with c1:
         top_n = st.slider("Top N Cities", 10, 40, 20, key="f4c_n")
-        col_metric = st.radio("Color by",
-                              ["Total Visits", "Number of Artists", "Capital city?"],
-                              index=0, key="f4c_col")
+        col_metric = st.radio(
+            "Color by",
+            ["Total Visits", "Number of Artists", "Capital city?"],
+            index=0, key="f4c_col"
+        )
         min_art = st.slider("Minimum Artists", 1, 10, 2, key="f4c_ma")
+
+    col_descriptions = {
+        "Total Visits": (
+            "This chart ranks cities by how often artists in the dataset performed there in total. "
+            "The color intensity reflects visit count — darker bars indicate more visits. "
+            "This shows which cities function as the central hubs of live music activity across all artists."
+        ),
+        "Number of Artists": (
+            "The bars are ranked by total visits, but colored by how many distinct artists performed in each city. "
+            "A city with many artists but fewer total visits suggests broad but shallow touring presence. "
+            "A city with few artists but many visits suggests a small number of artists return there repeatedly."
+        ),
+        "Capital city?": (
+            "Bars are colored by whether the city is a national capital or not. "
+            "This makes it easy to see whether the most-visited touring destinations tend to be "
+            "political and administrative centres, or whether economic and cultural hubs dominate instead."
+        ),
+    }
+
+    description_placeholder.markdown(col_descriptions[col_metric])
 
     city_agg = (
         city_df.groupby(["city", "country"])
-        .agg(total_visits=("visits", "sum"),
-             n_artists=("artist_name", "nunique"),
-             is_capital=("is_capital", "first"))
+        .agg(
+            total_visits=("visits", "sum"),
+            n_artists=("artist_name", "nunique"),
+            is_capital=("is_capital", "first")
+        )
         .reset_index()
     )
     city_agg = city_agg[city_agg["n_artists"] >= min_art]
     city_top = city_agg.nlargest(top_n, "total_visits").sort_values("total_visits")
 
     if col_metric == "Total Visits":
-        fig3 = px.bar(city_top, x="total_visits", y="city", orientation="h",
-                      color="total_visits", color_continuous_scale="YlGn",
-                      hover_data={"city": False, "country": True, "total_visits": True,
-                                  "n_artists": True, "is_capital": True},
-                      labels={"total_visits": "Visits", "city": "", "n_artists": "Artists",
-                              "country": "Country", "is_capital": "Capital"},
-                      template="plotly_dark")
+        fig3 = px.bar(
+            city_top, x="total_visits", y="city", orientation="h",
+            color="total_visits", color_continuous_scale="YlGn",
+            hover_data={"city": False, "country": True, "total_visits": True,
+                        "n_artists": True, "is_capital": True},
+            labels={"total_visits": "Visits", "city": "", "n_artists": "Artists",
+                    "country": "Country", "is_capital": "Capital"},
+            template="plotly_dark"
+        )
     elif col_metric == "Number of Artists":
-        fig3 = px.bar(city_top, x="total_visits", y="city", orientation="h",
-                      color="n_artists", color_continuous_scale="Blues",
-                      hover_data={"city": False, "country": True, "total_visits": True,
-                                  "n_artists": True},
-                      labels={"total_visits": "Visits", "city": "", "n_artists": "Artists",
-                              "country": "Country"},
-                      template="plotly_dark")
+        fig3 = px.bar(
+            city_top, x="total_visits", y="city", orientation="h",
+            color="n_artists", color_continuous_scale="Blues",
+            hover_data={"city": False, "country": True, "total_visits": True,
+                        "n_artists": True},
+            labels={"total_visits": "Visits", "city": "", "n_artists": "Artists",
+                    "country": "Country"},
+            template="plotly_dark"
+        )
     else:
         city_top["cap_label"] = city_top["is_capital"].apply(
             lambda x: "Capital city" if pd.notna(x) and int(x) == 1 else "Non-Capital city"
         )
-        fig3 = px.bar(city_top, x="total_visits", y="city", orientation="h",
-                      color="cap_label",
-                      color_discrete_map={"Capital city": "#1DB954", "Non-Capital city": "#4a4a4a"},
-                      hover_data={"city": False, "country": True, "total_visits": True},
-                      labels={"total_visits": "Visits", "city": "", "cap_label": "Type",
-                              "country": "Country"},
-                      template="plotly_dark")
+        fig3 = px.bar(
+            city_top, x="total_visits", y="city", orientation="h",
+            color="cap_label",
+            color_discrete_map={"Capital city": "#1DB954", "Non-Capital city": "#4a4a4a"},
+            hover_data={"city": False, "country": True, "total_visits": True},
+            labels={"total_visits": "Visits", "city": "", "cap_label": "Type",
+                    "country": "Country"},
+            template="plotly_dark"
+        )
 
     fig3.update_layout(
-        height=max(360, top_n * 22),
+        height=max(500, top_n * 32),
         paper_bgcolor="#0e0e0e", plot_bgcolor="#1a1a1a",
         font=dict(color="white"),
         xaxis=dict(gridcolor="#333", title="Visits"),
-        yaxis=dict(gridcolor="#333"),
-        title=f"Top {top_n} most visited cities (min. {min_art} Artists)",
+        yaxis=dict(
+            gridcolor="#333",
+            tickfont=dict(size=12),
+            automargin=True,
+        ),
+        margin=dict(l=120),
+        title=f"Top {top_n} most visited cities (min. {min_art} artists)",
     )
     with c2:
         st.plotly_chart(fig3, use_container_width=True)
 
+    # Dynamic interpretation
+    top_city = city_top.iloc[-1]["city"]
+    top_visits = int(city_top.iloc[-1]["total_visits"])
     top20 = city_agg.nlargest(20, "total_visits")
     cap20 = int(top20["is_capital"].sum())
 
+    if cap20 >= 12:
+        capital_text = (
+            f"{cap20} of the top 20 most-visited cities are national capitals. "
+            "This suggests that touring strongly follows political and administrative centres — "
+            "artists concentrate their performances in cities that already have high infrastructural visibility."
+        )
+    elif cap20 >= 7:
+        capital_text = (
+            f"{cap20} of the top 20 most-visited cities are national capitals. "
+            "Capitals are well represented, but major economic and cultural hubs play an equally important role — "
+            "touring is not purely driven by political geography."
+        )
+    else:
+        capital_text = (
+            f"Only {cap20} of the top 20 most-visited cities are national capitals. "
+            "Non-capital cities dominate — music and economic metros matter more than political centres "
+            "when it comes to where artists choose to perform."
+        )
+
     st.markdown(f"""
-    <div style="background:#0f1829;border:1px solid #1e2d45;border-left:3px solid #6366f1;border-radius:10px;padding:18px 22px;margin-bottom:12px;">
-    <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:#818cf8;margin-bottom:10px;">📊 Statistical Analysis</div>
-    <div style="color:#C8D6E8;font-size:.9rem;line-height:1.65;">
-    <strong>{cap20} of the top 20 most-visited cities ({cap20 / 20 * 100:.0f}%)</strong> are capital cities.
-    {"Capitals clearly dominate — touring follows political and administrative centres." if cap20 >= 12
-    else "Capitals are over-represented, but major economic centres play an equally important role." if cap20 >= 7
-    else "Non-capitals dominate — music metros and economic hubs matter more than political capitals."}
-    </div>
+    <div class="insight-card">
+        <h4>🔍 Interpretation</h4>
+        <p>
+        The most visited city in this selection is <strong>{top_city}</strong> with {top_visits} total visits, 
+        showing that touring is far from evenly spread across locations. Instead, a small number of cities 
+        attract a disproportionate share of performances — these hubs represent established markets where 
+        demand is already proven and artists are more likely to return.
+        <br><br>
+        {capital_text}
+        </p>
     </div>
     """, unsafe_allow_html=True)
 
-    st.markdown("""
-    <div style="background:#0f1829;border:1px solid #1e2d45;border-left:3px solid #10b981;border-radius:10px;padding:18px 22px;margin-bottom:16px;">
-    <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:#10b981;margin-bottom:10px;">🔍 Interpretation</div>
-    <div style="color:#C8D6E8;font-size:.9rem;line-height:1.65;">
-    A strong concentration of visits in only a few top cities shows that touring is not evenly spread across locations. Instead, many artists perform in the same well-known hubs. These hubs represent established markets where artists already know there is strong demand, which makes them more likely to return there again.
-    </div>
-    </div>
-    """, unsafe_allow_html=True)
 else:
-    st.info("⚠️  `f4_city_frequencies.csv` fehlt — `join_data.py` ausführen.")
+    st.info("⚠️ `f4_city_frequencies.csv` missing — please run `join_data.py`.")
 
 st.divider()
-
 # ══════════════════════════════════════════════════════════════════════════
 # ZUSAMMENFASSUNG Q1
 # ══════════════════════════════════════════════════════════════════════════
