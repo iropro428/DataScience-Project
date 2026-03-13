@@ -276,29 +276,29 @@ if len(df1) >= 5:
 
     # Interpretation
     if abs_r < 0.1:
-    interp_text = (
+        interp_text = (
         "The trend line is nearly flat — artists with more Last.fm listeners do not systematically play more concerts. "
         "Streaming popularity alone is not a strong predictor of tour scale: some artists with relatively few listeners "
         "tour extensively, while some of the most-streamed artists play only a handful of shows."
-    )
+        )
     elif p < 0.05 and r > 0:
-    interp_text = (
+        interp_text = (
         "The trend line rises from left to right — artists with more Last.fm listeners tend to play more concerts. "
         "This suggests that streaming popularity and tour scale move in the same direction, "
         "though the wide spread of points shows that many other factors also shape how extensively an artist tours."
-    )
+        )
     elif p < 0.05 and r < 0:
-    interp_text = (
+        interp_text = (
         "The trend line falls from left to right — artists with more Last.fm listeners tend to play fewer concerts. "
         "This might reflect that highly streamed artists are more selective about their live appearances, "
         "or that smaller artists rely more heavily on touring to build their audience."
-    )
+        )
     else:
-    interp_text = (
+        interp_text = (
         "The trend line shows a slight tendency, but the overall pattern is not strong enough to draw a firm conclusion. "
         "The data points are spread widely, suggesting that factors beyond streaming popularity — "
         "such as genre, career stage, or management strategy — play an equally important role in tour scale."
-    )
+        )
 
     st.markdown(f"""
     <div class="insight-card">
