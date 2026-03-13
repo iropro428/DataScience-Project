@@ -520,21 +520,6 @@ st.divider()
 st.markdown('<div class="section-title">Summary — Research Question 1</div>',
             unsafe_allow_html=True)
 
-if len(df) >= 5:
-    r_all, p_all = stats.pearsonr(df["listeners"], df["total_events"])
-    r2_all = r_all ** 2
-    st_all = "strong" if abs(r_all) >= 0.7 else "moderate" if abs(r_all) >= 0.4 else "weak"
-
-    st.markdown(f"""
-    | Metric | Value |
-    |--------|------|
-    | Sample size (n) | {len(df)} artists |
-    | Pearson r | {r_all:.3f} |
-    | R² | {r2_all:.1%} |
-    | p-value | {p_all:.4f} |
-    | Statistically significant | {'Yes (p < 0.05) ' if p_all < 0.05 else 'No (p ≥ 0.05) '} |
-    | Correlation strength | {st_all.capitalize()} |
-    """)
 
     abs_r = abs(r_all)
 
