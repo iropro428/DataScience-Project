@@ -1273,10 +1273,10 @@ st.markdown(
 )
 
 st.markdown("""
-This overlaid histogram compares the distribution of Last.fm listener counts for Chart Artists and Non-Chart Artists.
-The x-axis shows listener count, while the y-axis shows either the number of artists or the percentage of artists in each listener range, depending on the selected setting.
-If normalization is enabled, the histogram compares the relative shape of the two distributions rather than raw counts.
-A distribution that lies further to the right indicates generally higher listener values.
+This overlaid histogram compares how Last.fm listener counts are distributed across Chart and Non-Chart Artists. 
+A distribution shifted to the right means that group generally has more listeners. 
+Because the two groups may differ in size, the normalized view shows percentages rather than raw counts — 
+this makes the shapes directly comparable regardless of how many artists are in each group.
 """)
 
 h1, h2 = st.columns([1, 3])
@@ -1286,7 +1286,6 @@ with h1:
 
     st.markdown("")
     st.markdown("**Color legend**")
-
     st.markdown(
         """
         <div style="display:flex; align-items:center; margin-bottom:8px;">
@@ -1344,41 +1343,35 @@ fig_f3g2.update_layout(
 with h2:
     st.plotly_chart(fig_f3g2, use_container_width=True)
 
-# Statistical analysis (descriptive complement to Graph 1)
-if norm_hist:
-    stat_text_f3g2 = (
-        "This graph is a descriptive complement to the Mann-Whitney test in Graph 1. "
-        "Because the histogram is normalized, the y-axis shows percentages rather than raw artist counts. "
-        "This makes it easier to compare the shape and location of the two listener distributions directly."
+if ratio > 1:
+    shift_text = (
+        f"The green distribution for Chart Artists is visibly shifted toward higher listener counts "
+        f"compared to Non-Chart Artists. This is consistent with the {ratio:.1f}× difference in average "
+        f"listeners seen in Graph 1 — artists who appeared in the Spotify charts tend to have a "
+        f"larger Last.fm audience overall."
     )
 else:
-    stat_text_f3g2 = (
-        "This graph is a descriptive complement to the Mann-Whitney test in Graph 1. "
-        "Without normalization, the histogram shows raw counts of artists in each listener range. "
-        "This makes it easier to compare where the two groups are concentrated along the listener scale."
+    shift_text = (
+        "The two distributions overlap strongly and sit at similar positions along the listener scale. "
+        "This suggests that Chart Artists and Non-Chart Artists in this dataset have comparable "
+        "Last.fm audience sizes on average."
     )
 
-# Interpretation
-if u_p is not None and u_p < 0.05:
-    interp_text_f3g2 = (
-        "The distribution for Chart Artists is moderately shifted toward higher listener values, "
-        "although the two groups still overlap substantially. "
-        "This visually supports the result from Graph 1 that Chart Artists tend to have larger Last.fm audiences on average."
+if norm_hist:
+    norm_note = (
+        "The normalized view makes the shape comparison fair — without it, a larger Non-Chart group "
+        "would visually dominate the chart even if individual artists had fewer listeners."
     )
 else:
-    interp_text_f3g2 = (
-        "The two distributions overlap strongly, and any visible shift between them should be interpreted cautiously. "
-        "Without a statistically significant group difference, the histogram alone does not support a robust conclusion about higher listener counts among Chart Artists."
+    norm_note = (
+        "Without normalization, the raw counts show how many artists fall into each listener range. "
+        "Keep in mind that if the two groups differ in size, a direct visual comparison can be misleading."
     )
 
 st.markdown(f"""
 <div class="insight-card">
-    <h4>📊 Statistical analysis</h4>
-    <p>{stat_text_f3g2}</p>
-</div>
-<div class="insight-card">
     <h4>🔍 Interpretation</h4>
-    <p>{interp_text_f3g2}</p>
+    <p>{shift_text} {norm_note}</p>
 </div>
 """, unsafe_allow_html=True)
 
