@@ -1145,10 +1145,9 @@ st.markdown(
 st.markdown("""
 This box plot compares the distribution of Last.fm listener counts between Chart Artists and Non-Chart Artists.
 The line inside each box marks the median, the box contains the middle 50% of values, and the points show individual artists or outliers.
-This allows us to compare not only central tendency, but also the spread and overlap of listener counts across the two groups.            
+This allows us to compare not only the typical listener count, but also the spread and overlap between the two groups.
 """)
 
-# KPIs
 st.markdown("<div style='height: 0.8rem;'></div>", unsafe_allow_html=True)
 k1, k2, k3, k4, k5 = st.columns(5)
 k1.metric("Chart artists", n_chart, delta=f"{n_chart / (n_chart + n_non_chart) * 100:.0f}% of dataset")
@@ -1163,10 +1162,8 @@ st.markdown("<div style='height: 0.8rem;'></div>", unsafe_allow_html=True)
 g1, g2 = st.columns([1, 3])
 with g1:
     show_pts = st.checkbox("Show points", value=True, key="f3_pts")
-
     st.markdown("")
     st.markdown("**Color legend**")
-
     st.markdown(
         """
         <div style="display:flex; align-items:center; margin-bottom:8px;">
@@ -1217,7 +1214,7 @@ fig_f3g1.update_layout(
     title="Last.fm listeners — Chart vs. Non-Chart Artists",
     xaxis_title="Last.fm listeners",
     template="plotly_dark",
-    paper_bgcolor="#080b14", 
+    paper_bgcolor="#080b14",
     plot_bgcolor="#161c2d",
     font=dict(color="white"),
     height=380,
@@ -1230,46 +1227,40 @@ fig_f3g1.update_layout(
 with g2:
     st.plotly_chart(fig_f3g1, use_container_width=True)
 
-if u_p is not None:
-    if u_p < 0.05:
-        stat_text_f3 = (
-            f"Mann-Whitney U test: U = {u_stat:.0f}, p = {u_p:.4f}. "
-            f"The result is statistically significant, indicating a reliable difference in Last.fm listener counts "
-            f"between Chart Artists and Non-Chart Artists."
-        )
-    else:
-        stat_text_f3 = (
-            f"Mann-Whitney U test: U = {u_stat:.0f}, p = {u_p:.4f}. "
-            f"The result is not statistically significant, so the data do not provide reliable evidence "
-            f"for a difference in listener counts between the two groups."
-        )
+if ratio > 1:
+    direction_text = (
+        f"Chart Artists have on average about <strong>{ratio:.1f}× more</strong> Last.fm listeners "
+        f"than Non-Chart Artists ({mean_c:,.0f} vs. {mean_nc:,.0f}). "
+        f"The ratio here means that for every one listener a Non-Chart Artist has on average, "
+        f"a Chart Artist has {ratio:.1f}."
+    )
+else:
+    direction_text = (
+        f"Chart Artists and Non-Chart Artists have similar average Last.fm listener counts "
+        f"({mean_c:,.0f} vs. {mean_nc:,.0f}), with a ratio close to {ratio:.1f}×."
+    )
 
-    if u_p < 0.05:
-        interp_text_f3 = (
-            f"Artists who appeared in the sampled global Spotify Weekly Charts between Feb 2023 and Feb 2026 "
-            f"have, on average, about {ratio:.1f}× more Last.fm listeners than Non-Chart Artists "
-            f"({mean_c:,.0f} vs. {mean_nc:,.0f}). "
-            f"This is consistent with the idea that Spotify chart success and Last.fm listener counts capture related aspects "
-            f"of digital popularity, although the two groups still overlap substantially."
-        )
-    else:
-        interp_text_f3 = (
-            f"Chart Artists have about {ratio:.1f}× as many Last.fm listeners on average "
-            f"({mean_c:,.0f} vs. {mean_nc:,.0f}), but the difference is not statistically significant. "
-            f"In this dataset, Spotify chart status therefore does not provide clear evidence of a robust difference "
-            f"in Last.fm audience size."
-        )
+if ratio >= 2:
+    overlap_text = (
+        "This gap is visible in the box plot, though both groups still overlap — "
+        "some Non-Chart Artists have listener counts comparable to or above Chart Artists. "
+        "This suggests that Spotify chart presence and Last.fm audience size are related, "
+        "but chart status alone does not fully determine how widely an artist is followed on Last.fm."
+    )
+else:
+    overlap_text = (
+        "The two groups overlap considerably in the box plot, suggesting that Spotify chart status "
+        "and Last.fm listener counts do not always go hand in hand. "
+        "An artist can have a large Last.fm following without appearing in the Spotify charts, "
+        "and vice versa."
+    )
 
-    st.markdown(f"""
-    <div class="insight-card">
-        <h4>📊 Statistical analysis</h4>
-        <p>{stat_text_f3}</p>
-    </div>
-    <div class="insight-card">
-        <h4>🔍 Interpretation</h4>
-        <p>{interp_text_f3}</p>
-    </div>
-    """, unsafe_allow_html=True)
+st.markdown(f"""
+<div class="insight-card">
+    <h4>🔍 Interpretation</h4>
+    <p>{direction_text} {overlap_text}</p>
+</div>
+""", unsafe_allow_html=True)
 
 st.divider()
 
