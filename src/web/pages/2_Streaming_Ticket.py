@@ -1525,7 +1525,7 @@ if "chart_weeks" in df3.columns and df3["chart_weeks"].notna().sum() >= 5:
 # ══════════════════════════════════════════════════════════════════════════
 # F3 — Summary
 # ══════════════════════════════════════════════════════════════════════════
-st.markdown('<div class="section-title">Summary - Research Question 3</div>', unsafe_allow_html=True)
+st.markdown('<div class="section-title">Summary — Research Question 3</div>', unsafe_allow_html=True)
 
 if ratio > 1:
     answer_text = (
