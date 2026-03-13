@@ -147,28 +147,26 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 st.markdown("""
-**Definitionen**
+**Definitions**
 
-| Begriff | Bedeutung |
-|---------|-----------|
-| **New City** | Stadt die der Artist im Beobachtungszeitraum genau **1×** besucht |
-| **Revisit City** | Stadt die der Artist **≥ 2×** besucht |
-| **pct_revisit_cities** | Anteil Revisit-Städte an allen bereisten Städten (%) |
-| **revisit_ratio** | Revisit-Städte / New-Städte (Verhältnis) |
-| **pct_events_revisit** | Anteil aller Events die in Revisit-Städten stattfinden (%) — i.d.R. höher als pct_revisit, da diese Städte mehrfach zählen |
+| Term | Meaning |
+|------|---------|
+| **New City** | A city the artist visited exactly **once** during the observation period |
+| **Revisit City** | A city the artist visited **≥ 2 times** |
+| **pct_revisit_cities** | Share of revisit cities out of all cities visited (%) |
+| **revisit_ratio** | Revisit cities / new cities (ratio) |
+| **pct_events_revisit** | Share of all events taking place in revisit cities (%) — typically higher than pct_revisit_cities since these cities count multiple times |
 
-**Hypothese:** Künstler mit größeren Touren kehren anteilig öfter in bewährte Städte zurück
-— sie optimieren auf sichere Märkte. Kleinere Artists erkunden breitere geografische Gebiete.
+**Hypothesis:** Artists with larger tours tend to return to proven markets more often — optimising for reliable audiences. Smaller artists explore broader geographic territory.
 """)
 
-# KPIs
 st.divider()
 k1, k2, k3, k4, k5 = st.columns(5)
-k1.metric("Ø Revisit-Rate", f"{mean_pct:.1f}%", delta=f"Median {median_pct:.1f}%")
-k2.metric("Globaler Ratio", f"{global_ratio:.2f}", delta="revisit / new")
+k1.metric("Avg. Revisit Rate", f"{mean_pct:.1f}%", delta=f"Median {median_pct:.1f}%")
+k2.metric("Global Ratio", f"{global_ratio:.2f}", delta="revisit / new")
 k3.metric("Total Revisit Cities", f"{total_rev:.0f}")
 k4.metric("Total New Cities", f"{total_new:.0f}")
-k5.metric("% des Tourings = Revisit", f"{global_pct:.1f}%")
+k5.metric("% of Touring = Revisit", f"{global_pct:.1f}%")
 st.divider()
 
 # ══════════════════════════════════════════════════════════════════════════
@@ -314,25 +312,57 @@ st.divider()
 st.markdown('<div class="section-title">📦 Graph 2 — Revisit Rate by Tour Size</div>',
             unsafe_allow_html=True)
 
-st.markdown("""
-This box plot divides artists (n = 286) into groups based on their total number of tour events — from small to very large — and shows the distribution of the revisit rate within each group. The horizontal line inside each box marks the median, while the box itself spans the middle 50% of artists. The goal is to test whether larger tours tend to have higher revisit rates, supporting the idea that bigger artists prefer safe, proven markets.
+y_met = st.radio(
+    "Y-axis",
+    ["pct_revisit_cities", "revisit_ratio", "pct_events_revisit"],
+    index=0, key="f4b_y",
+    format_func=lambda x: {
+        "pct_revisit_cities": "% Revisit Cities",
+        "revisit_ratio": "Ratio (Revisit / New)",
+        "pct_events_revisit": "% Events in Revisit Cities"
+    }[x]
+)
+
+metric_descriptions = {
+    "pct_revisit_cities": (
+        "The y-axis shows the **share of revisit cities** out of all cities an artist visited. "
+        "A value of 30% means that 30% of the cities on a tour were cities the artist had already "
+        "played before. This metric focuses on the geographic variety of the tour — "
+        "how many distinct locations were new versus already known."
+    ),
+    "revisit_ratio": (
+        "The y-axis shows the **ratio of revisit cities to new cities**. "
+        "A value of 1.0 means an artist visited exactly as many cities for the second time as they "
+        "visited for the first time. Values above 1 indicate more revisits than new locations, "
+        "values below 1 indicate more new locations than revisits. "
+        "This metric makes the balance between consolidation and expansion directly readable."
+    ),
+    "pct_events_revisit": (
+        "The y-axis shows the **share of all events that took place in revisit cities**. "
+        "This is typically higher than the city share, because revisit cities appear multiple times "
+        "in the event count — an artist playing 3 shows in the same city contributes 3 events "
+        "but only 1 city. This metric captures how much of the actual touring activity "
+        "is concentrated in already-familiar locations."
+    ),
+}
+
+st.markdown(f"""
+Artists are divided into equally sized groups based on their total number of tour events — 
+from small to very large. For each group, the box plot shows the distribution of the selected metric. 
+
+{metric_descriptions[y_met]}
 """)
 
 b1, b2 = st.columns([1, 3])
 with b1:
     n_grp = st.select_slider("Groups", [3, 4, 5], value=4, key="f4b_ng")
-    y_met = st.radio("Y-Achse",
-                     ["pct_revisit_cities", "revisit_ratio", "pct_events_revisit"],
-                     index=0, key="f4b_y",
-                     format_func=lambda x: {
-                         "pct_revisit_cities": "% Revisit-Cities",
-                         "revisit_ratio": "Ratio (R/N)",
-                         "pct_events_revisit": "% Events in Revisit-Cities"}[x])
 
 df_bx = df_f4.dropna(subset=[y_met, "total_events"]).copy()
-G_LBLS = {3: ["Small", "Middle", "Large"],
-          4: ["Small", "Middle", "Large", "Very Large"],
-          5: ["Mini", "Small", "Middle", "Large", "Very Large"]}[n_grp]
+G_LBLS = {
+    3: ["Small", "Medium", "Large"],
+    4: ["Small", "Medium", "Large", "Very Large"],
+    5: ["Mini", "Small", "Medium", "Large", "Very Large"]
+}[n_grp]
 G_COLORS = ["#2e86c1", "#1a9850", "#1DB954", "#52BE80", "#A9DFBF"]
 
 try:
@@ -346,18 +376,21 @@ try:
         emin, emax = int(sub["total_events"].min()), int(sub["total_events"].max())
         fig2.add_trace(go.Box(
             y=sub[y_met],
-            name=f"{lbl}<br><sub>{emin}–{emax} Events  n={len(sub)}</sub>",
-            marker_color=G_COLORS[i],  # type: ignore
-            line_color=G_COLORS[i],  # type: ignore
+            name=f"{lbl}<br><sub>{emin}–{emax} events  n={len(sub)}</sub>",
+            marker_color=G_COLORS[i],
+            line_color=G_COLORS[i],
             fillcolor=hex_rgba(G_COLORS[i]),
             boxpoints="outliers",
             marker=dict(size=5, opacity=0.7),
         ))
-    y_labels = {"pct_revisit_cities": "% Revisit-Cities",
-                "revisit_ratio": "Ratio (Revisit / New)",
-                "pct_events_revisit": "% Events in Revisit-Cities"}
+
+    y_labels = {
+        "pct_revisit_cities": "% Revisit Cities",
+        "revisit_ratio": "Ratio (Revisit / New)",
+        "pct_events_revisit": "% Events in Revisit Cities"
+    }
     fig2.update_layout(
-        title=f"{y_labels[y_met]} by Tour-size ",
+        title=f"{y_labels[y_met]} by tour size",
         yaxis_title=y_labels[y_met],
         template="plotly_dark",
         paper_bgcolor="#0e0e0e", plot_bgcolor="#1a1a1a",
@@ -368,33 +401,56 @@ try:
     with b2:
         st.plotly_chart(fig2, use_container_width=True)
 
-    # Kruskal-Wallis
-    kw_arr = [df_bx[df_bx["grp"] == g][y_met].dropna().values
-              for g in G_LBLS if len(df_bx[df_bx["grp"] == g]) > 1]
-    if len(kw_arr) >= 2:
-        kw_h, kw_p = stats.kruskal(*kw_arr)
-        meds = df_bx.groupby("grp", observed=True)[y_met].median()
-        m_lo, m_hi = float(meds.iloc[0]), float(meds.iloc[-1])
-        st.markdown(f"""
-        <div style="background:#0f1829;border:1px solid #1e2d45;border-left:3px solid #6366f1;border-radius:10px;padding:18px 22px;margin-bottom:12px;">
-        <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:#818cf8;margin-bottom:10px;">📊 Statistical Analysis</div>
-        <div style="color:#C8D6E8;font-size:.9rem;line-height:1.65;">
-        The Kruskal-Wallis test checks whether the revisit rate distributions differ significantly across tour-size groups, returning H = 80.51 and p = 0.0000, which confirms that the differences between groups are statistically significant and unlikely to be random. The median revisit rate rises from 0.0 in the smallest group to 9.5 in the largest group, giving a Δ of +9.5 percentage points — well above the threshold of 3 points that indicates a meaningful shift in behaviour. This confirms that tour size has a real and substantial influence on revisit behaviour.
-        </div>
-        </div>
-        """, unsafe_allow_html=True)
+    meds = (
+        df_bx.groupby("grp", observed=True)[y_met]
+        .median()
+        .reindex(G_LBLS)
+        .tolist()
+    )
+    meds_clean = [m for m in meds if m is not None and not pd.isna(m)]
+    med_diff = max(meds_clean) - min(meds_clean) if len(meds_clean) >= 2 else 0
+    monotonic_up = all(meds_clean[i] <= meds_clean[i+1] for i in range(len(meds_clean)-1))
+    monotonic_down = all(meds_clean[i] >= meds_clean[i+1] for i in range(len(meds_clean)-1))
 
-        st.markdown(f"""
-        <div style="background:#0f1829;border:1px solid #1e2d45;border-left:3px solid #10b981;border-radius:10px;padding:18px 22px;margin-bottom:16px;">
-        <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:#10b981;margin-bottom:10px;">🔍 Interpretation</div>
-        <div style="color:#C8D6E8;font-size:.9rem;line-height:1.65;">
-        {"If the medians rise consistently from small to large tour groups and the test is significant, this confirms that tour scale drives consolidation - bigger artists increasingly rely on cities they have already proven. If no significant difference is found, revisit behaviour is more of an individual artistic choice, independent of how large the tour is."} 
-        </div>
-        </div>
-        """, unsafe_allow_html=True)
+    y_label_plain = y_labels[y_met]
+
+    if med_diff < 3:
+        interp_text = (
+            f"The median {y_label_plain} remains similar across all tour size groups. "
+            f"This suggests that revisit behaviour does not consistently depend on how large "
+            f"the tour is — it appears to be more of an individual choice than a scale-driven pattern."
+        )
+    elif monotonic_up:
+        interp_text = (
+            f"The median {y_label_plain} increases from smaller to larger tour groups. "
+            f"Artists with more events tend to show higher revisit rates, supporting the idea "
+            f"that bigger tours increasingly rely on proven markets. "
+            f"As tour scale grows, consolidation into familiar cities becomes more common."
+        )
+    elif monotonic_down:
+        interp_text = (
+            f"The median {y_label_plain} decreases from smaller to larger tour groups. "
+            f"Artists with more events tend to visit a higher share of new cities rather than "
+            f"returning to familiar ones. This could reflect that larger artists have the "
+            f"resources and audience reach to expand into more locations."
+        )
+    else:
+        interp_text = (
+            f"The median {y_label_plain} varies across tour size groups without a clear "
+            f"step-by-step pattern. This suggests that the relationship between tour scale "
+            f"and revisit behaviour is not straightforward in this dataset."
+        )
+
+    st.markdown(f"""
+    <div class="insight-card">
+        <h4>🔍 Interpretation</h4>
+        <p>{interp_text}</p>
+    </div>
+    """, unsafe_allow_html=True)
+
 except Exception as e:
     with b2:
-        st.warning(f"Fehler: {e}")
+        st.warning(f"Error: {e}")
 
 st.divider()
 
