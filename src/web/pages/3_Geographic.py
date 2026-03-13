@@ -471,7 +471,6 @@ if city_df is not None:
             ["Total Visits", "Number of Artists", "Capital city?"],
             index=0, key="f4c_col"
         )
-        
 
     col_descriptions = {
         "Total Visits": (
@@ -502,7 +501,7 @@ if city_df is not None:
         )
         .reset_index()
     )
-    city_agg = city_agg[city_agg["n_artists"]]
+
     city_top = city_agg.nlargest(top_n, "total_visits").sort_values("total_visits")
 
     if col_metric == "Total Visits":
@@ -550,12 +549,11 @@ if city_df is not None:
             automargin=True,
         ),
         margin=dict(l=120),
-        title=f"Top {top_n} most visited cities (min. {min_art} artists)",
+        title=f"Top {top_n} most visited cities",
     )
     with c2:
         st.plotly_chart(fig3, use_container_width=True)
 
-    # Dynamic interpretation
     top_city = city_top.iloc[-1]["city"]
     top_visits = int(city_top.iloc[-1]["total_visits"])
     top20 = city_agg.nlargest(20, "total_visits")
@@ -585,7 +583,7 @@ if city_df is not None:
         <h4>🔍 Interpretation</h4>
         <p>
         The most visited city in this selection is <strong>{top_city}</strong> with {top_visits} total visits, 
-        showing that touring is far from evenly spread across locations. Instead, a small number of cities 
+        showing that touring is far from evenly spread across locations. A small number of cities 
         attract a disproportionate share of performances — these hubs represent established markets where 
         demand is already proven and artists are more likely to return.
         <br><br>
