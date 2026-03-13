@@ -1263,7 +1263,7 @@ st.divider()
 # ══════════════════════════════════════════════════════════════════════════
 # GA2 — GRAPH 2: Top & Bottom Artists — Heatmap Streaming vs. Tour Countries
 # ══════════════════════════════════════════════════════════════════════════
-st.markdown('<div class="section-title">📊 Graph 3 — Best and Worst Aligned Artists: Streaming vs. Tour Countries</div>',
+st.markdown('<div class="section-title">📊 Graph 2 — Best and Worst Aligned Artists: Streaming vs. Tour Countries</div>',
             unsafe_allow_html=True)
 
 st.markdown("""
