@@ -740,183 +740,11 @@ k4.metric("Non-Capital Events", f"{total_non:.0f}")
 k5.metric("Ratio Capital / Non-Capital", f"{glob_ratio:.3f}")
 st.divider()
 
+
 # ══════════════════════════════════════════════════════════════════════════
-# Q2 — GRAPH 1: Balkendiagramm pct_capital nach Listeners-Gruppe
+# Q2 — GRAPH 1: Scatterplot pct_capital vs Listeners
 # ══════════════════════════════════════════════════════════════════════════
-st.markdown('<div class="section-title">📊 Graph 1 — Capital City Performances by Popularity Tier</div>',
-            unsafe_allow_html=True)
-
-metric_descriptions = {
-    "pct_capital": (
-        "The y-axis shows the <strong>share of all events</strong> that took place in capital cities. "
-        "A value of 30% means that 30 out of every 100 concerts were performed in a national capital. "
-        "This captures how much of an artist's actual touring activity is concentrated in capital cities."
-    ),
-    "pct_capital_cities": (
-        "The y-axis shows the <strong>share of cities visited</strong> that are national capitals. "
-        "A value of 30% means that 30% of the distinct cities on a tour were capitals. "
-        "Unlike the events metric, each city counts only once regardless of how many shows were played there."
-    ),
-    "unique_capitals": (
-        "The y-axis shows the <strong>average number of distinct capital cities</strong> visited. "
-        "This captures how many different national capitals an artist included in their tour, "
-        "independent of how large the tour was overall."
-    ),
-}
-
-groupby_descriptions = {
-    "listeners": (
-        "Artists are divided into equally sized tiers based on their <strong>Last.fm listener count</strong> — "
-        "from the least to the most-listened-to artists in the dataset."
-    ),
-    "total_events": (
-        "Artists are divided into equally sized tiers based on their <strong>total number of Ticketmaster events</strong> — "
-        "from the smallest to the largest tours in the dataset."
-    ),
-}
-
-description_placeholder = st.empty()
-
-g1, g2 = st.columns([1, 3])
-with g1:
-    n_tiers_f6 = st.select_slider("Number of tiers", [3, 4, 5], value=4, key="f6b_nt")
-    bar_metric = st.radio(
-        "Metric",
-        ["pct_capital", "pct_capital_cities", "unique_capitals"],
-        index=0, key="f6b_m",
-        format_func=lambda x: {
-            "pct_capital": "% Capital Events",
-            "pct_capital_cities": "% Capital Cities",
-            "unique_capitals": "Ø Visited Capital Cities"
-        }[x]
-    )
-    groupby_col = st.radio(
-        "Group by",
-        ["listeners", "total_events"],
-        index=0, key="f6b_gc",
-        format_func=lambda x: {
-            "listeners": "Listeners",
-            "total_events": "Tour Scale"
-        }[x]
-    )
-
-description_placeholder.markdown(
-    f"Artists are grouped into equally sized tiers and compared by their capital city performance share. "
-    f"{groupby_descriptions[groupby_col]} {metric_descriptions[bar_metric]}",
-    unsafe_allow_html=True
-)
-
-df_b6 = df_f6.dropna(subset=[bar_metric, groupby_col]).copy()
-df_b6[groupby_col] = pd.to_numeric(df_b6[groupby_col], errors="coerce")
-df_b6 = df_b6.dropna(subset=[groupby_col])
-
-g_lbls_f6 = {
-    3: ["Low", "Middle", "High"],
-    4: ["Q1 Low", "Q2 Low-mid", "Q3 Mid-high", "Q4 High"],
-    5: ["Q1 Low", "Q2 Low-mid", "Q3 Mid", "Q4 Mid-high", "Q5 High"],
-}[n_tiers_f6]
-G_COLORS_F6 = ["#4a4a4a", "#7fb3d3", "#1a9850", "#1DB954", "#52BE80"][:n_tiers_f6]
-
-try:
-    df_b6["tier"] = pd.qcut(df_b6[groupby_col], q=n_tiers_f6,
-                            labels=g_lbls_f6, duplicates="drop")
-    grp6 = df_b6.groupby("tier", observed=True)[bar_metric].agg(["mean", "count"]).reset_index()
-    grp6.columns = ["tier", "mean", "n"]
-
-    fig_b6 = go.Figure()
-    fig_b6.add_trace(go.Bar(
-        x=grp6["tier"].astype(str),
-        y=grp6["mean"],
-        marker=dict(color=G_COLORS_F6),
-        text=[f"{v:.1f}" for v in grp6["mean"]],
-        textposition="outside",
-        textfont=dict(color="white", size=13, family="monospace"),
-        customdata=grp6[["n"]].values,
-        hovertemplate=(
-            "<b>%{x}</b><br>"
-            "Mean: %{y:.1f}<br>"
-            "n Artists: %{customdata[0]}<extra></extra>"
-        )
-    ))
-
-    y_label_map = {
-        "pct_capital": "Avg. % Capital Events",
-        "pct_capital_cities": "Avg. % Capital Cities",
-        "unique_capitals": "Avg. Visited Capital Cities"
-    }
-    groupby_label = "Listener" if groupby_col == "listeners" else "Tour Scale"
-
-    fig_b6.update_layout(
-        title=f"{y_label_map[bar_metric]} by {groupby_label} tier",
-        yaxis_title=y_label_map[bar_metric],
-        xaxis_title=f"{groupby_label} group",
-        template="plotly_dark",
-        paper_bgcolor="#0e0e0e", plot_bgcolor="#1a1a1a",
-        font=dict(color="white"), height=400,
-        xaxis=dict(gridcolor="#333"), yaxis=dict(gridcolor="#333"),
-        showlegend=False,
-    )
-    with g2:
-        st.plotly_chart(fig_b6, use_container_width=True)
-
-    values = grp6["mean"].tolist()
-    m_lo = values[0]
-    m_hi = values[-1]
-    diff = m_hi - m_lo
-    monotonic_up = all(values[i] <= values[i+1] for i in range(len(values)-1))
-    monotonic_down = all(values[i] >= values[i+1] for i in range(len(values)-1))
-    y_label_plain = y_label_map[bar_metric]
-    group_label_plain = "listener count" if groupby_col == "listeners" else "tour scale"
-
-    if abs(diff) < 2:
-        interp_text = (
-            f"The {y_label_plain} remains very similar across all {groupby_label.lower()} tiers "
-            f"(from {m_lo:.1f} in the lowest to {m_hi:.1f} in the highest group). "
-            f"This suggests that {group_label_plain} does not meaningfully influence how much of "
-            f"an artist's touring activity is concentrated in capital cities. "
-            f"Other factors such as venue availability, regional demand, or booking strategy "
-            f"likely play a larger role."
-        )
-    elif monotonic_up:
-        interp_text = (
-            f"The {y_label_plain} increases consistently from the lowest to the highest {groupby_label.lower()} tier "
-            f"({m_lo:.1f} to {m_hi:.1f}). "
-            f"Artists with a higher {group_label_plain} tend to perform a larger share of their concerts "
-            f"in capital cities. This could reflect that more established artists have greater access to "
-            f"large capital city venues and audiences."
-        )
-    elif monotonic_down:
-        interp_text = (
-            f"The {y_label_plain} decreases from the lowest to the highest {groupby_label.lower()} tier "
-            f"({m_lo:.1f} to {m_hi:.1f}). "
-            f"Artists with a higher {group_label_plain} actually perform a smaller share of their concerts "
-            f"in capital cities. This may suggest that larger or more popular artists tour more broadly, "
-            f"spreading their performances across a wider range of cities."
-        )
-    else:
-        interp_text = (
-            f"The {y_label_plain} varies across {groupby_label.lower()} tiers without a clear pattern "
-            f"(from {m_lo:.1f} in the lowest to {m_hi:.1f} in the highest group). "
-            f"This suggests no consistent relationship between {group_label_plain} and capital city preference — "
-            f"the pattern may depend more on individual touring strategies than on overall popularity or scale."
-        )
-
-    st.markdown(f"""
-    <div class="insight-card">
-        <h4>🔍 Interpretation</h4>
-        <p>{interp_text}</p>
-    </div>
-    """, unsafe_allow_html=True)
-
-except Exception as e:
-    with g2:
-        st.warning(f"Error: {e}")
-
-st.divider()
-# ══════════════════════════════════════════════════════════════════════════
-# Q2 — GRAPH 2: Scatterplot pct_capital vs Listeners
-# ══════════════════════════════════════════════════════════════════════════
-st.markdown('<div class="section-title">📈 Graph 2 — Capital City Share vs. Last.fm Listener Popularity</div>',
+st.markdown('<div class="section-title">📈 Graph 1 — Capital City Share vs. Last.fm Listener Popularity</div>',
             unsafe_allow_html=True)
 
 st.markdown("""
@@ -1027,9 +855,9 @@ if len(df_sc6) >= 5:
 st.divider()
 
 # ══════════════════════════════════════════════════════════════════════════
-# Q2 — GRAPH 3: Meistbesuchte Hauptstädte (global)
+# Q2 — GRAPH 2: Meistbesuchte Hauptstädte (global)
 # ══════════════════════════════════════════════════════════════════════════
-st.markdown('<div class="section-title">📊 Graph 3 — Most Visited Capital Cities Across All Artists</div>',
+st.markdown('<div class="section-title">📊 Graph 2 — Most Visited Capital Cities Across All Artists</div>',
             unsafe_allow_html=True)
 
 st.markdown("""
