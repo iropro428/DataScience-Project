@@ -587,16 +587,17 @@ st.divider()
 # F2 — GRAPH 1: Scatterplot concentration vs. events_last_year
 # ══════════════════════════════════════════════════════════════════════════
 st.markdown(
-    '<div class="section-title">📈 Graph 1 — Scatterplot: Streaming concentration vs. tour intensity</div>',
+    '<div class="section-title">📈 Graph 1 — Does a concentrated streaming profile go hand in hand with more live events?</div>',
     unsafe_allow_html=True
 )
 
 st.markdown("""
-Each point represents one artist with complete data on both streaming concentration and recent touring activity. 
-The x-axis shows the selected concentration metric, and the y-axis shows the number of events in the last year. 
-The green trend line summarizes the overall direction of the relationship: if it rises, higher concentration 
-tends to be associated with higher tour intensity; if it falls, a broader streaming profile tends to go 
-along with more events.
+Each point represents one artist with complete data on both streaming concentration and total touring activity. 
+The x-axis shows what share of total playcount comes from an artist's top tracks — a high value means 
+the audience focuses heavily on just a few songs, a low value means plays are spread across many tracks. 
+The y-axis shows the total number of Ticketmaster events across all available data. 
+The green trend line summarizes the overall direction: rising means more concentrated artists tend to 
+tour more, falling means broader catalogues go along with more events.
 """)
 
 sc1, sc2 = st.columns([2, 1])
@@ -627,7 +628,7 @@ if conc_metric not in df2.columns:
     conc_metric = "top5_share"
 
 df2f = df2.copy()
-df2f = df2f.dropna(subset=[conc_metric])
+df2f = df2f.dropna(subset=[conc_metric, "total_events"])
 
 if sel_genres_f2 and "tags" in df2f.columns:
     df2f = df2f[df2f["tags"].apply(
@@ -636,14 +637,14 @@ if sel_genres_f2 and "tags" in df2f.columns:
 
 if len(df2f) >= 5:
     x_vals = df2f[conc_metric]
-    y_vals = np.log10(df2f["events_last_year"] + 1) if log_y_s else df2f["events_last_year"]
+    y_vals = np.log10(df2f["total_events"] + 1) if log_y_s else df2f["total_events"]
 
     plot_df2 = df2f.copy()
     plot_df2["y_plot"] = y_vals.values
 
     hover_f2 = {
         conc_metric: ":.1f",
-        "events_last_year": True,
+        "total_events": True,
         "listeners": ":,",
     }
     if "tags" in plot_df2.columns:
@@ -654,6 +655,8 @@ if len(df2f) >= 5:
     _y_sc = np.polyval(_c_sc, _x_sc)
 
     trend_direction = "positive" if _c_sc[0] > 0 else "negative"
+
+    top_n_label = conc_metric.replace("top", "").replace("_share", "")
 
     fig_sc = px.scatter(
         plot_df2,
@@ -666,9 +669,9 @@ if len(df2f) >= 5:
         text="artist_name" if show_names_s else None,
         labels={
             conc_metric: metric_labels.get(conc_metric, conc_metric),
-            "y_plot": f"{'log₁₀(' if log_y_s else ''}Events last year{')' if log_y_s else ''}",
+            "y_plot": f"{'log₁₀(' if log_y_s else ''}Total events{')' if log_y_s else ''}",
         },
-        title="Streaming concentration vs. tour intensity",
+        title="Streaming concentration vs. total number of Ticketmaster events",
         template="plotly_dark"
     )
 
@@ -705,19 +708,19 @@ if len(df2f) >= 5:
 
     if trend_direction == "negative":
         interp_text_f2 = (
-            f"The trend line slopes downward, which suggests that artists with a broader streaming profile — "
-            f"where playcount is spread more evenly across multiple tracks — tend to have more events per year. "
-            f"Artists whose audience is concentrated on just a {conc_metric.replace('top', '').replace('_share', '')} "
-            f"track appear to tour somewhat less intensively on average. "
-            "This could reflect that artists with a diverse catalogue attract audiences across different tastes, "
-            "which may support a more active touring schedule."
+            f"The trend line slopes downward, suggesting that artists with a broader streaming profile — "
+            f"where plays are spread across many tracks rather than concentrated on a few — tend to have "
+            f"more Ticketmaster events in total. Artists whose audience focuses heavily on just their "
+            f"top {top_n_label} track(s) appear to tour somewhat less extensively overall. "
+            "A diverse catalogue may help sustain a larger and more varied live audience over time."
         )
     else:
         interp_text_f2 = (
             f"The trend line slopes upward, suggesting that artists with a more concentrated streaming profile — "
-            f"where a large share of total playcount comes from just a few tracks — tend to have more events per year. "
-            "This might indicate that having one or a few breakout tracks can drive demand for live performances, "
-            "giving these artists more reason and opportunity to tour."
+            f"where a large share of plays comes from just the top {top_n_label} track(s) — tend to have "
+            f"more Ticketmaster events in total. "
+            "Having one or a few standout tracks may create stronger demand for live shows, "
+            "which could translate into a more extensive touring history overall."
         )
 
     st.markdown(f"""
