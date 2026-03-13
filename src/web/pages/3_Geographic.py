@@ -556,24 +556,27 @@ if city_df is not None:
 
     top_city = city_top.iloc[-1]["city"]
     top_visits = int(city_top.iloc[-1]["total_visits"])
-    top20 = city_agg.nlargest(20, "total_visits")
-    cap20 = int(top20["is_capital"].sum())
+    top_n_actual = len(city_top)
+    top_n_check = city_agg.nlargest(top_n_actual, "total_visits")
+    cap_n = int(top_n_check["is_capital"].sum())
+    cap_threshold_high = top_n_actual * 0.6
+    cap_threshold_mid = top_n_actual * 0.35
 
-    if cap20 >= 12:
+    if cap_n >= cap_threshold_high:
         capital_text = (
-            f"{cap20} of the top 20 most-visited cities are national capitals. "
+            f"{cap_n} of the top {top_n_actual} most-visited cities are national capitals. "
             "This suggests that touring strongly follows political and administrative centres — "
-            "artists concentrate their performances in cities that already have high infrastructural visibility."
+            "artists concentrate their performances in cities with high infrastructural visibility."
         )
-    elif cap20 >= 7:
+    elif cap_n >= cap_threshold_mid:
         capital_text = (
-            f"{cap20} of the top 20 most-visited cities are national capitals. "
-            "Capitals are well represented, but major economic and cultural hubs play an equally important role — "
-            "touring is not purely driven by political geography."
+            f"{cap_n} of the top {top_n_actual} most-visited cities are national capitals. "
+            "Capitals are well represented, but major economic and cultural hubs play an equally "
+            "important role — touring is not purely driven by political geography."
         )
     else:
         capital_text = (
-            f"Only {cap20} of the top 20 most-visited cities are national capitals. "
+            f"Only {cap_n} of the top {top_n_actual} most-visited cities are national capitals. "
             "Non-capital cities dominate — music and economic metros matter more than political centres "
             "when it comes to where artists choose to perform."
         )
