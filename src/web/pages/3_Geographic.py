@@ -1473,6 +1473,9 @@ st.divider()
 # ══════════════════════════════════════════════════════════════════════════
 # Summary Q2
 # ══════════════════════════════════════════════════════════════════════════
+mean_cap_pct = float(df_f6["pct_capital"].mean()) if "pct_capital" in df_f6.columns else 0.0
+mean_cap_cities_pct = float(df_f6["pct_capital_cities"].mean()) if "pct_capital_cities" in df_f6.columns else 0.0
+
 st.markdown('<div class="section-title">Summary — Research Question 2: Capital Cities</div>',
             unsafe_allow_html=True)
 
