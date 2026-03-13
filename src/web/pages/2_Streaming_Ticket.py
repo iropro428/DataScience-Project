@@ -1525,15 +1525,15 @@ if "chart_weeks" in df3.columns and df3["chart_weeks"].notna().sum() >= 5:
 # ══════════════════════════════════════════════════════════════════════════
 # F3 — Summary
 # ══════════════════════════════════════════════════════════════════════════
-st.markdown('<div class="section-title">Summary Research Question 3</div>', unsafe_allow_html=True)
+st.markdown('<div class="section-title">Summary - Research Question 3</div>', unsafe_allow_html=True)
 
 if ratio > 1:
     answer_text = (
         f"Artists who appeared in the global Spotify Weekly Charts between February 2023 and February 2026 "
         f"have on average about {ratio:.1f}× more Last.fm listeners than Non-Chart Artists "
         f"({mean_c:,.0f} vs. {mean_nc:,.0f}). "
-        f"This suggests that Spotify chart presence and Last.fm audience size are related — "
-        f"artists with broader chart success tend to also have a larger following on Last.fm. "
+        f"This suggests that Spotify chart presence and Last.fm audience size are related. "
+        f"Artists with broader chart success tend to also have a larger following on Last.fm. "
         f"At the same time, the two groups overlap considerably, meaning chart status alone "
         f"does not fully determine how widely an artist is followed across platforms."
     )
