@@ -314,16 +314,19 @@ st.markdown('<div class="section-title">📦 Graph 2 — Revisit Rate by Tour Si
 
 metric_descriptions = {
     "pct_revisit_cities": (
+        "Artists are divided into equally sized groups based on their total number of tour events. "
         "The y-axis shows the <strong>share of revisit cities</strong> out of all cities visited. "
         "A value of 30% means 30% of the cities on a tour were places the artist had already played before. "
         "This focuses on geographic variety — how many distinct locations were new versus already known."
     ),
     "revisit_ratio": (
+        "Artists are divided into equally sized groups based on their total number of tour events. "
         "The y-axis shows the <strong>ratio of revisit cities to new cities</strong>. "
         "A value of 1.0 means an artist visited exactly as many cities again as for the first time. "
         "Values above 1 indicate more revisits than new locations, values below 1 the opposite."
     ),
     "pct_events_revisit": (
+        "Artists are divided into equally sized groups based on their total number of tour events. "
         "The y-axis shows the <strong>share of all events in revisit cities</strong>. "
         "This is typically higher than the city share — an artist playing 3 shows in the same city "
         "contributes 3 events but only 1 city. This captures how much touring activity "
@@ -331,8 +334,9 @@ metric_descriptions = {
     ),
 }
 
-b1, b2 = st.columns([1, 3])
+description_placeholder = st.empty()
 
+b1, b2 = st.columns([1, 3])
 with b1:
     n_grp = st.select_slider("Groups", [3, 4, 5], value=4, key="f4b_ng")
     y_met = st.radio(
@@ -346,10 +350,8 @@ with b1:
         }[x]
     )
 
-# Description text between title and chart — rendered after controls are read
-st.markdown(
-    f"Artists are divided into equally sized groups based on their total number of tour events — "
-    f"from small to very large. {metric_descriptions[y_met]}",
+description_placeholder.markdown(
+    metric_descriptions[y_met],
     unsafe_allow_html=True
 )
 
