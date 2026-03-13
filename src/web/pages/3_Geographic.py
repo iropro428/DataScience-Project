@@ -179,14 +179,13 @@ st.markdown('<div class="section-title">📈 Graph 1 — Revisit vs. New Cities 
 
 st.markdown("""
 Each dot is one artist. The x-axis shows new cities visited, the y-axis shows revisit cities. 
-Artists **above** the dashed diagonal revisit more cities than they explore new ones — a consolidation strategy. 
-Artists **below** the line explore more new cities than they return to.
+Artists above the dashed diagonal revisit more cities than they explore new ones — a consolidation strategy. 
+Artists below the line explore more new cities than they return to.
 """)
 
 s1, s2 = st.columns([1, 3])
 with s1:
     min_ev = st.slider("Minimum events", 1, 20, 3, key="f4s_min")
-    log_sc = st.checkbox("Log scale", value=False, key="f4s_log")
     lbl_sc = st.checkbox("Show names", value=False, key="f4s_lbl")
     col_by = st.radio(
         "Color by",
@@ -205,8 +204,8 @@ if col_by == "listeners" and "listeners" not in df_s.columns:
 df_s = df_s.dropna(subset=[col_by])
 
 if len(df_s) > 0:
-    df_s["x_p"] = np.log10(df_s["new_cities"] + 1) if log_sc else df_s["new_cities"]
-    df_s["y_p"] = np.log10(df_s["revisit_cities"] + 1) if log_sc else df_s["revisit_cities"]
+    df_s["x_p"] = df_s["new_cities"]
+    df_s["y_p"] = df_s["revisit_cities"]
     max_diag = max(df_s["x_p"].max(), df_s["y_p"].max()) * 1.05
 
     fig1 = px.scatter(
@@ -219,8 +218,8 @@ if len(df_s) > 0:
                     "pct_revisit_cities": ":.1f", "total_events": True},
         text="artist_name" if lbl_sc else None,
         labels={
-            "x_p": "log₁₀(New Cities)" if log_sc else "New Cities",
-            "y_p": "log₁₀(Revisit Cities)" if log_sc else "Revisit Cities"
+            "x_p": "New Cities",
+            "y_p": "Revisit Cities"
         },
         title=f"Revisit vs. New Cities  |  n={len(df_s)}  |  min {min_ev} events",
         template="plotly_dark",
@@ -259,14 +258,14 @@ if len(df_s) > 0:
 
     if pct_above > 50:
         pattern_text = (
-            f"The majority of artists ({above} out of {n}, {pct_above:.0f}%) fall **above** the diagonal, "
+            f"The majority of artists ({above} out of {n}, {pct_above:.0f}%) fall above the diagonal, "
             f"meaning they return to more cities than they visit for the first time. "
             f"This suggests a consolidation strategy — most artists in this selection tend to "
             f"play in proven markets rather than expanding into new locations."
         )
     elif pct_below > 50:
         pattern_text = (
-            f"The majority of artists ({below} out of {n}, {pct_below:.0f}%) fall **below** the diagonal, "
+            f"The majority of artists ({below} out of {n}, {pct_below:.0f}%) fall below the diagonal, "
             f"meaning they visit more new cities than they return to. "
             f"This points to a geographic expansion pattern — most artists prioritise "
             f"reaching new audiences in new locations over revisiting established ones."
@@ -309,7 +308,6 @@ else:
         st.warning("No data after filter.")
 
 st.divider()
-
 # ══════════════════════════════════════════════════════════════════════════
 # GRAPH 2 — Box Plot Revisit-Rate nach Tour-Größe
 # ══════════════════════════════════════════════════════════════════════════
