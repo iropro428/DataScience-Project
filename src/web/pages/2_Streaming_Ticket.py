@@ -277,19 +277,19 @@ if len(df1) >= 5:
     # Interpretation
     if abs_r < 0.1:
         interp_text = (
-        "The trend line is nearly flat — artists with more Last.fm listeners do not systematically play more concerts. "
+        "The trend line is nearly flat. Artists with more Last.fm listeners do not systematically play more concerts. "
         "Streaming popularity alone is not a strong predictor of tour scale: some artists with relatively few listeners "
         "tour extensively, while some of the most-streamed artists play only a handful of shows."
         )
     elif p < 0.05 and r > 0:
         interp_text = (
-        "The trend line rises from left to right — artists with more Last.fm listeners tend to play more concerts. "
+        "The trend line rises from left to right. Artists with more Last.fm listeners tend to play more concerts. "
         "This suggests that streaming popularity and tour scale move in the same direction, "
         "though the wide spread of points shows that many other factors also shape how extensively an artist tours."
         )
     elif p < 0.05 and r < 0:
         interp_text = (
-        "The trend line falls from left to right — artists with more Last.fm listeners tend to play fewer concerts. "
+        "The trend line falls from left to right. Artists with more Last.fm listeners tend to play fewer concerts. "
         "This might reflect that highly streamed artists are more selective about their live appearances, "
         "or that smaller artists rely more heavily on touring to build their audience."
         )
@@ -305,9 +305,6 @@ if len(df1) >= 5:
         <h4>🔍 Interpretation</h4>
         <p>
         {interp_text}
-        <br><br>
-        <strong>Note:</strong> Correlation does not imply causation. A high listener count
-        could also be a result of past tours, not only a predictor of future ones.
         </p>
     </div>
     """, unsafe_allow_html=True)
