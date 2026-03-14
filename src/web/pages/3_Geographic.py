@@ -1358,6 +1358,7 @@ they actually visit on tour.
 g3a, g3b = st.columns([1, 3])
 with g3a:
     n_show = st.slider("Number of Artists", 5, 20, 10, key="ga2_n")
+    min_events = st.slider("Min. Events", 1, 20, 3, key="ga2_min")
     show_type = st.radio(
         "Show",
         ["Best Aligned", "Worst Aligned"],
@@ -1366,10 +1367,12 @@ with g3a:
 
 sort_col = "streaming_reach" if "streaming_reach" in ga.columns else "jaccard"
 
+ga_filtered = ga[ga["total_events"] >= min_events].copy()
+
 top_df = (
-    ga.dropna(subset=["n_tour_countries", "n_streaming", "streaming_reach"])
+    ga_filtered.dropna(subset=["n_tour_countries", "n_streaming", "streaming_reach"])
     .nlargest(n_show, sort_col) if show_type == "Best Aligned"
-    else ga.dropna(subset=["n_tour_countries", "n_streaming", "streaming_reach"])
+    else ga_filtered.dropna(subset=["n_tour_countries", "n_streaming", "streaming_reach"])
     .nsmallest(n_show, sort_col)
 )
 
@@ -1401,7 +1404,7 @@ fig_g3.add_trace(go.Bar(
 ))
 
 fig_g3.update_layout(
-    title=f"{show_type} — Streaming vs. Tour Countries",
+    title=f"{show_type} — Streaming vs. Tour Countries  |  min. {min_events} events",
     barmode="group",
     xaxis_title="Number of Countries",
     template="plotly_dark",
