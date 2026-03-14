@@ -1369,6 +1369,16 @@ sort_col = "streaming_reach" if "streaming_reach" in ga.columns else "jaccard"
 
 ga_filtered = ga[ga["total_events"] >= min_events].copy()
 
+# Merge total_events from df into ga first
+if "total_events" not in ga.columns and "total_events" in df.columns:
+    ga = ga.merge(
+        df[["artist_name", "total_events"]],
+        on="artist_name",
+        how="left"
+    )
+
+ga_filtered = ga[ga["total_events"] >= min_events].copy()
+
 top_df = (
     ga_filtered.dropna(subset=["n_tour_countries", "n_streaming", "streaming_reach"])
     .nlargest(n_show, sort_col) if show_type == "Best Aligned"
