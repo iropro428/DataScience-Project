@@ -1335,43 +1335,52 @@ st.divider()
 # ══════════════════════════════════════════════════════════════════════════
 # GA2 — GRAPH 2: Top & Bottom Artists — Heatmap Streaming vs. Tour Countries
 # ══════════════════════════════════════════════════════════════════════════
-st.markdown('<div class="section-title">📊 Graph 2 — Best and Worst Aligned Artists: Streaming vs. Tour Countries</div>',
+st.markdown('<div class="section-title">📊 Graph 2 — Streaming Presence vs. Tour Countries per Artist</div>',
             unsafe_allow_html=True)
 
-st.markdown("""
-This chart displays the best or worst aligned artists in the dataset, showing three bars side by side for each artist:
-- **Streaming Countries (purple)** — the number of countries where the artist appears in Last.fm's top artists list, meaning they have a significant listener presence there
-- **Tour Countries (amber)** — the number of countries where the artist has at least one Ticketmaster event
-- **Overlap (green)** — the number of countries that appear in both: countries where the artist both has listeners and actually performed
-
-The more the green bar dominates relative to the purple and amber bars, the better aligned the artist is.
-Use the selector on the left to switch between the best-aligned artists (those who tour closely where their fans are) and the worst-aligned artists (those with the largest gap between streaming presence and live touring).
-You can also change the sorting metric to rank artists by Weighted Coverage, Jaccard Similarity, Tour Coverage, or Streaming Reach.
-""")
+description_placeholder = st.empty()
 
 g3a, g3b = st.columns([1, 3])
 with g3a:
     n_show = st.slider("Number of Artists", 5, 20, 10, key="ga2_n")
-    show_type = st.radio("Show", ["Best Aligned", "Worst Aligned"], key="ga2_type")
-    
-    metric_labels = {
-    "weighted_coverage": "Weighted Coverage",
-    "jaccard": "Jaccard Similarity",
-    "tour_coverage": "Tour Coverage",
-    "streaming_reach": "Streaming Reach"
-    }
-
-    sort_col = st.selectbox(
-        "Sort by",
-        [c for c in ["weighted_coverage", "jaccard", "tour_coverage", "streaming_reach"] if c in ga.columns],
-        format_func=lambda x: metric_labels.get(x, x),
-        key="ga2_sort"
+    show_type = st.radio(
+        "Show",
+        ["Best Aligned", "Worst Aligned"],
+        key="ga2_type"
     )
 
-top_df = (ga.dropna(subset=["jaccard", "n_tour_countries", "n_streaming"])
-          .nlargest(n_show, sort_col) if show_type == "Best Aligned"
-          else ga.dropna(subset=["jaccard", "n_tour_countries", "n_streaming"])
-          .nsmallest(n_show, sort_col))
+align_descriptions = {
+    "Best Aligned": (
+        "Each artist shows three bars: <strong>Streaming Countries</strong> (purple) — countries where "
+        "the artist has significant Last.fm listeners; <strong>Tour Countries</strong> (amber) — countries "
+        "with at least one Ticketmaster event; and <strong>Overlap</strong> (green) — countries where both apply. "
+        "Artists are sorted by <strong>Streaming Reach</strong> — the share of their listener countries "
+        "they actually visit on tour. "
+        "The artists shown here tour in the highest share of the countries where they have listeners."
+    ),
+    "Worst Aligned": (
+        "Each artist shows three bars: <strong>Streaming Countries</strong> (purple) — countries where "
+        "the artist has significant Last.fm listeners; <strong>Tour Countries</strong> (amber) — countries "
+        "with at least one Ticketmaster event; and <strong>Overlap</strong> (green) — countries where both apply. "
+        "Artists are sorted by <strong>Streaming Reach</strong> — the share of their listener countries "
+        "they actually visit on tour. "
+        "The artists shown here leave the largest share of their listener countries unreached by live performances."
+    ),
+}
+
+description_placeholder.markdown(
+    align_descriptions[show_type],
+    unsafe_allow_html=True
+)
+
+sort_col = "streaming_reach" if "streaming_reach" in ga.columns else "jaccard"
+
+top_df = (
+    ga.dropna(subset=["n_tour_countries", "n_streaming", "streaming_reach"])
+    .nlargest(n_show, sort_col) if show_type == "Best Aligned"
+    else ga.dropna(subset=["n_tour_countries", "n_streaming", "streaming_reach"])
+    .nsmallest(n_show, sort_col)
+)
 
 fig_g3 = go.Figure()
 fig_g3.add_trace(go.Bar(
@@ -1395,15 +1404,13 @@ fig_g3.add_trace(go.Bar(
     x=top_df["n_aligned"],
     name="Overlap",
     orientation="h",
-    marker_color="#10b981",  # type: ignore
-    hovertemplate="%{y}<br>Aligned: %{x} countries  Jaccard=%{customdata:.3f}<extra></extra>",
-    customdata=top_df["jaccard"],
+    marker_color="#10b981",
+    hovertemplate="%{y}<br>Aligned: %{x} countries  Streaming Reach=%{customdata:.1%}<extra></extra>",
+    customdata=top_df["streaming_reach"],
 ))
 
-legend_y = -0.35 + min(n_show * 0.01, 0.15)
-
 fig_g3.update_layout(
-    title=show_type + " — Streaming vs. Tour Countries",
+    title=f"{show_type} — Streaming vs. Tour Countries",
     barmode="group",
     xaxis_title="Number of Countries",
     template="plotly_dark",
@@ -1411,31 +1418,43 @@ fig_g3.update_layout(
     plot_bgcolor="#161c2d",
     font=dict(color="white"),
     height=max(420, n_show * 42),
-    xaxis=dict(
-        gridcolor="#232840",
-        title_standoff=6
-    ),
+    xaxis=dict(gridcolor="#232840"),
     yaxis=dict(gridcolor="#232840"),
     legend=dict(
         orientation="h",
         yanchor="top",
-        y=legend_y,
+        y=-0.2,
         xanchor="center",
         x=0.5
     ),
-    margin=dict(b=170)
+    margin=dict(b=120)
 )
 with g3b:
     st.plotly_chart(fig_g3, use_container_width=True)
 
-st.markdown("""
-<div style="background:#080b14;border:1px solid #232840;border-left:3px solid #10b981;border-radius:10px;padding:18px 22px;margin-bottom:16px;">
-<div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:#10b981;margin-bottom:10px;">🔍 Interpretation</div>
-<div style="color:#C8D6E8;font-size:.9rem;line-height:1.65;">
-The best-aligned artists show a large green overlap bar relative to their purple and amber bars — meaning they actively perform in the countries where their streaming audience is strongest.
-For the worst-aligned artists, two distinct patterns emerge: if the purple bar (streaming) is much larger than the amber bar (tour), the artist has a globally spread fanbase but only tours regionally, leaving many listener markets completely unreached. If the amber bar dominates instead, the artist tours extensively into countries where they have little existing streaming presence, suggesting a deliberate strategy of building new audiences through live performance rather than serving existing ones.
-This graph gives a concrete, artist-level answer to Research Question 3 by making the gap — or alignment — between digital reach and live presence visible and comparable across artists.
-</div>
+if show_type == "Best Aligned":
+    interp_text = (
+        "The artists shown here visit the highest share of the countries where they have Last.fm listeners. "
+        "Their green overlap bar is large relative to the purple streaming bar — meaning most of the countries "
+        "where they have an audience are also countries they perform in. "
+        "For these artists, touring and streaming presence are closely aligned, "
+        "suggesting their live schedule is built around where actual demand exists."
+    )
+else:
+    interp_text = (
+        "The artists shown here leave the largest share of their listener countries unreached by live performances. "
+        "Two patterns are worth looking for: if the purple bar is much larger than the amber bar, "
+        "the artist has a broad global listener base but only tours in a small fraction of those countries — "
+        "their digital reach far exceeds their live presence. "
+        "If the amber bar dominates instead, the artist tours extensively into countries where they have "
+        "little existing listener presence — suggesting a strategy of building new audiences through "
+        "live performance rather than serving existing ones."
+    )
+
+st.markdown(f"""
+<div class="insight-card">
+    <h4>🔍 Interpretation</h4>
+    <p>{interp_text}</p>
 </div>
 """, unsafe_allow_html=True)
 
