@@ -1367,7 +1367,7 @@ with g3a:
 
 sort_col = "streaming_reach" if "streaming_reach" in ga.columns else "jaccard"
 
-ga_filtered = ga[ga["total_events"] >= min_events].copy()
+
 
 # Merge total_events from df into ga first
 if "total_events" not in ga.columns and "total_events" in df.columns:
