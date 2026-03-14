@@ -1367,7 +1367,6 @@ with g3a:
 
 sort_col = "streaming_reach" if "streaming_reach" in ga.columns else "jaccard"
 
-# Filter: only artists with at least min_events future events
 try:
     df_events = pd.read_csv("data/raw/ticketmaster_events.csv")
     df_events["event_date"] = pd.to_datetime(df_events["event_date"], errors="coerce")
@@ -1384,6 +1383,8 @@ try:
     ]["artist_name"].tolist()
 
     ga_filtered = ga[ga["artist_name"].isin(active_artists)].copy()
+    ga_filtered = ga_filtered[ga_filtered["n_tour_countries"] >= 3].copy()
+
 except Exception:
     ga_filtered = ga.copy()
 
@@ -1422,7 +1423,7 @@ fig_g3.add_trace(go.Bar(
 ))
 
 fig_g3.update_layout(
-    title=f"{show_type} — Streaming vs. Tour Countries  |  min. {min_events} future events",
+    title=f"{show_type} — Streaming vs. Tour Countries  |  min. {min_events} future events, min. 3 tour countries",
     barmode="group",
     xaxis_title="Number of Countries",
     template="plotly_dark",
