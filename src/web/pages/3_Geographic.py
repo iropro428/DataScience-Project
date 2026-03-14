@@ -1351,20 +1351,20 @@ with g3a:
 
 align_descriptions = {
     "Best Aligned": (
-        "Each artist shows three bars: <strong>Streaming Countries</strong> (purple) — countries where "
-        "the artist has significant Last.fm listeners; <strong>Tour Countries</strong> (amber) — countries "
-        "with at least one Ticketmaster event; and <strong>Overlap</strong> (green) — countries where both apply. "
-        "Artists are sorted by <strong>Streaming Reach</strong> — the share of their listener countries "
-        "they actually visit on tour. "
-        "The artists shown here tour in the highest share of the countries where they have listeners."
+        "This chart displays the best aligned artists in the dataset, showing three bars side by side for each artist: "
+        "<strong>Streaming Countries (purple)</strong> — the number of countries where the artist appears in Last.fm's top artists list, meaning they have a significant listener presence there. "
+        "<strong>Tour Countries (amber)</strong> — the number of countries where the artist has at least one Ticketmaster event. "
+        "<strong>Overlap (green)</strong> — the number of countries that appear in both: countries where the artist both has listeners and actually performed. "
+        "The more the green bar dominates relative to the purple and amber bars, the better aligned the artist is. "
+        "The artists shown here tour most closely where their listeners are."
     ),
     "Worst Aligned": (
-        "Each artist shows three bars: <strong>Streaming Countries</strong> (purple) — countries where "
-        "the artist has significant Last.fm listeners; <strong>Tour Countries</strong> (amber) — countries "
-        "with at least one Ticketmaster event; and <strong>Overlap</strong> (green) — countries where both apply. "
-        "Artists are sorted by <strong>Streaming Reach</strong> — the share of their listener countries "
-        "they actually visit on tour. "
-        "The artists shown here leave the largest share of their listener countries unreached by live performances."
+        "This chart displays the worst aligned artists in the dataset, showing three bars side by side for each artist: "
+        "<strong>Streaming Countries (purple)</strong> — the number of countries where the artist appears in Last.fm's top artists list, meaning they have a significant listener presence there. "
+        "<strong>Tour Countries (amber)</strong> — the number of countries where the artist has at least one Ticketmaster event. "
+        "<strong>Overlap (green)</strong> — the number of countries that appear in both: countries where the artist both has listeners and actually performed. "
+        "The more the green bar dominates relative to the purple and amber bars, the better aligned the artist is. "
+        "The artists shown here have the largest gap between streaming presence and live touring."
     ),
 }
 
