@@ -1200,46 +1200,62 @@ st.divider()
 st.markdown('<div class="section-title">📈 Graph 1 — Streaming Popularity vs. Geographic Alignment</div>',
             unsafe_allow_html=True)
 
-st.markdown("""
-This scatterplot investigates whether more popular artists tour more closely in line with where their digital fanbase is located. 
-The x-axis shows each artist's total Last.fm listener count on a log scale, and the y-axis shows their geo-alignment score — 
-by default the listener-weighted coverage, which measures what proportion of an artist's global listener reach is covered by their tour countries.
-A score of 1.0 means the artist performs in every country where they have significant listeners; a score of 0.0 means they tour in none of those countries.
-The OLS regression line captures the overall trend across all artists.
+description_placeholder = st.empty()
 
-The colour of each dot can be changed using the selector on the left:
-- **Tour Countries** — colours each artist by how many countries they toured in total
-- **Tour Coverage** — colours by what share of the artist's tour countries are also among their top streaming countries
-- **Streaming Reach** — colours by what share of the artist's streaming countries are actually toured
-""")
+color_descriptions = {
+    "n_tour_countries": (
+        "Each dot is one artist. The x-axis shows their Last.fm listener count, the y-axis shows their "
+        "<strong>geo-alignment score</strong> — how much of their global listener reach is covered by the countries they tour in. "
+        "A score of 1.0 means the artist tours in every country where they have significant listeners; "
+        "0.0 means none of those countries are visited on tour. "
+        "Dots are colored by <strong>how many countries</strong> the artist toured in total — "
+        "this helps spot whether artists who tour more broadly also align better with their listeners."
+    ),
+    "tour_coverage": (
+        "Each dot is one artist. The x-axis shows their Last.fm listener count, the y-axis shows their "
+        "<strong>geo-alignment score</strong> — how much of their global listener reach is covered by the countries they tour in. "
+        "Dots are colored by <strong>tour coverage</strong> — the share of an artist's tour countries "
+        "that are also among their top streaming countries. "
+        "A high value means the artist mostly plays in countries where they already have a listener base."
+    ),
+    "streaming_reach": (
+        "Each dot is one artist. The x-axis shows their Last.fm listener count, the y-axis shows their "
+        "<strong>geo-alignment score</strong> — how much of their global listener reach is covered by the countries they tour in. "
+        "Dots are colored by <strong>streaming reach</strong> — the share of an artist's top streaming countries "
+        "that they actually visit on tour. "
+        "A low value means many countries where the artist has listeners are never visited live."
+    ),
+}
 
 g1a, g1b = st.columns([1, 3])
 with g1a:
-    color_by = st.selectbox("Color by",
-                            ["n_tour_countries", "tour_coverage", "streaming_reach"],
-                            format_func=lambda x: {
-                                "n_tour_countries": "Tour Countries",
-                                "tour_coverage": "Tour Coverage",
-                                "streaming_reach": "Streaming Reach",
-                            }[x], key="ga2_color")
+    color_by = st.selectbox(
+        "Color by",
+        ["n_tour_countries", "tour_coverage", "streaming_reach"],
+        format_func=lambda x: {
+            "n_tour_countries": "Tour Countries",
+            "tour_coverage": "Tour Coverage",
+            "streaming_reach": "Streaming Reach",
+        }[x],
+        key="ga2_color"
+    )
     show_labels_g1 = st.checkbox("Show Names", value=False, key="ga2_lbl")
 
+description_placeholder.markdown(
+    color_descriptions[color_by],
+    unsafe_allow_html=True
+)
+
 GA2_Y = "weighted_coverage" if "weighted_coverage" in ga.columns else "jaccard"
-GA2_Y_LABEL = "Weighted Coverage (Listener-weighted)" if GA2_Y == "weighted_coverage" else "Jaccard-Similarity"
+GA2_Y_LABEL = "Geo-alignment score (listener-weighted)" if GA2_Y == "weighted_coverage" else "Jaccard Similarity"
+
 df_g1 = ga.dropna(subset=["listeners", GA2_Y]).copy()
 df_g1["log_listeners"] = np.log10(df_g1["listeners"] + 1)
 
-r_g1, p_g1 = stats.pearsonr(df_g1["log_listeners"], df_g1[GA2_Y])
 coef_g1 = np.polyfit(df_g1["log_listeners"], df_g1[GA2_Y], 1)
 x_line_g1 = np.linspace(df_g1["log_listeners"].min(), df_g1["log_listeners"].max(), 200)
 y_line_g1 = np.polyval(coef_g1, x_line_g1)
-
-m1g1, m2g1, m3g1 = st.columns(3)
-m1g1.metric("n Artists", len(df_g1))
-m2g1.metric("Pearson r", f"{r_g1:.3f}")
-m3g1.metric("p-Value", f"{p_g1:.4f}",
-            delta="significant " if p_g1 < 0.05 else "not significant ⚠️",
-            delta_color="normal" if p_g1 < 0.05 else "inverse")
+slope_g1 = coef_g1[0]
 
 fig_g1 = px.scatter(
     df_g1, x="log_listeners", y=GA2_Y,
@@ -1257,15 +1273,15 @@ fig_g1 = px.scatter(
     },
     text="artist_name" if show_labels_g1 else None,
     labels={
-        "log_listeners": "log10(Last.fm Listeners)",
+        "log_listeners": "log₁₀(Last.fm Listeners)",
         GA2_Y: GA2_Y_LABEL,
         "n_tour_countries": "Tour Countries",
     },
-    title=f"Listeners vs. {GA2_Y_LABEL}  |  r = {r_g1:.3f}  |  n = {len(df_g1)}",
+    title=f"Last.fm Listeners vs. Geo-alignment  |  n = {len(df_g1)}",
     template="plotly_dark",
 )
 fig_g1.add_trace(go.Scatter(
-    x=x_line_g1, y=y_line_g1, mode="lines", name="OLS",
+    x=x_line_g1, y=y_line_g1, mode="lines", name="Trend line",
     line=dict(color="#f59e0b", width=2.5), hoverinfo="skip",
 ))
 if show_labels_g1:
@@ -1284,58 +1300,33 @@ fig_g1.update_layout(
 with g1b:
     st.plotly_chart(fig_g1, use_container_width=True)
 
-# Prepare interpretation
-sig_label = "significant " if p_g1 < 0.05 else "not significant ⚠️"
-sig_sentence = (
-    "This result is statistically significant — the relationship is unlikely to have occurred by chance."
-    if p_g1 < 0.05 else
-    "This result is not statistically significant — the observed pattern could easily be due to chance in a sample of this size."
-)
-direction_sentence = (
-    "A positive r indicates that more popular artists tend to have a higher geo-alignment score — meaning they tour more closely in line with where their listeners are."
-    if r_g1 > 0 else
-    "A negative r indicates that more popular artists tend to have a lower geo-alignment score — meaning that despite having more listeners, they cover a smaller share of their streaming markets through touring."
-)
-if r_g1 > 0.1 and p_g1 < 0.05:
-    interpretation_g1 = (
-        "More popular artists cover a greater share of their streaming markets through touring — "
-        "suggesting that as artists grow in popularity, their touring routes increasingly follow "
-        "where their listener demand is strongest."
-    )
-elif r_g1 < -0.1 and p_g1 < 0.05:
-    interpretation_g1 = (
-        "Despite having larger and more widespread streaming audiences, more popular artists "
-        "actually cover a smaller share of their streaming markets through touring. "
-        "This suggests that as artists grow in popularity, their fanbase expands into more countries "
-        "than their tours can realistically reach — leaving a growing gap between digital reach and live presence."
-    )
-else:
-    interpretation_g1 = (
-        "There is no meaningful relationship between how popular an artist is and how well "
-        "their tour geography matches their streaming footprint. "
-        "Some highly popular artists cover their streaming markets very well through touring, "
-        "while others do not — and the same variation exists among smaller artists. "
-        "How well an artist reaches their streaming audience through live shows appears to be "
+if abs(slope_g1) < 0.05:
+    interp_g1 = (
+        "The trend line is nearly flat, suggesting that an artist's popularity on Last.fm "
+        "does not consistently relate to how well their tour geography matches their listener footprint. "
+        "Artists with large and small audiences show a similar spread of geo-alignment scores — "
+        "how well an artist reaches their streaming audience through live shows appears to be "
         "an individual decision rather than something driven by overall popularity."
     )
+elif slope_g1 > 0:
+    interp_g1 = (
+        "The trend line slopes upward, suggesting that more popular artists tend to have a higher "
+        "geo-alignment score. As artists grow in popularity, their touring routes appear to follow "
+        "where their listener demand is strongest — possibly because larger artists have more "
+        "resources and data to plan tours around actual audience locations."
+    )
+else:
+    interp_g1 = (
+        "The trend line slopes downward, suggesting that despite having larger audiences, "
+        "more popular artists actually cover a smaller share of their streaming markets through touring. "
+        "As artists grow in popularity, their fanbase tends to spread into more countries than "
+        "their tours can realistically reach — creating a growing gap between digital reach and live presence."
+    )
 
 st.markdown(f"""
-<div style="background:#080b14;border:1px solid #232840;border-left:3px solid #6366f1;border-radius:10px;padding:18px 22px;margin-bottom:12px;">
-<div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:#818cf8;margin-bottom:10px;">📊 Statistical Analysis</div>
-<div style="color:#C8D6E8;font-size:.9rem;line-height:1.65;">
-Pearson r = <strong>{r_g1:.3f}</strong>, p = <strong>{p_g1:.4f}</strong> — <strong>{sig_label}</strong>.
-Pearson r measures how strongly streaming popularity and geo-alignment are linearly related — a value close to 0 indicates almost no relationship, while values closer to 1 or -1 indicate a stronger one.
-{direction_sentence} {sig_sentence}
-</div>
-</div>
-""", unsafe_allow_html=True)
-
-st.markdown(f"""
-<div style="background:#080b14;border:1px solid #232840;border-left:3px solid #10b981;border-radius:10px;padding:18px 22px;margin-bottom:16px;">
-<div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:#10b981;margin-bottom:10px;">🔍 Interpretation</div>
-<div style="color:#C8D6E8;font-size:.9rem;line-height:1.65;">
-{interpretation_g1}
-</div>
+<div class="insight-card">
+    <h4>🔍 Interpretation</h4>
+    <p>{interp_g1}</p>
 </div>
 """, unsafe_allow_html=True)
 
