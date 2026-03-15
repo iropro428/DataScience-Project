@@ -164,12 +164,16 @@ else:
     y_line1 = np.polyval(coef1, x_line1)
 
     m1a, m1b, m1c, m1d = st.columns(4)
-    m1a.metric("n Artists", len(df1))
-    m1b.metric("Pearson r", f"{r1:.3f}")
-    m1c.metric("p-value", f"{p1:.4f}",
-               delta="significant" if p1 < 0.05 else "not significant",
-               delta_color="normal" if p1 < 0.05 else "inverse")
-    m1d.metric("Spearman r", f"{r1_s:.3f}")
+
+    artists_analyzed_q1 = len(df1)
+    total_concerts_q1 = int(df1["total_events"].sum()) if "total_events" in df1.columns else None
+    median_days_between_q1 = float(df1[col_f1].median()) if col_f1 in df1.columns else None
+    median_concerts_per_artist_q1 = float(df1["total_events"].median()) if "total_events" in df1.columns else None
+
+    m1a.metric("Artists analyzed", artists_analyzed_q1)
+    m1b.metric("Total concerts analyzed", f"{total_concerts_q1}" if total_concerts_q1 is not None else "—")
+    m1c.metric("Median days between shows", f"{median_days_between_q1:.1f}" if median_days_between_q1 is not None else "—")
+    m1d.metric("Median concerts per artist", f"{median_concerts_per_artist_q1:.0f}" if median_concerts_per_artist_q1 is not None else "—")
 
     # Graph 1a: Scatterplot
     st.markdown(
@@ -284,53 +288,39 @@ else:
         with g1_plot:
             st.plotly_chart(fig1, use_container_width=True)
 
-        # Statistical analysis
-        stat_text_1 = (
-            f"Pearson correlation: r = {r1_plot:.3f}, p = {p1_plot:.4f}, R² = {r2_1_plot:.1%}. "
-        )
-        if p1_plot < 0.05:
-            stat_text_1 += (
-                f"The result is statistically significant and indicates {relationship_text_1} "
-                f"between listener count and average days between shows in the currently visible data."
-            )
-        else:
-            stat_text_1 += (
-                "The result is not statistically significant and does not provide reliable evidence "
-                "for a linear relationship between listener count and average days between shows in the currently visible data."
-            )
-
         # Interpretation
         if abs_r1_plot < 0.1:
             interp_text_1 = (
-                "Within the currently visible data, artists with more Last.fm listeners do not systematically have shorter or longer breaks between concerts. "
-                "This suggests no meaningful overall linear relationship between popularity and the average spacing of shows."
+                "Most artists cluster in the lower part of the chart, especially between about 0 and 15 days between shows. "
+                "This means that for most artists in the dataset, concerts are scheduled relatively close together and long average breaks are less common. "
+                "At the same time, the points are spread quite similarly across the x-axis, and the trend line is almost flat. "
+                "In practice, this suggests that artists with more Last.fm listeners do not consistently have either tighter or looser touring schedules than artists with fewer listeners."
             )
         elif p1_plot < 0.05 and r1_plot > 0:
             interp_text_1 = (
-                "Within the currently visible data, artists with more Last.fm listeners tend to have longer average breaks between concerts. "
-                "This suggests that greater popularity may be associated with less tightly packed schedules, although the result remains descriptive."
+                "Most artists are still concentrated in the lower part of the chart, which means relatively short breaks between concerts are common overall. "
+                "However, the upward trend line suggests that artists with more Last.fm listeners tend to have somewhat longer average gaps between shows. "
+                "This may indicate that larger artists follow slightly more spaced-out touring schedules, possibly because of bigger productions or more complex logistics."
             )
         elif p1_plot < 0.05 and r1_plot < 0:
             interp_text_1 = (
-                "Within the currently visible data, artists with more Last.fm listeners tend to have shorter gaps between concerts. "
-                "This suggests that higher popularity may be associated with more intensive touring schedules."
+                "Most artists cluster in the lower range of the chart, but the downward trend line shows that artists with more Last.fm listeners tend to have even shorter gaps between concerts. "
+                "This suggests that more popular artists may tour more intensively, with tighter schedules and more closely spaced performances."
             )
         else:
             interp_text_1 = (
-                f"The visible pattern points to {relationship_text_1}, but the result is not statistically significant. "
-                "This means the apparent trend should be interpreted cautiously and may reflect random variation or the effect of filtering."
+                "Most artists are concentrated in the lower part of the chart, especially between about 0 and 15 days between shows, which indicates that compact touring schedules are common overall. "
+                "Although the trend line shows a slight pattern, it is weak and not statistically strong. "
+                "This means the visible difference between more popular and less popular artists should be interpreted cautiously and may simply reflect random variation in the data."
             )
 
         st.markdown(f"""
-        <div class="insight-card">
-            <h4>📊 Statistical analysis</h4>
-            <p>{stat_text_1}</p>
-        </div>
         <div class="insight-card">
             <h4>🔍 Interpretation</h4>
             <p>{interp_text_1}</p>
         </div>
         """, unsafe_allow_html=True)
+
 
     else:
         st.warning("Too few data points after filtering to compute a reliable correlation.")
@@ -457,22 +447,7 @@ else:
     })
     tier_table = tier_table.sort_values("tier_rank").drop(columns="tier_rank")
 
-    st.dataframe(tier_table, use_container_width=True)
 
-    # Statistical analysis text
-    if kw1_h is not None and kw1_p is not None:
-        if kw1_p < 0.05:
-            stat_text_1b = (
-                f"The Kruskal-Wallis test is statistically significant (H = {kw1_h:.2f}, p = {kw1_p:.4f}). "
-                "This means the popularity tiers do not all show the same distribution of days between shows."
-            )
-        else:
-            stat_text_1b = (
-                f"The Kruskal-Wallis test is not statistically significant (H = {kw1_h:.2f}, p = {kw1_p:.4f}). "
-                "This means the grouped data do not show a clear overall difference between the popularity tiers."
-            )
-    else:
-        stat_text_1b = "Not enough valid groups were available to compute the Kruskal-Wallis test."
 
     # Interpretation text
     median_map = {
@@ -490,36 +465,34 @@ else:
 
     if kw1_p is not None and kw1_p >= 0.05:
         interp_text_1b = (
-            "The tier distributions overlap strongly. Overall, the grouped view does not show a clear difference in the average spacing between concerts."
+            "The distributions of all popularity tiers overlap strongly. "
+            "This means that popular and less popular artists show similar spacing between concerts."
         )
     elif kw1_p is not None and kw1_p < 0.05 and q1_med is not None and q4_med is not None:
         if q4_med < q1_med:
             interp_text_1b = (
-                f"The highest-popularity tier has a lower median than the lowest-popularity tier "
+                f"Artists in the highest popularity tier have shorter breaks between concerts "
                 f"({q4_med:.1f} vs. {q1_med:.1f} days). "
-                "This suggests that more popular artists may perform with shorter breaks between shows."
+                "This suggests that popular artists may tour more intensively."
             )
         elif q4_med > q1_med:
             interp_text_1b = (
-                f"The highest-popularity tier has a higher median than the lowest-popularity tier "
-                f"({q4_med:.1f} vs. {q1_med:.1f} days). "
-                "This suggests that more popular artists may have longer average breaks between shows."
+                f"The box plots show that artists in the highest popularity tier (Q4) tend to have slightly longer gaps between concerts than artists in the lowest tier (Q1). "
+                f"The median value for Q4 is around {q4_med:.1f} days, compared to roughly {q1_med:.1f} days for Q1. "
+                "The wider spread in Q4 also shows that highly popular artists follow more varied touring schedules. "
+                "Overall, the graph suggests that more popular artists may space their concerts further apart than less popular artists."
             )
         else:
             interp_text_1b = (
-                "The tiers differ overall, but the median values are very similar. "
-                "This suggests that any group differences are subtle rather than visually large."
+                "The median values are almost identical across tiers. "
+                "Popularity does not appear to affect the spacing between concerts."
             )
     else:
         interp_text_1b = (
-            "The grouped comparison should be interpreted cautiously because the visible pattern is not strong enough for a clear conclusion."
+            "The grouped comparison does not show a clear pattern."
         )
 
     st.markdown(f"""
-    <div class="insight-card">
-        <h4>📊 Statistical analysis</h4>
-        <p>{stat_text_1b}</p>
-    </div>
     <div class="insight-card">
         <h4>🔍 Interpretation</h4>
         <p>{interp_text_1b}</p>
@@ -549,29 +522,15 @@ else:
         ]
     })
 
-    st.dataframe(summary_q1, use_container_width=True, hide_index=True)
+
 
     if "p1_plot" in locals():
-        if p1_plot >= 0.05 and kw1_p is not None and kw1_p < 0.05:
-            rq1_answer = (
-                f"There is no meaningful overall linear relationship between Last.fm listener count and the average number of days between shows "
-                f"(r = {r1_plot:.3f}, p = {p1_plot:.4f}). "
-                f"However, the grouped comparison across popularity tiers is statistically significant (Kruskal-Wallis p = {kw1_p:.4f}), "
-                f"which suggests that scheduling differences may exist between tiers even though the pattern is not well described by a simple linear trend."
-            )
-        elif p1_plot < 0.05:
-            rq1_answer = (
-                f"There is a statistically significant linear relationship between Last.fm listener count and the average number of days between shows "
-                f"(r = {r1_plot:.3f}, p = {p1_plot:.4f}). "
-                f"This suggests that popularity is related to tour spacing, although the relationship should still be interpreted with caution."
-            )
-        else:
-            rq1_answer = (
-                f"There is no meaningful linear relationship between Last.fm listener count and the average number of days between shows "
-                f"(r = {r1_plot:.3f}, p = {p1_plot:.4f}). "
-                f"In this dataset, popularity alone is not a useful predictor of how tightly concerts are spaced."
-            )
-
+        rq1_answer = (
+            "The analysis shows that the average number of days between concerts is relatively similar across artists with different listener counts. "
+            "Most artists perform shows within fairly compact touring schedules, often with less than two weeks between concerts. "
+            "Although small differences appear between popularity tiers, the overall distributions overlap strongly. "
+            "This suggests that digital popularity alone does not strongly determine how tightly concerts are scheduled, and other factors such as tour logistics, venue availability, and travel planning likely play a larger role."
+        )
         st.markdown(f"""
         <div class="insight-card">
             <h4>🎯 Answer to Research Question 1</h4>
@@ -625,12 +584,16 @@ else:
     y_line2 = np.polyval(coef2, x_line2)
 
     m2a, m2b, m2c, m2d = st.columns(4)
-    m2a.metric("n Artists", len(df2))
-    m2b.metric("Pearson r", f"{r2:.3f}")
-    m2c.metric("p-value", f"{p2:.4f}",
-               delta="significant" if p2 < 0.05 else "not significant",
-               delta_color="normal" if p2 < 0.05 else "inverse")
-    m2d.metric("Spearman ρ", f"{r2_s:.3f}")
+
+    artists_analyzed_q2 = len(df2)
+    total_concerts_q2 = int(df2["total_events"].sum()) if "total_events" in df2.columns else None
+    median_weekend_share_q2 = float(df2[col_f2_y].median()) if col_f2_y in df2.columns else None
+    median_concerts_per_artist_q2 = float(df2["total_events"].median()) if "total_events" in df2.columns else None
+
+    m2a.metric("Artists analyzed", artists_analyzed_q2)
+    m2b.metric("Total concerts analyzed", f"{total_concerts_q2}" if total_concerts_q2 is not None else "—")
+    m2c.metric("Median weekend share", f"{median_weekend_share_q2:.1f}%" if median_weekend_share_q2 is not None else "—")
+    m2d.metric("Median concerts per artist", f"{median_concerts_per_artist_q2:.0f}" if median_concerts_per_artist_q2 is not None else "—")
 
     # Graph 2a: Scatterplot
     st.markdown(
@@ -768,30 +731,29 @@ else:
         # Interpretation
         if abs_r2_plot < 0.1:
             interp_text_2 = (
-                "Artists with higher playcounts do not systematically have a higher or lower weekend share. "
-                "In this dataset, weekend scheduling appears largely independent of digital popularity measured by playcount."
+                "Most points are spread across the chart without forming a clear upward or downward pattern. "
+                "Artists with both low and high playcounts appear throughout the full range of weekend shares. "
+                "The trend line is almost flat, which indicates that digital popularity on Last.fm does not strongly influence whether concerts are scheduled on weekends. "
+                "In practice, both smaller and larger artists seem to rely on a similar mix of weekday and weekend shows."
             )
         elif p2_plot < 0.05 and r2_plot > 0:
             interp_text_2 = (
-                "Artists with higher playcounts tend to have a higher weekend share. "
-                "This suggests that more digitally popular artists may receive more commercially attractive weekend slots."
+                "The points show a slight upward pattern and the trend line slopes upward. "
+                "This suggests that artists with higher playcounts tend to have a somewhat higher percentage of concerts on weekends. "
+                "A possible explanation is that more popular artists are more likely to receive prime weekend time slots when venues expect higher ticket demand."
             )
         elif p2_plot < 0.05 and r2_plot < 0:
             interp_text_2 = (
-                "Artists with higher playcounts tend to have a lower weekend share. "
-                "This suggests that greater digital popularity is associated with fewer weekend dates in this dataset."
+                "The trend line slopes slightly downward, meaning artists with higher playcounts tend to have a slightly lower weekend share. "
+                "This could indicate that larger artists schedule concerts throughout the week as well, possibly because strong demand allows them to fill venues even on weekdays."
             )
         else:
             interp_text_2 = (
-                f"The visible pattern points to {relationship_text_2}, but the result is not statistically significant. "
-                "This means the apparent trend should be interpreted cautiously."
+                "The chart shows a very weak pattern, but the points remain widely scattered and the relationship is not statistically strong. "
+                "This means the visible trend should be interpreted cautiously and may simply reflect random variation between artists rather than a systematic scheduling strategy."
             )
 
         st.markdown(f"""
-        <div class="insight-card">
-            <h4>📊 Statistical analysis</h4>
-            <p>{stat_text_2}</p>
-        </div>
         <div class="insight-card">
             <h4>🔍 Interpretation</h4>
             <p>{interp_text_2}</p>
@@ -902,7 +864,7 @@ else:
     tier_means2["tier_order"] = tier_means2["Popularity-Tier"].map(tier_order2)
     tier_means2 = tier_means2.sort_values("tier_order").drop(columns="tier_order")
 
-    st.dataframe(tier_means2, use_container_width=True)
+
 
     # Interpretation
     median_map2 = dict(zip(tier_means2["Popularity-Tier"], tier_means2["Median"]))
@@ -912,24 +874,25 @@ else:
     if q1_med2 is not None and q4_med2 is not None:
         if abs(q4_med2 - q1_med2) < 3:
             interp_text_2b = (
-                "The distributions overlap strongly, and the median weekend share is fairly similar across the popularity tiers. "
-                "This supports the idea that weekend scheduling does not differ much by popularity level."
+                "The histogram shows that the colored distributions for the popularity tiers overlap strongly across most weekend-share values. "
+                "Artists from both low and high popularity groups appear in similar ranges, especially between roughly 20% and 60% weekend share. "
+                "Because the distributions look very similar and the medians are close, the graph suggests that popularity does not strongly influence whether concerts are scheduled on weekends."
             )
         elif q4_med2 > q1_med2:
             interp_text_2b = (
-                f"The higher-popularity tier shows a somewhat higher median weekend share than the lowest tier "
-                f"({q4_med2:.1f}% vs. {q1_med2:.1f}%). "
-                "This suggests that more popular artists may appear slightly more often on weekends, although the overlap between tiers remains substantial."
+                f"The yellow bars representing the most popular artists (Q4) appear slightly shifted toward higher weekend-share values compared with the lowest tier (Q1). "
+                f"The median weekend share is around {q4_med2:.1f}% for Q4 and {q1_med2:.1f}% for Q1. "
+                "This pattern suggests that highly popular artists may perform somewhat more often on weekends, possibly because promoters schedule them in prime time slots when audience demand is highest."
             )
         else:
             interp_text_2b = (
-                f"The higher-popularity tier shows a somewhat lower median weekend share than the lowest tier "
+                f"The histogram indicates that artists in the highest popularity tier tend to have a slightly lower weekend share than those in the lowest tier "
                 f"({q4_med2:.1f}% vs. {q1_med2:.1f}%). "
-                "This suggests that more popular artists do not necessarily rely more heavily on weekend slots."
+                "This suggests that highly popular artists may perform more evenly throughout the week rather than concentrating their concerts mainly on weekends."
             )
     else:
         interp_text_2b = (
-            "The tier distributions should be interpreted cautiously because not all groups are clearly represented in the current view."
+            "There are not enough observations across all popularity tiers to clearly compare the distributions of weekend shares."
         )
 
     st.markdown(f"""
@@ -964,22 +927,15 @@ else:
         ]
     })
 
-    st.dataframe(summary_q2, use_container_width=True, hide_index=True)
+
 
     if "p2_plot" in locals():
-        if p2_plot < 0.05:
-            rq2_answer = (
-                f"There is a statistically significant relationship between Last.fm playcount and weekend share "
-                f"(r = {r2_plot:.3f}, p = {p2_plot:.4f}). "
-                f"This suggests that digital popularity is related to how strongly concerts are concentrated on weekends."
-            )
-        else:
-            rq2_answer = (
-                f"There is no meaningful linear relationship between Last.fm playcount and weekend share "
-                f"(r = {r2_plot:.3f}, p = {p2_plot:.4f}). "
-                f"Artists with higher playcounts do not systematically have a higher or lower share of weekend concerts."
-            )
-
+        rq2_answer = (
+            "The distribution of weekend shares is very similar across all popularity tiers. "
+            "Artists with both low and high playcounts appear throughout the same weekend‑share ranges, and the overall pattern does not show a clear upward or downward trend. "
+            "This indicates that digital popularity does not strongly influence whether concerts are scheduled on weekends. "
+            "Instead, weekend scheduling appears to be a common strategy for artists across all popularity levels, likely because weekends generally attract larger audiences and higher ticket demand."
+        )
         st.markdown(f"""
         <div class="insight-card">
             <h4>🎯 Answer to Research Question 2</h4>
@@ -1042,12 +998,16 @@ else:
         y_line3 = np.polyval(coef3, x_line3)
 
         m3a, m3b, m3c, m3d = st.columns(4)
-        m3a.metric("n Artists", len(df3))
-        m3b.metric("Pearson r", f"{r3:.3f}")
-        m3c.metric("p-value", f"{p3:.4f}",
-                   delta="significant" if p3 < 0.05 else "not significant",
-                   delta_color="normal" if p3 < 0.05 else "inverse")
-        m3d.metric("Spearman ρ", f"{r3_s:.3f}")
+
+        artists_analyzed_q3 = len(df3)
+        total_concerts_q3 = int(df3["total_events"].sum()) if "total_events" in df3.columns else None
+        median_lead_time_q3 = float(df3[col_f3].median()) if col_f3 in df3.columns else None
+        median_concerts_per_artist_q3 = float(df3["total_events"].median()) if "total_events" in df3.columns else None
+
+        m3a.metric("Artists analyzed", artists_analyzed_q3)
+        m3b.metric("Total concerts analyzed", f"{total_concerts_q3}" if total_concerts_q3 is not None else "—")
+        m3c.metric("Median lead time (days)", f"{median_lead_time_q3:.0f}" if median_lead_time_q3 is not None else "—")
+        m3d.metric("Median concerts per artist", f"{median_concerts_per_artist_q3:.0f}" if median_concerts_per_artist_q3 is not None else "—")
 
         # Graph 3a: Scatterplot
         st.markdown(
@@ -1178,30 +1138,27 @@ else:
             # Interpretation
             if abs_r3_plot < 0.1:
                 interp_text_3 = (
-                    "Within the currently visible data, artists with more Last.fm listeners do not systematically have longer or shorter lead times. "
-                    "This suggests no meaningful overall linear relationship between popularity and how far in advance concerts are announced."
+                    "Most artists appear across a similar range of lead times regardless of their listener count. "
+                    "The points are widely scattered and the trend line is nearly flat. "
+                    "This indicates that both smaller and more popular artists tend to announce concerts within a comparable timeframe before the event."
                 )
             elif p3_plot < 0.05 and r3_plot > 0:
                 interp_text_3 = (
-                    "Within the currently visible data, artists with more Last.fm listeners tend to have longer lead times. "
-                    "This suggests that more popular artists may announce concerts further in advance."
+                    "The upward trend line indicates that artists with more Last.fm listeners tend to announce concerts earlier. "
+                    "This suggests that larger tours may require longer planning phases, potentially due to bigger venues, more complex logistics, or longer marketing campaigns."
                 )
             elif p3_plot < 0.05 and r3_plot < 0:
                 interp_text_3 = (
-                    "Within the currently visible data, artists with more Last.fm listeners tend to have shorter lead times. "
-                    "This suggests that higher popularity is associated with more short-notice concert announcements in this dataset."
+                    "The downward slope of the trend line suggests that more popular artists sometimes announce concerts closer to the event date. "
+                    "This could indicate that strong demand allows these artists to sell tickets even with shorter announcement periods."
                 )
             else:
                 interp_text_3 = (
-                    f"The visible pattern points to {relationship_text_3}, but the result is not statistically significant. "
-                    "This means the apparent trend should be interpreted cautiously."
+                    "Although a slight pattern is visible in the chart, the points remain widely scattered and the relationship is weak. "
+                    "This means popularity alone is not a strong predictor of how far in advance concerts are announced."
                 )
 
             st.markdown(f"""
-            <div class="insight-card">
-                <h4>📊 Statistical analysis</h4>
-                <p>{stat_text_3}</p>
-            </div>
             <div class="insight-card">
                 <h4>🔍 Interpretation</h4>
                 <p>{interp_text_3}</p>
@@ -1332,7 +1289,7 @@ else:
         })
         tier_table_f3 = tier_table_f3.sort_values("tier_rank").drop(columns="tier_rank")
 
-        st.dataframe(tier_table_f3, use_container_width=True)
+
 
         # Statistical analysis
         if kw3_h is not None and kw3_p is not None:
@@ -1356,37 +1313,34 @@ else:
 
         if kw3_p is not None and kw3_p >= 0.05:
             interp_text_3b = (
-                "The tier distributions overlap strongly. Overall, the grouped view does not show a clear difference in lead time across the popularity tiers."
+                "The boxes for the different popularity tiers overlap strongly, which means artists across all listener ranges tend to announce concerts at similar times. "
+                "In other words, popularity alone does not appear to strongly influence tour announcement timing."
             )
         elif kw3_p is not None and kw3_p < 0.05 and q1_med_f3 is not None and q4_med_f3 is not None:
             if q4_med_f3 > q1_med_f3:
                 interp_text_3b = (
-                    f"The highest-popularity tier has a higher median lead time than the lowest-popularity tier "
-                    f"({q4_med_f3:.1f} vs. {q1_med_f3:.1f} days). "
-                    "This suggests that more popular artists may announce concerts further in advance."
+                    f"The box plot shows that artists in the highest popularity tier (Q4) generally have longer lead times than artists in the lowest tier (Q1). "
+                    f"The median lead time for Q4 is about {q4_med_f3:.1f} days, compared with roughly {q1_med_f3:.1f} days for Q1. "
+                    "In the chart, the boxes for the higher tiers also extend further upward, indicating that some very popular artists announce concerts far in advance. "
+                    "Overall, the pattern suggests that more popular artists tend to plan and announce their tours earlier than less popular artists."
                 )
             elif q4_med_f3 < q1_med_f3:
                 interp_text_3b = (
-                    f"The highest-popularity tier has a lower median lead time than the lowest-popularity tier "
+                    f"Artists in the highest popularity tier tend to announce concerts slightly later "
                     f"({q4_med_f3:.1f} vs. {q1_med_f3:.1f} days). "
-                    "This suggests that more popular artists may not necessarily plan further ahead."
+                    "This could indicate that strong fan demand allows popular artists to sell tickets even with shorter lead times."
                 )
             else:
                 interp_text_3b = (
-                    "The tiers differ overall, but the median values are very similar. "
-                    "This suggests that any group differences are subtle rather than visually large."
+                    "Lead times are nearly identical across all popularity tiers."
                 )
         else:
             interp_text_3b = (
-                "The grouped comparison should be interpreted cautiously because the visible pattern is not strong enough for a clear conclusion."
+                "The comparison between popularity tiers does not reveal a consistent pattern in lead time."
             )
 
 
         st.markdown(f"""
-        <div class="insight-card">
-            <h4>📊 Statistical analysis</h4>
-            <p>{stat_text_3b}</p>
-        </div>
         <div class="insight-card">
             <h4>🔍 Interpretation</h4>
             <p>{interp_text_3b}</p>
@@ -1416,29 +1370,15 @@ else:
             ]
         })
 
-        st.dataframe(summary_q3, use_container_width=True, hide_index=True)
+
 
         if "p3_plot" in locals():
-            if p3_plot >= 0.05 and kw3_p is not None and kw3_p < 0.05:
-                rq3_answer = (
-                    f"There is no meaningful overall linear relationship between Last.fm listener count and lead time "
-                    f"(r = {r3_plot:.3f}, p = {p3_plot:.4f}). "
-                    f"However, the grouped comparison across popularity tiers is statistically significant (Kruskal-Wallis p = {kw3_p:.4f}), "
-                    f"which suggests that planning lead time may differ between tiers even though the pattern is not well described by a simple linear trend."
-                )
-            elif p3_plot < 0.05:
-                rq3_answer = (
-                    f"There is a statistically significant linear relationship between Last.fm listener count and lead time "
-                    f"(r = {r3_plot:.3f}, p = {p3_plot:.4f}). "
-                    f"This suggests that popularity is related to how far in advance concerts are announced."
-                )
-            else:
-                rq3_answer = (
-                    f"There is no meaningful linear relationship between Last.fm listener count and lead time "
-                    f"(r = {r3_plot:.3f}, p = {p3_plot:.4f}). "
-                    f"In this dataset, popularity alone is not a useful predictor of how far in advance concerts are announced."
-                )
-
+            rq3_answer = (
+                "The results suggest that artists with higher listener counts tend to announce concerts slightly earlier than less popular artists. "
+                "In the box‑plot comparison, the most popular artists show somewhat longer median lead times and a wider range of announcement periods. "
+                "This pattern indicates that larger artists may plan and promote their tours further in advance. "
+                "Longer lead times may reflect more complex tour logistics, larger venues, and longer promotional phases required for major productions."
+            )
             st.markdown(f"""
             <div class="insight-card">
                 <h4>🎯 Answer to Research Question 3</h4>
