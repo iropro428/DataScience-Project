@@ -184,7 +184,7 @@ else:
     st.markdown("""
     Each point represents one artist. The x-axis shows Last.fm listener count, and the y-axis shows the average number of days between consecutive concerts.
     A logarithmic x-axis can be enabled to compress very large listener values and make broad patterns easier to compare.
-    The green OLS trend line summarizes the overall linear relationship: if it slopes downward, more popular artists tend to have shorter breaks between shows; if it slopes upward, they tend to have longer average gaps.
+    The green trend line summarizes the overall linear relationship: if it slopes downward, more popular artists tend to have shorter breaks between shows; if it slopes upward, they tend to have longer average gaps.
     The filters allow users to hide extreme outliers and explore whether the visible pattern remains stable.
     """)
 
@@ -264,7 +264,7 @@ else:
             x=x_line1_plot,
             y=y_line1_plot,
             mode="lines",
-            name="OLS",
+            name="trend line",
             line=dict(color="#10b981", width=2.5),
             hoverinfo="skip",
         ))
