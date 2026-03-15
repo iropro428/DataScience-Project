@@ -1106,8 +1106,8 @@ st.markdown("""
 # ══════════════════════════════════════════════════════════════════════════
 # RESEARCH QUESTION 3
 # ══════════════════════════════════════════════════════════════════════════
-
 st.divider()
+st.markdown('<div id="geo-frage-3"></div>', unsafe_allow_html=True)
 st.markdown("""
 <div class="rq-box">
     <h3>🗺️ Research Question 3</h3>
@@ -1118,34 +1118,32 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 st.markdown("""
-**Hypothesis:** Artists tend to perform in countries where they have the highest listener counts on Last.fm.
+**Definitions**
 
-**3 Metrics measure the agreement:**
+| Term | Meaning |
+|------|---------|
+| **Weighted Coverage** | The share of an artist's total Last.fm listener reach that is covered by their tour countries — the main metric of this analysis. An artist with 80% of their listeners in countries they tour in has a Weighted Coverage of 0.8 |
+| **Streaming Reach** | The share of an artist's top streaming countries that are also visited on tour. A low value indicates untapped markets — countries with listeners but no live presence |
+
+**Hypothesis:** Artists tend to perform in countries where their Last.fm listener counts are highest —
+tour routing follows existing audience demand rather than exploring markets with no prior streaming presence.
 """)
 
-c1, c2, c3 = st.columns(3)
+c1, c2 = st.columns(2)
 with c1:
     st.markdown("""
     <div class="insight-card">
-        <h4>📐 Jaccard-Similarity</h4>
-        <p>Overlap of the Top 10 streaming countries (by listeners) with the tour countries.
-        <p>U0 = no Match · 1 = perfect match.</p>
+        <h4>📡 Streaming Reach</h4>
+        <p>Share of top streaming countries actually visited on tour.
+        A low value indicates untapped markets — countries with listeners but no live presence.</p>
     </div>""", unsafe_allow_html=True)
 with c2:
     st.markdown("""
     <div class="insight-card accent">
         <h4>🗺️ Weighted Coverage</h4>
-        <p><strong>Listener-weighted:</strong> What share of the listener reach is covered by the tour?
-         This is the main metric of this analysis.</p>
+        <p>Listener-weighted share of streaming reach covered by the tour.
+        Countries with more listeners contribute more to this score — the main metric of this analysis.</p>
     </div>""", unsafe_allow_html=True)
-with c3:
-    st.markdown("""
-    <div class="insight-card">
-        <h4>📡 Streaming Reach</h4>
-        <p>What percentage of streaming countries are also included in the tour?
-        This measures whether there are untapped markets.</p>
-    </div>""", unsafe_allow_html=True)
-
 
 # Load data
 @st.cache_data
@@ -1155,14 +1153,12 @@ def load_geo_align():
         return None
     return pd.read_csv(p)
 
-
 @st.cache_data
 def load_geo_presence():
     p = "data/raw/lastfm_geo_presence.csv"
     if not os.path.exists(p):
         return None
     return pd.read_csv(p)
-
 
 ga = load_geo_align()
 geo = load_geo_presence()
@@ -1179,21 +1175,18 @@ for c in ["jaccard", "tour_coverage", "streaming_reach", "listeners", "n_aligned
 
 # KPIs
 n_artists = len(ga)
-mean_jac = ga["jaccard"].mean()
 mean_tc = ga["tour_coverage"].mean()
 mean_sr = ga["streaming_reach"].mean()
 n_aligned_m = ga["n_aligned"].median()
 
 st.divider()
 mean_wc = ga["weighted_coverage"].mean() if "weighted_coverage" in ga.columns else mean_tc
-k1, k2, k3, k4, k5 = st.columns(5)
-k1.metric("Artists analysiert", n_artists)
-k2.metric("Ø Weighted Coverage", f"{mean_wc:.1%}", help="Listener-gewichteter Anteil")
-k3.metric("Ø Jaccard", f"{mean_jac:.3f}")
-k4.metric("Ø Streaming Reach", f"{mean_sr:.1%}")
-k5.metric("Median aligned Länder", f"{int(n_aligned_m)}")
+k1, k2, k3, k4 = st.columns(4)
+k1.metric("Artists", n_artists)
+k2.metric("Ø Weighted Coverage", f"{mean_wc:.1%}", help="Listener-weighted share of reach covered by tour")
+k3.metric("Ø Streaming Reach", f"{mean_sr:.1%}")
+k4.metric("Median Aligned Countries", f"{int(n_aligned_m)}")
 st.divider()
-
 # ══════════════════════════════════════════════════════════════════════════
 # GA2 — GRAPH 1: Scatterplot Listeners vs Jaccard
 # ══════════════════════════════════════════════════════════════════════════
@@ -1628,22 +1621,6 @@ st.markdown(f"""
     <strong>{"strongly" if mean_wc >= 0.6 else "partly" if mean_wc >= 0.3 else "weakly"}</strong> 
     aligned with country-level listener reach — but for most artists, a relevant share of their 
     digital audience remains unreached by live performance.
-    </p>
-</div>
-""", unsafe_allow_html=True)
-
-st.markdown("""
-<div class="methodology-note">
-    <p>
-    <strong>Methodological note:</strong> This analysis compares an artist's Ticketmaster tour countries
-    with the countries where the artist shows the highest Last.fm listener presence.
-    Top streaming countries are defined using <strong>listener counts</strong>
-    (<code>listeners_in_country</code>), not rank positions. The main metric,
-    <strong>Weighted Coverage</strong>, measures how much of an artist's listener reach is covered
-    by their tour countries, while <strong>Streaming Reach</strong> shows how many of the strongest
-    listener countries are actually included in the tour. Since Last.fm listener values are platform-based
-    and not exact national audience totals, they should be interpreted as a
-    <strong>proxy for geographic audience strength</strong>, not as precise country listener counts.
     </p>
 </div>
 """, unsafe_allow_html=True)
