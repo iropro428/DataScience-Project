@@ -1484,121 +1484,166 @@ mean_sr = ga["streaming_reach"].mean() if "streaming_reach" in ga.columns else n
 mean_tc = ga["tour_coverage"].mean() if "tour_coverage" in ga.columns else np.nan
 median_aligned = ga["n_aligned"].median() if "n_aligned" in ga.columns else np.nan
 
-# ── Slope-based interpretation from Graph 1 ──────────────────────────────
-if abs(slope_g1) < 0.05:
-    graph1_text = (
-        "Graph 1 showed that the trend line between Last.fm listeners and the geo-alignment score "
-        "is nearly flat — artists with large and small audiences show a similar spread of scores. "
-        "This suggests that aligning touring with listener demand is an individual decision "
-        "rather than something driven by overall popularity."
-    )
-elif slope_g1 > 0:
-    graph1_text = (
-        "Graph 1 showed an upward trend between Last.fm listeners and the geo-alignment score — "
-        "more popular artists tend to cover a larger share of their listener reach through touring. "
-        "This suggests that as artists grow in popularity, their tour routing increasingly follows "
-        "where actual demand is strongest."
-    )
+# ── Overall alignment text (based on mean_wc + slope_g1) ─────────────────
+if mean_wc >= 0.6:
+    if slope_g1 > 0.05:
+        overall_text = (
+            f"On average, artists cover <strong>{mean_wc:.1%}</strong> of their Last.fm listener reach "
+            f"through the countries they tour in, indicating a strong overall alignment between "
+            f"digital audience demand and live touring. The scatter plot reinforces this — "
+            f"more popular artists show even stronger alignment, suggesting that tour routing "
+            f"increasingly follows where demand is highest as artists grow."
+        )
+    elif abs(slope_g1) <= 0.05:
+        overall_text = (
+            f"On average, artists cover <strong>{mean_wc:.1%}</strong> of their Last.fm listener reach "
+            f"through the countries they tour in, indicating a strong overall alignment between "
+            f"digital audience demand and live touring. This holds consistently across all popularity "
+            f"levels — the scatter plot shows no meaningful difference between larger and smaller artists."
+        )
+    else:
+        overall_text = (
+            f"On average, artists cover <strong>{mean_wc:.1%}</strong> of their Last.fm listener reach "
+            f"through the countries they tour in, indicating a strong overall alignment. "
+            f"Notably, the scatter plot suggests that more popular artists cover a slightly smaller share — "
+            f"as global fanbases tend to grow faster than tour footprints, a widening gap between "
+            f"digital reach and live presence emerges at higher popularity levels."
+        )
+elif mean_wc >= 0.3:
+    if slope_g1 > 0.05:
+        overall_text = (
+            f"On average, artists cover <strong>{mean_wc:.1%}</strong> of their Last.fm listener reach "
+            f"through the countries they tour in — a moderate level of alignment. "
+            f"The scatter plot suggests this improves with popularity: more established artists appear "
+            f"to route their tours more deliberately around where their listener demand is strongest."
+        )
+    elif abs(slope_g1) <= 0.05:
+        overall_text = (
+            f"On average, artists cover <strong>{mean_wc:.1%}</strong> of their Last.fm listener reach "
+            f"through the countries they tour in, pointing to a moderate alignment between streaming "
+            f"geography and live touring. The scatter plot shows no consistent relationship with "
+            f"popularity — how well an artist reaches their streaming audience through live shows "
+            f"appears to be an individual decision rather than something driven by audience size."
+        )
+    else:
+        overall_text = (
+            f"On average, artists cover <strong>{mean_wc:.1%}</strong> of their Last.fm listener reach "
+            f"through the countries they tour in, pointing to only moderate alignment. "
+            f"The scatter plot adds an important nuance: more popular artists actually show lower "
+            f"alignment scores, suggesting that as fanbases spread globally, tours increasingly "
+            f"fail to keep pace with the full geographic scope of listener demand."
+        )
 else:
-    graph1_text = (
-        "Graph 1 showed a downward trend between Last.fm listeners and the geo-alignment score — "
-        "despite having larger audiences, more popular artists cover a smaller share of their "
-        "streaming markets through live touring. This is consistent with the idea that global "
-        "fanbases grow faster than tour footprints, creating a widening gap between digital "
-        "reach and live presence."
-    )
+    if slope_g1 > 0.05:
+        overall_text = (
+            f"On average, artists cover only <strong>{mean_wc:.1%}</strong> of their Last.fm listener reach "
+            f"through the countries they tour in — indicating weak overall alignment. "
+            f"The scatter plot does suggest some improvement at higher popularity levels, "
+            f"but even the most popular artists in the dataset leave a large share of their "
+            f"listener reach uncovered by live touring."
+        )
+    elif abs(slope_g1) <= 0.05:
+        overall_text = (
+            f"On average, artists cover only <strong>{mean_wc:.1%}</strong> of their Last.fm listener reach "
+            f"through the countries they tour in, indicating weak alignment between streaming geography "
+            f"and touring geography. The scatter plot confirms that this gap is consistent across "
+            f"all popularity levels — neither large nor small artists consistently bridge the "
+            f"distance between where they are heard and where they perform."
+        )
+    else:
+        overall_text = (
+            f"On average, artists cover only <strong>{mean_wc:.1%}</strong> of their Last.fm listener reach "
+            f"through the countries they tour in, indicating weak alignment between streaming geography "
+            f"and touring geography. The scatter plot makes this even more pronounced: more popular "
+            f"artists show lower alignment scores, as their global fanbases grow into far more "
+            f"countries than their tours can realistically reach."
+        )
 
-# ── Best/Worst aligned pattern from Graph 2 ──────────────────────────────
+# ── Streaming reach + Graph 2 pattern ────────────────────────────────────
 if "streaming_reach" in ga.columns and "n_tour_countries" in ga.columns:
     best_artists = ga.nlargest(5, "streaming_reach")
     worst_artists = ga.nsmallest(5, "streaming_reach")
     best_avg_tour = best_artists["n_tour_countries"].mean()
     worst_avg_tour = worst_artists["n_tour_countries"].mean()
 
+    if mean_sr >= 0.5:
+        sr_base = (
+            f"With an average Streaming Reach of <strong>{mean_sr:.1%}</strong>, "
+            f"artists typically visit at least half of their strongest listener markets on tour."
+        )
+    elif mean_sr >= 0.2:
+        sr_base = (
+            f"The average Streaming Reach of <strong>{mean_sr:.1%}</strong> means that artists "
+            f"visit only a minority of their strongest streaming countries live, "
+            f"pointing to noticeable untapped markets."
+        )
+    else:
+        sr_base = (
+            f"With an average Streaming Reach of only <strong>{mean_sr:.1%}</strong>, "
+            f"most top streaming countries remain unvisited on tour — "
+            f"indicating a large gap between where artists are heard and where they actually perform."
+        )
+
     if best_avg_tour > worst_avg_tour * 1.5:
         graph2_text = (
-            "Graph 2 revealed that the best-aligned artists tend to have notably broader "
-            "tour footprints — they visit more countries overall, which naturally increases "
-            "the chance of reaching their listener base. The worst-aligned artists show "
-            "a large purple bar (streaming presence) relative to their amber bar (tour countries), "
-            "indicating that their global audience far exceeds the reach of their live touring."
+            f"{sr_base} The artist comparison in Graph 2 shows that the best-aligned artists "
+            f"tend to tour in more countries overall, which naturally increases the chance of "
+            f"reaching their listener base. The worst-aligned artists consistently show a broad "
+            f"streaming presence with a far smaller tour footprint — their digital reach "
+            f"clearly outpaces their live activity."
         )
     elif worst_avg_tour > best_avg_tour * 1.5:
         graph2_text = (
-            "Graph 2 revealed a counter-intuitive pattern among the worst-aligned artists: "
-            "many of them actually tour in more countries than the best-aligned group, "
-            "but their extensive touring routes do not match where their listener demand is strongest. "
-            "This suggests these artists are building new audiences in unfamiliar markets "
-            "rather than serving existing ones."
+            f"{sr_base} Interestingly, Graph 2 shows that the worst-aligned artists often tour "
+            f"in just as many — or more — countries than the best-aligned group. Their misalignment "
+            f"is not due to touring too little, but to routing into countries where their listener "
+            f"presence is weak, suggesting a strategy of building new audiences rather than "
+            f"serving existing ones."
         )
     else:
         graph2_text = (
-            "Graph 2 showed that the difference between best- and worst-aligned artists is "
-            "not simply a matter of how many countries they tour in. The best-aligned artists "
-            "have a large overlap (green bar) relative to their streaming presence, while the "
-            "worst-aligned artists leave many of their listener countries unvisited — "
-            "regardless of the total size of their tour."
+            f"{sr_base} Graph 2 shows that the gap between best- and worst-aligned artists is "
+            f"not simply a matter of tour size — both groups visit a comparable number of countries. "
+            f"What sets them apart is whether those countries overlap with their actual listener base: "
+            f"the best-aligned artists have a large overlap between streaming presence and tour routing, "
+            f"while the worst-aligned leave many of their strongest listener countries unvisited."
         )
 else:
-    graph2_text = ""
-
-# ── Overall framing ───────────────────────────────────────────────────────
-if mean_wc >= 0.6:
-    overall_text = (
-        f"On average, artists cover <strong>{mean_wc:.1%}</strong> of their Last.fm listener reach "
-        f"through the countries they tour in — indicating a strong overall alignment between "
-        f"digital audience demand and live touring activity."
-    )
-elif mean_wc >= 0.3:
-    overall_text = (
-        f"On average, artists cover <strong>{mean_wc:.1%}</strong> of their Last.fm listener reach "
-        f"through the countries they tour in. This points to a moderate alignment: tours reflect "
-        f"listener demand to some extent, but a substantial share of listener reach remains "
-        f"outside the countries visited on tour."
-    )
-else:
-    overall_text = (
-        f"On average, artists cover only <strong>{mean_wc:.1%}</strong> of their Last.fm listener reach "
-        f"through the countries they tour in — indicating weak alignment between streaming geography "
-        f"and touring geography."
-    )
-
-if mean_sr >= 0.5:
-    reach_text = (
+    graph2_text = (
         f"With an average Streaming Reach of <strong>{mean_sr:.1%}</strong>, "
-        f"artists typically visit at least half of their strongest listener markets on tour. "
-        f"Most high-priority countries appear to be covered."
-    )
-elif mean_sr >= 0.2:
-    reach_text = (
-        f"The average Streaming Reach of <strong>{mean_sr:.1%}</strong> means that artists visit "
-        f"only a minority of their strongest streaming countries live — "
-        f"pointing to noticeable untapped markets."
-    )
-else:
-    reach_text = (
-        f"With an average Streaming Reach of only <strong>{mean_sr:.1%}</strong>, "
-        f"most top streaming countries remain unvisited on tour — "
-        f"indicating a large gap between where artists are heard and where they actually perform."
+        f"a relevant share of listener countries remains unreached by live touring."
     )
 
 st.markdown(f"""
 <div class="insight-card">
     <h4>🎯 Answer to Research Question 3</h4>
     <p>
-    {overall_text} The median artist aligns across 
-    <strong>{int(median_aligned) if pd.notna(median_aligned) else 0}</strong> countries 
-    between their streaming hotspots and their tour destinations.
-    {reach_text}
-    <br><br>
-    {graph1_text}
+    {overall_text}
     <br><br>
     {graph2_text}
     <br><br>
-    Overall, this suggests that touring is 
+    The median artist aligns across 
+    <strong>{int(median_aligned) if pd.notna(median_aligned) else 0}</strong> countries 
+    between their streaming hotspots and tour destinations. Overall, this suggests that touring is 
     <strong>{"strongly" if mean_wc >= 0.6 else "partly" if mean_wc >= 0.3 else "weakly"}</strong> 
     aligned with country-level listener reach — but for most artists, a relevant share of their 
     digital audience remains unreached by live performance.
+    </p>
+</div>
+""", unsafe_allow_html=True)
+
+st.markdown("""
+<div class="methodology-note">
+    <p>
+    <strong>Methodological note:</strong> This analysis compares an artist's Ticketmaster tour countries
+    with the countries where the artist shows the highest Last.fm listener presence.
+    Top streaming countries are defined using <strong>listener counts</strong>
+    (<code>listeners_in_country</code>), not rank positions. The main metric,
+    <strong>Weighted Coverage</strong>, measures how much of an artist's listener reach is covered
+    by their tour countries, while <strong>Streaming Reach</strong> shows how many of the strongest
+    listener countries are actually included in the tour. Since Last.fm listener values are platform-based
+    and not exact national audience totals, they should be interpreted as a
+    <strong>proxy for geographic audience strength</strong>, not as precise country listener counts.
     </p>
 </div>
 """, unsafe_allow_html=True)
