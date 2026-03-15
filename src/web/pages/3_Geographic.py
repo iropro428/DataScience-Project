@@ -770,6 +770,7 @@ with sc6_1:
             "pct_capital_cities": "% Capital Cities"
         }[x]
     )
+    log_x_sc6 = st.checkbox("Log X (listeners)", value=True, key="f6s_logx")
     sc6_lbls = st.checkbox("Show Names", value=False, key="f6s_lbl")
     sc6_min = st.slider("Min. Events", 1, 20, 3, key="f6s_min")
 
@@ -784,7 +785,7 @@ df_sc6["listeners"] = pd.to_numeric(df_sc6["listeners"], errors="coerce")
 df_sc6 = df_sc6.dropna(subset=["listeners"])
 
 if len(df_sc6) >= 5:
-    x_v = np.log10(df_sc6["listeners"] + 1)
+    x_v = np.log10(df_sc6["listeners"] + 1) if log_x_sc6 else df_sc6["listeners"]
     y_v = df_sc6[sc6_y]
 
     df_sc6["x_plot"] = x_v.values
@@ -794,11 +795,17 @@ if len(df_sc6) >= 5:
         "pct_capital": "% Capital Events",
         "pct_capital_cities": "% Capital Cities"
     }
+    x_label_sc6 = "log₁₀(Last.fm Listeners)" if log_x_sc6 else "Last.fm Listeners"
 
+    # --- Trend line for the plot (uses the currently selected x scale) ---
     coef = np.polyfit(df_sc6["x_plot"], df_sc6["y_plot"], 1)
     x_line = np.linspace(df_sc6["x_plot"].min(), df_sc6["x_plot"].max(), 200)
     y_line = np.polyval(coef, x_line)
-    slope = coef[0]
+
+    # --- Slope for interpretation (always computed on log listeners so text stays stable) ---
+    log_listeners = np.log10(df_sc6["listeners"] + 1)
+    coef_interp = np.polyfit(log_listeners, df_sc6[sc6_y], 1)
+    slope = coef_interp[0]
 
     fig_sc6 = px.scatter(
         df_sc6, x="x_plot", y="y_plot",
@@ -809,7 +816,7 @@ if len(df_sc6) >= 5:
         color_continuous_scale="RdYlGn",
         text="artist_name" if sc6_lbls else None,
         labels={
-            "x_plot": "log₁₀(Last.fm Listeners)",
+            "x_plot": x_label_sc6,
             "y_plot": y_lbl_map[sc6_y]
         },
         title=f"{y_lbl_map[sc6_y]} vs. Last.fm Listeners  |  n = {len(df_sc6)}",
@@ -1232,6 +1239,7 @@ with g1a:
         }[x],
         key="ga2_color"
     )
+    log_x_g1 = st.checkbox("Log X (listeners)", value=True, key="ga2_logx")
     show_labels_g1 = st.checkbox("Show Names", value=False, key="ga2_lbl")
 
 description_placeholder.markdown(
@@ -1243,20 +1251,34 @@ GA2_Y = "weighted_coverage" if "weighted_coverage" in ga.columns else "jaccard"
 GA2_Y_LABEL = "Geo-alignment score (listener-weighted)" if GA2_Y == "weighted_coverage" else "Jaccard Similarity"
 
 df_g1 = ga.dropna(subset=["listeners", GA2_Y]).copy()
+
+# x-axis toggle (log / linear)
+if log_x_g1:
+    df_g1["x_plot"] = np.log10(df_g1["listeners"] + 1)
+    x_label_g1 = "log₁₀(Last.fm Listeners)"
+else:
+    df_g1["x_plot"] = df_g1["listeners"]
+    x_label_g1 = "Last.fm Listeners"
+
+# log version kept for stable interpretation
 df_g1["log_listeners"] = np.log10(df_g1["listeners"] + 1)
 
-coef_g1 = np.polyfit(df_g1["log_listeners"], df_g1[GA2_Y], 1)
-x_line_g1 = np.linspace(df_g1["log_listeners"].min(), df_g1["log_listeners"].max(), 200)
+# trend line follows the displayed x scale
+coef_g1 = np.polyfit(df_g1["x_plot"], df_g1[GA2_Y], 1)
+x_line_g1 = np.linspace(df_g1["x_plot"].min(), df_g1["x_plot"].max(), 200)
 y_line_g1 = np.polyval(coef_g1, x_line_g1)
-slope_g1 = coef_g1[0]
+
+# slope for interpretation always based on log listeners
+coef_interp_g1 = np.polyfit(df_g1["log_listeners"], df_g1[GA2_Y], 1)
+slope_g1 = coef_interp_g1[0]
 
 fig_g1 = px.scatter(
-    df_g1, x="log_listeners", y=GA2_Y,
+    df_g1, x="x_plot", y=GA2_Y,
     color=color_by,
     color_continuous_scale="Viridis",
     hover_name="artist_name",
     hover_data={
-        "log_listeners": False,
+        "x_plot": False,
         "jaccard": ":.3f",
         "tour_coverage": ":.1%",
         "streaming_reach": ":.1%",
@@ -1266,7 +1288,7 @@ fig_g1 = px.scatter(
     },
     text="artist_name" if show_labels_g1 else None,
     labels={
-        "log_listeners": "log₁₀(Last.fm Listeners)",
+        "x_plot": x_label_g1,
         GA2_Y: GA2_Y_LABEL,
         "n_tour_countries": "Tour Countries",
     },
