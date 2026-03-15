@@ -1476,3 +1476,126 @@ st.divider()
 # ══════════════════════════════════════════════════════════════════════════
 # Summary Q3
 # ══════════════════════════════════════════════════════════════════════════
+st.markdown('<div class="section-title">Summary — Research Question 3: Listener Reach vs. Tour Geography</div>',
+            unsafe_allow_html=True)
+
+mean_wc = ga["weighted_coverage"].mean() if "weighted_coverage" in ga.columns else np.nan
+mean_sr = ga["streaming_reach"].mean() if "streaming_reach" in ga.columns else np.nan
+mean_tc = ga["tour_coverage"].mean() if "tour_coverage" in ga.columns else np.nan
+median_aligned = ga["n_aligned"].median() if "n_aligned" in ga.columns else np.nan
+
+# Optional: use correlation if already available through the scatter relationship
+corr_text = ""
+if {"listeners", "weighted_coverage"}.issubset(ga.columns):
+    corr_val = ga[["listeners", "weighted_coverage"]].corr().iloc[0, 1]
+    if pd.notna(corr_val):
+        if corr_val >= 0.3:
+            corr_text = (
+                "The scatter plot also suggests that more popular artists tend to show somewhat stronger "
+                "geographic alignment between listener reach and touring."
+            )
+        elif corr_val >= 0.1:
+            corr_text = (
+                "The scatter plot indicates only a weak positive relationship between overall popularity "
+                "and geographic tour alignment."
+            )
+        elif corr_val > -0.1:
+            corr_text = (
+                "The scatter plot suggests little to no clear relationship between overall popularity "
+                "and geographic tour alignment."
+            )
+        else:
+            corr_text = (
+                "The scatter plot suggests that higher popularity does not automatically translate into "
+                "better geographic tour alignment."
+            )
+
+if mean_wc >= 0.6:
+    overall_text = (
+        f"On average, artists cover <strong>{mean_wc:.1%}</strong> of their Last.fm listener reach "
+        f"through the countries they tour in. This indicates a strong geographic alignment between "
+        f"digital audience demand and live touring activity."
+    )
+elif mean_wc >= 0.3:
+    overall_text = (
+        f"On average, artists cover <strong>{mean_wc:.1%}</strong> of their Last.fm listener reach "
+        f"through the countries they tour in. This suggests a moderate level of alignment: tours reflect "
+        f"listener demand to some extent, but a substantial share of listener reach remains outside the "
+        f"countries visited on tour."
+    )
+else:
+    overall_text = (
+        f"On average, artists cover only <strong>{mean_wc:.1%}</strong> of their Last.fm listener reach "
+        f"through the countries they tour in. This points to weak alignment between streaming geography "
+        f"and touring geography."
+    )
+
+if mean_sr >= 0.5:
+    reach_text = (
+        f"The average <strong>Streaming Reach</strong> is <strong>{mean_sr:.1%}</strong>, meaning that artists "
+        f"tour in at least about half of their most important streaming countries. This suggests that most "
+        f"high-priority listener markets are already being reached live."
+    )
+elif mean_sr >= 0.2:
+    reach_text = (
+        f"The average <strong>Streaming Reach</strong> is <strong>{mean_sr:.1%}</strong>, meaning that artists "
+        f"tour in only a minority of their strongest streaming countries. Many countries with clear listener "
+        f"presence remain unvisited, pointing to noticeable untapped live markets."
+    )
+else:
+    reach_text = (
+        f"The average <strong>Streaming Reach</strong> is only <strong>{mean_sr:.1%}</strong>, meaning that most "
+        f"top streaming countries are not visited on tour. This points to a large gap between where artists are "
+        f"heard and where they actually perform."
+    )
+
+if mean_tc >= 0.6:
+    tour_text = (
+        f"At the same time, <strong>{mean_tc:.1%}</strong> of artists' tour countries are also among their key "
+        f"streaming countries, which suggests that tour routing is often focused on countries with existing audience demand."
+    )
+elif mean_tc >= 0.3:
+    tour_text = (
+        f"At the same time, <strong>{mean_tc:.1%}</strong> of artists' tour countries are also among their key "
+        f"streaming countries, suggesting a partial but not complete focus on existing listener markets."
+    )
+else:
+    tour_text = (
+        f"At the same time, only <strong>{mean_tc:.1%}</strong> of artists' tour countries overlap with their key "
+        f"streaming countries, suggesting that many tours are routed independently of where listener demand is strongest."
+    )
+
+st.markdown(f"""
+<div class="insight-card">
+    <h4>🎯 Answer to Research Question 3</h4>
+    <p>
+    {overall_text}
+    <br><br>
+    {reach_text}
+    <br><br>
+    {tour_text}
+    <br><br>
+    The median artist aligns with <strong>{int(median_aligned) if pd.notna(median_aligned) else 0}</strong>
+    countries between streaming hotspots and tour destinations. {corr_text}
+    Overall, this suggests that touring is
+    <strong>{"strongly" if mean_wc >= 0.6 else "partly" if mean_wc >= 0.3 else "weakly"}</strong>
+    aligned with country-level listener reach, but many artists still leave a relevant share of their digital audience uncovered in live touring.
+    </p>
+</div>
+""", unsafe_allow_html=True)
+
+st.markdown("""
+<div class="methodology-note">
+    <p>
+    <strong>Methodological note:</strong> This analysis compares an artist's Ticketmaster tour countries
+    with the countries where the artist shows the highest Last.fm listener presence.
+    Top streaming countries are defined using <strong>listener counts</strong>
+    (<code>listeners_in_country</code>), not rank positions. The main metric,
+    <strong>Weighted Coverage</strong>, measures how much of an artist's listener reach is covered
+    by their tour countries, while <strong>Streaming Reach</strong> shows how many of the strongest
+    listener countries are actually included in the tour. Since Last.fm listener values are platform-based
+    and not exact national audience totals, they should be interpreted as a
+    <strong>proxy for geographic audience strength</strong>, not as precise country listener counts.
+    </p>
+</div>
+""", unsafe_allow_html=True)
