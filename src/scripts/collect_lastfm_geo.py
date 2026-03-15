@@ -28,6 +28,10 @@ BASE_URL = "https://ws.audioscrobbler.com/2.0/"
 OUTPUT = Path("data/raw/lastfm_geo_presence.csv")
 LIMIT = 200  # Top-N artists per country
 DELAY = 0.25  # Seconds between requests to reduce rate-limit risks
+COUNTRY_NAME_MAP = {
+    "Great Britain": "United Kingdom",
+    "United States Of America": "United States",
+}
 
 
 def load_tour_countries() -> list:
@@ -72,12 +76,14 @@ def get_top_artists_for_country(country: str) -> list:
     Returns:
         List of tuples: (artist_name, rank, listeners_in_country)
     """
+    lastfm_country = COUNTRY_NAME_MAP.get(country, country)
+
     try:
         r = requests.get(
             BASE_URL,
             params={
                 "method": "geo.getTopArtists",
-                "country": country,
+                "country": lastfm_country,
                 "limit": LIMIT,
                 "api_key": LASTFM_KEY,
                 "format": "json",
@@ -87,9 +93,8 @@ def get_top_artists_for_country(country: str) -> list:
         r.raise_for_status()
         data = r.json()
 
-        # Last.fm sometimes returns API-level errors in the JSON body
         if "error" in data:
-            print(f"{country}: Last.fm error {data['error']} — {data.get('message', '')}")
+            print(f"{country} -> {lastfm_country}: Last.fm error {data['error']} — {data.get('message', '')}")
             return []
 
         artists = data.get("topartists", {}).get("artist", [])
@@ -108,7 +113,7 @@ def get_top_artists_for_country(country: str) -> list:
         return result
 
     except Exception as e:
-        print(f"{country}: {e}")
+        print(f"{country} -> {lastfm_country}: {e}")
         return []
 
 
