@@ -115,7 +115,7 @@ for col, icon, title, color, border, bg, desc, qs, page in [
                     Research Questions
                 </div>
                 {''.join(f"""<div style="display:flex;align-items:center;gap:8px;margin-bottom:7px;">
-                    <span style="background:{color}22;color:{color} !important;
+                    <span style="background:#818cf822;color:#818cf8 !important;
                         border-radius:50%;width:22px;height:22px;display:flex;
                         align-items:center;justify-content:center;
                         font-size:0.8rem;font-weight:700;flex-shrink:0;">{i + 1}</span>
