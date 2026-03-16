@@ -38,6 +38,7 @@ NAV_CSS = """
     top: 0;
     z-index: 999;
 }
+
 .navbar-brand {
     font-size: 1rem;
     font-weight: 800;
@@ -61,29 +62,32 @@ div[data-testid="stHorizontalBlock"] [data-testid="stPageLink"] a {
     align-items: center !important;
     justify-content: center !important;
     height: 56px !important;
-    padding: 10px 16px !important;
+    padding: 10px 20px !important;
     border-radius: 0 !important;
     border: none !important;
     background: transparent !important;
     color: #94a3b8 !important;
-    font-size: 0.875rem !important;
+    font-size: 1rem !important;
     font-weight: 500 !important;
-    white-space: nowrap;
+    white-space: nowrap !important;
     transition: all 0.15s ease !important;
     border-bottom: 2px solid transparent !important;
     text-decoration: none !important;
 }
+
 div[data-testid="stHorizontalBlock"] [data-testid="stPageLink"] a:hover {
     color: #f1f5f9 !important;
     background: rgba(99,102,241,0.06) !important;
     border-bottom: 2px solid #6366f1 !important;
 }
+
 div[data-testid="stHorizontalBlock"] [data-testid="stPageLink"] a[aria-current="page"] {
     color: #818cf8 !important;
     border-bottom: 2px solid #6366f1 !important;
     font-weight: 600 !important;
     background: rgba(99,102,241,0.06) !important;
 }
+
 /* About Us extra Styling (letzter Punkt) */
 div[data-testid="stHorizontalBlock"] [data-testid="stPageLink"]:last-child a {
     color: #818cf8 !important;
@@ -92,24 +96,33 @@ div[data-testid="stHorizontalBlock"] [data-testid="stPageLink"]:last-child a {
 div[data-testid="stHorizontalBlock"] [data-testid="stPageLink"]:last-child a:hover {
     color: #a5b4fc !important;
 }
+
+/* Navbar Items volle Breite verteilen */
+div[data-testid="stHorizontalBlock"] {
+    gap: 0 !important;
+    width: 100% !important;
+}
+
+div[data-testid="stHorizontalBlock"] > div[data-testid="stColumn"] {
+    flex: 1 1 auto !important;
+    min-width: fit-content !important;
+}
 </style>
 """
-
 
 def render_navbar():
     """Rendert die horizontale Navbar. Ersetzt render_nav()."""
     st.markdown(NAV_CSS, unsafe_allow_html=True)
 
-    # Brand-Link (klickbar → Home) + Nav-Items
     st.markdown("""
     <div class="navbar-wrapper">
         <a class="navbar-brand" href="/">&#127925; From Streams to Stages</a>
     </div>
     """, unsafe_allow_html=True)
 
-    # Nav-Items als Columns (direkt nach dem Brand-Bar)
-    cols = st.columns([1] * len(PAGES) + [4])  # letzter leerer Spacer
+    cols = st.columns([2, 2, 2, 1, 1, 3])
     for i, page in enumerate(PAGES):
         with cols[i]:
             st.page_link(page["page"], label=f"{page['icon']} {page['label']}")
+
     st.markdown('<hr style="margin: 0 0 1.5rem 0; border-color: #232840;">', unsafe_allow_html=True)
