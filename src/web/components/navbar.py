@@ -104,7 +104,7 @@ def render_navbar():
     </div>
     """, unsafe_allow_html=True)
 
-    cols = st.columns([2, 2, 2, 1, 1, 1])
+    cols = st.columns(6)
     for i, page in enumerate(PAGES):
         with cols[i]:
             st.page_link(page["page"], label=f"{page['icon']} {page['label']}")
