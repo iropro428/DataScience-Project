@@ -364,7 +364,7 @@ try:
         customdata=grouped[["n_artists", "avg_listeners"]].values,
         hovertemplate=(
             "<b>Group %{x}</b><br>"
-            f"{agg} events: %{{y:.1f}}<br>"
+            f"{agg}: %{{y:.1f}}<br>"
             "Artists: %{customdata[0]}<br>"
             "Avg. listeners: %{customdata[1]:,.0f}<extra></extra>"
         )
