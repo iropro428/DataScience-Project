@@ -169,8 +169,8 @@ code { background:var(--surface2) !important; color:var(--primary-l) !important;
 .page-header p { color:var(--text-m) !important; margin:0 !important; font-size:1.1rem !important; }
 
 .rq-box { background:linear-gradient(135deg,#4f58b0 0%,#bbc0c9 100%); border:1px solid var(--primary-d); border-radius:var(--r); padding:16px 20px; margin-bottom:22px; }
-.rq-box h3 { color:var(--primary-l) !important; margin:0 0 6px 0 !important; font-size:1.3rem !important; text-transform:uppercase !important; letter-spacing:.12em !important; font-weight:700 !important; }
-.rq-box p { color:var(--text) !important; margin:0 !important; font-size:1rem !important; font-weight:500 !important; line-height:1.5 !important; }
+.rq-box h3 { color:var(--primary-l) !important; margin:0 0 6px 0 !important; font-size:1.4rem !important; text-transform:uppercase !important; letter-spacing:.12em !important; font-weight:700 !important; }
+.rq-box p { color:var(--text) !important; margin:0 !important; font-size:1.1rem !important; font-weight:500 !important; line-height:1.5 !important; }
 
 .section-title { font-size:1.2rem !important; font-weight:700 !important; color:var(--text) !important; margin:26px 0 10px 0 !important; padding-bottom:8px !important; border-bottom:1px solid var(--border) !important; }
 
