@@ -84,7 +84,7 @@ for col, icon, title, color, border, bg, desc, qs, page in [
     (
         c2, "🗺️",
         "Geographic Analysis",
-        "#fbbf24", "#3d3010", "#1a1500",
+        "#fbbf24", "#2e3557", "#12153a",
         "Where do artists go on tour — and does this align with their geographic streaming popularity? "
         "We analyse whether artists revisit cities, how many concerts take place in capital cities, "
         "and how well streaming countries and tour countries overlap.",
@@ -94,7 +94,7 @@ for col, icon, title, color, border, bg, desc, qs, page in [
     (
         c3, "📅",
         "Market Time & Scheduling",
-        "#10b981", "#0d3020", "#051a10",
+        "#10b981", "#2e3557", "#12153a",
         "When and how do artists plan their shows? We examine the number of days between "
         "performances, whether more popular artists play more frequently on weekends, "
         "and how far in advance tickets go on sale relative to artist popularity.",
