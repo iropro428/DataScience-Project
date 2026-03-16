@@ -54,54 +54,12 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-# ── Data Sources ───────────────────────────────────────────────────────────
-st.markdown('<div class="section-title">📡 Data Sources</div>', unsafe_allow_html=True)
-
-sources = [
-    {
-        "icon": "🎧",
-        "name": "Last.fm API",
-        "desc": "Listener counts, play counts, top tracks, and geographic popularity per country"
-    },
-    {
-        "icon": "🎟️",
-        "name": "Ticketmaster API",
-        "desc": "Concert data including cities, countries, dates, and capital city status (2023–2026)"
-    },
-    {
-        "icon": "🌍",
-        "name": "RestCountries",
-        "desc": "Country information dataset providing capital city data for all countries worldwide, used in the capital city analysis"
-    },
-    {
-        "icon": "🗺️",
-        "name": "Spotify Chart Data",
-        "desc": "Weekly chart data from February 2023 to February 2026, used for chart artist classification"
-    },
-]
-
-s_cols = st.columns(2)
-for i, src in enumerate(sources):
-    with s_cols[i % 2]:
-        st.markdown(f"""
-        <div class="insight-card" style="margin-bottom:12px; min-height:140px;">
-            <h4 style="font-size:1.2rem;">{src['icon']} {src['name']}</h4>
-            <p style="font-size:0.9rem;">{src['desc']}</p>
-        </div>
-        """, unsafe_allow_html=True)
-
-st.markdown("<br>", unsafe_allow_html=True)
-
-# ── Data Collection Note ───────────────────────────────────────────────────
 st.markdown("""
 <div class="methodology-note">
     <p>
-    <strong>Note on data collection:</strong>
-    The original project plan included the use of the Spotify Web API (followers, popularity score).
-    However, due to API access restrictions introduced in February 2026 that removed these fields
-    in Development Mode, <strong>Last.fm listener counts and play counts</strong> were used
-    as alternative popularity proxies. Last.fm metrics are widely used in academic music research
-    and have been shown to correlate strongly with cross-platform popularity indicators.
+    For a full overview of the data sources used in this project, including collection methods
+    and field descriptions, visit the
+    <strong><a href="/Data" target="_self" style="color:#818cf8;">🗄️ Data page</a></strong>.
     </p>
 </div>
 """, unsafe_allow_html=True)
