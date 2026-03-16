@@ -165,8 +165,8 @@ code { background:var(--surface2) !important; color:var(--primary-l) !important;
 }
 .page-header::before { content:''; position:absolute; top:0; left:0; width:4px; height:100%; background:linear-gradient(180deg,var(--primary),var(--accent)); }
 .page-header::after  { content:''; position:absolute; top:-50px; right:-50px; width:200px; height:200px; background:radial-gradient(circle,rgba(99,102,241,.07) 0%,transparent 70%); pointer-events:none; }
-.page-header h1 { color:var(--text) !important; font-size:2.4rem !important; font-weight:800 !important; margin:0 0 6px 0 !important; background:linear-gradient(90deg,var(--primary-l) 0%,var(--accent-l) 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
-.page-header p { color:var(--text-m) !important; margin:0 !important; font-size:1.3rem !important; }
+.page-header h1 { color:var(--text) !important; font-size:2.2rem !important; font-weight:800 !important; margin:0 0 6px 0 !important; background:linear-gradient(90deg,var(--primary-l) 0%,var(--accent-l) 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.page-header p { color:var(--text-m) !important; margin:0 !important; font-size:1.1rem !important; }
 
 .rq-box { background:linear-gradient(135deg,#4f58b0 0%,#bbc0c9 100%); border:1px solid var(--primary-d); border-radius:var(--r); padding:16px 20px; margin-bottom:22px; }
 .rq-box h3 { color:var(--primary-l) !important; margin:0 0 6px 0 !important; font-size:1.4rem !important; text-transform:uppercase !important; letter-spacing:.12em !important; font-weight:700 !important; }
