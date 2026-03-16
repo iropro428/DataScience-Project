@@ -64,7 +64,7 @@ div[data-testid="stHorizontalBlock"] [data-testid="stPageLink"] a {
     border: none !important;
     background: transparent !important;
     color: #94a3b8 !important;
-    font-size: 1.3rem !important;
+    font-size: 1rem !important;
     font-weight: 500 !important;
     white-space: nowrap !important;
     transition: all 0.15s ease !important;
@@ -104,7 +104,7 @@ def render_navbar():
     </div>
     """, unsafe_allow_html=True)
 
-    cols = st.columns(6)
+    cols = st.columns([3, 2, 3, 1, 1, 1])
     for i, page in enumerate(PAGES):
         with cols[i]:
             st.page_link(page["page"], label=f"{page['icon']} {page['label']}")
