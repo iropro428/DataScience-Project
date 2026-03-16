@@ -67,12 +67,20 @@ div[data-testid="stHorizontalBlock"] [data-testid="stPageLink"] a {
     border: none !important;
     background: transparent !important;
     color: #94a3b8 !important;
-    font-size: 1.5rem !important;
-    font-weight: 700 !important;
+    font-size: 1.6rem !important;
+    font-weight: 800 !important;
     white-space: nowrap !important;
     transition: all 0.15s ease !important;
     border-bottom: 2px solid transparent !important;
     text-decoration: none !important;
+}
+
+/* Erzwinge fett auf alle inneren Elemente */
+div[data-testid="stHorizontalBlock"] [data-testid="stPageLink"] a p,
+div[data-testid="stHorizontalBlock"] [data-testid="stPageLink"] a span,
+div[data-testid="stHorizontalBlock"] [data-testid="stPageLink"] p {
+    font-weight: 800 !important;
+    font-size: 1.6rem !important;
 }
 
 div[data-testid="stHorizontalBlock"] [data-testid="stPageLink"] a:hover {
@@ -84,7 +92,7 @@ div[data-testid="stHorizontalBlock"] [data-testid="stPageLink"] a:hover {
 div[data-testid="stHorizontalBlock"] [data-testid="stPageLink"] a[aria-current="page"] {
     color: #818cf8 !important;
     border-bottom: 2px solid #6366f1 !important;
-    font-weight: 700 !important;
+    font-weight: 800 !important;
     background: rgba(99,102,241,0.06) !important;
 }
 
@@ -120,9 +128,11 @@ def render_navbar():
     </div>
     """, unsafe_allow_html=True)
 
-    cols = st.columns([2, 2, 2, 1, 1, 3])
-    for i, page in enumerate(PAGES):
-        with cols[i]:
-            st.page_link(page["page"], label=f"{page['icon']} {page['label']}")
+    nav_container = st.container()
+    with nav_container:
+        cols = st.columns([2, 2, 2, 1, 1, 3])
+        for i, page in enumerate(PAGES):
+            with cols[i]:
+                st.page_link(page["page"], label=f"{page['icon']} {page['label']}")
 
     st.markdown('<hr style="margin: 0 0 1.5rem 0; border-color: #232840;">', unsafe_allow_html=True)
