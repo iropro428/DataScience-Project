@@ -104,8 +104,8 @@ p,li,span,label,div { color:var(--text-m) !important; font-size:1rem !important;
 strong { color:var(--text) !important; }
 
 /* Fließtext in st.markdown */
-.stMarkdown p { font-size:1rem !important; line-height:1.75 !important; }
-.stMarkdown li { font-size:1rem !important; line-height:1.75 !important; }
+.stMarkdown p { font-size:1.1rem !important; line-height:1.8 !important; }
+.stMarkdown li { font-size:1.1rem !important; line-height:1.8 !important; }
 
 /* WIDGETS */
 [data-testid="stSelectbox"]>div>div,
@@ -178,15 +178,15 @@ code { background:var(--surface2) !important; color:var(--primary-l) !important;
 .page-header p { color:var(--text-m) !important; margin:0 !important; font-size:1.1rem !important; }
 
 .rq-box { background:linear-gradient(135deg,#4f58b0 0%,#bbc0c9 100%); border:1px solid var(--primary-d); border-radius:var(--r); padding:16px 20px; margin-bottom:22px; }
-.rq-box h3 { color:var(--primary-l) !important; margin:0 0 6px 0 !important; font-size:1.4rem !important; text-transform:uppercase !important; letter-spacing:.12em !important; font-weight:700 !important; }
-.rq-box p { color:var(--text) !important; margin:0 !important; font-size:1.1rem !important; font-weight:500 !important; line-height:1.5 !important; }
+.rq-box h3 { color:var(--primary-l) !important; margin:0 0 6px 0 !important; font-size:1.5rem !important; text-transform:uppercase !important; letter-spacing:.12em !important; font-weight:700 !important; }
+.rq-box p { color:var(--text) !important; margin:0 !important; font-size:1.2rem !important; font-weight:500 !important; line-height:1.5 !important; }
 
 .section-title { font-size:1.3rem !important; font-weight:700 !important; color:var(--text) !important; margin:26px 0 10px 0 !important; padding-bottom:8px !important; border-bottom:1px solid var(--border) !important; }
 
 .insight-card { background:var(--surface2); border:1px solid var(--border); border-radius:var(--r); padding:14px 18px; margin-bottom:10px; border-left:3px solid var(--primary); transition:var(--t); }
 .insight-card:hover { border-color:var(--border2); }
-.insight-card h4 { color:var(--primary-l) !important; margin:0 0 6px 0 !important; font-size:0.8rem !important; text-transform:uppercase !important; letter-spacing:.08em !important; font-weight:700 !important; }
-.insight-card p { color:var(--text-m) !important; margin:0 !important; font-size:1rem !important; line-height:1.65 !important; }
+.insight-card h4 { color:var(--primary-l) !important; margin:0 0 6px 0 !important; font-size:1.1rem !important; text-transform:uppercase !important; letter-spacing:.08em !important; font-weight:700 !important; }
+.insight-card p { color:var(--text-m) !important; margin:0 !important; font-size:1.1rem !important; line-height:1.65 !important; }
 
 .methodology-note { background:var(--surface); border:1px solid var(--border); border-radius:var(--r); padding:12px 16px; margin-top:12px; }
 .methodology-note p { color:var(--text-d) !important; font-size:0.9rem !important; margin:0 !important; font-style:italic; line-height:1.6 !important; }
