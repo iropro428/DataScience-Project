@@ -34,7 +34,7 @@ st.markdown("""
 st.markdown("""
 <div style="background:#161c2d;border:1px solid #232840;border-radius:14px;
     padding:24px 28px;margin-bottom:28px;">
-    <div style="font-size:0.8rem;font-weight:700;text-transform:uppercase;
+    <div style="font-size:1rem;font-weight:700;text-transform:uppercase;
         letter-spacing:.12em;color:#475569 !important;margin-bottom:14px;">
         Table of contents — Research questions
     </div>
