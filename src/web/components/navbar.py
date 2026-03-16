@@ -8,23 +8,21 @@ PAGES = [
     {"label": "Streaming & Ticket Power", "page": "pages/2_Streaming_Ticket.py", "icon": "🎟️"},
     {"label": "Geographic Analysis", "page": "pages/3_Geographic.py", "icon": "🗺️"},
     {"label": "Market Time & Scheduling", "page": "pages/4_Scheduling.py", "icon": "📅"},
+    {"label": "Data", "page": "pages/7_Data.py", "icon": "🗄️"},
     {"label": "Glossary", "page": "pages/5_Glossar.py", "icon": "📖"},
     {"label": "About Us", "page": "pages/6_About.py", "icon": "👥"},
 ]
 
 NAV_CSS = """
 <style>
-/* Sidebar komplett ausblenden */
 [data-testid="stSidebar"]        { display: none !important; }
 [data-testid="collapsedControl"] { display: none !important; }
 
-/* Hauptinhalt nimmt volle Breite */
 .main .block-container {
     padding-top: 0.5rem !important;
     max-width: 1600px !important;
 }
 
-/* Navbar-Wrapper */
 .navbar-wrapper {
     display: flex;
     align-items: center;
@@ -56,7 +54,6 @@ NAV_CSS = """
 }
 .navbar-brand:hover { opacity: 0.85; }
 
-/* page_link Items in Navbar */
 div[data-testid="stHorizontalBlock"] [data-testid="stPageLink"] a {
     display: flex !important;
     align-items: center !important;
@@ -88,7 +85,6 @@ div[data-testid="stHorizontalBlock"] [data-testid="stPageLink"] a[aria-current="
     background: rgba(99,102,241,0.06) !important;
 }
 
-/* About Us extra Styling (letzter Punkt) */
 div[data-testid="stHorizontalBlock"] [data-testid="stPageLink"]:last-child a {
     color: #818cf8 !important;
     margin-left: 8px;
@@ -100,7 +96,6 @@ div[data-testid="stHorizontalBlock"] [data-testid="stPageLink"]:last-child a:hov
 """
 
 def render_navbar():
-    """Rendert die horizontale Navbar. Ersetzt render_nav()."""
     st.markdown(NAV_CSS, unsafe_allow_html=True)
 
     st.markdown("""
@@ -109,8 +104,7 @@ def render_navbar():
     </div>
     """, unsafe_allow_html=True)
 
-    # Gleiche Breite für alle Nav-Items, kein Spacer damit sie sich ausdehnen
-    cols = st.columns([2, 2, 2, 1, 1])
+    cols = st.columns([2, 2, 2, 1, 1, 1])
     for i, page in enumerate(PAGES):
         with cols[i]:
             st.page_link(page["page"], label=f"{page['icon']} {page['label']}")
