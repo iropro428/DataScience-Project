@@ -172,7 +172,7 @@ code { background:var(--surface2) !important; color:var(--primary-l) !important;
 .rq-box h3 { color:var(--primary-l) !important; margin:0 0 6px 0 !important; font-size:1.4rem !important; text-transform:uppercase !important; letter-spacing:.12em !important; font-weight:700 !important; }
 .rq-box p { color:var(--text) !important; margin:0 !important; font-size:1.1rem !important; font-weight:500 !important; line-height:1.5 !important; }
 
-.section-title { font-size:1.2rem !important; font-weight:700 !important; color:var(--text) !important; margin:26px 0 10px 0 !important; padding-bottom:8px !important; border-bottom:1px solid var(--border) !important; }
+.section-title { font-size:1.3rem !important; font-weight:700 !important; color:var(--text) !important; margin:26px 0 10px 0 !important; padding-bottom:8px !important; border-bottom:1px solid var(--border) !important; }
 
 .insight-card { background:var(--surface2); border:1px solid var(--border); border-radius:var(--r); padding:14px 18px; margin-bottom:10px; border-left:3px solid var(--primary); transition:var(--t); }
 .insight-card:hover { border-color:var(--border2); }
