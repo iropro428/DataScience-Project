@@ -32,7 +32,7 @@ NAV_CSS = """
     background: #0f1320;
     border-bottom: 1px solid #232840;
     padding: 0 24px;
-    height: 56px;
+    height: 64px;
     margin: -0.5rem -2.5rem 2rem -2.5rem;
     position: sticky;
     top: 0;
@@ -40,7 +40,7 @@ NAV_CSS = """
 }
 
 .navbar-brand {
-    font-size: 1rem;
+    font-size: 1.1rem;
     font-weight: 800;
     background: linear-gradient(90deg, #818cf8, #fbbf24);
     -webkit-background-clip: text;
@@ -52,7 +52,7 @@ NAV_CSS = """
     margin-right: 12px;
     border-right: 1px solid #232840;
     text-decoration: none;
-    line-height: 56px;
+    line-height: 64px;
 }
 .navbar-brand:hover { opacity: 0.85; }
 
@@ -61,13 +61,13 @@ div[data-testid="stHorizontalBlock"] [data-testid="stPageLink"] a {
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    height: 56px !important;
+    height: 64px !important;
     padding: 10px 20px !important;
     border-radius: 0 !important;
     border: none !important;
     background: transparent !important;
     color: #94a3b8 !important;
-    font-size: 1rem !important;
+    font-size: 1.25rem !important;
     font-weight: 500 !important;
     white-space: nowrap !important;
     transition: all 0.15s ease !important;
