@@ -175,6 +175,7 @@ else:
     m1c.metric("Median days between shows", f"{median_days_between_q1:.1f}" if median_days_between_q1 is not None else "—")
     m1d.metric("Median concerts per artist", f"{median_concerts_per_artist_q1:.0f}" if median_concerts_per_artist_q1 is not None else "—")
 
+    st.divider()
     # Graph 1a: Scatterplot
     st.markdown(
         '<div class="section-title">📈 Graph 1 — Listeners vs. days between shows</div>',
@@ -245,7 +246,7 @@ else:
         else:
             relationship_text_1 = f"a strong {'positive' if r1_plot > 0 else 'negative'} relationship"
 
-        # OLS line based on filtered data
+        # Trend line based on filtered data
         coef1_plot = np.polyfit(df1_plot["x_plot"], df1_plot[col_f1], 1)
         x_line1_plot = np.linspace(df1_plot["x_plot"].min(), df1_plot["x_plot"].max(), 200)
         y_line1_plot = np.polyval(coef1_plot, x_line1_plot)
@@ -356,7 +357,8 @@ else:
 
     else:
         st.warning("Too few data points after filtering to compute a reliable correlation.")
-
+    
+    st.divider()
     # ── Graph 1b: Box Plot by tier ─────────────────────────────────────────
     st.markdown(
         '<div class="section-title">📦 Graph 2 — Days between shows by popularity tier</div>',
@@ -531,9 +533,11 @@ else:
     </div>
     """, unsafe_allow_html=True)
 
+
+    st.divider()
     # Summary: Research Question 1
     st.markdown(
-        '<div class="section-title">Summary — Research Question 1</div>',
+        '<div class="section-title">Summary — Research Question 1: Days between shows</div>',
         unsafe_allow_html=True
     )
 
@@ -627,6 +631,7 @@ else:
     m2c.metric("Median weekend share", f"{median_weekend_share_q2:.1f}%" if median_weekend_share_q2 is not None else "—")
     m2d.metric("Median concerts per artist", f"{median_concerts_per_artist_q2:.0f}" if median_concerts_per_artist_q2 is not None else "—")
 
+    st.divider()
     # Graph 2a: Scatterplot
     st.markdown(
         '<div class="section-title">📈 Graph 1 — Playcount vs. weekend share</div>',
@@ -701,7 +706,7 @@ else:
         else:
             relationship_text_2 = f"a strong {'positive' if r2_plot > 0 else 'negative'} relationship"
 
-        # OLS line
+        # trend line
         coef2_plot = np.polyfit(df2_plot["x_plot"], df2_plot[col_f2_y], 1)
         x_line2_plot = np.linspace(df2_plot["x_plot"].min(), df2_plot["x_plot"].max(), 200)
         y_line2_plot = np.polyval(coef2_plot, x_line2_plot)
@@ -795,6 +800,7 @@ else:
     else:
         st.warning("Too few data points to compute a reliable correlation.")
 
+    st.divider()
     # Graph 2b: Histogram of weekend share
     st.markdown(
         '<div class="section-title">📊 Graph 2 — Distribution of weekend share</div>',
@@ -945,9 +951,10 @@ else:
 </div>
 """, unsafe_allow_html=True)
 
+    st.divider()
     # Summary: Research Question 2
     st.markdown(
-        '<div class="section-title">Summary — Research Question 2</div>',
+        '<div class="section-title">Summary — Research Question 2: Weekend share</div>',
         unsafe_allow_html=True
     )
 
@@ -1050,6 +1057,7 @@ else:
         m3c.metric("Median lead time (days)", f"{median_lead_time_q3:.0f}" if median_lead_time_q3 is not None else "—")
         m3d.metric("Median concerts per artist", f"{median_concerts_per_artist_q3:.0f}" if median_concerts_per_artist_q3 is not None else "—")
 
+        st.divider()
         # Graph 3a: Scatterplot
         st.markdown(
             '<div class="section-title">📈 Graph 1 — Listeners vs. lead time</div>',
@@ -1197,6 +1205,7 @@ else:
         else:
             st.warning("Too few data points after filtering to compute a reliable correlation.")
 
+        st.divider()
         # Graph 3b: Box Plot by tier
         st.markdown(
             '<div class="section-title">📦 Graph 2 — Lead time by popularity tier</div>',
@@ -1358,9 +1367,10 @@ else:
         </div>
         """, unsafe_allow_html=True)
 
+        st.divider()
         # Summary: Research Question 3
         st.markdown(
-            '<div class="section-title">Summary — Research Question 3</div>',
+            '<div class="section-title">Summary — Research Question 3: Lead time</div>',
             unsafe_allow_html=True
         )
 

@@ -361,7 +361,7 @@ G_LBLS = {
     4: ["Small", "Medium", "Large", "Very Large"],
     5: ["Mini", "Small", "Medium", "Large", "Very Large"]
 }[n_grp]
-G_COLORS = ["#2e86c1", "#1a9850", "#1DB954", "#52BE80", "#A9DFBF"]
+G_COLORS = ["#52BE80", "#1DB954", "#1a9850", "#0B6B3A"]
 
 try:
     df_bx["grp"] = pd.qcut(df_bx["total_events"], q=n_grp,

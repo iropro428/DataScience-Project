@@ -123,7 +123,7 @@ st.markdown(
 
 st.markdown("""
 <div class="rq-box" style="margin-top: 28px;">
-    <h3>🔬 Research Question 1</h3>
+    <h3>🎟️ Research Question 1</h3>
     <p>How does the number of Last.fm listeners correlate with the scale of an artist's tour,
     measured by the number of events scheduled?</p>
 </div>
@@ -131,10 +131,11 @@ st.markdown("""
 
 st.markdown("""
 **What are we measuring?**
-We examine whether artists with more Last.fm listeners also tend to have larger tours. Digital popularity is measured using the current number of Last.fm listeners. Tour scale is measured as the total number of Ticketmaster events found for each artist between 2022 and 2026.
+We examine whether artists with more Last.fm listeners also tend to have larger tours. Digital popularity is measured using the current number of Last.fm listeners. Tour scale is measured as the total number of Ticketmaster events found for each artist between 2022 and 2026.<br>
+<br>
 **Why is this relevant?**
 If digital reach is associated with more live events, this suggests that online popularity may be a useful indicator of real-world live demand.
-""")
+""", unsafe_allow_html=True)
 
 st.divider()
 
@@ -471,14 +472,16 @@ with hb:
         x=med,
         line=dict(color="#00d4ff", width=2, dash="dash"),
         annotation_text=f"Median: {10 ** med:,.0f}" if log_x else f"Median: {med:,.0f}",
-        annotation_font_color="#00d4ff"
+        annotation_font_color="#00d4ff",
+        annotation_position="top left",
+        annotation_yshift=10
     )
     fig3.add_vline(
         x=avg,
         line=dict(color="#ff8c00", width=2, dash="dot"),
         annotation_text=f"Mean: {10 ** avg:,.0f}" if log_x else f"Mean: {avg:,.0f}",
         annotation_font_color="#ff8c00",
-        annotation_position="top left"
+        annotation_position="top right"
     )
     fig3.update_layout(
         title="Distribution of Last.fm listeners across all artists",
@@ -540,7 +543,7 @@ st.markdown('<div id="frage-2"></div>', unsafe_allow_html=True)
 
 st.divider()
 st.markdown("""<div class="rq-box">
-    <h3>🔬 Research Question 2</h3>
+    <h3>🎟️ Research Question 2</h3>
     <p>How does the concentration of an artist's streaming activity on a few top tracks
     relate to the intensity of their touring, measured by total events?</p>
 </div>""", unsafe_allow_html=True)
@@ -765,9 +768,9 @@ df2b = df2.dropna(subset=["top5_share", "total_events"]).copy()
 
 try:
     cat_labels = {
-        3: ["🟢 Broad\nrepertoire", "🟡 Moderately\nconcentrated", "🔴 Highly\nconcentrated"],
-        4: ["🟢 Broad", "🟡 Moderate", "🟠 Focused", "🔴 Concentrated"],
-        5: ["🟢 Very broad", "🟢 Broad", "🟡 Moderate", "🟠 Focused", "🔴 Concentrated"],
+        3: ["🟢 Broad\nrepertoire", "🔵 Moderately\nconcentrated", "🟡 Highly\nconcentrated"],
+        4: ["🟢 Broad", "🔵 Moderate", "🟡 Focused", "🔴 Concentrated"],
+        5: ["🟢 Very broad", "🔵 Broad", "🟡 Moderate", "🟠 Focused", "🔴 Concentrated"],
     }[n_cats]
 
     df2b["cat"] = pd.qcut(
@@ -1067,7 +1070,7 @@ st.markdown('<div id="frage-3"></div>', unsafe_allow_html=True)
 
 st.divider()
 st.markdown("""<div class="rq-box">
-    <h3>🔬 Research Question 3</h3>
+    <h3>🎟️ Research Question 3</h3>
     <p>How do current Last.fm listener counts differ between artists who appeared
     in Spotify Weekly Charts (Feb&nbsp;2023–Feb&nbsp;2026) and those who did not?</p>
 </div>""", unsafe_allow_html=True)
