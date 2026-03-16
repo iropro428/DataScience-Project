@@ -26,7 +26,10 @@ apply_glossary_styles()
 # Header
 st.markdown("""
 <div class="page-header">
-    <h1 style="font-size:3.5rem !important;">🎟️ Streaming &amp; Ticket Power</h1>
+    <div class="page-header-title-row">
+        <span class="page-header-icon">🎟️</span>
+        <span class="page-header-title">Streaming &amp; Ticket Power</span>
+    </div>
     <p>How strongly is digital popularity on Last.fm related to the scale and intensity of touring?</p>
 </div>
 """, unsafe_allow_html=True)

@@ -28,7 +28,10 @@ apply_glossary_styles()
 # Header
 st.markdown("""
 <div class="page-header">
-    <h1>🗺️ Geographic Analysis</h1>
+    <div class="page-header-title-row">
+        <span class="page-header-icon">🗺️</span>
+        <span class="page-header-title">Geographic Analysis</span>
+    </div>
     <p>Analysing touring patterns: revisit cities, capital preferences, and alignment between streaming reach and tour geography.</p>
 </div>
 """, unsafe_allow_html=True)

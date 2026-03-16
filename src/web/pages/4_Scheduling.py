@@ -50,7 +50,10 @@ df = load_data()
 # Header
 st.markdown("""
 <div class="page-header">
-    <h1>📅 Market Time &amp; Scheduling</h1>
+    <div class="page-header-title-row">
+        <span class="page-header-icon">📅</span>
+        <span class="page-header-title">Market Time &amp; Scheduling</span>
+    </div>
     <p>How do artists plan their tours and is the structure of concert scheduling
     related to their digital popularity?</p>
 </div>
