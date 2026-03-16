@@ -1126,14 +1126,6 @@ st.markdown("""
 
 st.markdown("""
 **Definitions**
-
-| Term | Meaning |
-|------|---------|
-| **Weighted Coverage** | The share of an artist's total Last.fm listener reach that is covered by their tour countries — the main metric of this analysis. An artist with 80% of their listeners in countries they tour in has a Weighted Coverage of 0.8 |
-| **Streaming Reach** | The share of an artist's top streaming countries that are also visited on tour. A low value indicates untapped markets — countries with listeners but no live presence |
-
-**Hypothesis:** Artists tend to perform in countries where their Last.fm listener counts are highest —
-tour routing follows existing audience demand rather than exploring markets with no prior streaming presence.
 """)
 
 c1, c2 = st.columns(2)
@@ -1151,6 +1143,11 @@ with c2:
         <p>Listener-weighted share of streaming reach covered by the tour.
         Countries with more listeners contribute more to this score — the main metric of this analysis.</p>
     </div>""", unsafe_allow_html=True)
+
+st.markdown("""
+**Hypothesis:** Artists tend to perform in countries where their Last.fm listener counts are highest —
+tour routing follows existing audience demand rather than exploring markets with no prior streaming presence.
+""")
 
 # Load data
 @st.cache_data

@@ -181,20 +181,42 @@ else:
         unsafe_allow_html=True
     )
 
+<<<<<<< HEAD
     st.markdown("""
     Each point represents one artist. The x-axis shows Last.fm listener count, and the y-axis shows the average number of days between consecutive concerts.
     A logarithmic x-axis can be enabled to compress very large listener values and make broad patterns easier to compare.
     The green trend line summarizes the overall linear relationship: if it slopes downward, more popular artists tend to have shorter breaks between shows; if it slopes upward, they tend to have longer average gaps.
     The filters allow users to hide extreme outliers and explore whether the visible pattern remains stable.
     """)
+=======
+    graph1_descriptions = {
+        "total_events": (
+            "Each point represents one artist. The x-axis shows Last.fm listener count and the y-axis shows the average number of days between consecutive concerts. "
+            "A logarithmic x-axis can be enabled to compress very large listener values and make broad patterns easier to compare. "
+            "The points are colored by the total number of concerts in the dataset. This makes it easier to see whether artists with denser touring schedules also tend to have more total live events overall."
+        ),
+        "pct_weekend": (
+            "Each point represents one artist. The x-axis shows Last.fm listener count and the y-axis shows the average number of days between consecutive concerts. "
+            "A logarithmic x-axis can be enabled to compress very large listener values and make broad patterns easier to compare. "
+            "The points are colored by weekend share — the percentage of concerts that take place on Fridays, Saturdays, or Sundays. This helps reveal whether tighter or more spread-out tour schedules are associated with stronger weekend concentration."
+        ),
+        "lead_time_days": (
+            "Each point represents one artist. The x-axis shows Last.fm listener count and the y-axis shows the average number of days between consecutive concerts. "
+            "A logarithmic x-axis can be enabled to compress very large listener values and make broad patterns easier to compare. "
+            "The points are colored by lead time — the number of days between ticket sale start and the first concert date. This helps show whether artists with longer planning horizons also tend to space their concerts differently."
+        ),
+    }
+
+    description_placeholder_1 = st.empty()
+>>>>>>> 615f410 (upadate web)
 
     g1_ctrl, g1_plot = st.columns([1, 3])
     with g1_ctrl:
         max_days = st.slider(
             "Max. days shown",
             30,
-            365,
-            int(df1[col_f1].quantile(0.95)),
+            200,
+            min(200, int(df1[col_f1].quantile(0.95))),
             key="f7_max"
         )
         log_x1 = st.checkbox("Log X (listeners)", value=True, key="f7_logx")
@@ -210,6 +232,7 @@ else:
             key="f7_color"
         )
         color_by1 = color_by1 if color_by1 in df1.columns else None
+    description_placeholder_1.markdown(graph1_descriptions[color_by1])
 
     df1_plot = df1[df1[col_f1] <= max_days].copy()
 
@@ -314,6 +337,24 @@ else:
                 "This means the visible difference between more popular and less popular artists should be interpreted cautiously and may simply reflect random variation in the data."
             )
 
+        if color_by1 == "total_events":
+            color_interp_1 = (
+                " The color gradient additionally shows whether artists with more concerts cluster in a specific part of the chart. "
+                "If brighter points appear mainly lower on the y-axis, this suggests that artists with more total shows also tend to follow tighter touring schedules."
+            )
+        elif color_by1 == "pct_weekend":
+            color_interp_1 = (
+                " The color pattern also helps show whether weekend-heavy touring is linked to tighter or more spread-out schedules. "
+                "If similar colors appear throughout the chart, weekend concentration does not seem to be strongly connected to the spacing between concerts."
+            )
+        else:
+            color_interp_1 = (
+                " The color gradient also highlights whether artists with longer lead times tend to have more compact or more widely spaced touring schedules. "
+                "If no clear color clustering appears, planning horizon and spacing between concerts likely operate largely independently."
+            )
+
+        interp_text_1 = interp_text_1 + color_interp_1
+
         st.markdown(f"""
         <div class="insight-card">
             <h4>🔍 Interpretation</h4>
@@ -374,10 +415,10 @@ else:
     present_tiers_display = [tier_label_en(t) for t in present_tiers_raw]
 
     tier_colors = {
-        "Q1 (low)": "#475569",
-        "Q2": "#6366f1",
-        "Q3": "#818cf8",
-        "Q4 (high)": "#fbbf24",
+        "Q1 (low)": "#1DB954",
+        "Q2": "#7fb3d3",
+        "Q3": "#f0c040",
+        "Q4 (high)": "#e05050",
     }
 
     # Kruskal-Wallis on filtered data
@@ -604,7 +645,7 @@ else:
     st.markdown("""
     Each point represents one artist. The x-axis shows Last.fm playcount, and the y-axis shows the percentage of concerts scheduled on weekends.
     A logarithmic x-axis can be enabled to compress very large playcount values and make broad patterns easier to compare.
-    The green OLS trend line summarizes the overall linear relationship: if it slopes upward, artists with higher playcounts tend to have a higher weekend share; if it slopes downward, the opposite is true.
+    The green trend line summarizes the overall linear relationship: if it slopes upward, artists with higher playcounts tend to have a higher weekend share; if it slopes downward, the opposite is true.
     The point colors indicate popularity tiers, which makes it easier to see whether different parts of the popularity range follow similar patterns.
     """)
 
@@ -616,23 +657,36 @@ else:
         st.markdown("")
         st.markdown("**Color legend**")
 
+        if "f8_hist_q1" not in st.session_state:
+            st.session_state["f8_hist_q1"] = True
+        if "f8_hist_q2" not in st.session_state:
+            st.session_state["f8_hist_q2"] = True
+        if "f8_hist_q3" not in st.session_state:
+            st.session_state["f8_hist_q3"] = True
+        if "f8_hist_q4" not in st.session_state:
+            st.session_state["f8_hist_q4"] = True
+
         st.markdown(
             """
             <div style="display:flex; align-items:center; margin-bottom:8px;">
-                <span style="display:inline-block; width:14px; height:14px; background:#475569; border-radius:3px; margin-right:8px;"></span>
+                <span style="display:inline-block; width:14px; height:14px; background:#1DB954; border-radius:3px; margin-right:8px;"></span>
                 <span>Q1 (low)</span>
             </div>
             <div style="display:flex; align-items:center; margin-bottom:8px;">
-                <span style="display:inline-block; width:14px; height:14px; background:#6366f1; border-radius:3px; margin-right:8px;"></span>
+                <span style="display:inline-block; width:14px; height:14px; background:#7fb3d3; border-radius:3px; margin-right:8px;"></span>
                 <span>Q2</span>
             </div>
             <div style="display:flex; align-items:center; margin-bottom:8px;">
-                <span style="display:inline-block; width:14px; height:14px; background:#818cf8; border-radius:3px; margin-right:8px;"></span>
+                <span style="display:inline-block; width:14px; height:14px; background:#f0c040; border-radius:3px; margin-right:8px;"></span>
                 <span>Q3</span>
             </div>
             <div style="display:flex; align-items:center;">
-                <span style="display:inline-block; width:14px; height:14px; background:#fbbf24; border-radius:3px; margin-right:8px;"></span>
+                <span style="display:inline-block; width:14px; height:14px; background:#e05050; border-radius:3px; margin-right:8px;"></span>
                 <span>Q4 (high)</span>
+            </div>
+            <div style="display:flex; align-items:center; margin-top:10px;">
+                <span style="display:inline-block; width:14px; height:3px; background:#10b981; margin-right:8px;"></span>
+                <span>Trend line</span>
             </div>
             """,
             unsafe_allow_html=True
@@ -683,14 +737,14 @@ else:
             title=f"Playcount vs. weekend share  |  r = {r2_plot:.3f}  |  n = {len(df2_plot)}",
             template="plotly_dark",
             category_orders={"Popularity-Tier": ["Q1\n(low)", "Q2", "Q3", "Q4\n(high)"]},
-            color_discrete_sequence=["#475569", "#6366f1", "#818cf8", "#fbbf24"],
+            color_discrete_sequence=["#1DB954", "#7fb3d3", "#f0c040", "#e05050"],
         )
 
         fig2.add_trace(go.Scatter(
             x=x_line2_plot,
             y=y_line2_plot,
             mode="lines",
-            name="OLS",
+            name="trend line",
             line=dict(color="#10b981", width=2.5),
             hoverinfo="skip",
         ))
@@ -714,19 +768,6 @@ else:
 
         with g2_plot:
             st.plotly_chart(fig2, use_container_width=True)
-
-        # Statistical analysis
-        stat_text_2 = f"Pearson correlation: r = {r2_plot:.3f}, p = {p2_plot:.4f}, R² = {r2_sq_plot:.1%}. "
-        if p2_plot < 0.05:
-            stat_text_2 += (
-                f"The result is statistically significant and indicates {relationship_text_2} "
-                f"between playcount and weekend share."
-            )
-        else:
-            stat_text_2 += (
-                "The result is not statistically significant and does not provide reliable evidence "
-                "for a linear relationship between playcount and weekend share."
-            )
 
         # Interpretation
         if abs_r2_plot < 0.1:
@@ -778,55 +819,66 @@ else:
 
     h2_ctrl, h2_plot = st.columns([1, 3])
     with h2_ctrl:
-        n_bins2 = st.slider("Bins", 10, 40, 20, key="f8_bins")
+        n_bins2 = st.slider("Bins", 10, 25, 20, key="f8_bins")
         norm_hist2 = st.checkbox("Normalized (percent)", value=True, key="f8_norm")
 
-        st.markdown("")
-        st.markdown("**Color legend**")
-
-        st.markdown(
-            """
-            <div style="display:flex; align-items:center; margin-bottom:8px;">
-                <span style="display:inline-block; width:14px; height:14px; background:#475569; border-radius:3px; margin-right:8px;"></span>
+        st.markdown("""
+        <div style="margin-top:4px;">
+            <p style="color:#f1f5f9;font-weight:700;margin-bottom:14px;">Color legend</p>
+            <div style="display:flex;align-items:center;margin-bottom:8px;">
+                <span style="display:inline-block;width:14px;height:14px;background:#1DB954;border-radius:3px;margin-right:8px;"></span>
                 <span>Q1 (low)</span>
             </div>
-            <div style="display:flex; align-items:center; margin-bottom:8px;">
-                <span style="display:inline-block; width:14px; height:14px; background:#6366f1; border-radius:3px; margin-right:8px;"></span>
+            <div style="display:flex;align-items:center;margin-bottom:8px;">
+                <span style="display:inline-block;width:14px;height:14px;background:#7fb3d3;border-radius:3px;margin-right:8px;"></span>
                 <span>Q2</span>
             </div>
-            <div style="display:flex; align-items:center; margin-bottom:8px;">
-                <span style="display:inline-block; width:14px; height:14px; background:#818cf8; border-radius:3px; margin-right:8px;"></span>
+            <div style="display:flex;align-items:center;margin-bottom:8px;">
+                <span style="display:inline-block;width:14px;height:14px;background:#f0c040;border-radius:3px;margin-right:8px;"></span>
                 <span>Q3</span>
             </div>
-            <div style="display:flex; align-items:center;">
-                <span style="display:inline-block; width:14px; height:14px; background:#fbbf24; border-radius:3px; margin-right:8px;"></span>
+            <div style="display:flex;align-items:center;">
+                <span style="display:inline-block;width:14px;height:14px;background:#e05050;border-radius:3px;margin-right:8px;"></span>
                 <span>Q4 (high)</span>
             </div>
-            """,
-            unsafe_allow_html=True
-        )
+        </div>
+        """, unsafe_allow_html=True)
+
+        show_q1_hist_f8 = True
+        show_q2_hist_f8 = True
+        show_q3_hist_f8 = True
+        show_q4_hist_f8 = True
 
     hist_mode2 = "percent" if norm_hist2 else ""
 
     fig2b = go.Figure()
-    for tier, col in [("Q1\n(low)", "#475569"), ("Q2", "#6366f1"),
-                      ("Q3", "#818cf8"), ("Q4\n(high)", "#fbbf24")]:
-        sub = df2[df2["Popularity-Tier"] == tier][col_f2_y].dropna()
+    hist_tiers_f8 = [
+        ("Q1\n(low)", "Q1 (low)", "#1DB954", show_q1_hist_f8),
+        ("Q2", "Q2",             "#7fb3d3", show_q2_hist_f8),
+        ("Q3", "Q3",             "#f0c040", show_q3_hist_f8),
+        ("Q4\n(high)", "Q4 (high)", "#e05050", show_q4_hist_f8),
+    ]
+
+    for raw_tier, display_tier, tier_color, tier_visible in hist_tiers_f8:
+        if not tier_visible:
+            continue
+        sub = df2[df2["Popularity-Tier"] == raw_tier][col_f2_y].dropna()
         if len(sub) == 0:
             continue
 
         fig2b.add_trace(go.Histogram(
             x=sub,
-            name=tier.replace("\n", " "),
+            name=display_tier,
             nbinsx=n_bins2,
             histnorm=hist_mode2,
-            marker_color=col,
+            marker_color=tier_color,
             opacity=0.65,
             hovertemplate=(
-                f"{tier.replace(chr(10), ' ')}<br>Weekend share: %{{x:.1f}}%<br>Percent: %{{y:.2f}}%<extra></extra>"
+                f"{display_tier}<br>Weekend share: %{{x:.1f}}%<br>Percent: %{{y:.2f}}%<extra></extra>"
                 if norm_hist2 else
-                f"{tier.replace(chr(10), ' ')}<br>Weekend share: %{{x:.1f}}%<br>Artists: %{{y}}<extra></extra>"
+                f"{display_tier}<br>Weekend share: %{{x:.1f}}%<br>Artists: %{{y}}<extra></extra>"
             ),
+            showlegend=False,
         ))
 
     fig2b.update_layout(
@@ -880,7 +932,7 @@ else:
             )
         elif q4_med2 > q1_med2:
             interp_text_2b = (
-                f"The yellow bars representing the most popular artists (Q4) appear slightly shifted toward higher weekend-share values compared with the lowest tier (Q1). "
+                f"The red bars representing the most popular artists (Q4) appear slightly shifted toward higher weekend-share values compared with the lowest tier (Q1). "
                 f"The median weekend share is around {q4_med2:.1f}% for Q4 and {q1_med2:.1f}% for Q1. "
                 "This pattern suggests that highly popular artists may perform somewhat more often on weekends, possibly because promoters schedule them in prime time slots when audience demand is highest."
             )
@@ -962,13 +1014,11 @@ This question examines whether more popular artists tend to announce concerts fu
 A longer lead time may reflect larger productions, more complex logistics, or longer promotional phases before the first show.
 
 **Hypothesis:** Artists with more listeners may have longer lead times, because larger tours often require more planning and earlier ticket sales.
-""")
 
-st.info(
-    "**Method:** Only artists with at least one **upcoming** concert and a valid `onsale_date` are included. "
-    "For each artist, lead time is defined as the number of days between the first ticket sale start and the first upcoming concert date. "
-    "To exclude implausible outliers, only lead times between **0 and 1095 days (3 years)** are used."
-)
+**Method:** Only artists with at least one **upcoming** concert and a valid `onsale_date` are included.
+For each artist, lead time is defined as the number of days between the first ticket sale start and the first upcoming concert date.
+To exclude implausible outliers, only lead times between **0 and 1095 days (3 years)** are used.
+""")
 
 col_f3 = "lead_time_days"
 
@@ -1019,7 +1069,7 @@ else:
         Each point represents one artist. The x-axis shows Last.fm listener count, and the y-axis shows lead time in days.
         Lead time means the number of days between ticket sale start and the concert date.
         A logarithmic x-axis can be enabled to compress very large listener values and make broad patterns easier to compare.
-        The green OLS trend line summarizes the overall linear relationship: if it slopes upward, artists with more listeners tend to have longer lead times; if it slopes downward, the opposite is true.
+        The green trend line summarizes the overall linear relationship: if it slopes upward, artists with more listeners tend to have longer lead times; if it slopes downward, the opposite is true.
         """)
 
         g3_ctrl, g3_plot = st.columns([1, 3])
@@ -1027,7 +1077,7 @@ else:
             max_lead = st.slider(
                 "Max. lead time (days)",
                 30,
-                730,
+                1095,
                 int(df3[col_f3].quantile(0.95)),
                 key="f9_max"
             )
@@ -1063,7 +1113,7 @@ else:
             else:
                 relationship_text_3 = f"a strong {'positive' if r3_plot > 0 else 'negative'} relationship"
 
-            # OLS line based on filtered data
+            # trend line based on filtered data
             coef3_plot = np.polyfit(df3_plot["x_plot"], df3_plot[col_f3], 1)
             x_line3_plot = np.linspace(df3_plot["x_plot"].min(), df3_plot["x_plot"].max(), 200)
             y_line3_plot = np.polyval(coef3_plot, x_line3_plot)
@@ -1088,7 +1138,7 @@ else:
                     "x_plot": x_axis_label,
                     col_f3: "Avg. lead time (days)"
                 },
-                title=f"Listeners vs. lead time  |  r = {r3_plot:.3f}  |  n = {len(df3_plot)}",
+                title=f"Listeners vs. lead time  | n = {len(df3_plot)}",
                 template="plotly_dark",
                 category_orders={"Popularity-Tier": ["Q1\n(low)", "Q2", "Q3", "Q4\n(high)"]},
                 color_discrete_sequence=["#475569", "#6366f1", "#818cf8", "#fbbf24"],
@@ -1098,7 +1148,7 @@ else:
                 x=x_line3_plot,
                 y=y_line3_plot,
                 mode="lines",
-                name="OLS",
+                name="trend line",
                 line=dict(color="#10b981", width=2.5),
                 hoverinfo="skip",
             ))
@@ -1122,19 +1172,7 @@ else:
             with g3_plot:
                 st.plotly_chart(fig3, use_container_width=True)
 
-            # Statistical analysis
-            stat_text_3 = f"Pearson correlation: r = {r3_plot:.3f}, p = {p3_plot:.4f}, R² = {r2_3_plot:.1%}. "
-            if p3_plot < 0.05:
-                stat_text_3 += (
-                    f"The result is statistically significant and indicates {relationship_text_3} "
-                    f"between listener count and lead time in the currently visible data."
-                )
-            else:
-                stat_text_3 += (
-                    "The result is not statistically significant and does not provide reliable evidence "
-                    "for a linear relationship between listener count and lead time in the currently visible data."
-                )
-
+            
             # Interpretation
             if abs_r3_plot < 0.1:
                 interp_text_3 = (
@@ -1181,7 +1219,7 @@ else:
         Points outside the whiskers are outliers.
         """)
 
-        df3b = df3[df3[col_f3] <= max_lead].copy()
+        df3b = df3.copy()
 
         # Robust tier handling
         def tier_rank_f3(val: str) -> int:
@@ -1216,10 +1254,10 @@ else:
         present_tiers_display_f3 = [tier_label_f3(t) for t in present_tiers_raw_f3]
 
         tier_colors_f3 = {
-            "Q1 (low)": "#475569",
-            "Q2": "#6366f1",
-            "Q3": "#818cf8",
-            "Q4 (high)": "#fbbf24",
+            "Q1 (low)": "#1DB954",
+            "Q2": "#7fb3d3",
+            "Q3": "#f0c040",
+            "Q4 (high)": "#e05050",
         }
 
         # Kruskal-Wallis on filtered data
@@ -1289,23 +1327,6 @@ else:
         })
         tier_table_f3 = tier_table_f3.sort_values("tier_rank").drop(columns="tier_rank")
 
-
-
-        # Statistical analysis
-        if kw3_h is not None and kw3_p is not None:
-            if kw3_p < 0.05:
-                stat_text_3b = (
-                    f"The Kruskal-Wallis test is statistically significant (H = {kw3_h:.2f}, p = {kw3_p:.4f}). "
-                    "This means the popularity tiers do not all show the same distribution of lead time."
-                )
-            else:
-                stat_text_3b = (
-                    f"The Kruskal-Wallis test is not statistically significant (H = {kw3_h:.2f}, p = {kw3_p:.4f}). "
-                    "This means the grouped data do not show a clear overall difference between the popularity tiers."
-                )
-        else:
-            stat_text_3b = "Not enough valid groups were available to compute the Kruskal-Wallis test."
-
         # Interpretation
         median_map_f3 = dict(zip(tier_table_f3["Popularity-Tier"], tier_table_f3["Median"]))
         q1_med_f3 = median_map_f3.get("Q1 (low)")
@@ -1321,7 +1342,6 @@ else:
                 interp_text_3b = (
                     f"The box plot shows that artists in the highest popularity tier (Q4) generally have longer lead times than artists in the lowest tier (Q1). "
                     f"The median lead time for Q4 is about {q4_med_f3:.1f} days, compared with roughly {q1_med_f3:.1f} days for Q1. "
-                    "In the chart, the boxes for the higher tiers also extend further upward, indicating that some very popular artists announce concerts far in advance. "
                     "Overall, the pattern suggests that more popular artists tend to plan and announce their tours earlier than less popular artists."
                 )
             elif q4_med_f3 < q1_med_f3:

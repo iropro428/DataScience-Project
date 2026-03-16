@@ -10,104 +10,6 @@ Verwendung:
 import streamlit as st
 
 TERMS = {
-    "Pearson r": {
-        "kurz": "Strength of the linear relationship between two variables (-1 to +1)",
-        "lang": """
-**Pearson r** measures how strongly two variables are linearly related.
-
-| Value | Meaning |
-|-------|---------|
-| **+1** | Perfect positive relationship |
-| **0** | No relationship |
-| **-1** | Perfect negative relationship |
-
-**Rule of thumb:** < 0.2 = negligible · 0.2–0.4 = weak · 0.4–0.7 = moderate · > 0.7 = strong
-""",
-        "emoji": "📏", "kategorie": "Statistics",
-    },
-    "p-Value": {
-        "kurz": "Probability that the result is due to chance (< 0.05 = significant)",
-        "lang": """
-**p-value** answers: *Could this result be pure chance?*
-
-| p-value | Meaning |
-|---------|---------|
-| **< 0.05** | Significant — very unlikely to be chance |
-| **0.05–0.10** | Weak indication |
-| **> 0.10** | No reliable result |
-
-p = 0.021 means: only a 2.1% probability that the relationship occurred by chance.
-""",
-        "emoji": "🎯", "kategorie": "Statistics",
-    },
-    "R²": {
-        "kurz": "How much of the variation is explained by the model? (0–100%)",
-        "lang": """
-**R²** = Pearson r squared.
-
-Tells you what percentage of the differences between artists is explained by the X variable.
-
-r = 0.21 → R² = 4.4% → Only 4.4% of the variation in the outcome is explained by listener count.
-""",
-        "emoji": "📐", "kategorie": "Statistics",
-    },
-    "OLS": {
-        "kurz": "Trend line that best fits all data points (Ordinary Least Squares)",
-        "lang": """
-**OLS** = Ordinary Least Squares.
-
-Automatically calculates the straight line that is on average closest to all data points.
-
-- Rising line → positive relationship
-- Falling line → negative relationship
-- Flat line → no relationship
-""",
-        "emoji": "📈", "kategorie": "Statistics",
-    },
-    "Mann-Whitney U": {
-        "kurz": "Compares two groups without assumptions about the distribution",
-        "lang": """
-**Mann-Whitney U** compares two groups — robust for skewed distributions.
-
-Why not a t-test? Listener counts are extremely skewed (Taylor Swift vs. indie artist).
-Mann-Whitney ranks all artists by listeners and checks whether one group systematically ranks higher.
-""",
-        "emoji": "⚖️", "kategorie": "Statistics",
-    },
-    "Kruskal-Wallis": {
-        "kurz": "Compares 3 or more groups — extension of Mann-Whitney",
-        "lang": """
-**Kruskal-Wallis** works like Mann-Whitney U, but for 3 or more groups.
-
-H-statistic: the larger, the more the groups differ.
-p-value < 0.05 → at least two groups differ significantly.
-""",
-        "emoji": "📊", "kategorie": "Statistics",
-    },
-    "Cohen's d": {
-        "kurz": "How large is the difference between two groups in practice?",
-        "lang": """
-**Cohen's d** measures practical significance — independent of statistical significance.
-
-| d | Effect size |
-|---|-------------|
-| < 0.2 | Negligible |
-| 0.2–0.5 | Small |
-| 0.5–0.8 | Medium |
-| > 0.8 | Large |
-""",
-        "emoji": "📏", "kategorie": "Statistics",
-    },
-    "Significant": {
-        "kurz": "Result is very unlikely to be due to chance (p < 0.05)",
-        "lang": """
-**Statistically significant** = the observed pattern would occur in random data
-in fewer than 5% of cases.
-
-Important: significant ≠ important or large — it only means 'not random'.
-""",
-        "emoji": "✅", "kategorie": "Statistics",
-    },
     "Median": {
         "kurz": "Middle value — 50% of values are below, 50% above",
         "lang": """
@@ -165,24 +67,6 @@ High revisit rate → strong local fanbases, consolidation strategy.
 Low revisit rate → expansion strategy, reaching new markets.
 """,
         "emoji": "🔄", "kategorie": "Metrics",
-    },
-    "Jaccard Similarity": {
-        "kurz": "Overlap between two sets — here: streaming countries vs. tour countries (0 to 1)",
-        "lang": """
-**Jaccard Similarity** = |A ∩ B| / |A ∪ B|
-
-Measures how much two sets overlap, regardless of their size.
-
-| Value | Meaning |
-|-------|---------|
-| **1.0** | Perfect overlap — same countries in both sets |
-| **0.5** | Half of all countries appear in both sets |
-| **0.0** | No overlap at all |
-
-In this project: compares the set of countries where an artist is popular on Last.fm
-with the set of countries where they have Ticketmaster events.
-""",
-        "emoji": "🔀", "kategorie": "Metrics",
     },
     "Weighted Coverage": {
         "kurz": "Share of an artist's global listener reach covered by their tour countries",
