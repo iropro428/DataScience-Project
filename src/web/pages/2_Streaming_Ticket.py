@@ -372,7 +372,7 @@ try:
     fig2.update_layout(
         title=f"{agg} number of events per listener group  ({n_groups} groups, G1 = fewest listeners)",
         xaxis_title="Listener group",
-        yaxis_title=f"{agg} events",
+        yaxis_title=f"{agg}",
         template="plotly_dark",
         paper_bgcolor="#0e0e0e",
         plot_bgcolor="#1a1a1a",
