@@ -23,10 +23,7 @@ apply_styles()
 render_navbar()
 apply_glossary_styles()
 
-# CSS
-
-
-# Header 
+# Header
 st.markdown("""
 <div class="page-header">
     <h1>🎟️ Streaming &amp; Ticket Power</h1>
@@ -37,7 +34,7 @@ st.markdown("""
 st.markdown("""
 <div style="background:#161c2d;border:1px solid #232840;border-radius:14px;
     padding:24px 28px;margin-bottom:28px;">
-    <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;
+    <div style="font-size:0.8rem;font-weight:700;text-transform:uppercase;
         letter-spacing:.12em;color:#475569 !important;margin-bottom:14px;">
         Table of contents — Research questions
     </div>
@@ -47,8 +44,8 @@ st.markdown("""
             background:#1d2440;border:1px solid #2e3557;transition:all .15s;">
             <span style="background:#4338ca;color:white !important;border-radius:50%;
                 width:24px;height:24px;display:flex;align-items:center;justify-content:center;
-                font-size:.75rem;font-weight:700;flex-shrink:0;">1</span>
-            <span style="color:#cbd5e1 !important;font-size:.9rem;">
+                font-size:0.8rem;font-weight:700;flex-shrink:0;">1</span>
+            <span style="color:#cbd5e1 !important;font-size:1rem;">
                 How does the number of Last.fm listeners correlate with the scale of an artist's tour, measured by the number of events scheduled?
             </span>
         </a>
@@ -57,8 +54,8 @@ st.markdown("""
             background:#1d2440;border:1px solid #2e3557;transition:all .15s;">
             <span style="background:#4338ca;color:white !important;border-radius:50%;
                 width:24px;height:24px;display:flex;align-items:center;justify-content:center;
-                font-size:.75rem;font-weight:700;flex-shrink:0;">2</span>
-            <span style="color:#cbd5e1 !important;font-size:.9rem;">
+                font-size:0.8rem;font-weight:700;flex-shrink:0;">2</span>
+            <span style="color:#cbd5e1 !important;font-size:1rem;">
                 How does the concentration of an artist's streaming activity on a few top tracks relate to the intensity of their touring, measured by events per year?
             </span>
         </a>
@@ -67,8 +64,8 @@ st.markdown("""
             background:#1d2440;border:1px solid #2e3557;transition:all .15s;">
             <span style="background:#4338ca;color:white !important;border-radius:50%;
                 width:24px;height:24px;display:flex;align-items:center;justify-content:center;
-                font-size:.75rem;font-weight:700;flex-shrink:0;">3</span>
-            <span style="color:#cbd5e1 !important;font-size:.9rem;">
+                font-size:0.8rem;font-weight:700;flex-shrink:0;">3</span>
+            <span style="color:#cbd5e1 !important;font-size:1rem;">
                 How do current Last.fm listener counts differ between artists who appeared in Spotify Weekly Charts (Feb 2023–Feb 2026) and those who did not?
             </span>
         </a>
@@ -78,8 +75,7 @@ st.markdown("""
 
 st.markdown('<div id="frage-1"></div>', unsafe_allow_html=True)
 
-
-# Load Data 
+# Load Data
 @st.cache_data
 def load_data():
     path = "data/processed/final_dataset.csv"
@@ -216,7 +212,6 @@ if len(df1) >= 5:
     m1, = st.columns(1)
     m1.metric("n artists", len(df1))
 
-
     # Plot
     hover = {"listeners": ":,", "total_events": True}
     if "tags" in df1.columns:
@@ -273,8 +268,6 @@ if len(df1) >= 5:
     )
     st.plotly_chart(fig1, use_container_width=True)
 
-
-
     # Interpretation
     if abs_r < 0.1:
         interp_text = (
@@ -303,16 +296,15 @@ if len(df1) >= 5:
 
     st.markdown(f"""
     <div class="insight-card">
-        <h4>🔍 Interpretation</h4>
-        <p>
-        {interp_text}
-        </p>
+        <h4 style="font-size:1.1rem;">🔍 Interpretation</h4>
+        <p style="font-size:1rem;">{interp_text}</p>
     </div>
     """, unsafe_allow_html=True)
 else:
     st.warning("Too few data points after filtering. Please adjust the filters.")
 
 st.divider()
+
 # ══════════════════════════════════════════════════════
 # GRAPH 2 — Bar Chart (Grouped listener bins)
 # ══════════════════════════════════════════════════════
@@ -321,9 +313,7 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# Dynamic explanation text (will update with controls)
 explanation_placeholder = st.empty()
-
 
 qa, qb = st.columns([1, 3])
 with qa:
@@ -334,14 +324,15 @@ with qa:
         key="g2_ng"
     )
     agg = st.radio("Y-axis", ["Mean of events", "Median of events"], index=0, key="g2_agg")
-
     group_share = 100 / n_groups
 
 explanation_placeholder.markdown(f"""
-Artists are sorted by their Last.fm listener count and then divided into <strong>{n_groups} equally sized groups</strong>. 
-This means that each group contains about <strong>{group_share:.1f}%</strong> of all artists in the dataset. 
-G1 represents the artists with the fewest listeners, while G{n_groups} represents those with the most listeners. 
+<p style="font-size:1rem;">
+Artists are sorted by their Last.fm listener count and then divided into <strong>{n_groups} equally sized groups</strong>.
+This means that each group contains about <strong>{group_share:.1f}%</strong> of all artists in the dataset.
+G1 represents the artists with the fewest listeners, while G{n_groups} represents those with the most listeners.
 For each group, the chart shows the <strong>{agg.lower()}</strong> number of events, making broad patterns easier to compare than in the scatterplot alone.
+</p>
 """, unsafe_allow_html=True)
 
 try:
@@ -424,8 +415,8 @@ try:
 
     st.markdown(f"""
     <div class="insight-card">
-        <h4>🔍 Interpretation</h4>
-        <p>{interp_text}</p>
+        <h4 style="font-size:1.1rem;">🔍 Interpretation</h4>
+        <p style="font-size:1rem;">{interp_text}</p>
     </div>
     """, unsafe_allow_html=True)
 
@@ -442,8 +433,8 @@ st.markdown(
     unsafe_allow_html=True
 )
 st.markdown("""
-This histogram shows how Last.fm listener counts are distributed across all artists in the dataset. 
-The x-axis represents listener count, and the y-axis shows how many artists fall into each range. 
+This histogram shows how Last.fm listener counts are distributed across all artists in the dataset.
+The x-axis represents listener count, and the y-axis shows how many artists fall into each range.
 The dashed and dotted vertical lines mark the median and mean.
 """)
 
@@ -505,11 +496,11 @@ else:
 
 st.markdown(f"""
 <div class="insight-card">
-    <h4>🔍 Interpretation</h4>
-    <p>
-        Most artists in this dataset have relatively modest listener counts, while a small number of highly popular artists 
-        stand far above the rest. This uneven distribution is worth keeping in mind when thinking about the relationship 
-        between listeners and tour scale: the artists driving any visible correlation are likely a small group at the top, 
+    <h4 style="font-size:1.1rem;">🔍 Interpretation</h4>
+    <p style="font-size:1rem;">
+        Most artists in this dataset have relatively modest listener counts, while a small number of highly popular artists
+        stand far above the rest. This uneven distribution is worth keeping in mind when thinking about the relationship
+        between listeners and tour scale: the artists driving any visible correlation are likely a small group at the top,
         rather than a broad pattern across all artists. {scale_note}
     </p>
 </div>
@@ -524,23 +515,22 @@ st.markdown('<div class="section-title">Summary — Research Question 1</div>',
     unsafe_allow_html=True)
 
 st.markdown(f"""<div class="insight-card">
-    <h4>🎯 Answer to Research Question 1</h4>
-    <p>
-        The graphs suggest that artists with a larger Last.fm audience tend to schedule more events overall, 
-        but this pattern is not uniform across all artists. Most of the dataset consists of artists with 
-        mid-range listener counts, while a small number of highly popular artists stand out clearly. 
-        Among those top artists, a higher listener count does appear to go hand in hand with a broader 
-        tour presence — more dates, more cities, more events. For the majority of artists in the dataset, 
+    <h4 style="font-size:1.1rem;">🎯 Answer to Research Question 1</h4>
+    <p style="font-size:1rem;">
+        The graphs suggest that artists with a larger Last.fm audience tend to schedule more events overall,
+        but this pattern is not uniform across all artists. Most of the dataset consists of artists with
+        mid-range listener counts, while a small number of highly popular artists stand out clearly.
+        Among those top artists, a higher listener count does appear to go hand in hand with a broader
+        tour presence — more dates, more cities, more events. For the majority of artists in the dataset,
         however, listener count alone does not reliably predict how extensively they tour.
     </p>
 </div>""", unsafe_allow_html=True)
 
-
 st.markdown('<div id="frage-2"></div>', unsafe_allow_html=True)
-# ══════════════════════════════════════════════════════════════════════════
-# RESEARCH QUESTION 2 — Streaming concentration vs. tour intensity
-# ══════════════════════════════════════════════════════════════════════════
 
+# ══════════════════════════════════════════════════════════════════════════
+# RESEARCH QUESTION 2
+# ══════════════════════════════════════════════════════════════════════════
 st.divider()
 st.markdown("""<div class="rq-box">
     <h3>🎟️ Research Question 2</h3>
@@ -585,7 +575,7 @@ if n_f2 < 10:
 st.divider()
 
 # ══════════════════════════════════════════════════════════════════════════
-# F2 — GRAPH 1: Scatterplot concentration vs. events_last_year
+# F2 — GRAPH 1
 # ══════════════════════════════════════════════════════════════════════════
 st.markdown(
     '<div class="section-title">📈 Graph 1 — Does a concentrated streaming profile go hand in hand with more live events?</div>',
@@ -593,11 +583,11 @@ st.markdown(
 )
 
 st.markdown("""
-Each point represents one artist with complete data on both streaming concentration and total touring activity. 
-The x-axis shows what share of total playcount comes from an artist's top tracks — a high value means 
-the audience focuses heavily on just a few songs, a low value means plays are spread across many tracks. 
-The y-axis shows the total number of Ticketmaster events across all available data. 
-The green trend line summarizes the overall direction: rising means more concentrated artists tend to 
+Each point represents one artist with complete data on both streaming concentration and total touring activity.
+The x-axis shows what share of total playcount comes from an artist's top tracks — a high value means
+the audience focuses heavily on just a few songs, a low value means plays are spread across many tracks.
+The y-axis shows the total number of Ticketmaster events across all available data.
+The green trend line summarizes the overall direction: rising means more concentrated artists tend to
 tour more, falling means broader catalogues go along with more events.
 """)
 
@@ -735,8 +725,8 @@ if len(df2f) >= 5:
 
     st.markdown(f"""
     <div class="insight-card">
-        <h4>🔍 Interpretation</h4>
-        <p>{interp_text_f2}</p>
+        <h4 style="font-size:1.1rem;">🔍 Interpretation</h4>
+        <p style="font-size:1rem;">{interp_text_f2}</p>
     </div>
     """, unsafe_allow_html=True)
 
@@ -744,8 +734,9 @@ else:
     st.warning("Too few data points after filtering.")
 
 st.divider()
+
 # ══════════════════════════════════════════════════════════════════════════
-# F2 — GRAPH 2: Boxplot — Events/year by concentration category
+# F2 — GRAPH 2: Boxplot
 # ══════════════════════════════════════════════════════════════════════════
 st.markdown(
     '<div class="section-title">📦 Graph 2 — Do artists with broader or more concentrated streaming profiles tour more?</div>',
@@ -753,10 +744,10 @@ st.markdown(
 )
 
 st.markdown("""
-Artists are divided into equally sized categories based on how concentrated their streaming activity is — 
-from broad profiles where plays are spread across many tracks, to concentrated profiles where a few tracks 
-dominate. For each category, the box plot shows the spread of total Ticketmaster events: the line inside 
-the box marks the median, the box contains the middle 50% of values, and the whiskers show the typical range. 
+Artists are divided into equally sized categories based on how concentrated their streaming activity is —
+from broad profiles where plays are spread across many tracks, to concentrated profiles where a few tracks
+dominate. For each category, the box plot shows the spread of total Ticketmaster events: the line inside
+the box marks the median, the box contains the middle 50% of values, and the whiskers show the typical range.
 Individual points are outliers. The label n shows how many artists are in each category.
 """, unsafe_allow_html=True)
 
@@ -812,7 +803,6 @@ try:
     with bx2:
         st.plotly_chart(fig_bx2, use_container_width=True)
 
-    # Interpretation based on median pattern only
     medians = (
         df2b.groupby("cat", observed=True)["total_events"]
         .median()
@@ -854,8 +844,8 @@ try:
 
     st.markdown(f"""
     <div class="insight-card">
-        <h4>🔍 Interpretation</h4>
-        <p>{interp_text_bx}</p>
+        <h4 style="font-size:1.1rem;">🔍 Interpretation</h4>
+        <p style="font-size:1rem;">{interp_text_bx}</p>
     </div>
     """, unsafe_allow_html=True)
 
@@ -866,12 +856,12 @@ except Exception as e:
 st.divider()
 
 # ══════════════════════════════════════════════════════════════════════════
-# F2 — GRAPH 3: Top-track concentration profile (example artists)
+# F2 — GRAPH 3: Top-track concentration profile
 # ══════════════════════════════════════════════════════════════════════════
 st.markdown('<div class="section-title">🎵 Explore individual artist streaming profiles</div>', unsafe_allow_html=True)
 st.markdown("""
-Select any artists below to compare how their total playcount is distributed across their top tracks. 
-Artists on the left side of the chart spread their plays across many songs — those on the right are dominated by just a few. 
+Select any artists below to compare how their total playcount is distributed across their top tracks.
+Artists on the left side of the chart spread their plays across many songs — those on the right are dominated by just a few.
 Use the controls to explore different combinations and see who relies on a broad catalogue versus a handful of hits.
 """)
 
@@ -896,18 +886,9 @@ if sel_artists and os.path.exists("data/raw/lastfm_toptracks.csv"):
 
     n_top_show = st.slider("Show top N tracks per artist", 3, 10, 5, key="f2p_ntracks")
 
-    # Purple-toned color palette for tracks
     track_colors = [
-        "#c084fc",  # Track 1 — light purple
-        "#a855f7",  # Track 2
-        "#9333ea",  # Track 3
-        "#7c3aed",  # Track 4
-        "#6d28d9",  # Track 5
-        "#5b21b6",  # Track 6
-        "#4c1d95",  # Track 7
-        "#3b0764",  # Track 8
-        "#2e1065",  # Track 9
-        "#1e0a4a",  # Track 10
+        "#c084fc", "#a855f7", "#9333ea", "#7c3aed", "#6d28d9",
+        "#5b21b6", "#4c1d95", "#3b0764", "#2e1065", "#1e0a4a",
     ]
 
     fig_profile = go.Figure()
@@ -963,7 +944,6 @@ if sel_artists and os.path.exists("data/raw/lastfm_toptracks.csv"):
 
     st.plotly_chart(fig_profile, use_container_width=True)
 
-    # Table
     tbl_data = df2[df2["artist_name"].isin(sel_artists)][
         ["artist_name", "top5_share", "top3_share", "top1_share", "total_events"]
     ].sort_values("top5_share", ascending=False).copy()
@@ -982,7 +962,7 @@ st.dataframe(
     .background_gradient(cmap="Purples", subset=["Top-5 share %", "Top-3 share %", "Top-1 share %"])
     .background_gradient(cmap="YlGn", subset=["Total events"])
     .set_properties(**{
-        "font-size": "13px",
+        "font-size": "14px",
         "text-align": "center",
         "color": "white",
         "background-color": "#1a1a1a",
@@ -990,7 +970,7 @@ st.dataframe(
     .set_table_styles([{
         "selector": "th",
         "props": [
-            ("font-size", "13px"),
+            ("font-size", "14px"),
             ("text-align", "center"),
             ("padding", "6px 12px"),
             ("color", "white"),
@@ -1006,7 +986,6 @@ st.dataframe(
 st.divider()
 st.markdown('<div class="section-title">Summary — Research Question 2</div>', unsafe_allow_html=True)
 
-# Derive answer from trendline slope computed in Graph 1
 if len(df2f) >= 5:
     if abs(slope) < 2:
         answer_f2 = (
@@ -1044,30 +1023,30 @@ if len(df2f) >= 5:
 
     st.markdown(f"""
     <div class="insight-card">
-        <h4>🎯 Answer to Research Question 2</h4>
-        <p>{answer_f2}</p>
+        <h4 style="font-size:1.1rem;">🎯 Answer to Research Question 2</h4>
+        <p style="font-size:1rem;">{answer_f2}</p>
         <br>
-        <p><strong>Broader context:</strong> {context_f2}</p>
+        <p style="font-size:1rem;"><strong>Broader context:</strong> {context_f2}</p>
     </div>
     """, unsafe_allow_html=True)
 
     st.markdown("""
     <div class="methodology-note">
-        <p>
-        <strong>Methodological note:</strong> Streaming concentration is measured as the share of the 
-        top 5 tracks in the total playcount of the top 20 tracks returned by Last.fm 
-        (<code>artist.getTopTracks</code>). Tour scale is measured as total Ticketmaster events across 
-        all available data (no date filter applied). Artists without complete data on both dimensions 
+        <p style="font-size:1rem;">
+        <strong>Methodological note:</strong> Streaming concentration is measured as the share of the
+        top 5 tracks in the total playcount of the top 20 tracks returned by Last.fm
+        (<code>artist.getTopTracks</code>). Tour scale is measured as total Ticketmaster events across
+        all available data (no date filter applied). Artists without complete data on both dimensions
         were excluded from Graphs 1 and 2.
         </p>
     </div>
     """, unsafe_allow_html=True)
 
 st.markdown('<div id="frage-3"></div>', unsafe_allow_html=True)
-# ══════════════════════════════════════════════════════════════════════════
-# RESEARCH QUESTION 3 — Chart Artists vs. Non-Chart Artists
-# ══════════════════════════════════════════════════════════════════════════
 
+# ══════════════════════════════════════════════════════════════════════════
+# RESEARCH QUESTION 3
+# ══════════════════════════════════════════════════════════════════════════
 st.divider()
 st.markdown("""<div class="rq-box">
     <h3>🎟️ Research Question 3</h3>
@@ -1077,21 +1056,20 @@ st.markdown("""<div class="rq-box">
 
 st.markdown("""
 **Why this question?**
-Spotify charts and Last.fm listeners are two independent popularity signals from different platforms. 
-If Chart Artists systematically have more Last.fm listeners, this points to cross-platform popularity — 
-meaning digital popularity is consistent across platforms. If not, the two platforms may reflect 
+Spotify charts and Last.fm listeners are two independent popularity signals from different platforms.
+If Chart Artists systematically have more Last.fm listeners, this points to cross-platform popularity —
+meaning digital popularity is consistent across platforms. If not, the two platforms may reflect
 different user ecosystems or listening habits.
 
-**Hypothesis:** Artists who appeared in the global Spotify Weekly Charts tend to have more Last.fm 
+**Hypothesis:** Artists who appeared in the global Spotify Weekly Charts tend to have more Last.fm
 listeners, because both metrics capture general popularity — just from different angles.
 
 **What counts as a Chart Artist?**
-An artist is classified as a Chart Artist if they appeared at least once in the global Spotify Weekly 
-Charts between February 2023 and February 2026. Rather than using every weekly chart, one representative 
+An artist is classified as a Chart Artist if they appeared at least once in the global Spotify Weekly
+Charts between February 2023 and February 2026. Rather than using every weekly chart, one representative
 chart week per month was sampled to retain broad coverage while keeping the dataset manageable.
 """)
 
-# F3 load data
 @st.cache_data
 def load_f3_data():
     p = "data/processed/spotify_charts/chart_artists.csv"
@@ -1125,9 +1103,8 @@ mean_c = df3[df3["was_on_chart"]]["listeners"].mean()
 mean_nc = df3[~df3["was_on_chart"]]["listeners"].mean()
 ratio = mean_c / mean_nc if mean_nc and mean_nc > 0 else 0
 
-
 # ══════════════════════════════════════════════════════════════════════════
-# F3 — GRAPH 1: Box Plot — listeners by chart status
+# F3 — GRAPH 1
 # ══════════════════════════════════════════════════════════════════════════
 st.markdown(
     '<div class="section-title">📦 Graph 1 — Listener distribution: Chart vs. Non-Chart</div>',
@@ -1160,11 +1137,11 @@ with g1:
         """
         <div style="display:flex; align-items:center; margin-bottom:8px;">
             <span style="display:inline-block; width:14px; height:14px; background:#24f803; border-radius:3px; margin-right:8px;"></span>
-            <span>In Spotify Chart ✅</span>
+            <span style="font-size:1rem;">In Spotify Chart ✅</span>
         </div>
         <div style="display:flex; align-items:center;">
             <span style="display:inline-block; width:14px; height:14px; background:#fa0303; border-radius:3px; margin-right:8px;"></span>
-            <span>Not in Chart ❌</span>
+            <span style="font-size:1rem;">Not in Chart ❌</span>
         </div>
         """,
         unsafe_allow_html=True
@@ -1249,15 +1226,15 @@ else:
 
 st.markdown(f"""
 <div class="insight-card">
-    <h4>🔍 Interpretation</h4>
-    <p>{direction_text} {overlap_text}</p>
+    <h4 style="font-size:1.1rem;">🔍 Interpretation</h4>
+    <p style="font-size:1rem;">{direction_text} {overlap_text}</p>
 </div>
 """, unsafe_allow_html=True)
 
 st.divider()
 
 # ══════════════════════════════════════════════════════════════════════════
-# F3 — GRAPH 2: Histogram overlay — listener distribution of both groups
+# F3 — GRAPH 2
 # ══════════════════════════════════════════════════════════════════════════
 st.markdown(
     '<div class="section-title">📊 Graph 2 — Listener distribution: Chart vs. Non-Chart Artists</div>',
@@ -1265,9 +1242,9 @@ st.markdown(
 )
 
 st.markdown("""
-This overlaid histogram compares how Last.fm listener counts are distributed across Chart and Non-Chart Artists. 
-A distribution shifted to the right means that group generally has more listeners. 
-Because the two groups may differ in size, the normalized view shows percentages rather than raw counts — 
+This overlaid histogram compares how Last.fm listener counts are distributed across Chart and Non-Chart Artists.
+A distribution shifted to the right means that group generally has more listeners.
+Because the two groups may differ in size, the normalized view shows percentages rather than raw counts —
 this makes the shapes directly comparable regardless of how many artists are in each group.
 """)
 
@@ -1282,11 +1259,11 @@ with h1:
         """
         <div style="display:flex; align-items:center; margin-bottom:8px;">
             <span style="display:inline-block; width:14px; height:14px; background:#24f803; border-radius:3px; margin-right:8px;"></span>
-            <span>In Spotify Chart ✅</span>
+            <span style="font-size:1rem;">In Spotify Chart ✅</span>
         </div>
         <div style="display:flex; align-items:center;">
             <span style="display:inline-block; width:14px; height:14px; background:#fa0303; border-radius:3px; margin-right:8px;"></span>
-            <span>Not in Chart ❌</span>
+            <span style="font-size:1rem;">Not in Chart ❌</span>
         </div>
         """,
         unsafe_allow_html=True
@@ -1362,15 +1339,15 @@ else:
 
 st.markdown(f"""
 <div class="insight-card">
-    <h4>🔍 Interpretation</h4>
-    <p>{shift_text} {norm_note}</p>
+    <h4 style="font-size:1.1rem;">🔍 Interpretation</h4>
+    <p style="font-size:1rem;">{shift_text} {norm_note}</p>
 </div>
 """, unsafe_allow_html=True)
 
 st.divider()
 
 # ══════════════════════════════════════════════════════════════════════════
-# F3 — GRAPH 3: Scatterplot chart intensity vs. listeners
+# F3 — GRAPH 3
 # ══════════════════════════════════════════════════════════════════════════
 if "chart_weeks" in df3.columns and df3["chart_weeks"].notna().sum() >= 5:
 
@@ -1380,10 +1357,10 @@ if "chart_weeks" in df3.columns and df3["chart_weeks"].notna().sum() >= 5:
     )
 
     st.markdown("""
-    This scatterplot includes only artists who appeared in the sampled global Spotify Weekly Charts 
-    between February 2023 and February 2026. The x-axis shows either the number of chart weeks or 
-    total chart streams, while the y-axis shows current Last.fm listener counts. The trend line 
-    summarizes whether stronger chart presence tends to go along with a higher Last.fm audience 
+    This scatterplot includes only artists who appeared in the sampled global Spotify Weekly Charts
+    between February 2023 and February 2026. The x-axis shows either the number of chart weeks or
+    total chart streams, while the y-axis shows current Last.fm listener counts. The trend line
+    summarizes whether stronger chart presence tends to go along with a higher Last.fm audience
     within this group.
     """, unsafe_allow_html=True)
 
@@ -1391,11 +1368,6 @@ if "chart_weeks" in df3.columns and df3["chart_weeks"].notna().sum() >= 5:
     log_x_f3 = st.session_state.get("f3_logx", True)
     log_y_f3 = st.session_state.get("f3_logy", True)
     lbl_f3 = st.session_state.get("f3_lbl", False)
-
-    x_metric_f3 = st.session_state.get("f3_x", x_metric_f3)
-    log_x_f3 = st.session_state.get("f3_logx", log_x_f3)
-    log_y_f3 = st.session_state.get("f3_logy", log_y_f3)
-    lbl_f3 = st.session_state.get("f3_lbl", lbl_f3)
 
     df_sc3 = df3.dropna(subset=[x_metric_f3, "listeners"]).copy()
     df_sc3 = df_sc3[df_sc3["was_on_chart"]]
@@ -1519,12 +1491,13 @@ if "chart_weeks" in df3.columns and df3["chart_weeks"].notna().sum() >= 5:
 
         st.markdown(f"""
         <div class="insight-card">
-            <h4>🔍 Interpretation</h4>
-            <p>{interp_text_f3g3}</p>
+            <h4 style="font-size:1.1rem;">🔍 Interpretation</h4>
+            <p style="font-size:1rem;">{interp_text_f3g3}</p>
         </div>
         """, unsafe_allow_html=True)
 
     st.divider()
+
 # ══════════════════════════════════════════════════════════════════════════
 # F3 — Summary
 # ══════════════════════════════════════════════════════════════════════════
@@ -1550,18 +1523,18 @@ else:
 
 st.markdown(f"""
 <div class="insight-card">
-    <h4>🎯 Answer to Research Question 3</h4>
-    <p>{answer_text}</p>
+    <h4 style="font-size:1.1rem;">🎯 Answer to Research Question 3</h4>
+    <p style="font-size:1rem;">{answer_text}</p>
 </div>
 """, unsafe_allow_html=True)
 
 st.markdown("""
 <div class="methodology-note">
-    <p>
-    <strong>Methodological note:</strong> Chart assignment is based on normalized artist names 
-    (lowercase, trimmed). In collaborations, each credited artist is counted separately. 
-    The analysis uses sampled global Spotify Weekly Charts from February 2023 to February 2026, 
-    with one representative chart week per month. Last.fm listener counts are based on a 
+    <p style="font-size:1rem;">
+    <strong>Methodological note:</strong> Chart assignment is based on normalized artist names
+    (lowercase, trimmed). In collaborations, each credited artist is counted separately.
+    The analysis uses sampled global Spotify Weekly Charts from February 2023 to February 2026,
+    with one representative chart week per month. Last.fm listener counts are based on a
     March 2026 snapshot.
     </p>
 </div>
