@@ -26,7 +26,7 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-suche = st.text_input("🔍 Search term...", placeholder="e.g. p-value, Pearson, Median...")
+suche = st.text_input("🔍 Search term...", placeholder="e.g. median, quartile, pct_capital...")
 
 if suche.strip():
     treffer = {t: v for t, v in TERMS.items()
