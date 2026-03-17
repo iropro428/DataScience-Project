@@ -28,10 +28,7 @@ apply_glossary_styles()
 # Header
 st.markdown("""
 <div class="page-header">
-    <div class="page-header-title-row">
-        <span class="page-header-icon">🗺️</span>
-        <span class="page-header-title">Geographic Analysis</span>
-    </div>
+    <h1>🗺️ Geographic Analysis</h1>
     <p>Analysing touring patterns: revisit cities, capital preferences, and alignment between streaming reach and tour geography.</p>
 </div>
 """, unsafe_allow_html=True)
@@ -1409,6 +1406,12 @@ top_df = (
     else ga_filtered.dropna(subset=["n_tour_countries", "n_streaming", "streaming_reach"])
     .nsmallest(n_show, sort_col)
 )
+
+# --- IMPORTANT: sort artists by overlap for correct visual order ---
+if show_type == "Best Aligned":
+    top_df = top_df.sort_values("n_aligned", ascending=True)
+else:
+    top_df = top_df.sort_values("n_aligned", ascending=False)
 
 fig_g3 = go.Figure()
 fig_g3.add_trace(go.Bar(
