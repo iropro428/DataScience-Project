@@ -95,7 +95,7 @@ st.markdown("""
                 width:24px;height:24px;display:flex;align-items:center;justify-content:center;
                 font-size:.75rem;font-weight:700;flex-shrink:0;">3</span>
             <span style="color:#cbd5e1 !important;font-size:.9rem;">
-                How does lead time (days between sale start and the first concert date)  correlate with an artist's Last.fm listener count?
+                How does lead time correlate with an artist's Last.fm listener count?
             </span>
         </a>
     </div>
@@ -1011,9 +1011,9 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 st.markdown("""
-This question examines whether more popular artists tend to announce concerts further in advance than less popular artists.
 Lead time describes the number of days between ticket sale start and the first concert date.
-So a longer lead time may reflect larger productions, more complex logistics, or longer promotional phases before the first show.
+This question examines whether more popular artists tend to announce concerts further in advance than less popular artists.
+A longer lead time may reflect larger productions, more complex logistics, or longer promotional phases before the first show.
 
 **Hypothesis:** Artists with more listeners may have longer lead times, because larger tours often require more planning and earlier ticket sales.
 
