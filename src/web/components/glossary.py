@@ -21,12 +21,24 @@ In this project, trend lines are calculated using Ordinary Least Squares (OLS) �
         "emoji": "📈", "kategorie": "Statistics",
     },
 
+    "Mean": {
+        "kurz": "The average — sum of all values divided by the number of values",
+        "lang": """
+**Mean** (average) is calculated by adding up all values and dividing by how many there are.
+
+Example: if 5 artists have 1, 2, 3, 4, and 10 million listeners, the mean is (1+2+3+4+10)/5 = 4 million.
+
+The mean is sensitive to extreme outliers — one superstar with 50 million listeners can pull the mean far above what most artists actually have. This is why the **median** is often a better measure for skewed data like listener counts.
+""",
+        "emoji": "➗", "kategorie": "Statistics",
+    },
+
     "Median": {
         "kurz": "The middle value — 50% of values are below it, 50% are above it",
         "lang": """
 **Median** is the value exactly in the middle when all values are sorted in order.
 
-It is more robust than the mean (average) when data is skewed — for example, if one artist has 50 million listeners and everyone else has under 2 million, the mean is pulled upward dramatically, but the median barely moves.
+It is more robust than the mean when data is skewed — for example, if one artist has 50 million listeners and everyone else has under 2 million, the mean is pulled upward dramatically, but the median barely moves.
 
 In this project, medians are used wherever listener counts or event counts are highly skewed.
 """,
