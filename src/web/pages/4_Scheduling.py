@@ -1006,13 +1006,15 @@ st.markdown('<div id="sched-3"></div>', unsafe_allow_html=True)
 st.markdown("""
 <div class="rq-box">
     <h3>📅 Research Question 3</h3>
-    <p>How does lead time — the number of days between ticket sale start and the first concert date — relate to an artist's Last.fm listener count?</p>
+    <p>How does lead time relate to an artist's Last.fm listener count?</p>
 </div>
 """, unsafe_allow_html=True)
 
 st.markdown("""
 This question examines whether more popular artists tend to announce concerts further in advance than less popular artists.
 A longer lead time may reflect larger productions, more complex logistics, or longer promotional phases before the first show.
+
+**Lead time** = the number of days between ticket sale start and the first concert date.
 
 **Hypothesis:** Artists with more listeners may have longer lead times, because larger tours often require more planning and earlier ticket sales.
 
