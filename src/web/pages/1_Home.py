@@ -39,6 +39,12 @@ st.markdown("""<div style="
     background:#161c2d; border:1px solid #232840; border-radius:14px;
     padding:32px 36px; margin-bottom:32px; max-width:900px;
 ">
+    <p style="color:#818cf8 !important;font-size:1.15rem;font-weight:700;
+        line-height:1.6;margin:0 0 20px 0;font-style:italic;
+        border-left:3px solid #818cf8;padding-left:16px;">
+        From Streams to Stages: To what extent do digital streaming metrics
+        predict the physical reality of global concert tours?
+    </p>
     <p style="color:#cbd5e1 !important;font-size:1rem;line-height:1.8;margin:0 0 16px 0;">
         Streaming platforms such as Last.fm and Spotify generate millions of data points every day —
         listener counts, play counts, chart positions. But how well do these digital signals
@@ -56,7 +62,6 @@ st.markdown("""<div style="
     </p>
 </div>
 """, unsafe_allow_html=True)
-
 # ══════════════════════════════════════════════════════════════════════════
 # THREE ANALYSIS AREAS
 # ══════════════════════════════════════════════════════════════════════════
