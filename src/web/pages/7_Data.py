@@ -135,3 +135,85 @@ st.markdown("""
     </p>
 </div>
 """, unsafe_allow_html=True)
+
+# ── Visualisation Methods ──────────────────────────────────────────────────
+st.markdown('<div class="section-title">📊 Visualisation Methods</div>', unsafe_allow_html=True)
+
+st.markdown("""
+<p style="font-size:1rem; color:#cbd5e1;">
+All charts in this project are built with <strong>Plotly</strong> and embedded in Streamlit.
+Every chart is interactive — you can hover over data points, zoom in, and filter by group.
+Here is an overview of the chart types we used and where you can find them.
+</p>
+""", unsafe_allow_html=True)
+
+charts = [
+    {
+        "icon": "🔵",
+        "name": "Scatterplot",
+        "color": "#818cf8",
+        "desc": "Shows the relationship between two variables — each dot represents one artist. Used with a trend line to summarize the overall direction.",
+        "used": "Streaming & Ticket Power · Geographic Analysis · Market Time & Scheduling"
+    },
+    {
+        "icon": "📊",
+        "name": "Bar Chart",
+        "color": "#fbbf24",
+        "desc": "Ranks categories by a numeric value. Used both horizontally (cities, capitals) and vertically (listener groups, popularity tiers).",
+        "used": "Geographic Analysis · Streaming & Ticket Power"
+    },
+    {
+        "icon": "📊",
+        "name": "Grouped Bar Chart",
+        "color": "#f59e0b",
+        "desc": "Shows multiple bars side by side for each category, allowing direct comparison of several values at once.",
+        "used": "Geographic Analysis — Streaming vs. Tour Countries per Artist"
+    },
+    {
+        "icon": "📊",
+        "name": "Stacked Bar Chart",
+        "color": "#a78bfa",
+        "desc": "Stacks multiple values on top of each other within a single bar. Used to show how an artist's total playcount is distributed across their top tracks.",
+        "used": "Streaming & Ticket Power — Artist Streaming Profiles"
+    },
+    {
+        "icon": "📦",
+        "name": "Box Plot",
+        "color": "#10b981",
+        "desc": "Shows the distribution of values within a group — median, middle 50%, typical range, and outliers. Used to compare groups side by side.",
+        "used": "Streaming & Ticket Power · Geographic Analysis · Market Time & Scheduling"
+    },
+    {
+        "icon": "📉",
+        "name": "Histogram",
+        "color": "#22d3ee",
+        "desc": "Shows how many artists fall into each value range. Used to visualize the distribution of listener counts and weekend share across the dataset.",
+        "used": "Streaming & Ticket Power — Listener Distribution · Market Time & Scheduling — Weekend Share"
+    },
+]
+
+v_cols = st.columns(3)
+for i, chart in enumerate(charts):
+    with v_cols[i % 3]:
+        st.markdown(f"""
+        <div style="
+            background:#161c2d;
+            border:1px solid #232840;
+            border-left:4px solid {chart['color']};
+            border-radius:12px;
+            padding:20px 22px;
+            margin-bottom:16px;
+            min-height:200px;
+        ">
+            <div style="font-size:1.4rem;margin-bottom:8px;">{chart['icon']}</div>
+            <div style="color:{chart['color']} !important;font-weight:700;font-size:1rem;margin-bottom:10px;">
+                {chart['name']}
+            </div>
+            <p style="color:#cbd5e1 !important;font-size:0.9rem;line-height:1.6;margin:0 0 12px 0;">
+                {chart['desc']}
+            </p>
+            <div style="font-size:0.78rem;color:#475569 !important;border-top:1px solid #232840;padding-top:10px;">
+                📍 {chart['used']}
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
