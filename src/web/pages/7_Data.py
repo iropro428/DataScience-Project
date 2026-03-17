@@ -15,8 +15,11 @@ apply_glossary_styles()
 
 st.markdown("""
 <div class="page-header">
-    <h1>🗄️ Data</h1>
-    <p>An overview of all data sources used in this project</p>
+    <div class="page-header-title-row">
+        <span class="page-header-icon">🗄️</span>
+        <span class="page-header-title">Data</span>
+    </div>
+    <p>An overview of all data sources used in this projec</p>
 </div>
 """, unsafe_allow_html=True)
 

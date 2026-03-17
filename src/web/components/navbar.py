@@ -121,7 +121,7 @@ def render_navbar():
 
     st.markdown('<div class="navbar-wrapper">', unsafe_allow_html=True)
 
-    cols = st.columns([1.1, 2.3, 1.9, 2.5, 1.3, 1.3, 1.0], gap="small")
+    cols = st.columns([1.1, 2.3, 1.9, 2.5, 1.3, 1.3, 1.1], gap="small")
     for i, page in enumerate(PAGES):
         with cols[i]:
             st.page_link(page["page"], label=f"{page['icon']} {page['label']}")

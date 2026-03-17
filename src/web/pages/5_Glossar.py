@@ -18,7 +18,10 @@ render_navbar()
 
 st.markdown("""
 <div class="page-header">
-    <h1>📖 Glossary</h1>
+    <div class="page-header-title-row">
+        <span class="page-header-icon">📖</span>
+        <span class="page-header-title">Glossary</span>
+    </div>
     <p>All technical terms explained simply — no data science degree required</p>
 </div>
 """, unsafe_allow_html=True)

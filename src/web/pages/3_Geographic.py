@@ -28,8 +28,11 @@ apply_glossary_styles()
 # Header
 st.markdown("""
 <div class="page-header">
-    <h1>🗺️ Geographic Analysis</h1>
-    <p>Analysing touring patterns: revisit cities, capital preferences, and alignment between streaming reach and tour geography.</p>
+    <div class="page-header-title-row">
+        <span class="page-header-icon">🗺️</span>
+        <span class="page-header-title">Geographic Analysis</span>
+    </div>
+    <p>How do artists choose where to tour - do they revisit cities, play in capitals, and follow their listeners?</p>
 </div>
 """, unsafe_allow_html=True)
 

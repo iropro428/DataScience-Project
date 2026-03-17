@@ -15,7 +15,10 @@ apply_glossary_styles()
 
 st.markdown("""
 <div class="page-header">
-    <h1>👥 About Us</h1>
+    <div class="page-header-title-row">
+        <span class="page-header-icon">👥</span>
+        <span class="page-header-title">About Us</span>
+    </div>
     <p>The team behind this project</p>
 </div>
 """, unsafe_allow_html=True)
