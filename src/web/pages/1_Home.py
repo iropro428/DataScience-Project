@@ -108,7 +108,7 @@ for col, icon, title, color, border, bg, desc, qs, page in [
             <h3 style="color:{color} !important;font-size:1.2rem;font-weight:700;
                 margin:0 0 14px 0;line-height:1.3;">{title}</h3>
             <p style="color:#94a3b8 !important;font-size:1rem;line-height:1.7;
-                margin:0 0 20px 0; min-height: 150px;">{desc}</p>
+                margin:0 0 20px 0; min-height: 220px;">{desc}</p>
             <div style="border-top:1px solid {border};padding-top:16px;">
                 <div style="font-size:0.85rem;font-weight:700;text-transform:uppercase;
                     letter-spacing:.1em;color:#475569 !important;margin-bottom:10px;">
@@ -143,7 +143,7 @@ for col, icon, title, text in [
 ]:
     with col:
         st.markdown(f"""<div style="background:#161c2d;border:1px solid #232840;border-radius:10px;
-            padding:18px;text-align:center;min-height:180px;">
+            padding:18px;text-align:center;min-height:240px;">
             <div style="font-size:1.6rem;margin-bottom:8px;">{icon}</div>
             <div style="color:#f1f5f9 !important;font-weight:600;font-size:1rem;
                 margin-bottom:8px;">{title}</div>
