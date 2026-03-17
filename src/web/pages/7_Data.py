@@ -19,7 +19,7 @@ st.markdown("""
         <span class="page-header-icon">🗄️</span>
         <span class="page-header-title">Data</span>
     </div>
-    <p>An overview of all data sources used in this projec</p>
+    <p>An overview of all data sources used in this project</p>
 </div>
 """, unsafe_allow_html=True)
 
