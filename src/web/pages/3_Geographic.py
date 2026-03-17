@@ -1370,40 +1370,21 @@ they actually visit on tour.
 g3a, g3b = st.columns([1, 3])
 with g3a:
     n_show = st.slider("Number of Artists", 5, 20, 10, key="ga2_n")
-    min_events = st.slider("Min. Future Events", 1, 20, 3, key="ga2_min")
     show_type = st.radio(
         "Show",
         ["Best Aligned", "Worst Aligned"],
         key="ga2_type"
     )
 
-sort_col = "streaming_reach" if "streaming_reach" in ga.columns else "jaccard"
+sort_col = "n_aligned"
 
-try:
-    df_events = pd.read_csv("data/raw/ticketmaster_events.csv")
-    df_events["event_date"] = pd.to_datetime(df_events["event_date"], errors="coerce")
-    today = pd.Timestamp.today()
-
-    future_events = df_events[df_events["event_date"] >= today]
-    active_artists = (
-        future_events.groupby("artist_name")
-        .size()
-        .reset_index(name="future_events")
-    )
-    active_artists = active_artists[
-        active_artists["future_events"] >= min_events
-    ]["artist_name"].tolist()
-
-    ga_filtered = ga[ga["artist_name"].isin(active_artists)].copy()
-    ga_filtered = ga_filtered[ga_filtered["n_tour_countries"] >= 3].copy()
-
-except Exception:
-    ga_filtered = ga.copy()
+ga_filtered = ga.copy()
+ga_filtered = ga_filtered[ga_filtered["n_tour_countries"] >= 3].copy()
 
 top_df = (
-    ga_filtered.dropna(subset=["n_tour_countries", "n_streaming", "streaming_reach"])
+    ga_filtered.dropna(subset=["n_tour_countries", "n_streaming", "n_aligned"])
     .nlargest(n_show, sort_col) if show_type == "Best Aligned"
-    else ga_filtered.dropna(subset=["n_tour_countries", "n_streaming", "streaming_reach"])
+    else ga_filtered.dropna(subset=["n_tour_countries", "n_streaming", "n_aligned"])
     .nsmallest(n_show, sort_col)
 )
 
@@ -1441,7 +1422,7 @@ fig_g3.add_trace(go.Bar(
 ))
 
 fig_g3.update_layout(
-    title=f"{show_type} — Streaming vs. Tour Countries  |  min. {min_events} future events, min. 3 tour countries",
+    title=f"{show_type} — Streaming vs. Tour Countries  |  min. 3 tour countries",
     barmode="group",
     xaxis_title="Number of Countries",
     template="plotly_dark",
