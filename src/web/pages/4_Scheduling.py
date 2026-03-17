@@ -733,7 +733,7 @@ else:
                 "x_plot": x_axis_label,
                 col_f2_y: "Weekend share (%)"
             },
-            title=f"Playcount vs. weekend share  |  r = {r2_plot:.3f}  |  n = {len(df2_plot)}",
+            title=f"Playcount vs. weekend share  |  n = {len(df2_plot)}",
             template="plotly_dark",
             category_orders={"Popularity-Tier": ["Q1\n(low)", "Q2", "Q3", "Q4\n(high)"]},
             color_discrete_sequence=["#1DB954", "#7fb3d3", "#f0c040", "#e05050"],
