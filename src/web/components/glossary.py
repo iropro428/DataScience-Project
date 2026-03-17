@@ -1,161 +1,237 @@
 """
 components/glossary.py
-Glossar + CSS-Tooltips fuer alle Fachbegriffe.
-
-Verwendung:
-    from components.glossary import apply_glossary_styles, tt, glossar_seite
-    apply_glossary_styles()   # einmal pro Page aufrufen
-    st.markdown("Der " + tt("Pearson r") + " beträgt 0.21", unsafe_allow_html=True)
+Glossary + CSS tooltips for all technical terms.
 """
 import streamlit as st
 
 TERMS = {
-    "Median": {
-        "kurz": "Middle value — 50% of values are below, 50% above",
-        "lang": """
-**Median** is the value exactly in the middle of a sorted list.
 
-More robust than the mean for skewed data — one superstar artist barely shifts
-the median, but can heavily distort the average.
+    # ── STATISTICS ────────────────────────────────────────────────────────
+    "Trend Line": {
+        "kurz": "A straight line showing the overall direction of a relationship in a scatterplot",
+        "lang": """
+**Trend line** is the straight line that best fits all the data points in a scatterplot.
+
+- **Rising line** → positive relationship: as x increases, y tends to increase
+- **Falling line** → negative relationship: as x increases, y tends to decrease
+- **Flat line** → no relationship: x and y move independently
+
+In this project, trend lines are calculated using Ordinary Least Squares (OLS) — the standard method for finding the best-fit straight line through a set of points.
+""",
+        "emoji": "📈", "kategorie": "Statistics",
+    },
+
+    "Median": {
+        "kurz": "The middle value — 50% of values are below it, 50% are above it",
+        "lang": """
+**Median** is the value exactly in the middle when all values are sorted in order.
+
+It is more robust than the mean (average) when data is skewed — for example, if one artist has 50 million listeners and everyone else has under 2 million, the mean is pulled upward dramatically, but the median barely moves.
+
+In this project, medians are used wherever listener counts or event counts are highly skewed.
 """,
         "emoji": "📍", "kategorie": "Statistics",
     },
-    "Quartile": {
-        "kurz": "Divides data into 4 equally sized groups (25% each)",
-        "lang": """
-**Quartiles:** Q1 = bottom 25% · Q2 = 50% · Q3 = 75% · Q4 = top 25%
 
-Used in this project to group artists into popularity tiers.
+    "Quartile": {
+        "kurz": "Divides data into 4 equally sized groups of 25% each",
+        "lang": """
+**Quartiles** split all values into four equally sized groups:
+
+- **Q1** = bottom 25% (lowest values)
+- **Q2** = 25–50% (below median)
+- **Q3** = 50–75% (above median)
+- **Q4** = top 25% (highest values)
+
+In this project, artists are grouped into popularity tiers Q1–Q4 based on their Last.fm listener count.
 """,
         "emoji": "📦", "kategorie": "Statistics",
     },
-    "n": {
-        "kurz": "Number of data points in the analysis",
-        "lang": """
-**n** = sample size.
 
-Large n → more reliable; even small effects can become significant.
-Small n → requires stronger effects to reach significance.
+    "n": {
+        "kurz": "Number of data points included in an analysis",
+        "lang": """
+**n** = sample size — how many artists, cities, or data points are included in a given calculation.
+
+A larger n makes results more reliable. A small n means even strong-looking patterns should be interpreted cautiously.
+
+In this project, n is shown in chart titles so you always know how many artists a result is based on.
 """,
         "emoji": "🔢", "kategorie": "Statistics",
     },
-    "Top-5-Share": {
-        "kurz": "Share of the top 5 tracks in total play count (%)",
-        "lang": """
-**Top-5-Share** = What percentage of all streams come from the 5 most-played tracks?
 
-90% → very concentrated (one-hit-wonder effect)
-30% → broad catalogue
+    "Log Scale": {
+        "kurz": "A scale where equal steps represent equal multiplications (×10, ×100...)",
+        "lang": """
+**Log scale** (logarithmic scale) is used when data spans a very wide range of values — for example, Last.fm listener counts range from about 10,000 to over 50 million.
+
+On a normal scale, all the smaller artists would be squished into one tiny corner of the chart. On a log scale, each step represents a ×10 increase, so every artist is visible.
+
+The x-axis label `log₁₀(listeners)` means the displayed value is the base-10 logarithm of the actual listener count. For example: log₁₀(1,000,000) = 6.
 """,
-        "emoji": "🎧", "kategorie": "Metrics",
+        "emoji": "📐", "kategorie": "Statistics",
     },
-    "pct_capital": {
-        "kurz": "Share of concerts held in capital cities (%)",
-        "lang": """
-**pct_capital** = Concerts in capital cities / All concerts × 100
 
-Capital cities tend to offer larger venues, more media coverage, and denser fanbases.
+    # ── METRICS ───────────────────────────────────────────────────────────
+    "pct_capital": {
+        "kurz": "Share of an artist's total concerts held in capital cities (%)",
+        "lang": """
+**pct_capital** = (events in capital cities) / (all events) × 100
+
+An artist who plays 10 concerts, 3 of which are in capitals (e.g. Berlin, Paris, London), has a pct_capital of 30%.
+
+This metric counts every performance — so playing 5 shows in Berlin counts as 5 capital events.
 """,
         "emoji": "🏛️", "kategorie": "Metrics",
     },
-    "Revisit Rate": {
-        "kurz": "Share of cities visited more than once on a tour (%)",
+
+    "pct_capital_cities": {
+        "kurz": "Share of the distinct cities an artist visited that are capitals (%)",
         "lang": """
-**Revisit Rate** = Cities with 2 or more visits / All cities × 100
+**pct_capital_cities** counts cities, not events. Each city counts only once regardless of how many shows were played there.
 
-High revisit rate → strong local fanbases, consolidation strategy.
-Low revisit rate → expansion strategy, reaching new markets.
-""",
-        "emoji": "🔄", "kategorie": "Metrics",
-    },
-    "Weighted Coverage": {
-        "kurz": "Share of an artist's global listener reach covered by their tour countries",
-        "lang": """
-**Weighted Coverage** is the main geo-alignment metric in this project.
+An artist who visited London (capital), Manchester, and Berlin (capital) has a pct_capital_cities of 2/3 = 67%.
 
-Unlike Jaccard, it weights each country by how many listeners the artist has there.
-
-| Score | Meaning |
-|-------|---------|
-| **1.0** | The artist performs in every country where they have significant listeners |
-| **0.0** | The artist tours in none of the countries where they have listeners |
-
-A score of 0.6 means 60% of the artist's total listener reach is covered by their tour.
-""",
-        "emoji": "🌍", "kategorie": "Metrics",
-    },
-    "Tour Coverage": {
-        "kurz": "Share of tour countries that are also top streaming countries (%)",
-        "lang": """
-**Tour Coverage** answers: of all the countries an artist tours in,
-how many are also countries where they have a significant streaming presence?
-
-High Tour Coverage → the artist mainly tours where fans already exist.
-Low Tour Coverage → the artist tours heavily into markets without an established audience.
+This can tell a very different story from pct_capital. An artist with 10 shows in London and 1 in Hamburg has pct_capital = 91% (events), but pct_capital_cities = 50% (cities).
 """,
         "emoji": "🗺️", "kategorie": "Metrics",
     },
-    "Streaming Reach": {
-        "kurz": "Share of streaming countries that are actually toured (%)",
-        "lang": """
-**Streaming Reach** answers: of all the countries where an artist has significant listeners,
-how many are actually visited on tour?
 
-High Streaming Reach → the artist converts their digital presence into live shows effectively.
-Low Streaming Reach → many listener markets remain unreached by live performances.
+    "Revisit Rate": {
+        "kurz": "Share of cities an artist visited more than once on tour (%)",
+        "lang": """
+**Revisit Rate** = (cities with 2+ visits) / (all cities visited) × 100
+
+A high revisit rate means the artist returns to proven markets — a consolidation strategy.
+A low revisit rate means the artist is constantly exploring new cities — a geographic expansion strategy.
+
+In this project, a "revisit city" is any city where an artist has two or more Ticketmaster events recorded between 2023 and 2026.
+""",
+        "emoji": "🔄", "kategorie": "Metrics",
+    },
+
+    "Revisit Ratio": {
+        "kurz": "Number of revisit cities divided by number of new cities",
+        "lang": """
+**Revisit Ratio** = revisit cities / new cities
+
+- **Ratio > 1** → more revisits than new cities (consolidation dominates)
+- **Ratio = 1** → equal number of revisits and new cities
+- **Ratio < 1** → more new cities than revisits (expansion dominates)
+
+A global ratio of 0.16 means that for every new city added to a tour, only 0.16 cities are revisited — expansion is the dominant pattern.
+""",
+        "emoji": "📊", "kategorie": "Metrics",
+    },
+
+    "Top-5-Share": {
+        "kurz": "Share of an artist's total play count coming from their top 5 tracks (%)",
+        "lang": """
+**Top-5-Share** = (plays of top 5 tracks) / (total plays across top 20 tracks) × 100
+
+A high Top-5-Share (e.g. 90%) means the audience almost exclusively listens to a handful of songs — a one-hit-wonder profile.
+A low Top-5-Share (e.g. 30%) means plays are spread broadly across many tracks — a deep-catalogue artist.
+
+This metric is used in Research Question 2 of Streaming & Ticket Power to examine whether streaming concentration relates to tour scale.
+""",
+        "emoji": "🎧", "kategorie": "Metrics",
+    },
+
+    "Lead Time": {
+        "kurz": "Number of days between when tickets go on sale and the first concert date",
+        "lang": """
+**Lead time** measures how far in advance a concert is announced and put on sale.
+
+A lead time of 90 days means tickets went on sale about 3 months before the show.
+
+Longer lead times may reflect larger productions, more complex logistics, or longer marketing campaigns. In this project, only lead times between 0 and 1095 days (3 years) are included to remove implausible values.
+""",
+        "emoji": "📅", "kategorie": "Metrics",
+    },
+
+    "Weekend Share": {
+        "kurz": "Share of an artist's concerts that take place on Friday, Saturday, or Sunday (%)",
+        "lang": """
+**Weekend share** = (concerts on Fri/Sat/Sun) / (all concerts) × 100
+
+A weekend share of 60% means 60% of all concerts happen on weekends. Weekends are typically more attractive for live events because more people are free and ticket demand tends to be higher.
+
+In this project, Friday, Saturday, and Sunday are all counted as weekend days.
+""",
+        "emoji": "🗓️", "kategorie": "Metrics",
+    },
+
+    "Avg. Days Between Shows": {
+        "kurz": "Average number of days between consecutive concerts for one artist",
+        "lang": """
+**Average days between shows** is calculated by taking the dates of all an artist's concerts, computing the gap between each consecutive pair, and averaging those gaps.
+
+A value of 7 means the artist plays roughly once a week on average.
+A value of 30 means roughly once a month.
+
+Very short gaps suggest intensive touring; very long gaps may indicate infrequent live activity or long breaks between tours.
+""",
+        "emoji": "⏱️", "kategorie": "Metrics",
+    },
+
+    "Weighted Coverage": {
+        "kurz": "Share of an artist's global listener reach that is covered by their tour countries",
+        "lang": """
+**Weighted Coverage** is the main geo-alignment metric in this project.
+
+Unlike Jaccard, it weights each country by how many listeners the artist has there — so a large listener market that is not toured has a bigger negative impact on the score than a small market.
+
+| Score | Meaning |
+|-------|---------|
+| **1.0** | The artist tours in every country where they have significant listeners |
+| **0.5** | 50% of their total listener reach is covered by their tour countries |
+| **0.0** | None of the countries where they have listeners are toured |
+""",
+        "emoji": "🌍", "kategorie": "Metrics",
+    },
+
+    "Tour Coverage": {
+        "kurz": "Share of an artist's tour countries that are also top streaming countries (%)",
+        "lang": """
+**Tour Coverage** answers: of all the countries an artist tours in, how many are also countries where they have a significant streaming presence?
+
+- **High Tour Coverage** → the artist mainly performs where fans already exist
+- **Low Tour Coverage** → the artist tours heavily into markets with little prior streaming presence, suggesting a strategy of building new audiences
+""",
+        "emoji": "🗺️", "kategorie": "Metrics",
+    },
+
+    "Streaming Reach": {
+        "kurz": "Share of an artist's top streaming countries that are actually visited on tour (%)",
+        "lang": """
+**Streaming Reach** answers: of all the countries where an artist has significant listeners, how many are actually visited on tour?
+
+- **High Streaming Reach** → the artist converts their digital audience into live shows effectively
+- **Low Streaming Reach** → many listener markets are never reached by live performances — these are untapped markets
+
+This is a key metric for answering Research Question 3: how well does touring geography follow streaming geography?
 """,
         "emoji": "📡", "kategorie": "Metrics",
     },
+
     "Geo-Alignment": {
-        "kurz": "How well an artist's tour geography matches their streaming audience geography",
+        "kurz": "How well an artist's tour geography matches where their streaming audience is located",
         "lang": """
-**Geo-Alignment** is the central concept of Research Question 3.
+**Geo-Alignment** is the central concept of Research Question 3 in Geographic Analysis.
 
-It measures whether artists perform in the same countries where their digital fanbase is located.
-A perfectly aligned artist tours exactly where their listeners are.
-A misaligned artist either tours regionally despite a global fanbase,
-or tours globally into markets where they have little streaming presence.
+A perfectly aligned artist performs in the same countries where their digital fanbase is strongest.
+A misaligned artist either:
+- Tours regionally despite having a global fanbase (digital reach far exceeds live presence), or
+- Tours globally into countries where they have little streaming presence (building new audiences)
 
-Measured using three metrics: Jaccard Similarity, Weighted Coverage, and Streaming Reach.
+Measured using three complementary metrics: Weighted Coverage, Tour Coverage, and Streaming Reach.
 """,
         "emoji": "🧭", "kategorie": "Metrics",
     },
-    "Scatterplot": {
-        "kurz": "Chart where each dot is one artist — X and Y are two measured values",
-        "lang": """
-**Scatterplot** shows the relationship between two variables.
 
-Points aligned along a line → relationship exists.
-Randomly distributed → no relationship.
-The OLS line shows the average trend across all artists.
-""",
-        "emoji": "🔵", "kategorie": "Visualisation",
-    },
-    "Box Plot": {
-        "kurz": "Shows minimum, maximum, median and spread of a group in one compact chart",
-        "lang": """
-**Box Plot** displays 5 key values:
-
-- Box = middle 50% of the data (Q1 to Q3)
-- Line inside box = median
-- Whiskers = range excluding extreme outliers
-- Dots outside = outliers
-""",
-        "emoji": "📦", "kategorie": "Visualisation",
-    },
-    "Log Scale": {
-        "kurz": "Scale where equal distances represent equal ratios (×10, ×100...)",
-        "lang": """
-**Log Scale** solves the problem when data spans very different orders of magnitude
-(e.g. 100k to 50 million listeners).
-
-Each step = ×10. This makes all artists visible in one chart — not just the superstars.
-""",
-        "emoji": "📐", "kategorie": "Visualisation",
-    },
 }
 
-# ── CSS fuer schoene Tooltips ──────────────────────────────────────────────
+# ── CSS for tooltips ───────────────────────────────────────────────────────
 TOOLTIP_CSS = """
 <style>
 .gt {
@@ -197,10 +273,6 @@ TOOLTIP_CSS = """
     visibility: visible;
     opacity: 1;
 }
-.gt-emoji {
-    font-size: 1rem;
-    margin-right: 4px;
-}
 .gt-term {
     font-weight: 700;
     font-size: 0.82rem;
@@ -220,15 +292,10 @@ TOOLTIP_CSS = """
 
 
 def apply_glossary_styles():
-    """Einmal pro Page aufrufen — injiziert Tooltip-CSS."""
     st.markdown(TOOLTIP_CSS, unsafe_allow_html=True)
 
 
 def tt(term: str, label: str = None) -> str:
-    """
-    Gibt HTML-Tooltip-Span zurueck.
-    Verwendung: st.markdown("Der " + tt("Pearson r") + " = 0.21", unsafe_allow_html=True)
-    """
     if term not in TERMS:
         return label or term
     t = TERMS[term]
@@ -244,7 +311,6 @@ def tt(term: str, label: str = None) -> str:
 
 
 def glossar_seite():
-    """Complete glossary page — all terms grouped by category."""
     kategorien = {}
     for term, t in TERMS.items():
         k = t.get("kategorie", "Other")
@@ -253,7 +319,6 @@ def glossar_seite():
     kat_icons = {
         "Statistics": "📊",
         "Metrics": "📏",
-        "Visualisation": "🎨",
     }
 
     for kat, terms in kategorien.items():
