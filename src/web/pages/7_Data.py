@@ -203,7 +203,7 @@ for i, chart in enumerate(charts):
             border-radius:12px;
             padding:20px 22px;
             margin-bottom:16px;
-            min-height:200px;
+            height:280px;
         ">
             <div style="font-size:1.4rem;margin-bottom:8px;">{chart['icon']}</div>
             <div style="color:{chart['color']} !important;font-weight:700;font-size:1rem;margin-bottom:10px;">
