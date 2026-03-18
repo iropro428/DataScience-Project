@@ -123,7 +123,7 @@ for col, icon, title, color, border, bg, desc, qs, page in [
                     <span style="background:#818cf822;color:#818cf8 !important;
                         border-radius:50%;width:22px;height:22px;display:flex;
                         align-items:center;justify-content:center;
-                        font-size:2rem;font-weight:700;flex-shrink:0;">{i + 1}</span>
+                        font-size:0.8rem;font-weight:700;flex-shrink:0;">{i + 1}</span>
                     <span style="color:#cbd5e1 !important;font-size:1rem;">{q}</span>
                 </div>""" for i, q in enumerate(qs))}
             </div>
