@@ -109,8 +109,8 @@ for col, icon, title, color, border, bg, desc, qs, page in [
 ]:
     with col:
         st.markdown(f"""<div style="{card_style.format(border=border, bg=bg)}">
-            <div style="font-size:2.5rem;margin-bottom:14px;">{icon}</div>
-            <h3 style="color:{color} !important;font-size:1.2rem;font-weight:700;
+            <div style="font-size:2.2rem;margin-bottom:14px;">{icon}</div>
+            <h3 style="color:{color} !important;font-size:1.5rem;font-weight:700;
                 margin:0 0 14px 0;line-height:1.3;">{title}</h3>
             <p style="color:#94a3b8 !important;font-size:1rem;line-height:1.7;
                 margin:0 0 20px 0; min-height: 220px;">{desc}</p>
