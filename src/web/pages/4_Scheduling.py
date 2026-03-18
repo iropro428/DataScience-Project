@@ -134,8 +134,7 @@ st.markdown('<div id="sched-1"></div>', unsafe_allow_html=True)
 st.markdown("""
 <div class="rq-box">
     <h3>📅 Research Question 1</h3>
-    <p>How does average days between concerts differ between high and low Last.fm listener count artists?
-</p>
+    <p>How does average days between concerts differ between high and low Last.fm listener count artists?</p>
 </div>
 """, unsafe_allow_html=True)
 
@@ -155,17 +154,19 @@ if col_f1 not in df.columns or df[col_f1].notna().sum() < 10:
     st.warning("Column `avg_days_between_shows` not found in the dataset — run join_data.py again.")
 else:
     df1 = df.dropna(subset=["listeners", col_f1]).copy()
-    df1 = df1[df1[col_f1] > 0]
+    df1 = df1[df1[col_f1] > 0].copy()
+
+    if "total_events" in df1.columns:
+        df1 = df1[df1["total_events"].notna()].copy()
+
     df1["log_listeners"] = np.log10(df1["listeners"] + 1)
-    df1["Popularity-Tier"] = pd.qcut(df1["listeners"], q=4,
-                                     labels=["Q1\n(niedrig)", "Q2", "Q3", "Q4\n(hoch)"])
+    df1["Popularity-Tier"] = pd.qcut(
+        df1["listeners"],
+        q=4,
+        labels=["Q1\n(niedrig)", "Q2", "Q3", "Q4\n(hoch)"]
+    )
 
-    r1, p1 = stats.pearsonr(df1["log_listeners"], df1[col_f1])
-    r1_s, p1_s = stats.spearmanr(df1["listeners"], df1[col_f1])
-    coef1 = np.polyfit(df1["log_listeners"], df1[col_f1], 1)
-    x_line1 = np.linspace(df1["log_listeners"].min(), df1["log_listeners"].max(), 200)
-    y_line1 = np.polyval(coef1, x_line1)
-
+    # Metrics based on full cleaned sample
     m1a, m1b, m1c, m1d = st.columns(4)
 
     artists_analyzed_q1 = len(df1)
@@ -179,7 +180,10 @@ else:
     m1d.metric("Median concerts per artist", f"{median_concerts_per_artist_q1:.0f}" if median_concerts_per_artist_q1 is not None else "—")
 
     st.divider()
-    # Graph 1a: Scatterplot
+
+    # ══════════════════════════════════════════════════════════════════════════
+    # GRAPH 1 — Scatterplot
+    # ══════════════════════════════════════════════════════════════════════════
     st.markdown(
         '<div class="section-title">📈 Graph 1 — Listeners vs. days between shows</div>',
         unsafe_allow_html=True
@@ -189,17 +193,20 @@ else:
         "total_events": (
             "Each point represents one artist. The x-axis shows Last.fm listener count and the y-axis shows the average number of days between consecutive concerts. "
             "A logarithmic x-axis can be enabled to compress very large listener values and make broad patterns easier to compare. "
-            "The points are colored by the total number of concerts in the dataset. This makes it easier to see whether artists with denser touring schedules also tend to have more total live events overall."
+            "The points are colored by the total number of concerts in the dataset. Only artists meeting the selected minimum-event threshold are shown, "
+            "but the color scale remains anchored to the full dataset so that colors stay comparable across filter settings."
         ),
         "pct_weekend": (
             "Each point represents one artist. The x-axis shows Last.fm listener count and the y-axis shows the average number of days between consecutive concerts. "
             "A logarithmic x-axis can be enabled to compress very large listener values and make broad patterns easier to compare. "
-            "The points are colored by weekend share — the percentage of concerts that take place on Fridays, Saturdays, or Sundays. This helps reveal whether tighter or more spread-out tour schedules are associated with stronger weekend concentration."
+            "The points are colored by weekend share — the percentage of concerts that take place on Fridays, Saturdays, or Sundays. "
+            "Only artists meeting the selected minimum-event threshold are shown."
         ),
         "lead_time_days": (
             "Each point represents one artist. The x-axis shows Last.fm listener count and the y-axis shows the average number of days between consecutive concerts. "
             "A logarithmic x-axis can be enabled to compress very large listener values and make broad patterns easier to compare. "
-            "The points are colored by lead time — the number of days between ticket sale start and the first concert date. This helps show whether artists with longer planning horizons also tend to space their concerts differently."
+            "The points are colored by lead time — the number of days between ticket sale start and the first concert date. "
+            "Only artists meeting the selected minimum-event threshold are shown."
         ),
     }
 
@@ -207,15 +214,32 @@ else:
 
     g1_ctrl, g1_plot = st.columns([1, 3])
     with g1_ctrl:
-        max_days = st.slider(
+        max_days_g1 = st.slider(
             "Max. days shown",
             30,
             200,
             min(200, int(df1[col_f1].quantile(0.95))),
-            key="f7_max"
+            key="rq1_g1_max_days"
         )
-        log_x1 = st.checkbox("Log X (listeners)", value=True, key="f7_logx")
-        show_lbl1 = st.checkbox("Show names", False, key="f7_lbl")
+
+        if "total_events" in df1.columns and df1["total_events"].notna().any():
+            min_events_available_g1 = int(df1["total_events"].min())
+            max_events_available_g1 = int(df1["total_events"].max())
+
+            min_events_filter_g1 = st.slider(
+                "Minimum number of events",
+                min_value=min_events_available_g1,
+                max_value=max_events_available_g1,
+                value=min_events_available_g1,
+                step=1,
+                key="rq1_g1_min_events"
+            )
+        else:
+            min_events_filter_g1 = 0
+            st.info("`total_events` column not available — event-based filtering disabled.")
+
+        log_x1 = st.checkbox("Log X (listeners)", value=True, key="rq1_g1_logx")
+        show_lbl1 = st.checkbox("Show names", False, key="rq1_g1_labels")
         color_by1 = st.selectbox(
             "Color by",
             ["total_events", "pct_weekend", "lead_time_days"],
@@ -224,58 +248,70 @@ else:
                 "pct_weekend": "Weekend share",
                 "lead_time_days": "Lead time",
             }.get(x, x),
-            key="f7_color"
+            key="rq1_g1_color"
         )
         color_by1 = color_by1 if color_by1 in df1.columns else None
-    description_placeholder_1.markdown(graph1_descriptions[color_by1])
 
-    df1_plot = df1[df1[col_f1] <= max_days].copy()
+    description_placeholder_1.markdown(graph1_descriptions.get(color_by1, ""))
 
-    # Dynamic x-axis column
-    df1_plot["x_plot"] = np.log10(df1_plot["listeners"] + 1) if log_x1 else df1_plot["listeners"]
+    # Filtered data for Graph 1 only
+    df1_plot = df1.copy()
+    if "total_events" in df1_plot.columns:
+        df1_plot = df1_plot[df1_plot["total_events"] >= min_events_filter_g1].copy()
+    df1_plot = df1_plot[df1_plot[col_f1] <= max_days_g1].copy()
 
     if len(df1_plot) >= 5:
-        # Recompute statistics on filtered data
+        df1_plot["x_plot"] = np.log10(df1_plot["listeners"] + 1) if log_x1 else df1_plot["listeners"]
+
+        # Global color ranges for consistency across filter settings
+        color_range_map = {}
+        if "total_events" in df1.columns and df1["total_events"].notna().any():
+            color_range_map["total_events"] = (0, float(df1["total_events"].max()))
+        if "pct_weekend" in df1.columns and df1["pct_weekend"].notna().any():
+            color_range_map["pct_weekend"] = (0, float(df1["pct_weekend"].max()))
+        if "lead_time_days" in df1.columns and df1["lead_time_days"].notna().any():
+            color_range_map["lead_time_days"] = (0, float(df1["lead_time_days"].max()))
+
         r1_plot, p1_plot = stats.pearsonr(df1_plot["x_plot"], df1_plot[col_f1])
-        r2_1_plot = r1_plot ** 2
         abs_r1_plot = abs(r1_plot)
 
-        if abs_r1_plot < 0.1:
-            relationship_text_1 = "no meaningful linear relationship"
-        elif abs_r1_plot < 0.3:
-            relationship_text_1 = f"a weak {'positive' if r1_plot > 0 else 'negative'} relationship"
-        elif abs_r1_plot < 0.5:
-            relationship_text_1 = f"a moderate {'positive' if r1_plot > 0 else 'negative'} relationship"
-        else:
-            relationship_text_1 = f"a strong {'positive' if r1_plot > 0 else 'negative'} relationship"
-
-        # Trend line based on filtered data
         coef1_plot = np.polyfit(df1_plot["x_plot"], df1_plot[col_f1], 1)
         x_line1_plot = np.linspace(df1_plot["x_plot"].min(), df1_plot["x_plot"].max(), 200)
         y_line1_plot = np.polyval(coef1_plot, x_line1_plot)
 
         x_axis_label = "log₁₀(Last.fm listeners)" if log_x1 else "Last.fm listeners"
 
+        scatter_kwargs = {}
+        if color_by1:
+            scatter_kwargs["color"] = color_by1
+            scatter_kwargs["color_continuous_scale"] = "Viridis"
+            if color_by1 in color_range_map:
+                scatter_kwargs["range_color"] = color_range_map[color_by1]
+        else:
+            scatter_kwargs["color"] = "Popularity-Tier"
+
         fig1 = px.scatter(
             df1_plot,
             x="x_plot",
             y=col_f1,
-            color=color_by1 if color_by1 else "Popularity-Tier",
-            color_continuous_scale="Viridis" if color_by1 else None,
             hover_name="artist_name",
             hover_data={
                 "x_plot": False,
                 col_f1: ":.1f",
                 "listeners": ":,",
-                "total_events": True
+                "total_events": True if "total_events" in df1_plot.columns else False
             },
             text="artist_name" if show_lbl1 else None,
             labels={
                 "x_plot": x_axis_label,
                 col_f1: "Avg. days between shows"
             },
-            title=f"Listeners vs. avg. days between shows  |  number of artists = {len(df1_plot)}",
+            title=(
+                f"Listeners vs. avg. days between shows  |  artists = {len(df1_plot)}"
+                f"  |  min. events = {min_events_filter_g1}"
+            ),
             template="plotly_dark",
+            **scatter_kwargs
         )
 
         fig1.add_trace(go.Scatter(
@@ -301,54 +337,72 @@ else:
             font=dict(color="white"),
             xaxis=dict(gridcolor="#232840"),
             yaxis=dict(gridcolor="#232840"),
+            coloraxis_colorbar=dict(title={
+                "total_events": "Events",
+                "pct_weekend": "Weekend %",
+                "lead_time_days": "Lead time"
+            }.get(color_by1, ""))
         )
 
         with g1_plot:
             st.plotly_chart(fig1, use_container_width=True)
 
-        # Interpretation
+        filter_note_1 = (
+            f"This view only includes artists with at least {min_events_filter_g1} events, "
+            f"so artists with very limited live activity are excluded. "
+        )
+
         if abs_r1_plot < 0.1:
             interp_text_1 = (
-                "Most artists cluster in the lower part of the chart, especially between about 0 and 15 days between shows. "
-                "This means that for most artists in the dataset, concerts are scheduled relatively close together and long average breaks are less common. "
-                "At the same time, the points are spread quite similarly across the x-axis, and the trend line is almost flat. "
-                "In practice, this suggests that artists with more Last.fm listeners do not consistently have either tighter or looser touring schedules than artists with fewer listeners."
+                filter_note_1 +
+                "Most artists still cluster in the lower part of the chart, which means that relatively compact touring schedules are common overall. "
+                "At the same time, the points remain broadly scattered across the popularity range and the fitted line is nearly flat. "
+                "This suggests that there is no meaningful relationship between listener count and average days between shows in this filtered sample."
+            )
+        elif abs_r1_plot < 0.3:
+            interp_text_1 = (
+                filter_note_1 +
+                "The fitted line shows only a very weak pattern, and its direction should be interpreted cautiously. "
+                "When the minimum-event threshold is adjusted, the slope can shift slightly and may even reverse. "
+                "This indicates that the relationship between popularity and spacing between concerts is not robust."
             )
         elif p1_plot < 0.05 and r1_plot > 0:
             interp_text_1 = (
-                "Most artists are still concentrated in the lower part of the chart, which means relatively short breaks between concerts are common overall. "
-                "However, the upward trend line suggests that artists with more Last.fm listeners tend to have somewhat longer average gaps between shows. "
-                "This may indicate that larger artists follow slightly more spaced-out touring schedules, possibly because of bigger productions or more complex logistics."
+                filter_note_1 +
+                "The upward trend line suggests that more popular artists in this filtered sample tend to have somewhat longer average gaps between shows. "
+                "However, because the slope changes when the minimum-event threshold is adjusted, this pattern should be treated as unstable rather than definitive."
             )
         elif p1_plot < 0.05 and r1_plot < 0:
             interp_text_1 = (
-                "Most artists cluster in the lower range of the chart, but the downward trend line shows that artists with more Last.fm listeners tend to have even shorter gaps between concerts. "
-                "This suggests that more popular artists may tour more intensively, with tighter schedules and more closely spaced performances."
+                filter_note_1 +
+                "The downward trend line suggests that more popular artists in this filtered sample tend to have somewhat shorter average gaps between shows. "
+                "However, because the slope changes when the minimum-event threshold is adjusted, this pattern should be treated as unstable rather than definitive."
             )
         else:
             interp_text_1 = (
-                "Most artists are concentrated in the lower part of the chart, especially between about 0 and 15 days between shows, which indicates that compact touring schedules are common overall. "
-                "Although the trend line shows a slight pattern, it is weak and not statistically strong. "
-                "This means the visible difference between more popular and less popular artists should be interpreted cautiously and may simply reflect random variation in the data."
+                filter_note_1 +
+                "A slight trend is visible, but it remains weak and sensitive to the minimum-event filter. "
+                "Since the fitted line can change direction across plausible thresholds, the overall pattern is not robust. "
+                "This means popularity alone does not appear to be a reliable predictor of how closely concerts are scheduled."
             )
 
         if color_by1 == "total_events":
             color_interp_1 = (
-                " The color gradient additionally shows whether artists with more concerts cluster in a specific part of the chart. "
-                "If brighter points appear mainly lower on the y-axis, this suggests that artists with more total shows also tend to follow tighter touring schedules."
+                " Because the color scale stays anchored to the full dataset and starts at zero, the shading remains comparable even when the event threshold changes. "
+                "This helps show whether high-event artists cluster in a particular part of the plot without changing the color interpretation."
             )
         elif color_by1 == "pct_weekend":
             color_interp_1 = (
-                " The color pattern also helps show whether weekend-heavy touring is linked to tighter or more spread-out schedules. "
-                "If similar colors appear throughout the chart, weekend concentration does not seem to be strongly connected to the spacing between concerts."
+                " The color pattern also indicates whether weekend-heavy touring is concentrated in a specific area of the chart. "
+                "If the colors remain mixed, weekend concentration does not appear strongly tied to the spacing between concerts."
             )
         else:
             color_interp_1 = (
-                " The color gradient also highlights whether artists with longer lead times tend to have more compact or more widely spaced touring schedules. "
-                "If no clear color clustering appears, planning horizon and spacing between concerts likely operate largely independently."
+                " The color gradient also shows whether artists with longer lead times tend to follow more compact or more spread-out schedules. "
+                "If no clear clustering appears, planning horizon and spacing between concerts are likely only weakly connected."
             )
 
-        interp_text_1 = interp_text_1 + color_interp_1
+        interp_text_1 += color_interp_1
 
         st.markdown(f"""
         <div class="insight-card">
@@ -357,39 +411,64 @@ else:
         </div>
         """, unsafe_allow_html=True)
 
-
     else:
+        r1_plot = None
+        p1_plot = None
         st.warning("Too few data points after filtering to compute a reliable correlation.")
-    
+
     st.divider()
-    # ── Graph 1b: Box Plot by tier ─────────────────────────────────────────
+
+    # ══════════════════════════════════════════════════════════════════════════
+    # GRAPH 2 — Boxplot by popularity tier
+    # ══════════════════════════════════════════════════════════════════════════
     st.markdown(
         '<div class="section-title">📦 Graph 2 — Days between shows by popularity tier</div>',
         unsafe_allow_html=True
     )
 
     st.markdown("""
-    Artists are sorted by Last.fm listener count and divided into four equally sized popularity tiers (quartiles).
-    Each box shows the distribution of the average number of days between consecutive concerts within one tier.
-    The line inside the box marks the median, the box contains the middle 50% of values, and the whiskers show the typical range.
-    Points outside the whiskers are outliers.
-    """)
+Artists are sorted by Last.fm listener count and divided into four equally sized popularity tiers (quartiles).
+Each box shows the distribution of the average number of days between consecutive concerts within one tier.
+The line inside the box marks the median, the box contains the middle 50% of values, and the whiskers show the typical range.
+Points outside the whiskers are outliers.
 
-    # Use the same filter as Graph 1
-    df1b = df1[df1[col_f1] <= max_days].copy()
+You can also use the minimum-events filter to focus on artists with more substantial touring activity.
+""")
 
-    # Robust tier handling
-    def tier_rank(val: str) -> int:
-        s = str(val).replace("\n", " ").lower()
-        if "q1" in s:
-            return 1
-        if "q2" in s:
-            return 2
-        if "q3" in s:
-            return 3
-        if "q4" in s:
-            return 4
-        return 99
+    g2_ctrl, g2_plot = st.columns([1, 3])
+
+    with g2_ctrl:
+        if "total_events" in df1.columns and df1["total_events"].notna().any():
+            min_events_available_g2 = int(df1["total_events"].min())
+            max_events_available_g2 = int(df1["total_events"].max())
+
+            min_events_filter_g2 = st.slider(
+                "Minimum number of events",
+                min_value=min_events_available_g2,
+                max_value=max_events_available_g2,
+                value=min_events_available_g2,
+                step=1,
+                key="rq1_g2_min_events"
+            )
+        else:
+            min_events_filter_g2 = 0
+            st.info("`total_events` column not available — event-based filtering disabled.")
+
+        max_days_g2 = st.slider(
+            "Max. days shown",
+            30,
+            200,
+            min(200, int(df1[col_f1].quantile(0.95))),
+            key="rq1_g2_max_days"
+        )
+
+    df1_box = df1.copy()
+    if "total_events" in df1_box.columns:
+        df1_box = df1_box[df1_box["total_events"] >= min_events_filter_g2].copy()
+    df1_box = df1_box[df1_box[col_f1] <= max_days_g2].copy()
+
+    kw1_h = None
+    kw1_p = None
 
     def tier_label_en(val: str) -> str:
         s = str(val).replace("\n", " ").lower()
@@ -403,13 +482,6 @@ else:
             return "Q4 (high)"
         return str(val).replace("\n", " ")
 
-    present_tiers_raw = sorted(
-        [t for t in df1b["Popularity-Tier"].dropna().unique()],
-        key=tier_rank
-    )
-
-    present_tiers_display = [tier_label_en(t) for t in present_tiers_raw]
-
     tier_colors = {
         "Q1 (low)": "#1DB954",
         "Q2": "#7fb3d3",
@@ -417,128 +489,126 @@ else:
         "Q4 (high)": "#e05050",
     }
 
-    # Kruskal-Wallis on filtered data
-    kw_groups = [
-        df1b[df1b["Popularity-Tier"] == t][col_f1].dropna().values
-        for t in present_tiers_raw
-        if len(df1b[df1b["Popularity-Tier"] == t][col_f1].dropna()) > 1
-    ]
+    present_tiers_raw = ["Q1\n(niedrig)", "Q2", "Q3", "Q4\n(hoch)"]
+    present_tiers_raw = [t for t in present_tiers_raw if t in df1_box["Popularity-Tier"].dropna().unique()]
 
-    kw1_h = kw1_p = None
-    if len(kw_groups) >= 2:
-        kw1_h, kw1_p = stats.kruskal(*kw_groups)
+    if len(df1_box) >= 5 and len(present_tiers_raw) >= 1:
+        fig2 = go.Figure()
 
-    # Box plot
-    fig1b = go.Figure()
+        for raw_tier in present_tiers_raw:
+            display_tier = tier_label_en(raw_tier)
+            sub = df1_box[df1_box["Popularity-Tier"] == raw_tier]
 
-    for raw_tier in present_tiers_raw:
-        display_tier = tier_label_en(raw_tier)
-        sub = df1b[df1b["Popularity-Tier"] == raw_tier][col_f1].dropna()
-        if len(sub) == 0:
-            continue
+            if len(sub) == 0:
+                continue
 
-        fig1b.add_trace(go.Box(
-            y=sub,
-            name=display_tier,
-            marker_color=tier_colors.get(display_tier, "#6366f1"),
-            fillcolor=_hex_rgba(tier_colors.get(display_tier, "#6366f1")),
-            line=dict(color=tier_colors.get(display_tier, "#6366f1"), width=1.5),
-            boxpoints="outliers",
-            hovertemplate=f"{display_tier}<br>Days: %{{y:.1f}}<extra></extra>",
-        ))
+            fig2.add_trace(go.Box(
+                y=sub[col_f1],
+                x=[display_tier] * len(sub),
+                name=display_tier,
+                marker=dict(
+                    color=tier_colors.get(display_tier, "#6366f1"),
+                    outliercolor=tier_colors.get(display_tier, "#6366f1"),
+                    size=6
+                ),
+                line=dict(color=tier_colors.get(display_tier, "#6366f1"), width=1.5),
+                fillcolor=_hex_rgba(tier_colors.get(display_tier, "#6366f1"), 0.35),
+                boxpoints="outliers",
+                jitter=0,
+                pointpos=0,
+                hovertext=sub["artist_name"] if "artist_name" in sub.columns else None,
+                hovertemplate=(
+                    "Tier: %{x}<br>"
+                    "Avg. days between shows: %{y:.1f}<br>"
+                    "<extra></extra>"
+                ),
+            ))
 
-    fig1b.update_layout(
-        title="Days between shows by popularity tier",
-        yaxis_title="Avg. days between shows",
-        xaxis_title="Popularity tier (by Last.fm listeners)",
-        template="plotly_dark",
-        paper_bgcolor="#080b14",
-        plot_bgcolor="#161c2d",
-        font=dict(color="white"),
-        height=420,
-        xaxis=dict(
-            gridcolor="#232840",
-            categoryorder="array",
-            categoryarray=present_tiers_display
-        ),
-        yaxis=dict(gridcolor="#232840"),
-        showlegend=False,
-    )
-
-    st.plotly_chart(fig1b, use_container_width=True)
-
-    # Tier summary table
-    tier_table = (
-        df1b.groupby("Popularity-Tier", observed=True)[col_f1]
-        .agg(Mean="mean", Median="median", n="count")
-        .round(1)
-        .reset_index()
-    )
-
-    tier_table["Popularity-Tier"] = tier_table["Popularity-Tier"].apply(tier_label_en)
-    tier_table["tier_rank"] = tier_table["Popularity-Tier"].map({
-        "Q1 (low)": 1,
-        "Q2": 2,
-        "Q3": 3,
-        "Q4 (high)": 4
-    })
-    tier_table = tier_table.sort_values("tier_rank").drop(columns="tier_rank")
-
-
-
-    # Interpretation text
-    median_map = {
-        tier_label_en(row["Popularity-Tier"]): row["Median"]
-        for _, row in (
-            df1b.groupby("Popularity-Tier", observed=True)[col_f1]
-            .agg(Median="median")
-            .reset_index()
-            .iterrows()
+        fig2.update_layout(
+            title=(
+                f"Days between shows by popularity tier  |  artists = {len(df1_box)}"
+                f"  |  min. events = {min_events_filter_g2}"
+            ),
+            yaxis_title="Avg. days between shows",
+            xaxis_title="Popularity tier",
+            template="plotly_dark",
+            paper_bgcolor="#080b14",
+            plot_bgcolor="#161c2d",
+            font=dict(color="white"),
+            height=460,
+            showlegend=False,
+            xaxis=dict(
+                gridcolor="#232840",
+                categoryorder="array",
+                categoryarray=["Q1 (low)", "Q2", "Q3", "Q4 (high)"]
+            ),
+            yaxis=dict(gridcolor="#232840"),
         )
-    }
 
-    q1_med = median_map.get("Q1 (low)")
-    q4_med = median_map.get("Q4 (high)")
+        with g2_plot:
+            st.plotly_chart(fig2, use_container_width=True)
 
-    if kw1_p is not None and kw1_p >= 0.05:
-        interp_text_1b = (
-            "The distributions of all popularity tiers overlap strongly. "
-            "This means that popular and less popular artists show similar spacing between concerts."
+        medians_by_tier = (
+            df1_box.groupby("Popularity-Tier", observed=False)[col_f1]
+            .median()
+            .reindex(["Q1\n(niedrig)", "Q2", "Q3", "Q4\n(hoch)"])
+            .dropna()
         )
-    elif kw1_p is not None and kw1_p < 0.05 and q1_med is not None and q4_med is not None:
-        if q4_med < q1_med:
-            interp_text_1b = (
-                f"Artists in the highest popularity tier have shorter breaks between concerts "
-                f"({q4_med:.1f} vs. {q1_med:.1f} days). "
-                "This suggests that popular artists may tour more intensively."
+
+        kw_groups = [
+            df1_box[df1_box["Popularity-Tier"] == t][col_f1].dropna().values
+            for t in ["Q1\n(niedrig)", "Q2", "Q3", "Q4\n(hoch)"]
+            if len(df1_box[df1_box["Popularity-Tier"] == t][col_f1].dropna()) > 1
+        ]
+
+        if len(kw_groups) >= 2:
+            kw1_h, kw1_p = stats.kruskal(*kw_groups)
+
+        if kw1_p is not None and kw1_p >= 0.05:
+            box_interp = (
+                f"With a minimum threshold of {min_events_filter_g2} events, the boxplots overlap strongly across the popularity tiers. "
+                "The medians are relatively similar and there is no clear separation between low- and high-popularity artists. "
+                "This supports the view that popularity is not strongly associated with average spacing between concerts."
             )
-        elif q4_med > q1_med:
-            interp_text_1b = (
-                f"The box plots show that artists in the highest popularity tier (Q4) tend to have slightly longer gaps between concerts than artists in the lowest tier (Q1). "
-                f"The median value for Q4 is around {q4_med:.1f} days, compared to roughly {q1_med:.1f} days for Q1. "
-                "The wider spread in Q4 also shows that highly popular artists follow more varied touring schedules. "
-                "Overall, the graph suggests that more popular artists may space their concerts further apart than less popular artists."
-            )
+        elif len(medians_by_tier) >= 2:
+            first_med = medians_by_tier.iloc[0]
+            last_med = medians_by_tier.iloc[-1]
+
+            if abs(last_med - first_med) < 1:
+                box_interp = (
+                    f"With a minimum threshold of {min_events_filter_g2} events, the median values remain very similar across the tiers. "
+                    "Even after excluding artists with little live activity, the grouped comparison does not indicate a meaningful difference in average days between shows."
+                )
+            elif last_med > first_med:
+                box_interp = (
+                    f"With a minimum threshold of {min_events_filter_g2} events, higher-popularity artists show somewhat longer median gaps between shows than lower-popularity artists. "
+                    "However, because the scatterplot pattern shifts across event thresholds, this tier-based difference should be interpreted cautiously rather than as a stable overall effect."
+                )
+            else:
+                box_interp = (
+                    f"With a minimum threshold of {min_events_filter_g2} events, higher-popularity artists show somewhat shorter median gaps between shows than lower-popularity artists. "
+                    "However, because the scatterplot pattern shifts across event thresholds, this tier-based difference should be interpreted cautiously rather than as a stable overall effect."
+                )
         else:
-            interp_text_1b = (
-                "The median values are almost identical across tiers. "
-                "Popularity does not appear to affect the spacing between concerts."
+            box_interp = (
+                f"After applying the threshold of at least {min_events_filter_g2} events, there are not enough observations across the popularity tiers for a robust comparison."
             )
+
+        st.markdown(f"""
+        <div class="insight-card">
+            <h4>🔍 Interpretation</h4>
+            <p>{box_interp}</p>
+        </div>
+        """, unsafe_allow_html=True)
+
     else:
-        interp_text_1b = (
-            "The grouped comparison does not show a clear pattern."
-        )
-
-    st.markdown(f"""
-    <div class="insight-card">
-        <h4>🔍 Interpretation</h4>
-        <p>{interp_text_1b}</p>
-    </div>
-    """, unsafe_allow_html=True)
-
+        st.warning("Too few data points after filtering to display the boxplot reliably.")
 
     st.divider()
-    # Summary: Research Question 1
+
+    # ══════════════════════════════════════════════════════════════════════════
+    # SUMMARY — Research Question 1
+    # ══════════════════════════════════════════════════════════════════════════
     st.markdown(
         '<div class="section-title">Summary — Research Question 1: Days between shows</div>',
         unsafe_allow_html=True
@@ -546,7 +616,7 @@ else:
 
     summary_q1 = pd.DataFrame({
         "Metric": [
-            "Artists included",
+            "Artists included (cleaned base sample)",
             "Metric",
             "Pearson r (Graph 1)",
             "p-value (Graph 1)",
@@ -555,20 +625,17 @@ else:
         "Value": [
             len(df1),
             "Average days between shows",
-            f"{r1_plot:.3f}" if "r1_plot" in locals() else "n/a",
-            f"{p1_plot:.4f}" if "p1_plot" in locals() else "n/a",
+            f"{r1_plot:.3f}" if r1_plot is not None else "n/a",
+            f"{p1_plot:.4f}" if p1_plot is not None else "n/a",
             f"{kw1_p:.4f}" if kw1_p is not None else "n/a",
         ]
     })
 
-
-
-    if "p1_plot" in locals():
+    if r1_plot is not None:
         rq1_answer = (
-            "The analysis shows that the average number of days between concerts is relatively similar across artists with different listener counts. "
-            "Most artists perform shows within fairly compact touring schedules, often with less than two weeks between concerts. "
-            "Although small differences appear between popularity tiers, the overall distributions overlap strongly. "
-            "This suggests that digital popularity alone does not strongly determine how tightly concerts are scheduled, and other factors such as tour logistics, venue availability, and travel planning likely play a larger role."
+            "Across the filtered samples, the relationship between Last.fm listener count and average days between shows remains weak. "
+            "The trend line changes slightly depending on the minimum-event threshold and even reverses direction at some settings. "
+            "This indicates that the pattern is not robust. Overall, listener count alone does not appear to be a strong determinant of how closely concerts are scheduled."
         )
         st.markdown(f"""
         <div class="insight-card">
@@ -578,8 +645,6 @@ else:
         """, unsafe_allow_html=True)
 
     st.divider()
-
-    
 # ══════════════════════════════════════════════════════════════════════════════
 # QUESTION 2 — Weekend share vs. playcount
 # ══════════════════════════════════════════════════════════════════════════════
