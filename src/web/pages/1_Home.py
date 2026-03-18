@@ -109,7 +109,7 @@ for col, icon, title, color, border, bg, desc, qs, page in [
 ]:
     with col:
         st.markdown(f"""<div style="{card_style.format(border=border, bg=bg)}">
-            <div style="font-size:2rem;margin-bottom:14px;">{icon}</div>
+            <div style="font-size:2.5rem;margin-bottom:14px;">{icon}</div>
             <h3 style="color:{color} !important;font-size:1.2rem;font-weight:700;
                 margin:0 0 14px 0;line-height:1.3;">{title}</h3>
             <p style="color:#94a3b8 !important;font-size:1rem;line-height:1.7;
@@ -141,7 +141,7 @@ st.markdown('<div class="section-title">🔬 Methodology Overview</div>', unsafe
 
 me1, me2, me3, me4 = st.columns(4)
 for col, icon, title, text in [
-    (me1, "📥", "Data Collection", "Last.fm API for popularity metrics, Ticketmaster for concert data, RestCountries for capital city information, Spotify Charts for chart classification,."),
+    (me1, "📥", "Data Collection", "Last.fm API for popularity metrics, Ticketmaster for concert data, RestCountries for capital city information, Spotify Charts for chart classification."),
     (me2, "🔗", "Data Join", "Linked via normalised artist name. 499 artists with complete data available in both sources."),
     (me3, "📊", "Analysis", "Trend lines, group comparisons, and distribution analysis across popularity tiers and geographic dimensions."),
     (me4, "🖥️", "Visualisation", "Interactive Plotly charts embedded in Streamlit. All charts are filterable and zoomable."),
