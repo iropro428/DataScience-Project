@@ -141,9 +141,9 @@ st.markdown('<div class="section-title">🔬 Methodology Overview</div>', unsafe
 
 me1, me2, me3, me4 = st.columns(4)
 for col, icon, title, text in [
-    (me1, "📥", "Data Collection", "Last.fm API for popularity metrics, Ticketmaster for concert data, RestCountries for capital city information."),
+    (me1, "📥", "Data Collection", "Last.fm API for popularity metrics, Ticketmaster for concert data, RestCountries for capital city information, Spotify Charts for chart classification,."),
     (me2, "🔗", "Data Join", "Linked via normalised artist name. 499 artists with complete data available in both sources."),
-    (me3, "📊", "Analysis", "Correlation analysis, Mann-Whitney U, Kruskal-Wallis, OLS regression, Jaccard Similarity."),
+    (me3, "📊", "Analysis", "Trend lines, group comparisons, and distribution analysis across popularity tiers and geographic dimensions."),
     (me4, "🖥️", "Visualisation", "Interactive Plotly charts embedded in Streamlit. All charts are filterable and zoomable."),
 ]:
     with col:
