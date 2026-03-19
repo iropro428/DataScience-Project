@@ -279,6 +279,15 @@ else:
         x_line1_plot = np.linspace(df1_plot["x_plot"].min(), df1_plot["x_plot"].max(), 200)
         y_line1_plot = np.polyval(coef1_plot, x_line1_plot)
 
+        resid_mean = np.mean(np.abs(df1_plot[col_f1] - np.polyval(coef1_plot, df1_plot["x_plot"])))
+
+        if resid_mean < 0.9:
+            spread_text_1 = "The points lie relatively close to the fitted line, so the pattern appears fairly compact in this filtered view."
+        elif resid_mean < 1.8:
+            spread_text_1 = "The points show a moderate amount of spread around the fitted line, so the pattern is visible but not especially tight."
+        else:
+            spread_text_1 = "The points are fairly widely dispersed around the fitted line, so the relationship appears weak."
+
         x_axis_label = "log₁₀(Last.fm listeners)" if log_x1 else "Last.fm listeners"
 
         scatter_kwargs = {}
@@ -347,59 +356,51 @@ else:
         with g1_plot:
             st.plotly_chart(fig1, use_container_width=True)
 
-        filter_note_1 = (
-            f"This view only includes artists with at least {min_events_filter_g1} events, "
-            f"so artists with very limited live activity are excluded. "
-        )
-
-        if abs_r1_plot < 0.1:
-            interp_text_1 = (
-                filter_note_1 +
-                "Most artists still cluster in the lower part of the chart, which means that relatively compact touring schedules are common overall. "
-                "At the same time, the points remain broadly scattered across the popularity range and the fitted line is nearly flat. "
-                "This suggests that there is no meaningful relationship between listener count and average days between shows in this filtered sample."
-            )
+        if abs_r1_plot < 0.15:
+            if r1_plot > 0:
+                interp_text_1 = (
+                    "The fitted line slopes slightly upward, which suggests that artists with higher listener counts tend to have somewhat larger gaps between shows in this filtered sample. "
+                    f"{spread_text_1}"
+                )
+            else:
+                interp_text_1 = (
+                    "The fitted line slopes slightly downward, which suggests that artists with higher listener counts tend to have somewhat smaller gaps between shows in this filtered sample. "
+                    f"{spread_text_1}"
+                )
         elif abs_r1_plot < 0.3:
-            interp_text_1 = (
-                filter_note_1 +
-                "The fitted line shows only a very weak pattern, and its direction should be interpreted cautiously. "
-                "When the minimum-event threshold is adjusted, the slope can shift slightly and may even reverse. "
-                "This indicates that the relationship between popularity and spacing between concerts is not robust."
-            )
-        elif p1_plot < 0.05 and r1_plot > 0:
-            interp_text_1 = (
-                filter_note_1 +
-                "The upward trend line suggests that more popular artists in this filtered sample tend to have somewhat longer average gaps between shows. "
-                "However, because the slope changes when the minimum-event threshold is adjusted, this pattern should be treated as unstable rather than definitive."
-            )
-        elif p1_plot < 0.05 and r1_plot < 0:
-            interp_text_1 = (
-                filter_note_1 +
-                "The downward trend line suggests that more popular artists in this filtered sample tend to have somewhat shorter average gaps between shows. "
-                "However, because the slope changes when the minimum-event threshold is adjusted, this pattern should be treated as unstable rather than definitive."
-            )
+            if r1_plot > 0:
+                interp_text_1 = (
+                    "The fitted line shows a slight upward tendency, meaning that artists with higher listener counts tend to have somewhat larger gaps between shows in this filtered sample. "
+                    f"{spread_text_1}"
+                )
+            else:
+                interp_text_1 = (
+                    "The fitted line shows a slight downward tendency, meaning that artists with higher listener counts tend to have somewhat smaller gaps between shows in this filtered sample. "
+                    f"{spread_text_1}"
+                )
         else:
-            interp_text_1 = (
-                filter_note_1 +
-                "A slight trend is visible, but it remains weak and sensitive to the minimum-event filter. "
-                "Since the fitted line can change direction across plausible thresholds, the overall pattern is not robust. "
-                "This means popularity alone does not appear to be a reliable predictor of how closely concerts are scheduled."
-            )
+            if r1_plot > 0:
+                interp_text_1 = (
+                    "The fitted line slopes upward, indicating that artists with higher listener counts tend to have larger average gaps between shows in this filtered sample. "
+                    f"{spread_text_1}"
+                )
+            else:
+                interp_text_1 = (
+                    "The fitted line slopes downward, indicating that artists with higher listener counts tend to have smaller average gaps between shows in this filtered sample. "
+                    f"{spread_text_1}"
+                )
 
         if color_by1 == "total_events":
             color_interp_1 = (
-                " Because the color scale stays anchored to the full dataset and starts at zero, the shading remains comparable even when the event threshold changes. "
-                "This helps show whether high-event artists cluster in a particular part of the plot without changing the color interpretation."
+                " The color shading also shows whether artists with more total events cluster in a particular part of the chart."
             )
         elif color_by1 == "pct_weekend":
             color_interp_1 = (
-                " The color pattern also indicates whether weekend-heavy touring is concentrated in a specific area of the chart. "
-                "If the colors remain mixed, weekend concentration does not appear strongly tied to the spacing between concerts."
+                " The color shading also shows whether weekend-heavy touring is concentrated in a particular part of the chart."
             )
         else:
             color_interp_1 = (
-                " The color gradient also shows whether artists with longer lead times tend to follow more compact or more spread-out schedules. "
-                "If no clear clustering appears, planning horizon and spacing between concerts are likely only weakly connected."
+                " The color shading also shows whether artists with longer lead times cluster in a particular part of the chart."
             )
 
         interp_text_1 += color_interp_1
@@ -427,20 +428,20 @@ else:
     )
 
     st.markdown("""
-Artists are sorted by Last.fm listener count and divided into four equally sized popularity tiers (quartiles).
-Each box shows the distribution of the average number of days between consecutive concerts within one tier.
-The line inside the box marks the median, the box contains the middle 50% of values, and the whiskers show the typical range.
-Points outside the whiskers are outliers.
+    Artists are sorted by Last.fm listener count and divided into four equally sized popularity tiers (quartiles).
+    Each box shows the distribution of the average number of days between consecutive concerts within one tier.
+    The line inside the box marks the median, the box contains the middle 50% of values, and the whiskers show the typical range.
+    Points outside the whiskers are outliers.
 
-You can also use the minimum-events filter to focus on artists with more substantial touring activity.
-""")
+    You can also use the minimum-events filter to focus on artists with more substantial touring activity.
+    """)
 
     g2_ctrl, g2_plot = st.columns([1, 3])
 
     with g2_ctrl:
         if "total_events" in df1.columns and df1["total_events"].notna().any():
             min_events_available_g2 = int(df1["total_events"].min())
-            max_events_available_g2 = int(df1["total_events"].max())
+            max_events_available_g2 = min(38, int(df1["total_events"].max()))
 
             min_events_filter_g2 = st.slider(
                 "Minimum number of events",
@@ -564,30 +565,55 @@ You can also use the minimum-events filter to focus on artists with more substan
         if len(kw_groups) >= 2:
             kw1_h, kw1_p = stats.kruskal(*kw_groups)
 
+        tier_spreads = (
+            df1_box.groupby("Popularity-Tier", observed=False)[col_f1]
+            .agg(lambda s: s.quantile(0.75) - s.quantile(0.25))
+            .reindex(["Q1\n(niedrig)", "Q2", "Q3", "Q4\n(hoch)"])
+            .dropna()
+        )
+
         if kw1_p is not None and kw1_p >= 0.05:
             box_interp = (
                 f"With a minimum threshold of {min_events_filter_g2} events, the boxplots overlap strongly across the popularity tiers. "
-                "The medians are relatively similar and there is no clear separation between low- and high-popularity artists. "
-                "This supports the view that popularity is not strongly associated with average spacing between concerts."
+                "The median values are fairly similar, and no group stands out clearly from the others. "
+                "In this view, average days between shows appear broadly comparable across popularity levels."
             )
         elif len(medians_by_tier) >= 2:
             first_med = medians_by_tier.iloc[0]
             last_med = medians_by_tier.iloc[-1]
+            med_diff = last_med - first_med
 
-            if abs(last_med - first_med) < 1:
+            if len(tier_spreads) >= 2:
+                spread_first = tier_spreads.iloc[0]
+                spread_last = tier_spreads.iloc[-1]
+
+                if abs(spread_last - spread_first) < 0.75:
+                    spread_phrase = "The spread within the groups is also fairly similar overall."
+                elif spread_last > spread_first:
+                    spread_phrase = "The higher-popularity tiers also show a somewhat wider spread, indicating more variation within those groups."
+                else:
+                    spread_phrase = "The lower-popularity tiers show a somewhat wider spread, indicating more variation within those groups."
+            else:
+                spread_phrase = ""
+
+            if abs(med_diff) < 0.75:
                 box_interp = (
-                    f"With a minimum threshold of {min_events_filter_g2} events, the median values remain very similar across the tiers. "
-                    "Even after excluding artists with little live activity, the grouped comparison does not indicate a meaningful difference in average days between shows."
+                    f"With a minimum threshold of {min_events_filter_g2} events, the median values remain very close across the popularity tiers. "
+                    "Although small differences are visible, the boxes still overlap substantially. "
+                    "This suggests that the grouped distributions are fairly similar in the current filtered view. "
+                    f"{spread_phrase}"
                 )
-            elif last_med > first_med:
+            elif med_diff > 0:
                 box_interp = (
-                    f"With a minimum threshold of {min_events_filter_g2} events, higher-popularity artists show somewhat longer median gaps between shows than lower-popularity artists. "
-                    "However, because the scatterplot pattern shifts across event thresholds, this tier-based difference should be interpreted cautiously rather than as a stable overall effect."
+                    f"With a minimum threshold of {min_events_filter_g2} events, the higher popularity tiers show somewhat larger median gaps between shows than the lower tiers. "
+                    "The distributions still overlap, so the difference should be read as a tendency rather than a sharp separation. "
+                    f"{spread_phrase}"
                 )
             else:
                 box_interp = (
-                    f"With a minimum threshold of {min_events_filter_g2} events, higher-popularity artists show somewhat shorter median gaps between shows than lower-popularity artists. "
-                    "However, because the scatterplot pattern shifts across event thresholds, this tier-based difference should be interpreted cautiously rather than as a stable overall effect."
+                    f"With a minimum threshold of {min_events_filter_g2} events, the higher popularity tiers show somewhat smaller median gaps between shows than the lower tiers. "
+                    "The distributions still overlap, so the difference should be read as a tendency rather than a sharp separation. "
+                    f"{spread_phrase}"
                 )
         else:
             box_interp = (
@@ -605,7 +631,7 @@ You can also use the minimum-events filter to focus on artists with more substan
         st.warning("Too few data points after filtering to display the boxplot reliably.")
 
     st.divider()
-
+    
     # ══════════════════════════════════════════════════════════════════════════
     # SUMMARY — Research Question 1
     # ══════════════════════════════════════════════════════════════════════════
