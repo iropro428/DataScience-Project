@@ -1078,7 +1078,6 @@ else:
             "The distribution of weekend shares is very similar across all popularity tiers. "
             "Artists with both low and high playcounts appear throughout the same weekend‑share ranges, and the overall pattern does not show a clear upward or downward trend. "
             "This indicates that digital popularity does not strongly influence whether concerts are scheduled on weekends. "
-            "Instead, weekend scheduling appears to be a common strategy for artists across all popularity levels, likely because weekends generally attract larger audiences and higher ticket demand."
         )
         st.markdown(f"""
         <div class="insight-card">
