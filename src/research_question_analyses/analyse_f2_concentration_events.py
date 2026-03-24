@@ -1,3 +1,7 @@
+# =============================================================================
+# AI was actively used for the generation and creation of the code.
+# =============================================================================
+
 # Standalone Data-Science Analysis for F2:
 # Streaming Concentration (Top Track Share) vs. Tour Intensity (Events/Year)
 #
