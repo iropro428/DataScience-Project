@@ -1,3 +1,8 @@
+# =============================================================================
+# AI was used exclusively for debugging purposes,
+# not for the creation or generation of the code itself.
+# =============================================================================
+
 import streamlit as st
 
 st.set_page_config(
