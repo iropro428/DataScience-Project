@@ -1,9 +1,7 @@
-"""
-components/styles.py
-
-Shared design system for the Streamlit app.
-Provides the central color palette and global CSS styles.
-"""
+# components/styles.py
+#
+# Shared design system for the Streamlit app.
+# Provides the central color palette and global CSS styles.
 
 import streamlit as st
 
