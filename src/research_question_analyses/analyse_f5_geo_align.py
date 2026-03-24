@@ -1,22 +1,20 @@
-"""
-analyse_geo_align.py v2 — Listener-weighted Geo-Alignment Analysis
-
-Question: How well do the countries with the highest Last.fm listener reach
-         align with the tour countries of the artists?
-
-Approach:
-  For each artist: Top-K countries based on listeners_in_country (not just "in" or "not in")
-  → Weighted Jaccard: Overlap weighted by listener share
-  → Coverage metrics for the Top-K streaming countries
-
-Input:
-  data/raw/lastfm_geo_presence.csv   (country, artist_name, rank, listeners_in_country)
-  data/processed/f4_city_frequencies.csv   (city, country, visit frequencies)
-  data/processed/final_dataset.csv   (artist_name, total_events, listeners, etc.)
-
-Output:
-  data/processed/geo_alignment.csv   (artist_name, listeners, tour_coverage, streaming_reach, etc.)
-"""
+# analyse_geo_align.py v2 — Listener-weighted Geo-Alignment Analysis
+#
+# Question: How well do the countries with the highest Last.fm listener reach
+#           align with the tour countries of the artists?
+#
+# Approach:
+#   For each artist: Top-K countries based on listeners_in_country (not just "in" or "not in")
+#   → Weighted Jaccard: Overlap weighted by listener share
+#   → Coverage metrics for the Top-K streaming countries
+# 
+# Input:
+#   data/raw/lastfm_geo_presence.csv   (country, artist_name, rank, listeners_in_country)
+#   data/processed/f4_city_frequencies.csv   (city, country, visit frequencies)
+#   data/processed/final_dataset.csv   (artist_name, total_events, listeners, etc.)
+#
+# Output:
+#   data/processed/geo_alignment.csv   (artist_name, listeners, tour_coverage, streaming_reach, etc.)
 
 import pandas as pd
 import numpy as np
