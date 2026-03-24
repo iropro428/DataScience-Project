@@ -1,3 +1,8 @@
+# =============================================================================
+# AI was used exclusively for debugging purposes,
+# not for the creation or generation of the code itself.
+# =============================================================================
+
 # get_capitals.py
 # Loads all capital cities via the RestCountries API and saves them to data/raw/capitals.json
 
