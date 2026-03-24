@@ -1,3 +1,7 @@
+# =============================================================================
+# AI was actively used for the generation and creation of the code.
+# =============================================================================
+
 # Process Spotify weekly chart CSVs into an artist profile table.
 #
 # Input:
