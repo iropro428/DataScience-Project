@@ -27,7 +27,9 @@ GEO_FILE = "data/raw/lastfm_geo_presence.csv"
 CITY_FILE = "data/processed/f4_city_frequencies.csv"
 FINAL_FILE = "data/processed/final_dataset.csv"
 
-# ── Check if required files exist ───────────────────────────────────────────
+# ══════════════════════════════════════════════════════════════════════════
+# Check if required files exist
+# ══════════════════════════════════════════════════════════════════════════
 for p in [GEO_FILE, CITY_FILE, FINAL_FILE]:
     if not os.path.exists(p):
         print(f"{p} is missing")
