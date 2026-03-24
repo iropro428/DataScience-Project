@@ -1,3 +1,8 @@
+# =============================================================================
+# AI was used exclusively for debugging purposes,
+# not for the creation or generation of the code itself.
+# =============================================================================
+
 # get_artist_list.py
 #
 # Fetches Top-Artists from Last.fm Charts and saves them as:
