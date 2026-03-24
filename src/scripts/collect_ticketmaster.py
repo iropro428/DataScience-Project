@@ -5,7 +5,7 @@ import pandas as pd
 import json
 from dotenv import load_dotenv
 from pathlib import Path
-from artists import ARTISTS  # The list of artists should be imported here.
+from artists import ARTISTS  
 
 # Load environment variables
 load_dotenv()
