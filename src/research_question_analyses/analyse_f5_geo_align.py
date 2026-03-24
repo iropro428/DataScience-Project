@@ -1,20 +1,22 @@
-# analyse_geo_align.py v2 — Listener-weighted Geo-Alignment Analysis
-#
-# Question: How well do the countries with the highest Last.fm listener reach
-#          align with the tour countries of the artists?
-#
-# Approach:
-#   For each artist: Top-K countries based on listeners_in_country (not just "in" or "not in")
-#   → Weighted Jaccard: Overlap weighted by listener share
-#   → Coverage metrics for the Top-K streaming countries
-#
-# Input:
-#   data/raw/lastfm_geo_presence.csv   (country, artist_name, rank, listeners_in_country)
-#   data/processed/f4_city_frequencies.csv   (city, country, visit frequencies)
-#   data/processed/final_dataset.csv   (artist_name, total_events, listeners, etc.)
-#
-# Output:
-#   data/processed/geo_alignment.csv   (artist_name, listeners, tour_coverage, streaming_reach, etc.)
+"""
+analyse_geo_align.py v2 — Listener-weighted Geo-Alignment Analysis
+
+Question: How well do the countries with the highest Last.fm listener reach
+         align with the tour countries of the artists?
+
+Approach:
+  For each artist: Top-K countries based on listeners_in_country (not just "in" or "not in")
+  → Weighted Jaccard: Overlap weighted by listener share
+  → Coverage metrics for the Top-K streaming countries
+
+Input:
+  data/raw/lastfm_geo_presence.csv   (country, artist_name, rank, listeners_in_country)
+  data/processed/f4_city_frequencies.csv   (city, country, visit frequencies)
+  data/processed/final_dataset.csv   (artist_name, total_events, listeners, etc.)
+
+Output:
+  data/processed/geo_alignment.csv   (artist_name, listeners, tour_coverage, streaming_reach, etc.)
+"""
 
 import pandas as pd
 import numpy as np
@@ -37,7 +39,9 @@ geo = pd.read_csv(GEO_FILE)
 cities = pd.read_csv(CITY_FILE)
 final = pd.read_csv(FINAL_FILE)
 
-# ── Normalization ──────────────────────────────────────────────────────────
+# ══════════════════════════════════════════════════════════════════════════
+# Normalization 
+# ══════════════════════════════════════════════════════════════════════════
 # Normalize artist names for comparison (lowercase and stripped)
 for df in [geo, cities, final]:
     df["artist_norm"] = df[
@@ -50,7 +54,9 @@ if "listeners_in_country" not in geo.columns:
     geo["listeners_in_country"] = 0
 geo["listeners_in_country"] = pd.to_numeric(geo["listeners_in_country"], errors="coerce").fillna(0)
 
-# ── Per Artist: Top-K Streaming Countries by Listeners ───────────────────
+# ══════════════════════════════════════════════════════════════════════════
+# Per Artist: Top-K Streaming Countries by Listeners 
+# ══════════════════════════════════════════════════════════════════════════
 # K = 10 (configurable) — Top 10 countries per artist
 TOP_K = 10
 
@@ -71,7 +77,9 @@ streaming_data = {}
 for artist, group in geo.groupby("artist_norm"):
     streaming_data[artist] = top_k_countries(group, TOP_K)
 
-# ── Tour Countries per Artist ─────────────────────────────────────────────
+# ══════════════════════════════════════════════════════════════════════════
+# Tour Countries per Artist 
+# ══════════════════════════════════════════════════════════════════════════
 # Create a map of artist and their tour countries
 tour_map = (
     cities.groupby("artist_norm")["country"]
@@ -80,7 +88,9 @@ tour_map = (
     .rename(columns={"country": "tour_countries"})
 )
 
-# ── Alignment Metrics ─────────────────────────────────────────────────────
+# ══════════════════════════════════════════════════════════════════════════
+# Alignment Metrics 
+# ══════════════════════════════════════════════════════════════════════════
 def jaccard(a: set, b: set) -> float:
     """
     Calculate Jaccard similarity between two sets.
@@ -105,8 +115,10 @@ def weighted_coverage(inter: set, top_df: pd.DataFrame) -> float:
     if total == 0: return 0.0
     covered = top_df[top_df["country"].isin(inter)]["listeners_in_country"].sum()
     return covered / total
-
-# ── Calculate alignment metrics for each artist ───────────────────────────
+    
+# ══════════════════════════════════════════════════════════════════════════
+# Calculate alignment metrics for each artist 
+# ══════════════════════════════════════════════════════════════════════════
 rows = []
 for _, row in final.iterrows():
     norm = row["artist_norm"]
@@ -143,7 +155,7 @@ for c in ["listeners", "jaccard", "tour_coverage", "streaming_reach", "weighted_
 SEP = "=" * 62
 
 # ══════════════════════════════════════════════════════════════════════════
-# A) DESCRIPTIVE STATISTICS
+# DESCRIPTIVE STATISTICS
 # ══════════════════════════════════════════════════════════════════════════
 print(f"\n{SEP}")
 print(f"A) DESCRIPTIVE STATISTICS — Geo-Alignment  (n={len(df)})")
@@ -166,7 +178,7 @@ for col, label in [
           f"Std={s.std():.3f}  Min={s.min():.0f}  Max={s.max():.0f}")
 
 # ══════════════════════════════════════════════════════════════════════════
-# D) TOP / BOTTOM
+# TOP / BOTTOM
 # ══════════════════════════════════════════════════════════════════════════
 show_cols = ["artist_name", "listeners", "weighted_coverage", "jaccard",
              "tour_coverage", "streaming_reach", "n_streaming",
@@ -186,7 +198,7 @@ print(SEP)
 print(df.nsmallest(10, "weighted_coverage")[show_cols].to_string(index=False))
 
 # ══════════════════════════════════════════════════════════════════════════
-# E) SAVE RESULTS
+# SAVE RESULTS
 # ══════════════════════════════════════════════════════════════════════════
 df[show_cols].to_csv("data/processed/geo_alignment.csv", index=False)
 print(f"\n data/processed/geo_alignment.csv ({len(df)} Artists)")
