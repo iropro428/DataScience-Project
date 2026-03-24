@@ -1,15 +1,13 @@
-"""
-collect_artists_lastfm.py
-
-Fetches basic artist metadata from the Last.fm API for a predefined artist list and stores the results as a CSV file.
-
-What this script does:
-1) Loads an API key from a .env file (LASTFM_API_KEY).
-2) Iterates over ARTISTS (imported from artists.py).
-3) For each artist, calls Last.fm "artist.getInfo".
-4) Extracts a small, clean subset of fields (listeners, playcount, tags, url).
-5) Writes everything to data/raw/last_fm/artists_lastfm.csv
-"""
+# collect_artists_lastfm.py
+#
+# Fetches basic artist metadata from the Last.fm API for a predefined artist list and stores the results as a CSV file.
+#
+# What this script does:
+# 1) Loads an API key from a .env file (LASTFM_API_KEY).
+# 2) Iterates over ARTISTS (imported from artists.py).
+# 3) For each artist, calls Last.fm "artist.getInfo".
+# 4) Extracts a small, clean subset of fields (listeners, playcount, tags, url).
+# 5) Writes everything to data/raw/last_fm/artists_lastfm.csv
 
 import os
 import time
