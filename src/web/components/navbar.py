@@ -1,3 +1,7 @@
+# =============================================================================
+# AI was actively used for the generation and creation of the code.
+# =============================================================================
+
 # components/navbar.py
 #
 # Horizontal top navigation for the Streamlit app.
