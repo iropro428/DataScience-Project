@@ -19,7 +19,9 @@ import pandas as pd
 import numpy as np
 import os, sys
 
-# ── Loading ──────────────────────────────────────────────────────────────────
+# ══════════════════════════════════════════════════════════════════════════
+# Loading
+# ══════════════════════════════════════════════════════════════════════════
 for p in ["data/processed/final_dataset.csv", "data/processed/f4_city_frequencies.csv"]:
     if not os.path.exists(p):
         print(f" {p} is missing — please run join_data.py first")
@@ -45,7 +47,7 @@ print(f"Artists with F4 data: {len(df_f4)}\n")
 SEP = "=" * 56
 
 # ══════════════════════════════════════════════════════════════════════════
-# A) DESCRIPTIVE STATISTICS
+# DESCRIPTIVE STATISTICS
 # ══════════════════════════════════════════════════════════════════════════
 print(SEP)
 print("A) DESCRIPTIVE STATISTICS")
@@ -72,7 +74,7 @@ Global dataset:
 """)
 
 # ══════════════════════════════════════════════════════════════════════════
-# C) GROUP COMPARISON — Tour Size
+# GROUP COMPARISON — Tour Size
 # ══════════════════════════════════════════════════════════════════════════
 print(f"\n{SEP}")
 print("C) GROUP COMPARISON — pct_revisit_cities by Tour Size (Quartiles)")
@@ -91,7 +93,7 @@ grp = df_f4.groupby("tour_q", observed=True)["pct_revisit_cities"].agg(
 print(grp.to_string())
 
 # ══════════════════════════════════════════════════════════════════════════
-# D) TOP / BOTTOM ARTISTS
+# TOP / BOTTOM ARTISTS
 # ══════════════════════════════════════════════════════════════════════════
 cols_show = ["artist_name", "revisit_cities", "new_cities",
              "pct_revisit_cities", "revisit_ratio", "total_events"]
@@ -112,7 +114,7 @@ print(SEP)
 print(df_min5.nsmallest(10, "pct_revisit_cities")[cols_show].to_string(index=False))
 
 # ══════════════════════════════════════════════════════════════════════════
-# E) MOST VISITED CITIES
+# MOST VISITED CITIES
 # ══════════════════════════════════════════════════════════════════════════
 print(f"\n{SEP}")
 print("E) TOP 20 MOST VISITED CITIES (all Artists)")
@@ -126,7 +128,7 @@ top_cities = (
 print(top_cities.to_string(index=False))
 
 # ══════════════════════════════════════════════════════════════════════════
-# F) SAVE RESULTS
+# SAVE RESULTS
 # ══════════════════════════════════════════════════════════════════════════
 result_cols = [c for c in
                ["artist_name", "total_events", "revisit_cities", "new_cities",
