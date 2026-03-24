@@ -1,3 +1,7 @@
+# =============================================================================
+# AI was actively used for the generation and creation of the code.
+# =============================================================================
+
 # analyse_f6_capital_ratio.py
 # Standalone Data-Science Analysis for F6: Capital vs. Non-Capital Cities
 # No Streamlit — Console Output + CSV
