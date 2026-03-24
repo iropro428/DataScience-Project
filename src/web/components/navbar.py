@@ -1,9 +1,7 @@
-"""
-components/navbar.py
-
-Horizontal top navigation for the Streamlit app.
-Replaces the default vertical sidebar navigation.
-"""
+# components/navbar.py
+#
+# Horizontal top navigation for the Streamlit app.
+# Replaces the default vertical sidebar navigation.
 
 import streamlit as st
 
