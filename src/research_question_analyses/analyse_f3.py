@@ -1,3 +1,7 @@
+# =============================================================================
+# AI was actively used for the generation and creation of the code.
+# =============================================================================
+
 # analyse_f3.py
 # Standalone Analysis for F3:
 # Last.fm Listeners — Chart Artists vs. Non-Chart Artists (Spotify Weekly 2023–2026)
