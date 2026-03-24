@@ -1,18 +1,22 @@
-# analyse_f6_capital_ratio.py
-# Standalone Data-Science Analysis for F6: Capital vs. Non-Capital Cities
-# No Streamlit — Console Output + CSV
-#
-# Prerequisite: join_data.py must have been executed
-#
-# Output:
-#   Console — Statistics, Correlations, Rankings
-#   data/processed/f6_results.csv
+"""
+analyse_f6_capital_ratio.py
+Standalone Data-Science Analysis for F6: Capital vs. Non-Capital Cities
+No Streamlit — Console Output + CSV
+
+Prerequisite: join_data.py must have been executed
+
+Output:
+  Console — Statistics, Correlations, Rankings
+  data/processed/f6_results.csv
+"""
 
 import pandas as pd
 import numpy as np
 import os, sys
 
-# ── Check if required files exist ───────────────────────────────────────────
+# ══════════════════════════════════════════════════════════════════════════
+# Check if required files exist
+# ══════════════════════════════════════════════════════════════════════════
 for p in ["data/processed/final_dataset.csv",
           "data/processed/f6_capitals_visited.csv",
           "data/processed/f6_capitals_per_artist.csv"]:
@@ -24,7 +28,9 @@ df = pd.read_csv("data/processed/final_dataset.csv")
 cap_gl = pd.read_csv("data/processed/f6_capitals_visited.csv")
 cap_ar = pd.read_csv("data/processed/f6_capitals_per_artist.csv")
 
-# ── Ensure necessary columns are present ───────────────────────────────────
+# ══════════════════════════════════════════════════════════════════════════
+# Ensure necessary columns are present
+# ══════════════════════════════════════════════════════════════════════════
 F6_COLS = ["capital_events", "non_capital_events", "pct_capital",
            "capital_ratio", "unique_capitals", "unique_non_capitals", "pct_capital_cities"]
 missing = [c for c in F6_COLS if c not in df.columns]
@@ -43,7 +49,7 @@ df_f6 = df.dropna(subset=["capital_events", "non_capital_events"]).copy()
 SEP = "=" * 56
 
 # ══════════════════════════════════════════════════════════════════════════
-# A) DESCRIPTIVE STATISTICS
+# DESCRIPTIVE STATISTICS
 # ══════════════════════════════════════════════════════════════════════════
 print(SEP)
 print("A) DESCRIPTIVE STATISTICS")
@@ -76,7 +82,7 @@ Global dataset:
 """)
 
 # ══════════════════════════════════════════════════════════════════════════
-# D) TOP / BOTTOM ARTISTS
+# TOP / BOTTOM ARTISTS
 # ══════════════════════════════════════════════════════════════════════════
 cols_show = ["artist_name", "capital_events", "non_capital_events", "pct_capital",
              "unique_capitals", "total_events"]
@@ -95,7 +101,7 @@ print(SEP)
 print(df_min5.nsmallest(10, "pct_capital")[cols_show].to_string(index=False))
 
 # ══════════════════════════════════════════════════════════════════════════
-# E) MOST VISITED CAPITALS
+# MOST VISITED CAPITALS
 # ══════════════════════════════════════════════════════════════════════════
 print(f"\n{SEP}")
 print("E) TOP 20 MOST VISITED CAPITALS (all Artists)")
@@ -109,7 +115,7 @@ print(SEP)
 print(cap_gl.nlargest(10, "n_artists")[["city", "country", "n_artists", "total_visits"]].to_string(index=False))
 
 # ══════════════════════════════════════════════════════════════════════════
-# F) SAVE RESULTS
+# SAVE RESULTS
 # ══════════════════════════════════════════════════════════════════════════
 # Save the results to a CSV file
 result_cols = [c for c in
