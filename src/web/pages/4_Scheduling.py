@@ -1,3 +1,7 @@
+# =============================================================================
+# AI was actively used for the generation and creation of the code.
+# =============================================================================
+
 import streamlit as st
 import pandas as pd
 import numpy as np
