@@ -1,5 +1,4 @@
-"""Small utility helpers used across the web app."""
-
+# Small utility helpers used across the web app.
 
 def hex_rgba(hex_color: str, alpha: float = 0.2) -> str:
     """Convert a hex color in #rrggbb format to an rgba(...) string for Plotly."""
