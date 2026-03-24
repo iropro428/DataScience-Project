@@ -1,12 +1,10 @@
-'''
-get_artist_list.py
-
-Fetches Top-Artists from Last.fm Charts and saves them as:
-    - src/scripts/artists.py ← Python list, imported by other scripts
-    - data/artists_list.csv ← CSV backup
-    
-Each page fetched through chart.gettopartists returns up to 50 artists. We fetch multiple pages to build a larger list.
-'''
+# get_artist_list.py
+#
+# Fetches Top-Artists from Last.fm Charts and saves them as:
+#     - src/scripts/artists.py ← Python list, imported by other scripts
+#     - data/artists_list.csv ← CSV backup
+#    
+# Each page fetched through chart.gettopartists returns up to 50 artists. We fetch multiple pages to build a larger list.
 
 import requests
 import pandas as pd
