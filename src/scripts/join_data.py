@@ -1,19 +1,18 @@
-"""
-join_data.py
-Aggregates raw data → data/processed/final_dataset.csv
-Research questions: F2, F4, F6, F7 + foundation for all other analyses
+# join_data.py
+# Aggregates raw data → data/processed/final_dataset.csv
+# Research questions: F2, F4, F6, F7 + foundation for all other analyses
+#
+# Input:
+#    data/raw/artists_lastfm.csv
+#    data/raw/ticketmaster_events.csv
+#    data/raw/lastfm_toptracks.csv          
+#
+# Output:
+#    data/processed/final_dataset.csv
+#    data/processed/f4_city_frequencies.csv
+#    data/processed/f6_capitals_visited.csv
+#    data/processed/f6_capitals_per_artist.csv
 
-Input:
-   data/raw/artists_lastfm.csv
-   data/raw/ticketmaster_events.csv
-   data/raw/lastfm_toptracks.csv          
-
-Output:
-   data/processed/final_dataset.csv
-   data/processed/f4_city_frequencies.csv
-   data/processed/f6_capitals_visited.csv
-   data/processed/f6_capitals_per_artist.csv
-"""
 import pandas as pd
 import numpy as np
 from datetime import date
