@@ -3,15 +3,17 @@ import numpy as np
 import os
 
 def compute_concentration(df_tracks: pd.DataFrame) -> pd.DataFrame:
-    # Input: DataFrame with columns [artist_name, rank, playcount]
-    # Output: DataFrame with concentration metrics per artist
-    # Metrics:
-    #   top1_share — share of track #1 in the total playcount (%)
-    #   top3_share — share of the top 3 tracks in the total playcount (%)
-    #   top5_share — share of the top 5 tracks in the total playcount (%)  ← main metric F2
-    #   hhi        — Herfindahl–Hirschman Index (0–10000), a measure of concentration
-    #   n_tracks   — number of tracks with available data
-    #   total_track_plays — total sum of all track playcounts
+    """
+    Input: DataFrame with columns [artist_name, rank, playcount]
+    Output: DataFrame with concentration metrics per artist
+    Metrics:
+      top1_share — share of track #1 in the total playcount (%)
+      top3_share — share of the top 3 tracks in the total playcount (%)
+      top5_share — share of the top 5 tracks in the total playcount (%)  ← main metric F2
+      hhi        — Herfindahl–Hirschman Index (0–10000), a measure of concentration
+      n_tracks   — number of tracks with available data
+      total_track_plays — total sum of all track playcounts
+    """
     
     results = []
 
