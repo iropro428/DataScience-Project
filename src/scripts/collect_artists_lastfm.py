@@ -1,3 +1,9 @@
+# =============================================================================
+# AI was used exclusively for debugging purposes,
+# not for the creation or generation of the code itself.
+# =============================================================================
+
+
 # collect_artists_lastfm.py
 #
 # Fetches basic artist metadata from the Last.fm API for a predefined artist list and stores the results as a CSV file.
