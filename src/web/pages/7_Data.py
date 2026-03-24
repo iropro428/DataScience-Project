@@ -1,3 +1,8 @@
+# =============================================================================
+# AI was used both to support development
+# and for debugging purposes.
+# =============================================================================
+
 import streamlit as st
 from components.styles import apply_styles
 from components.navbar import render_navbar
