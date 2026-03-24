@@ -1,3 +1,7 @@
+# =============================================================================
+# AI was actively used for the generation and creation of the code.
+# =============================================================================
+
 # analyse_geo_align.py v2 — Listener-weighted Geo-Alignment Analysis
 #
 # Question: How well do the countries with the highest Last.fm listener reach
