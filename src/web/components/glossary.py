@@ -7,7 +7,9 @@ Glossary definitions and CSS tooltip helpers for technical terms.
 import streamlit as st
 
 TERMS = {
-    # ── STATISTICS ────────────────────────────────────────────────────────
+    # ══════════════════════════════════════════════════════════════════════════
+    # STATISTICS
+    # ══════════════════════════════════════════════════════════════════════════
     "Trend Line": {
         "kurz": "A straight line showing the overall direction of a relationship in a scatterplot",
         "lang": """
@@ -86,7 +88,9 @@ The x-axis label `log₁₀(listeners)` means the displayed value is the base-10
         "kategorie": "Statistics",
     },
 
-    # ── METRICS ───────────────────────────────────────────────────────────
+    # ══════════════════════════════════════════════════════════════════════════
+    # METRICS
+    # ══════════════════════════════════════════════════════════════════════════
     "pct_capital": {
         "kurz": "Share of an artist's total concerts held in capital cities (%)",
         "lang": """
