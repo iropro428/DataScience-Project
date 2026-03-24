@@ -1,17 +1,15 @@
-""""
-Standalone Data-Science Analysis for F2:
-Streaming Concentration (Top Track Share) vs. Tour Intensity (Events/Year)
-
-Prerequisite: join_data.py has been executed (requires lastfm_toptracks.csv)
-
-Console Output:
-   A) Descriptive Statistics (Concentration Metrics)
-   B) Top/Bottom Artists
-   C) Track Profile: Extreme Cases
-
-Output Files:
-   data/processed/f2_results.csv
-"""
+# Standalone Data-Science Analysis for F2:
+# Streaming Concentration (Top Track Share) vs. Tour Intensity (Events/Year)
+#
+# Prerequisite: join_data.py has been executed (requires lastfm_toptracks.csv)
+#
+# Console Output:
+#    A) Descriptive Statistics (Concentration Metrics)
+#    B) Top/Bottom Artists
+#    C) Track Profile: Extreme Cases
+#
+# Output Files:
+#    data/processed/f2_results.csv
 
 import pandas as pd
 import numpy as np
