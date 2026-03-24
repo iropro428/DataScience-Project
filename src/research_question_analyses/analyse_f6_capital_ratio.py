@@ -119,7 +119,6 @@ print(cap_gl.nlargest(10, "n_artists")[["city", "country", "n_artists", "total_v
 # ══════════════════════════════════════════════════════════════════════════
 # SAVE RESULTS
 # ══════════════════════════════════════════════════════════════════════════
-# Save the results to a CSV file
 result_cols = [c for c in
                ["artist_name", "total_events", "capital_events", "non_capital_events",
                 "pct_capital", "capital_ratio", "unique_capitals", "unique_non_capitals",
