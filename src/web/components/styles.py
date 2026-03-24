@@ -1,3 +1,7 @@
+# =============================================================================
+# AI was actively used for the generation and creation of the code.
+# =============================================================================
+
 # components/styles.py
 #
 # Shared design system for the Streamlit app.
