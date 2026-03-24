@@ -1,3 +1,9 @@
+# =============================================================================
+# AI was used exclusively for debugging purposes,
+# not for the creation or generation of the code itself.
+# =============================================================================
+
+
 import os
 import time
 import requests
