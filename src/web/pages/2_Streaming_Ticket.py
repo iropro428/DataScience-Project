@@ -1,3 +1,7 @@
+# =============================================================================
+# AI was actively used for the generation and creation of the code.
+# =============================================================================
+
 import os
 import sys as _sys, os as _os
 
