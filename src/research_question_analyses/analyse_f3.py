@@ -1,15 +1,13 @@
-"""
-analyse_f3.py
-Standalone Analysis for F3:
-Last.fm Listeners — Chart Artists vs. Non-Chart Artists (Spotify Weekly 2023–2026)
-
-Prerequisites:
-  1. python scripts/process_spotify_charts.py
-  2. python scripts/join_data.py
-     (or directly: run join_f3.py to add 'was_on_chart' flag)
-
-Console Output + data/processed/f3_results.csv
-"""
+# analyse_f3.py
+# Standalone Analysis for F3:
+# Last.fm Listeners — Chart Artists vs. Non-Chart Artists (Spotify Weekly 2023–2026)
+#
+# Prerequisites:
+#   1. python scripts/process_spotify_charts.py
+#   2. python scripts/join_data.py
+#      (or directly: run join_f3.py to add 'was_on_chart' flag)
+#
+# Console Output + data/processed/f3_results.csv
 
 import pandas as pd
 import numpy as np
