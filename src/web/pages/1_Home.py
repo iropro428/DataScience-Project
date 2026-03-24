@@ -18,7 +18,9 @@ apply_styles()
 render_navbar()
 apply_glossary_styles()
 
-# ── Load data ──────────────────────────────────────────────────────────────
+# ═══════════════════════════════════════════════════════════════════════════
+# Load data
+# ═══════════════════════════════════════════════════════════════════════════
 data_path = "data/processed/final_dataset.csv"
 
 if os.path.exists(data_path):
