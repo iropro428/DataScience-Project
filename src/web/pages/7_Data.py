@@ -23,7 +23,9 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-# ── Overview ───────────────────────────────────────────────────────────────
+# ═══════════════════════════════════════════════════════════════════════════
+# Overview
+# ═══════════════════════════════════════════════════════════════════════════
 st.markdown("""
 <div style="
     background: #161c2d;
@@ -42,7 +44,9 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-# ── Data Sources ───────────────────────────────────────────────────────────
+# ═══════════════════════════════════════════════════════════════════════════
+# Data Sources 
+# ═══════════════════════════════════════════════════════════════════════════
 st.markdown('<div class="section-title">📡 Data Sources</div>', unsafe_allow_html=True)
 
 # Metadata for each data source: displayed as styled cards in the section below.
@@ -124,7 +128,9 @@ for src in sources:
 
 st.markdown("<br>", unsafe_allow_html=True)
 
-# ── Note ───────────────────────────────────────────────────────────────────
+# ═══════════════════════════════════════════════════════════════════════════
+# Note
+# ═══════════════════════════════════════════════════════════════════════════
 st.markdown("""
 <div class="methodology-note">
     <p>
@@ -138,7 +144,9 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-# ── Visualisation Methods ──────────────────────────────────────────────────
+# ═══════════════════════════════════════════════════════════════════════════
+# Visualisation Methods
+# ═══════════════════════════════════════════════════════════════════════════
 st.markdown('<div class="section-title">📊 Visualisation Methods</div>', unsafe_allow_html=True)
 
 st.markdown("""
