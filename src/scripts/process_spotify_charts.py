@@ -28,7 +28,15 @@ DATE_END = "2026-02-28"
 
 
 def extract_date(filename: str) -> str:
-    """Extract the first YYYY-MM-DD date found in a filename."""
+    """
+    Extracts the date from the filename in the format YYYY-MM-DD.
+
+    Args:
+        filename (str): The name of the file.
+
+    Returns:
+        str: The extracted date as a string.
+    """
     match = re.search(r"\d{4}-\d{2}-\d{2}", filename)
     if not match:
         raise ValueError(f"No date found in filename: {filename}")

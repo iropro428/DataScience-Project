@@ -1,22 +1,12 @@
+import os
+import time
 import requests
 import pandas as pd
-import time
-import os
 from pathlib import Path
 from dotenv import load_dotenv
 
-# Load .env
-_script_dir = Path(__file__).resolve().parent
-for _candidate in [
-    _script_dir / ".env",
-    _script_dir.parent / ".env",
-    _script_dir.parent.parent / ".env",
-]:
-    if _candidate.exists():
-        load_dotenv(_candidate)
-        break
-else:
-    load_dotenv()
+# Load environment variables
+load_dotenv()
 
 LASTFM_KEY = os.getenv("LASTFM_API_KEY")
 if not LASTFM_KEY:
@@ -42,7 +32,7 @@ def load_tour_countries() -> list:
     we fall back to the raw Ticketmaster events.
 
     Returns:
-        Sorted list of unique country names.
+        list: Sorted list of unique country names.
     """
     sources = [
         "data/processed/f4_city_frequencies.csv",
@@ -74,7 +64,7 @@ def get_top_artists_for_country(country: str) -> list:
     Query Last.fm geo.getTopArtists for the top artists in a given country.
 
     Returns:
-        List of tuples: (artist_name, rank, listeners_in_country)
+        list: List of tuples: (artist_name, rank, listeners_in_country)
     """
     lastfm_country = COUNTRY_NAME_MAP.get(country, country)
 

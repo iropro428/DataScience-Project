@@ -1,27 +1,26 @@
 city,country,total_visits,n_artists,first_seen,last_seen
-London,Great Britain,186,99,2026-03-09,2026-12-18
-Berlin,Germany,81,44,2026-03-09,2026-12-19
-Dublin,Ireland,72,56,2026-03-12,2026-11-05
-Amsterdam,Netherlands,60,34,2026-03-12,2026-11-05
-Madrid,Spain,36,17,2026-03-17,2026-11-05
-Warsaw,Poland,27,22,2026-03-11,2026-08-23
-Stockholm,Sweden,16,13,2026-04-18,2026-11-11
-Vienna,Austria,11,11,2026-03-13,2026-11-18
-Helsinki,Finland,9,9,2026-05-27,2026-12-07
-Ottawa,Canada,8,8,2026-07-10,2026-07-18
+London,Great Britain,179,101,2026-03-25,2026-11-21
+Berlin,Germany,82,44,2026-04-01,2026-12-19
+Dublin,Ireland,71,56,2026-03-27,2026-11-05
+Amsterdam,Netherlands,59,34,2026-03-24,2026-11-08
+Madrid,Spain,42,18,2026-03-30,2026-11-05
+Warsaw,Poland,26,21,2026-03-28,2026-10-24
+Stockholm,Sweden,18,15,2026-04-18,2026-11-11
+Helsinki,Finland,11,10,2026-05-27,2026-12-08
+Vienna,Austria,10,10,2026-04-07,2026-11-18
+Ottawa,Canada,9,9,2026-07-10,2026-10-05
 Hamilton,Canada,8,8,2026-03-31,2026-08-02
+Brussels,Belgium,7,5,2026-06-14,2026-10-09
 London,United Kingdom,7,2,2026-06-19,2026-07-28
-Brussels,Belgium,5,4,2026-06-14,2026-08-25
-Oslo,Norway,4,3,2026-04-08,2026-06-17
-Singapore,Singapore,4,4,2026-05-09,2026-11-25
-London,Canada,3,3,2026-04-04,2026-07-18
-Kingston,United States Of America,2,2,2026-03-13,2026-05-01
-Georgetown,United States Of America,2,2,2026-04-18,2026-04-18
-Prague,Czech Republic,2,2,2026-06-27,2026-07-26
-Victoria,Canada,2,2,2026-03-19,2026-04-19
-Ankara,Turkey,2,2,2026-04-19,2026-06-18
+Singapore,Singapore,6,6,2026-05-09,2026-11-25
+London,Canada,4,4,2026-04-04,2026-10-03
+Oslo,Norway,3,2,2026-04-08,2026-09-10
 Vienna,United States Of America,2,2,2026-06-07,2026-09-17
+Tallinn,Estonia,2,2,2026-06-14,2026-07-20
 Abu Dhabi,United Arab Emirates,2,2,2026-04-24,2026-04-25
+Prague,Czech Republic,2,2,2026-06-27,2026-07-26
+Ankara,Turkey,2,2,2026-04-19,2026-06-18
+Victoria,Canada,1,1,2026-04-19,2026-04-19
 Lima,Peru,1,1,2026-05-20,2026-05-20
-Pretoria,South Africa,1,1,2026-03-20,2026-03-20
-Tallinn,Estonia,1,1,2026-06-14,2026-06-14
+Kingston,United States Of America,1,1,2026-05-01,2026-05-01
+Georgetown,United States Of America,1,1,2026-04-18,2026-04-18

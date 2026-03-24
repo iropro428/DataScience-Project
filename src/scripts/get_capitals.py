@@ -1,9 +1,18 @@
 # get_capitals.py
 # Loads all capital cities via the RestCountries API and saves them to data/raw/capitals.json
-import requests, json, os
+
+import requests
+import json
+import os
 
 
 def get_capital_cities():
+    """
+    Fetches the list of capital cities from the RestCountries API.
+    
+    Returns:
+        set: A set of unique capital cities.
+    """
     response = requests.get("https://restcountries.com/v3.1/all?fields=capital")
     data = response.json()
 
@@ -13,7 +22,7 @@ def get_capital_cities():
             if capital:
                 capitals.add(capital)
 
-    print(f" {len(capitals)} load capital cities")
+    print(f" {len(capitals)} capital cities loaded")
     return capitals
 
 

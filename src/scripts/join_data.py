@@ -1,18 +1,19 @@
-# join_data.py
-# Aggregates raw data → data/processed/final_dataset.csv
-# Research questions: F2, F4, F6, F7 + foundation for all other analyses
-#
-# Input:
-#   data/raw/artists_lastfm.csv
-#   data/raw/ticketmaster_events.csv
-#   data/raw/lastfm_toptracks.csv          (optional, F2)
-#
-# Output:
-#   data/processed/final_dataset.csv
-#   data/processed/f4_city_frequencies.csv
-#   data/processed/f6_capitals_visited.csv
-#   data/processed/f6_capitals_per_artist.csv
+"""
+join_data.py
+Aggregates raw data → data/processed/final_dataset.csv
+Research questions: F2, F4, F6, F7 + foundation for all other analyses
 
+Input:
+   data/raw/artists_lastfm.csv
+   data/raw/ticketmaster_events.csv
+   data/raw/lastfm_toptracks.csv          
+
+Output:
+   data/processed/final_dataset.csv
+   data/processed/f4_city_frequencies.csv
+   data/processed/f6_capitals_visited.csv
+   data/processed/f6_capitals_per_artist.csv
+"""
 import pandas as pd
 import numpy as np
 from datetime import date
@@ -21,9 +22,9 @@ import os, sys
 os.makedirs("data/processed", exist_ok=True)
 
 # Load raw data
-for p in ["data/raw/artists_lastfm.csv", "data/raw/ticketmaster_events.csv"]:
-    if not os.path.exists(p):
-        print(f"  {p} fehlt");
+for path in ["data/raw/artists_lastfm.csv", "data/raw/ticketmaster_events.csv"]:
+    if not os.path.exists(path):
+        print(f"  {path} is missing")
         sys.exit(1)
 
 df_lastfm = pd.read_csv("data/raw/artists_lastfm.csv")
@@ -58,37 +59,37 @@ _lead_df["lead_time_days"] = (_lead_df["first_event_date"] - _lead_df["first_ons
 _lead_df.loc[_lead_df["lead_time_days"] < 0, "lead_time_days"] = None
 _lead_df.loc[_lead_df["lead_time_days"] >= 1095, "lead_time_days"] = None
 n_lead = _lead_df["lead_time_days"].notna().sum()
-print(f"lead_time_days: {n_lead} Artists mit zukuenftigem Event + onsale_date "
-      f"(Median: {_lead_df['lead_time_days'].median():.0f} Tage)")
+print(f"lead_time_days: {n_lead} artists with future events + onsale_date "
+      f"(Median: {_lead_df['lead_time_days'].median():.0f} days)")
 
 # Dedup: remove VIP/Package-Events
-# Ticketmaster listet VIP Packages, Business Seats etc. as separate events
-# → not an actual concert, distorts event counts
-SKIP_KW = ["vip package", "business seat", "hospitality",
-           "meet & greet", "meet and greet", "premium package",
-           "vip experience", "fan package"]
+# Ticketmaster lists VIP Packages, Business Seats, etc. as separate events
+# → not actual concerts, distorting event counts
+SKIP_KEYWORDS = ["vip package", "business seat", "hospitality",
+                 "meet & greet", "meet and greet", "premium package",
+                 "vip experience", "fan package"]
 
 n_before = len(df_events)
 if "event_name" in df_events.columns:
     mask_pkg = df_events["event_name"].str.lower().str.contains(
-        "|".join(SKIP_KW), na=False
+        "|".join(SKIP_KEYWORDS), na=False
     )
     df_events = df_events[~mask_pkg].copy()
     n_removed = n_before - len(df_events)
-    print(f"🔧 Dedup Packages: {n_removed} Package-Events entfernt ({n_before} → {len(df_events)})")
+    print(f"🔧 Dedup Package Events: {n_removed} package events removed ({n_before} → {len(df_events)})")
 
 # Additional dedup: same artist + same city + same date → keep only one event
-# (catches other duplicates such as "standard" vs. "seated ticket" etc.)
+# (catches other duplicates like "standard" vs "seated ticket" etc.)
 n_before2 = len(df_events)
 df_events = df_events.sort_values("event_name").drop_duplicates(
     subset=["artist_name", "city", "event_date"], keep="first"
 )
 n_removed2 = n_before2 - len(df_events)
 if n_removed2 > 0:
-    print(f" Dedup Date/City: {n_removed2} remove more duplicates ({n_before2} → {len(df_events)})")
+    print(f" Dedup Date/City: {n_removed2} more duplicates removed ({n_before2} → {len(df_events)})")
 
 # ══════════════════════════════════════════════════════════════════════════
-# 1) BASE-AGGREGATION
+# 1) BASE AGGREGATION
 # ══════════════════════════════════════════════════════════════════════════
 tour_base = (
     df_events.groupby("artist_name")
@@ -266,7 +267,7 @@ if os.path.exists("data/raw/lastfm_toptracks.csv"):
         from compute_concentration import compute_concentration
 
         conc_df = compute_concentration(pd.read_csv("data/raw/lastfm_toptracks.csv"))
-        print(f"  Streaming-concentration:     {len(conc_df)} Artists")
+        print(f"  Streaming concentration:     {len(conc_df)} Artists")
     except Exception as e:
         print(f"   compute_concentration: {e}")
 
@@ -296,7 +297,7 @@ df_final.to_csv("data/processed/final_dataset.csv", index=False)
 print(f"\n  {len(df_final)} Artists → data/processed/final_dataset.csv")
 print(f"    {len(df_final.columns)} Columns")
 
-# Schnellcheck F4 + F6
+# Quick check F4 + F6
 for label, cols in [
     ("F4", ["pct_revisit_cities", "revisit_ratio"]),
     ("F6", ["pct_capital", "pct_capital_cities", "unique_capitals"]),

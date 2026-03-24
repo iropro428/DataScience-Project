@@ -1,5 +1,3 @@
-# Calculates streaming concentration metrics from lastfm_toptracks.csv.
-# Can be called by join_data.py or executed as a standalone script.
 import pandas as pd
 import numpy as np
 import os
@@ -26,7 +24,7 @@ def compute_concentration(df_tracks: pd.DataFrame) -> pd.DataFrame:
         if total == 0:
             continue
 
-        shares = grp["playcount"] / total  # Propotion of each track
+        shares = grp["playcount"] / total  # Proportion of each track
 
         top1  = grp[grp["rank"] <= 1]["playcount"].sum()
         top3  = grp[grp["rank"] <= 3]["playcount"].sum()
@@ -52,7 +50,7 @@ def compute_concentration(df_tracks: pd.DataFrame) -> pd.DataFrame:
 if __name__ == "__main__":
     path = "data/raw/lastfm_toptracks.csv"
     if not os.path.exists(path):
-        print(f" {path} nicht gefunden — erst collect_toptracks.py ausführen")
+        print(f"{path} not found — please run collect_toptracks.py first")
         exit(1)
 
     df_tracks = pd.read_csv(path)
@@ -61,8 +59,8 @@ if __name__ == "__main__":
     os.makedirs("data/processed", exist_ok=True)
     df_conc.to_csv("data/processed/streaming_concentration.csv", index=False)
 
-    print(f" {len(df_conc)} Artists → data/processed/streaming_concentration.csv")
-    print(f"\nBeispiel:")
+    print(f"{len(df_conc)} artists → data/processed/streaming_concentration.csv")
+    print(f"\nExample:")
     print(df_conc.head(10).to_string())
-    print(f"\nStatistik top5_share:")
+    print(f"\nStatistics for top5_share:")
     print(df_conc["top5_share"].describe().round(2))
