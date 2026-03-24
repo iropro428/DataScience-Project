@@ -1,15 +1,17 @@
-# Standalone Data-Science Analysis for F2:
-# Streaming Concentration (Top Track Share) vs. Tour Intensity (Events/Year)
-#
-# Prerequisite: join_data.py has been executed (requires lastfm_toptracks.csv)
-#
-# Console Output:
-#   A) Descriptive Statistics (Concentration Metrics)
-#   D) Top/Bottom Artists
-#   E) Track Profile: Extreme Cases
-#
-# Output Files:
-#   data/processed/f2_results.csv
+""""
+Standalone Data-Science Analysis for F2:
+Streaming Concentration (Top Track Share) vs. Tour Intensity (Events/Year)
+
+Prerequisite: join_data.py has been executed (requires lastfm_toptracks.csv)
+
+Console Output:
+   A) Descriptive Statistics (Concentration Metrics)
+   B) Top/Bottom Artists
+   C) Track Profile: Extreme Cases
+
+Output Files:
+   data/processed/f2_results.csv
+"""
 
 import pandas as pd
 import numpy as np
@@ -17,7 +19,7 @@ from scipy import stats
 import os
 import sys
 
-# ── Loading ──────────────────────────────────────────────────────────────────
+# Loading
 FINAL = "data/processed/final_dataset.csv"
 TRACKS = "data/raw/lastfm_toptracks.csv"
 
@@ -90,7 +92,7 @@ Tour Intensity (events_last_year):
 """)
 
 # ══════════════════════════════════════════════════════════════════════════
-# D) TOP / BOTTOM ARTISTS
+# B) TOP / BOTTOM ARTISTS
 # ══════════════════════════════════════════════════════════════════════════
 cols_show = [col for col in ["artist_name", "top5_share", "top1_share", "hhi", 
                              "events_last_year", "total_events", "listeners"] 
@@ -113,7 +115,7 @@ print(SEP)
 print(df_f2.nlargest(10, "events_last_year")[cols_show].to_string(index=False))
 
 # ══════════════════════════════════════════════════════════════════════════
-# E) TRACK PROFILE: Extreme Cases (if Toptracks exists)
+# C) TRACK PROFILE: Extreme Cases (if Toptracks exists)
 # ══════════════════════════════════════════════════════════════════════════
 if os.path.exists(TRACKS):
     print(f"\n{SEP}")
@@ -150,7 +152,7 @@ if os.path.exists(TRACKS):
                 print(f"    #{int(t['rank']):<2} {str(t['track_name'])[:30]:<30} {pct:>5.1f}%  {bar}")
 
 # ══════════════════════════════════════════════════════════════════════════
-# F) SAVE RESULTS
+# SAVE RESULTS
 # ══════════════════════════════════════════════════════════════════════════
 result_cols = [col for col in 
                ["artist_name", "top5_share", "top3_share", "top1_share", "hhi", 
