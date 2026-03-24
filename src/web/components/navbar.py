@@ -1,14 +1,29 @@
 """
-components/navbar.py  —  Horizontale Navigation
-Ersetzt die vertikale Sidebar komplett.
+components/navbar.py
+
+Horizontal top navigation for the Streamlit app.
+Replaces the default vertical sidebar navigation.
 """
+
 import streamlit as st
 
 PAGES = [
     {"label": "Home", "page": "pages/1_Home.py", "icon": "🏠"},
-    {"label": "Streaming & Ticket Power", "page": "pages/2_Streaming_Ticket.py", "icon": "🎟️"},
-    {"label": "Geographic Analysis", "page": "pages/3_Geographic.py", "icon": "🗺️"},
-    {"label": "Market Time & Scheduling", "page": "pages/4_Scheduling.py", "icon": "📅"},
+    {
+        "label": "Streaming & Ticket Power",
+        "page": "pages/2_Streaming_Ticket.py",
+        "icon": "🎟️",
+    },
+    {
+        "label": "Geographic Analysis",
+        "page": "pages/3_Geographic.py",
+        "icon": "🗺️",
+    },
+    {
+        "label": "Market Time & Scheduling",
+        "page": "pages/4_Scheduling.py",
+        "icon": "📅",
+    },
     {"label": "Data", "page": "pages/7_Data.py", "icon": "🗄️"},
     {"label": "Glossary", "page": "pages/5_Glossar.py", "icon": "📖"},
     {"label": "About Us", "page": "pages/6_About.py", "icon": "👥"},
@@ -24,7 +39,7 @@ NAV_CSS = """
     max-width: 1600px !important;
 }
 
-/* Große Überschrift oben */
+/* Large app title at the top */
 .brand-header {
     margin: -0.5rem -2.5rem 0rem -2.5rem;
     padding: 26px 24px 16px 24px;
@@ -57,7 +72,7 @@ NAV_CSS = """
     color: transparent !important;
 }
 
-/* Navigation darunter */
+/* Navigation bar below the title */
 .navbar-wrapper {
     display: flex;
     align-items: center;
@@ -72,7 +87,7 @@ NAV_CSS = """
     z-index: 999;
 }
 
-/* Standard-Styling für die Nav-Zeile */
+/* Default styling for nav links */
 div[data-testid="stHorizontalBlock"] [data-testid="stPageLink"] a {
     display: flex !important;
     align-items: center !important;
@@ -94,7 +109,7 @@ div[data-testid="stHorizontalBlock"] [data-testid="stPageLink"] a {
 
 div[data-testid="stHorizontalBlock"] [data-testid="stPageLink"] a:hover {
     color: #f1f5f9 !important;
-    background: rgba(99,102,241,0.06) !important;
+    background: rgba(99, 102, 241, 0.06) !important;
     border-bottom: 2px solid #6366f1 !important;
 }
 
@@ -102,22 +117,27 @@ div[data-testid="stHorizontalBlock"] [data-testid="stPageLink"] a[aria-current="
     color: #818cf8 !important;
     border-bottom: 2px solid #6366f1 !important;
     font-weight: 600 !important;
-    background: rgba(99,102,241,0.06) !important;
+    background: rgba(99, 102, 241, 0.06) !important;
 }
 </style>
 """
 
+
 def render_navbar():
+    """Render the branded top header and horizontal page navigation."""
     st.markdown(NAV_CSS, unsafe_allow_html=True)
-    
-    st.markdown("""
-    <div class="brand-header">
-        <div class="brand-row">
-            <span class="brand-icon">🎵</span>
-            <span class="brand-title">From Streams to Stages</span>
+
+    st.markdown(
+        """
+        <div class="brand-header">
+            <div class="brand-row">
+                <span class="brand-icon">🎵</span>
+                <span class="brand-title">From Streams to Stages</span>
+            </div>
         </div>
-    </div>
-    """, unsafe_allow_html=True)
+        """,
+        unsafe_allow_html=True,
+    )
 
     st.markdown('<div class="navbar-wrapper">', unsafe_allow_html=True)
 
@@ -126,4 +146,4 @@ def render_navbar():
         with cols[i]:
             st.page_link(page["page"], label=f"{page['icon']} {page['label']}")
 
-    st.markdown('</div>', unsafe_allow_html=True)
+    st.markdown("</div>", unsafe_allow_html=True)

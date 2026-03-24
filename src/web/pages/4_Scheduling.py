@@ -31,7 +31,7 @@ render_navbar()
 apply_glossary_styles()
 
 
-# Load data
+# Load and cache the dataset; coerce scheduling columns to numeric and return None if missing.
 @st.cache_data
 def load_data():
     p = "data/processed/final_dataset.csv"
@@ -47,7 +47,7 @@ def load_data():
 
 df = load_data()
 
-# Header
+# Render the page header with title and guiding research questions.
 st.markdown("""
 <div class="page-header">
     <div class="page-header-title-row">
@@ -59,7 +59,7 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-# Research question overview
+# Render the table of contents linking to each research question section.
 st.markdown("""
 <div style="background:#161c2d;border:1px solid #232840;border-radius:14px;
     padding:24px 28px;margin-bottom:28px;">
@@ -107,7 +107,7 @@ if df is None:
     st.code("python scripts/join_data.py", language="bash")
     st.stop()
 
-# KPI summary
+# Display dataset-wide scheduling KPIs as a five-column metric row.
 k1, k2, k3, k4, k5 = st.columns(5)
 k1.metric("Artists", len(df))
 if "avg_days_between_shows" in df.columns:
@@ -166,7 +166,7 @@ else:
         labels=["Q1\n(niedrig)", "Q2", "Q3", "Q4\n(hoch)"]
     )
 
-    # Metrics based on full cleaned sample
+    # Compute summary metrics for Q1 from the full cleaned sample before any plot-level filtering.
     m1a, m1b, m1c, m1d = st.columns(4)
 
     artists_analyzed_q1 = len(df1)
@@ -254,7 +254,7 @@ else:
 
     description_placeholder_1.markdown(graph1_descriptions.get(color_by1, ""))
 
-    # Filtered data for Graph 1 only
+    # Apply plot-specific filters (event threshold and day cap) without touching the base sample.
     df1_plot = df1.copy()
     if "total_events" in df1_plot.columns:
         df1_plot = df1_plot[df1_plot["total_events"] >= min_events_filter_g1].copy()
@@ -263,7 +263,7 @@ else:
     if len(df1_plot) >= 5:
         df1_plot["x_plot"] = np.log10(df1_plot["listeners"] + 1) if log_x1 else df1_plot["listeners"]
 
-        # Global color ranges for consistency across filter settings
+        # Pin color scale ranges to the full base sample so colors stay comparable when filters change.
         color_range_map = {}
         if "total_events" in df1.columns and df1["total_events"].notna().any():
             color_range_map["total_events"] = (0, float(df1["total_events"].max()))
@@ -726,7 +726,7 @@ else:
     m2d.metric("Median concerts per artist", f"{median_concerts_per_artist_q2:.0f}" if median_concerts_per_artist_q2 is not None else "—")
 
     st.divider()
-    # Graph 2a: Scatterplot
+    # Scatterplot: playcount (x) vs. weekend share (y), colored by popularity tier.
     st.markdown(
         '<div class="section-title">📈 Graph 1 — Playcount vs. weekend share</div>',
         unsafe_allow_html=True
@@ -786,7 +786,7 @@ else:
     df2_plot["x_plot"] = np.log10(df2_plot["playcount"] + 1) if log_x2 else df2_plot["playcount"]
 
     if len(df2_plot) >= 5:
-        # Recompute statistics directly from the current data
+        # Recompute Pearson r from the currently displayed data to keep stats consistent with the plot.
         r2_plot, p2_plot = stats.pearsonr(df2_plot["x_plot"], df2_plot[col_f2_y])
         r2_sq_plot = r2_plot ** 2
         abs_r2_plot = abs(r2_plot)
@@ -800,7 +800,7 @@ else:
         else:
             relationship_text_2 = f"a strong {'positive' if r2_plot > 0 else 'negative'} relationship"
 
-        # trend line
+        # Fit a linear trend line to the currently displayed subset.
         coef2_plot = np.polyfit(df2_plot["x_plot"], df2_plot[col_f2_y], 1)
         x_line2_plot = np.linspace(df2_plot["x_plot"].min(), df2_plot["x_plot"].max(), 200)
         y_line2_plot = np.polyval(coef2_plot, x_line2_plot)
@@ -859,7 +859,7 @@ else:
         with g2_plot:
             st.plotly_chart(fig2, use_container_width=True)
 
-        # Interpretation
+        # Select an interpretation text based on correlation strength and direction.
         if abs_r2_plot < 0.1:
             interp_text_2 = (
                 "Most points are spread across the chart without forming a clear upward or downward pattern. "
@@ -895,7 +895,7 @@ else:
         st.warning("Too few data points to compute a reliable correlation.")
 
     st.divider()
-    # Graph 2b: Histogram of weekend share
+    # Histogram: weekend share distribution overlaid by popularity tier.
     st.markdown(
         '<div class="section-title">📊 Graph 2 — Distribution of weekend share</div>',
         unsafe_allow_html=True
@@ -990,7 +990,7 @@ else:
     with h2_plot:
         st.plotly_chart(fig2b, use_container_width=True)
 
-    # Weekend statistics table
+    # Aggregate mean, median, and count of weekend share per popularity tier for the summary table.
     tier_means2 = (
         df2.groupby("Popularity-Tier", observed=True)[col_f2_y]
         .agg(Mean="mean", Median="median", n="count")
@@ -1009,7 +1009,7 @@ else:
 
 
 
-    # Interpretation
+    # Select an interpretation text based on the median weekend share gap between Q1 and Q4.
     median_map2 = dict(zip(tier_means2["Popularity-Tier"], tier_means2["Median"]))
     q1_med2 = median_map2.get("Q1 (low)")
     q4_med2 = median_map2.get("Q4 (high)")
@@ -1192,7 +1192,7 @@ else:
         df3_plot["x_plot"] = np.log10(df3_plot["listeners"] + 1) if log_x3 else df3_plot["listeners"]
 
         if len(df3_plot) >= 5:
-            # Recompute statistics on currently visible data
+            # Recompute Pearson r from the currently displayed data to keep stats consistent with the plot.
             r3_plot, p3_plot = stats.pearsonr(df3_plot["x_plot"], df3_plot[col_f3])
             r2_3_plot = r3_plot ** 2
             abs_r3_plot = abs(r3_plot)
@@ -1206,7 +1206,7 @@ else:
             else:
                 relationship_text_3 = f"a strong {'positive' if r3_plot > 0 else 'negative'} relationship"
 
-            # trend line based on filtered data
+            # Fit a linear trend line to the currently displayed subset.
             coef3_plot = np.polyfit(df3_plot["x_plot"], df3_plot[col_f3], 1)
             x_line3_plot = np.linspace(df3_plot["x_plot"].min(), df3_plot["x_plot"].max(), 200)
             y_line3_plot = np.polyval(coef3_plot, x_line3_plot)
@@ -1266,7 +1266,7 @@ else:
                 st.plotly_chart(fig3, use_container_width=True)
 
             
-            # Interpretation
+            # Select an interpretation text based on correlation strength and direction.
             if abs_r3_plot < 0.1:
                 interp_text_3 = (
                     "Most artists appear across a similar range of lead times regardless of their listener count. "
@@ -1300,7 +1300,7 @@ else:
             st.warning("Too few data points after filtering to compute a reliable correlation.")
 
         st.divider()
-        # Graph 3b: Box Plot by tier
+        # Box plot: lead time distribution per popularity tier (Q3).
         st.markdown(
             '<div class="section-title">📦 Graph 2 — Lead time by popularity tier</div>',
             unsafe_allow_html=True
@@ -1315,7 +1315,7 @@ else:
 
         df3b = df3.copy()
 
-        # Robust tier handling
+        # Helper functions to sort and relabel tier strings robustly, regardless of newline variants.
         def tier_rank_f3(val: str) -> int:
             s = str(val).replace("\n", " ").lower()
             if "q1" in s:
@@ -1354,7 +1354,7 @@ else:
             "Q4 (high)": "#e05050",
         }
 
-        # Kruskal-Wallis on filtered data
+        # Run Kruskal-Wallis test across tiers to check for statistically significant differences.
         kw3_groups = [
             df3b[df3b["Popularity-Tier"] == t][col_f3].dropna().values
             for t in present_tiers_raw_f3
@@ -1365,7 +1365,7 @@ else:
         if len(kw3_groups) >= 2:
             kw3_h, kw3_p = stats.kruskal(*kw3_groups)
 
-        # Box plot
+        # Build the box plot with one trace per popularity tier.
         fig3b = go.Figure()
 
         for raw_tier in present_tiers_raw_f3:
@@ -1404,7 +1404,7 @@ else:
 
         st.plotly_chart(fig3b, use_container_width=True)
 
-        # Tier summary table
+        # Aggregate mean, median, and count of lead time per tier for the summary table.
         tier_table_f3 = (
             df3b.groupby("Popularity-Tier", observed=True)[col_f3]
             .agg(Mean="mean", Median="median", n="count")
@@ -1421,7 +1421,7 @@ else:
         })
         tier_table_f3 = tier_table_f3.sort_values("tier_rank").drop(columns="tier_rank")
 
-        # Interpretation
+        # Select an interpretation text based on Kruskal-Wallis result and Q1 vs. Q4 medians.
         median_map_f3 = dict(zip(tier_table_f3["Popularity-Tier"], tier_table_f3["Median"]))
         q1_med_f3 = median_map_f3.get("Q1 (low)")
         q4_med_f3 = median_map_f3.get("Q4 (high)")
@@ -1462,7 +1462,7 @@ else:
         """, unsafe_allow_html=True)
 
         st.divider()
-        # Summary: Research Question 3
+        # Summary section for Research Question 3.
         st.markdown(
             '<div class="section-title">Summary — Research Question 3: Lead time</div>',
             unsafe_allow_html=True

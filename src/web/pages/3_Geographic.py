@@ -25,7 +25,7 @@ apply_styles()
 render_navbar()
 apply_glossary_styles()
 
-# Header
+# Render the page header with title and guiding research questions.
 st.markdown("""
 <div class="page-header">
     <div class="page-header-title-row">
@@ -81,7 +81,7 @@ st.markdown("""
 st.markdown('<div id="geo-frage-1"></div>', unsafe_allow_html=True)
 
 
-# Load Data
+# Load and cache the main dataset and city frequency table; return None if files are missing.
 @st.cache_data
 def load_data():
     f1 = "data/processed/final_dataset.csv"
@@ -113,7 +113,7 @@ if any(c not in df.columns for c in F4_COLS):
 
 df_f4 = df.dropna(subset=["revisit_cities", "new_cities"]).copy()
 
-# Global Metrics
+# Compute dataset-wide revisit statistics for the summary metrics row.
 total_rev = df_f4["revisit_cities"].sum()
 total_new = df_f4["new_cities"].sum()
 total_cities = total_rev + total_new
@@ -122,7 +122,7 @@ global_pct = total_rev / total_cities * 100 if total_cities > 0 else 0
 mean_pct = df_f4["pct_revisit_cities"].mean()
 median_pct = df_f4["pct_revisit_cities"].median()
 
-# Sidebar
+# Populate the sidebar with navigation links and dataset-level overview metrics.
 with st.sidebar:
     st.markdown("## 🗺️ Geographic Analysis")
     st.divider()
@@ -672,7 +672,7 @@ st.markdown('<div id="geo-frage-2"></div>', unsafe_allow_html=True)
 # RESEARCH QUESTION 2
 # ══════════════════════════════════════════════════════════════════════════
 
-# Load F6 data 
+# Load and cache capital city data; each file is optional and checked separately.
 @st.cache_data
 def load_f6_data():
     p1 = "data/processed/f6_capitals_visited.csv"
@@ -922,7 +922,7 @@ if cap_global is not None and len(cap_global) > 0:
 
     cap_top = cap_global_clean.nlargest(top_n_h, "total_visits").sort_values("total_visits")
 
-    # Dynamic description based on current selection
+    # Update the description placeholder to reflect the currently selected top-N and leading capital.
     top1 = cap_top.iloc[-1]["city"]
     top1_visits = int(cap_top.iloc[-1]["total_visits"])
     top3 = cap_top.nlargest(3, "total_visits")["city"].tolist()
@@ -962,7 +962,7 @@ if cap_global is not None and len(cap_global) > 0:
     with h2:
         st.plotly_chart(fig_h, use_container_width=True)
 
-    # Check if visits drop steeply after top 3
+    # Detect whether visit counts drop sharply after the top 3 capitals to select interpretation text.
     visits_sorted = cap_top.sort_values("total_visits", ascending=False)["total_visits"].tolist()
     top3_avg = sum(visits_sorted[:3]) / 3 if len(visits_sorted) >= 3 else 0
     rest_avg = sum(visits_sorted[3:]) / len(visits_sorted[3:]) if len(visits_sorted) > 3 else 0
@@ -1152,7 +1152,7 @@ st.markdown("""
 tour routing follows existing audience demand rather than exploring markets with no prior streaming presence.
 """)
 
-# Load data
+# Load geo-alignment and Last.fm geographic presence data for Research Question 3.
 @st.cache_data
 def load_geo_align():
     p = "data/processed/geo_alignment.csv"
@@ -1180,7 +1180,7 @@ for c in ["jaccard", "tour_coverage", "streaming_reach", "listeners", "n_aligned
     if c in ga.columns:
         ga[c] = pd.to_numeric(ga[c], errors="coerce")
 
-# KPIs
+# Compute summary KPIs for the geo-alignment section header.
 n_artists = len(ga)
 mean_tc = ga["tour_coverage"].mean()
 mean_sr = ga["streaming_reach"].mean()
@@ -1252,7 +1252,7 @@ GA2_Y_LABEL = "Geo-alignment score (listener-weighted)" if GA2_Y == "weighted_co
 
 df_g1 = ga.dropna(subset=["listeners", GA2_Y]).copy()
 
-# x-axis toggle (log / linear)
+    # Apply log transform to x-axis values if the user toggled the log scale.
 if log_x_g1:
     df_g1["x_plot"] = np.log10(df_g1["listeners"] + 1)
     x_label_g1 = "log₁₀(Last.fm Listeners)"
@@ -1260,15 +1260,15 @@ else:
     df_g1["x_plot"] = df_g1["listeners"]
     x_label_g1 = "Last.fm Listeners"
 
-# log version kept for stable interpretation
+    # Always compute log listeners for slope interpretation, independent of the display scale.
 df_g1["log_listeners"] = np.log10(df_g1["listeners"] + 1)
 
-# trend line follows the displayed x scale
+    # Fit the trend line to whichever x scale is currently displayed.
 coef_g1 = np.polyfit(df_g1["x_plot"], df_g1[GA2_Y], 1)
 x_line_g1 = np.linspace(df_g1["x_plot"].min(), df_g1["x_plot"].max(), 200)
 y_line_g1 = np.polyval(coef_g1, x_line_g1)
 
-# slope for interpretation always based on log listeners
+    # Compute slope on log scale for consistent direction interpretation regardless of display mode.
 coef_interp_g1 = np.polyfit(df_g1["log_listeners"], df_g1[GA2_Y], 1)
 slope_g1 = coef_interp_g1[0]
 

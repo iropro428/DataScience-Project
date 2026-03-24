@@ -45,6 +45,7 @@ st.markdown("""
 # ── Data Sources ───────────────────────────────────────────────────────────
 st.markdown('<div class="section-title">📡 Data Sources</div>', unsafe_allow_html=True)
 
+# Metadata for each data source: displayed as styled cards in the section below.
 sources = [
     {
         "icon": "🎧",
@@ -96,6 +97,7 @@ sources = [
     },
 ]
 
+# Render one styled card per data source.
 for src in sources:
     st.markdown(f"""
     <div style="
@@ -147,6 +149,7 @@ Here is an overview of the chart types we used and where you can find them.
 </p>
 """, unsafe_allow_html=True)
 
+# Metadata for each chart type: displayed as a three-column card grid below.
 charts = [
     {
         "icon": "🔵",
@@ -192,6 +195,7 @@ charts = [
     },
 ]
 
+# Render one card per chart type, distributed across three columns.
 v_cols = st.columns(3)
 for i, chart in enumerate(charts):
     with v_cols[i % 3]:

@@ -1,11 +1,12 @@
 """
 components/glossary.py
-Glossary + CSS tooltips for all technical terms.
+
+Glossary definitions and CSS tooltip helpers for technical terms.
 """
+
 import streamlit as st
 
 TERMS = {
-
     # ── STATISTICS ────────────────────────────────────────────────────────
     "Trend Line": {
         "kurz": "A straight line showing the overall direction of a relationship in a scatterplot",
@@ -18,9 +19,9 @@ TERMS = {
 
 In this project, trend lines are calculated using Ordinary Least Squares (OLS) — the standard method for finding the best-fit straight line through a set of points.
 """,
-        "emoji": "📈", "kategorie": "Statistics",
+        "emoji": "📈",
+        "kategorie": "Statistics",
     },
-
     "Mean": {
         "kurz": "The average — sum of all values divided by the number of values",
         "lang": """
@@ -30,9 +31,9 @@ Example: if 5 artists have 1, 2, 3, 4, and 10 million listeners, the mean is (1+
 
 The mean is sensitive to extreme outliers — one superstar with 50 million listeners can pull the mean far above what most artists actually have. This is why the **median** is often a better measure for skewed data like listener counts.
 """,
-        "emoji": "➗", "kategorie": "Statistics",
+        "emoji": "➗",
+        "kategorie": "Statistics",
     },
-
     "Median": {
         "kurz": "The middle value — 50% of values are below it, 50% are above it",
         "lang": """
@@ -42,9 +43,9 @@ It is more robust than the mean when data is skewed — for example, if one arti
 
 In this project, medians are used wherever listener counts or event counts are highly skewed.
 """,
-        "emoji": "📍", "kategorie": "Statistics",
+        "emoji": "📍",
+        "kategorie": "Statistics",
     },
-
     "Quartile": {
         "kurz": "Divides data into 4 equally sized groups of 25% each",
         "lang": """
@@ -57,9 +58,9 @@ In this project, medians are used wherever listener counts or event counts are h
 
 In this project, artists are grouped into popularity tiers Q1–Q4 based on their Last.fm listener count.
 """,
-        "emoji": "📦", "kategorie": "Statistics",
+        "emoji": "📦",
+        "kategorie": "Statistics",
     },
-
     "n": {
         "kurz": "Number of data points included in an analysis",
         "lang": """
@@ -69,9 +70,9 @@ A larger n makes results more reliable. A small n means even strong-looking patt
 
 In this project, n is shown in chart titles so you always know how many artists a result is based on.
 """,
-        "emoji": "🔢", "kategorie": "Statistics",
+        "emoji": "🔢",
+        "kategorie": "Statistics",
     },
-
     "Log Scale": {
         "kurz": "A scale where equal steps represent equal multiplications (×10, ×100...)",
         "lang": """
@@ -81,7 +82,8 @@ On a normal scale, all the smaller artists would be squished into one tiny corne
 
 The x-axis label `log₁₀(listeners)` means the displayed value is the base-10 logarithm of the actual listener count. For example: log₁₀(1,000,000) = 6.
 """,
-        "emoji": "📐", "kategorie": "Statistics",
+        "emoji": "📐",
+        "kategorie": "Statistics",
     },
 
     # ── METRICS ───────────────────────────────────────────────────────────
@@ -94,9 +96,9 @@ An artist who plays 10 concerts, 3 of which are in capitals (e.g. Berlin, Paris,
 
 This metric counts every performance — so playing 5 shows in Berlin counts as 5 capital events.
 """,
-        "emoji": "🏛️", "kategorie": "Metrics",
+        "emoji": "🏛️",
+        "kategorie": "Metrics",
     },
-
     "pct_capital_cities": {
         "kurz": "Share of the distinct cities an artist visited that are capitals (%)",
         "lang": """
@@ -106,9 +108,9 @@ An artist who visited London (capital), Manchester, and Berlin (capital) has a p
 
 This can tell a very different story from pct_capital. An artist with 10 shows in London and 1 in Hamburg has pct_capital = 91% (events), but pct_capital_cities = 50% (cities).
 """,
-        "emoji": "🗺️", "kategorie": "Metrics",
+        "emoji": "🗺️",
+        "kategorie": "Metrics",
     },
-
     "Revisit Rate": {
         "kurz": "Share of cities an artist visited more than once on tour (%)",
         "lang": """
@@ -119,9 +121,9 @@ A low revisit rate means the artist is constantly exploring new cities — a geo
 
 In this project, a "revisit city" is any city where an artist has two or more Ticketmaster events recorded between 2023 and 2026.
 """,
-        "emoji": "🔄", "kategorie": "Metrics",
+        "emoji": "🔄",
+        "kategorie": "Metrics",
     },
-
     "Revisit Ratio": {
         "kurz": "Number of revisit cities divided by number of new cities",
         "lang": """
@@ -133,9 +135,9 @@ In this project, a "revisit city" is any city where an artist has two or more Ti
 
 A global ratio of 0.16 means that for every new city added to a tour, only 0.16 cities are revisited — expansion is the dominant pattern.
 """,
-        "emoji": "📊", "kategorie": "Metrics",
+        "emoji": "📊",
+        "kategorie": "Metrics",
     },
-
     "Top-5-Share": {
         "kurz": "Share of an artist's total play count coming from their top 5 tracks (%)",
         "lang": """
@@ -146,9 +148,9 @@ A low Top-5-Share (e.g. 30%) means plays are spread broadly across many tracks �
 
 This metric is used in Research Question 2 of Streaming & Ticket Power to examine whether streaming concentration relates to tour scale.
 """,
-        "emoji": "🎧", "kategorie": "Metrics",
+        "emoji": "🎧",
+        "kategorie": "Metrics",
     },
-
     "Lead Time": {
         "kurz": "Number of days between when tickets go on sale and the first concert date",
         "lang": """
@@ -158,9 +160,9 @@ A lead time of 90 days means tickets went on sale about 3 months before the show
 
 Longer lead times may reflect larger productions, more complex logistics, or longer marketing campaigns. In this project, only lead times between 0 and 1095 days (3 years) are included to remove implausible values.
 """,
-        "emoji": "📅", "kategorie": "Metrics",
+        "emoji": "📅",
+        "kategorie": "Metrics",
     },
-
     "Weekend Share": {
         "kurz": "Share of an artist's concerts that take place on Friday, Saturday, or Sunday (%)",
         "lang": """
@@ -170,9 +172,9 @@ A weekend share of 60% means 60% of all concerts happen on weekends. Weekends ar
 
 In this project, Friday, Saturday, and Sunday are all counted as weekend days.
 """,
-        "emoji": "🗓️", "kategorie": "Metrics",
+        "emoji": "🗓️",
+        "kategorie": "Metrics",
     },
-
     "Avg. Days Between Shows": {
         "kurz": "Average number of days between consecutive concerts for one artist",
         "lang": """
@@ -183,9 +185,9 @@ A value of 30 means roughly once a month.
 
 Very short gaps suggest intensive touring; very long gaps may indicate infrequent live activity or long breaks between tours.
 """,
-        "emoji": "⏱️", "kategorie": "Metrics",
+        "emoji": "⏱️",
+        "kategorie": "Metrics",
     },
-
     "Weighted Coverage": {
         "kurz": "Share of an artist's global listener reach that is covered by their tour countries",
         "lang": """
@@ -199,9 +201,9 @@ Unlike Jaccard, it weights each country by how many listeners the artist has the
 | **0.5** | 50% of their total listener reach is covered by their tour countries |
 | **0.0** | None of the countries where they have listeners are toured |
 """,
-        "emoji": "🌍", "kategorie": "Metrics",
+        "emoji": "🌍",
+        "kategorie": "Metrics",
     },
-
     "Tour Coverage": {
         "kurz": "Share of an artist's tour countries that are also top streaming countries (%)",
         "lang": """
@@ -210,9 +212,9 @@ Unlike Jaccard, it weights each country by how many listeners the artist has the
 - **High Tour Coverage** → the artist mainly performs where fans already exist
 - **Low Tour Coverage** → the artist tours heavily into markets with little prior streaming presence, suggesting a strategy of building new audiences
 """,
-        "emoji": "🗺️", "kategorie": "Metrics",
+        "emoji": "🗺️",
+        "kategorie": "Metrics",
     },
-
     "Streaming Reach": {
         "kurz": "Share of an artist's top streaming countries that are actually visited on tour (%)",
         "lang": """
@@ -223,9 +225,9 @@ Unlike Jaccard, it weights each country by how many listeners the artist has the
 
 This is a key metric for answering Research Question 3: how well does touring geography follow streaming geography?
 """,
-        "emoji": "📡", "kategorie": "Metrics",
+        "emoji": "📡",
+        "kategorie": "Metrics",
     },
-
     "Geo-Alignment": {
         "kurz": "How well an artist's tour geography matches where their streaming audience is located",
         "lang": """
@@ -238,12 +240,12 @@ A misaligned artist either:
 
 Measured using three complementary metrics: Weighted Coverage, Tour Coverage, and Streaming Reach.
 """,
-        "emoji": "🧭", "kategorie": "Metrics",
+        "emoji": "🧭",
+        "kategorie": "Metrics",
     },
-
 }
 
-# ── CSS for tooltips ───────────────────────────────────────────────────────
+# CSS used by glossary tooltips throughout the app.
 TOOLTIP_CSS = """
 <style>
 .gt {
@@ -304,29 +306,34 @@ TOOLTIP_CSS = """
 
 
 def apply_glossary_styles():
+    """Inject glossary tooltip CSS into the Streamlit app."""
     st.markdown(TOOLTIP_CSS, unsafe_allow_html=True)
 
 
 def tt(term: str, label: str = None) -> str:
+    """Return an HTML tooltip snippet for a glossary term."""
     if term not in TERMS:
         return label or term
-    t = TERMS[term]
+
+    term_data = TERMS[term]
     display = label or term
-    kurz = t["kurz"].replace("<", "&lt;").replace(">", "&gt;")
+    kurz = term_data["kurz"].replace("<", "&lt;").replace(">", "&gt;")
+
     return (
         f'<span class="gt">{display}'
         f'<span class="gt-box">'
-        f'<span class="gt-term">{t["emoji"]} {term}</span>'
+        f'<span class="gt-term">{term_data["emoji"]} {term}</span>'
         f'<span class="gt-def">{kurz}</span>'
-        f'</span></span>'
+        f"</span></span>"
     )
 
 
 def glossar_seite():
+    """Render the full glossary page grouped by category."""
     kategorien = {}
-    for term, t in TERMS.items():
-        k = t.get("kategorie", "Other")
-        kategorien.setdefault(k, []).append(term)
+    for term, term_data in TERMS.items():
+        kategorie = term_data.get("kategorie", "Other")
+        kategorien.setdefault(kategorie, []).append(term)
 
     kat_icons = {
         "Statistics": "📊",
@@ -336,10 +343,14 @@ def glossar_seite():
     for kat, terms in kategorien.items():
         icon = kat_icons.get(kat, "📌")
         st.markdown(f"### {icon} {kat}")
+
         cols = st.columns(2)
         for i, term in enumerate(terms):
-            t = TERMS[term]
+            term_data = TERMS[term]
             with cols[i % 2]:
-                with st.expander(t["emoji"] + " " + term + " — " + t["kurz"]):
-                    st.markdown(t["lang"])
+                with st.expander(
+                    f'{term_data["emoji"]} {term} — {term_data["kurz"]}'
+                ):
+                    st.markdown(term_data["lang"])
+
         st.divider()

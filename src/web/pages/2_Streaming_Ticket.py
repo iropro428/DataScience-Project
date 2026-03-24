@@ -1,30 +1,32 @@
-import streamlit as st
-import pandas as pd
-import numpy as np
-import plotly.express as px
-import plotly.graph_objects as go
-from scipy import stats
 import os
-
 import sys as _sys, os as _os
 
-from components.styles import apply_styles
-from components.navbar import render_navbar
+import numpy as np
+import pandas as pd
+import plotly.express as px
+import plotly.graph_objects as go
+import streamlit as st
+from scipy import stats
+
 from components.glossary import apply_glossary_styles, tt
+from components.navbar import render_navbar
+from components.styles import apply_styles
 from components.util import hex_rgba
 
 st.set_page_config(
     page_title="F1 – Listeners vs Tour Scale",
     page_icon="🎟️",
     layout="wide",
-    initial_sidebar_state="collapsed"
+    initial_sidebar_state="collapsed",
 )
+
 apply_styles()
 render_navbar()
 apply_glossary_styles()
 
-# Header
-st.markdown("""
+# Render the page header with title and guiding research question.
+st.markdown(
+    """
 <div class="page-header">
     <div class="page-header-title-row">
         <span class="page-header-icon">🎟️</span>
@@ -32,9 +34,12 @@ st.markdown("""
     </div>
     <p>How strongly is digital popularity on Last.fm related to the scale and intensity of touring?</p>
 </div>
-""", unsafe_allow_html=True)
+""",
+    unsafe_allow_html=True,
+)
 
-st.markdown("""
+st.markdown(
+    """
 <div style="background:#161c2d;border:1px solid #232840;border-radius:14px;
     padding:24px 28px;margin-bottom:28px;">
     <div style="font-size:1rem;font-weight:700;text-transform:uppercase;
@@ -74,16 +79,21 @@ st.markdown("""
         </a>
     </div>
 </div>
-""", unsafe_allow_html=True)
+""",
+    unsafe_allow_html=True,
+)
 
 st.markdown('<div id="frage-1"></div>', unsafe_allow_html=True)
 
-# Load Data
+
+# Load and cache the processed dataset; stop early if the file is missing.
 @st.cache_data
 def load_data():
+    """Load the processed final dataset for this page."""
     path = "data/processed/final_dataset.csv"
     if not os.path.exists(path):
         return None
+
     df = pd.read_csv(path)
     df = df.dropna(subset=["listeners", "total_events"])
     df = df[df["total_events"] > 0].copy()
@@ -94,12 +104,17 @@ df = load_data()
 
 if df is None:
     st.error("Dataset not found. Please run the collection scripts first.")
-    st.code("python scripts/collect_artists_lastfm.py\npython scripts/collect_ticketmaster.py\npython scripts/join_data.py")
+    st.code(
+        "python scripts/collect_artists_lastfm.py\n"
+        "python scripts/collect_ticketmaster.py\n"
+        "python scripts/join_data.py"
+    )
     st.stop()
 
 
-# Genre Helper
+# Build the list of unique genres from artist tags for use in filter controls.
 def extract_genres(tags_str):
+    """Split a comma-separated tag string into normalized genre labels."""
     if pd.isna(tags_str):
         return []
     return [t.strip().lower() for t in str(tags_str).split(",")]
@@ -110,6 +125,7 @@ for tags in df.get("tags", pd.Series(dtype=str)).dropna():
     for g in extract_genres(tags):
         if len(g) > 2:
             all_genres.add(g)
+
 top_genres = sorted(list(all_genres))[:50]
 
 # ══════════════════════════════════════════════════════
@@ -117,24 +133,34 @@ top_genres = sorted(list(all_genres))[:50]
 # ══════════════════════════════════════════════════════
 st.markdown(
     '<a id="frage-1" style="display:block; position:relative; top:-80px;"></a>',
-    unsafe_allow_html=True
+    unsafe_allow_html=True,
 )
 
-st.markdown("""
+st.markdown(
+    """
 <div class="rq-box" style="margin-top: 28px;">
     <h3>🎟️ Research Question 1</h3>
     <p>How does the number of Last.fm listeners correlate with the scale of an artist's tour,
     measured by the number of events scheduled?</p>
 </div>
-""", unsafe_allow_html=True)
+""",
+    unsafe_allow_html=True,
+)
 
-st.markdown("""
+st.markdown(
+    """
 **What are we measuring?**
-We examine whether artists with more Last.fm listeners also tend to have larger tours. Digital popularity is measured using the current number of Last.fm listeners. Tour scale is measured as the total number of Ticketmaster events found for each artist between 2022 and 2026.<br>
+We examine whether artists with more Last.fm listeners also tend to have larger tours.
+Digital popularity is measured using the current number of Last.fm listeners.
+Tour scale is measured as the total number of Ticketmaster events found for each artist
+between 2022 and 2026.<br>
 <br>
 **Why is this relevant?**
-If digital reach is associated with more live events, this suggests that online popularity may be a useful indicator of real-world live demand.
-""", unsafe_allow_html=True)
+If digital reach is associated with more live events, this suggests that online popularity
+may be a useful indicator of real-world live demand.
+""",
+    unsafe_allow_html=True,
+)
 
 st.divider()
 
@@ -142,16 +168,22 @@ st.divider()
 # GRAPH 1 — Scatterplot
 # ══════════════════════════════════════════════════════
 st.markdown(
-'<div class="section-title">📈 Graph 1 — Scatterplot: Last.fm listeners vs. number of events</div>',
-unsafe_allow_html=True
+    '<div class="section-title">📈 Graph 1 — Scatterplot: Last.fm listeners vs. number of events</div>',
+    unsafe_allow_html=True,
 )
 
-st.markdown("""
-Each point represents one artist. The x-axis shows the number of Last.fm listeners, and the y-axis shows the total number of Ticketmaster events. The green trend line summarizes the overall direction of the relationship: if the line rises, artists with more listeners tend to have more events on average; if it stays flat, there is little to no linear relationship.
-The filters allow users to exclude outliers or focus on specific genres to see whether the pattern remains stable.
-""")
+st.markdown(
+    """
+Each point represents one artist. The x-axis shows the number of Last.fm listeners,
+and the y-axis shows the total number of Ticketmaster events. The green trend line
+summarizes the overall direction of the relationship: if the line rises, artists with
+more listeners tend to have more events on average; if it stays flat, there is little
+to no linear relationship. The filters allow users to exclude outliers or focus on
+specific genres to see whether the pattern remains stable.
+"""
+)
 
-# Filter Controls
+# Render filter controls for listener range, event cap, genre, and label toggle.
 c1, c2 = st.columns(2)
 with c1:
     listener_range = st.slider(
@@ -159,7 +191,7 @@ with c1:
         min_value=int(df["listeners"].min()),
         max_value=int(df["listeners"].max()),
         value=(int(df["listeners"].min()), int(df["listeners"].max())),
-        key="g1_lr"
+        key="g1_lr",
     )
 with c2:
     event_max = st.slider(
@@ -167,34 +199,38 @@ with c2:
         min_value=5,
         max_value=int(df["total_events"].max()),
         value=int(df["total_events"].max()),
-        key="g1_em"
+        key="g1_em",
     )
 
 c3, c4 = st.columns([3, 1])
 with c3:
     selected_genres = st.multiselect(
         "🎵 Genre filter (empty = all)",
-        options=top_genres, default=[], key="g1_genres"
+        options=top_genres,
+        default=[],
+        key="g1_genres",
     )
 with c4:
     show_labels = st.checkbox("Show names", value=False, key="g1_lbl")
 
-# Apply filters
+# Apply listener range, event cap, and genre filters to produce the working subset.
 df1 = df[
-    (df["listeners"] >= listener_range[0]) &
-    (df["listeners"] <= listener_range[1]) &
-    (df["total_events"] <= event_max)
+    (df["listeners"] >= listener_range[0])
+    & (df["listeners"] <= listener_range[1])
+    & (df["total_events"] <= event_max)
 ].copy()
 
 if selected_genres and "tags" in df1.columns:
-    df1 = df1[df1["tags"].apply(lambda x: any(
-        g in extract_genres(x) for g in selected_genres
-    ))]
+    df1 = df1[
+        df1["tags"].apply(
+            lambda x: any(g in extract_genres(x) for g in selected_genres)
+        )
+    ]
 
-# Stats
+# Compute Pearson correlation and derive a human-readable relationship label.
 if len(df1) >= 5:
     r, p = stats.pearsonr(df1["listeners"], df1["total_events"])
-    r2 = r ** 2
+    r2 = r**2
     abs_r = abs(r)
 
     if abs_r < 0.1:
@@ -202,20 +238,26 @@ if len(df1) >= 5:
         relationship_text = "no meaningful linear relationship"
     elif abs_r < 0.3:
         relationship_label = "Weak"
-        relationship_text = f"a weak {'positive' if r > 0 else 'negative'} relationship"
+        relationship_text = (
+            f"a weak {'positive' if r > 0 else 'negative'} relationship"
+        )
     elif abs_r < 0.5:
         relationship_label = "Moderate"
-        relationship_text = f"a moderate {'positive' if r > 0 else 'negative'} relationship"
+        relationship_text = (
+            f"a moderate {'positive' if r > 0 else 'negative'} relationship"
+        )
     else:
         relationship_label = "Strong"
-        relationship_text = f"a strong {'positive' if r > 0 else 'negative'} relationship"
+        relationship_text = (
+            f"a strong {'positive' if r > 0 else 'negative'} relationship"
+        )
 
     significance_label = "Yes" if p < 0.05 else "No"
 
     m1, = st.columns(1)
     m1.metric("n artists", len(df1))
 
-    # Plot
+    # Build the scatterplot with a linear trend line overlay.
     hover = {"listeners": ":,", "total_events": True}
     if "tags" in df1.columns:
         hover["tags"] = True
@@ -236,29 +278,34 @@ if len(df1) >= 5:
         labels={
             "listeners": "Last.fm listeners",
             "total_events": "Number of scheduled events",
-            "tags": "Genre tags"
+            "tags": "Genre tags",
         },
-        title=f"Last.fm listeners vs. tour scale",
-        template="plotly_dark"
+        title="Last.fm listeners vs. tour scale",
+        template="plotly_dark",
     )
-    fig1.add_trace(go.Scatter(
-        x=_x1, y=_y1, mode="lines", name="trend line",
-        line=dict(color="#1DB954", width=2.5),
-        hoverinfo="skip",
-    ))
+    fig1.add_trace(
+        go.Scatter(
+            x=_x1,
+            y=_y1,
+            mode="lines",
+            name="trend line",
+            line=dict(color="#1DB954", width=2.5),
+            hoverinfo="skip",
+        )
+    )
     fig1.update_traces(
         marker=dict(size=9, opacity=0.8, line=dict(width=0.5, color="white")),
-        selector=dict(mode="markers")
+        selector=dict(mode="markers"),
     )
     fig1.update_traces(
         line=dict(color="#1DB954", width=2.5),
-        selector=dict(mode="lines")
+        selector=dict(mode="lines"),
     )
     if show_labels:
         fig1.update_traces(
             textposition="top center",
             textfont=dict(size=8, color="white"),
-            selector=dict(mode="markers+text")
+            selector=dict(mode="markers+text"),
         )
     fig1.update_layout(
         height=520,
@@ -267,42 +314,45 @@ if len(df1) >= 5:
         font=dict(color="white"),
         coloraxis_showscale=False,
         xaxis=dict(gridcolor="#333", tickformat=","),
-        yaxis=dict(gridcolor="#333")
+        yaxis=dict(gridcolor="#333"),
     )
     st.plotly_chart(fig1, use_container_width=True)
 
-    # Interpretation
+    # Select an interpretation text based on correlation strength and direction.
     if abs_r < 0.1:
         interp_text = (
-        "The trend line is nearly flat. Artists with more Last.fm listeners do not systematically play more concerts. "
-        "Streaming popularity alone is not a strong predictor of tour scale: some artists with relatively few listeners "
-        "tour extensively, while some of the most-streamed artists play only a handful of shows."
+            "The trend line is nearly flat. Artists with more Last.fm listeners do not systematically play more concerts. "
+            "Streaming popularity alone is not a strong predictor of tour scale: some artists with relatively few listeners "
+            "tour extensively, while some of the most-streamed artists play only a handful of shows."
         )
     elif p < 0.05 and r > 0:
         interp_text = (
-        "The trend line rises from left to right. Artists with more Last.fm listeners tend to play more concerts. "
-        "This suggests that streaming popularity and tour scale move in the same direction, "
-        "though the wide spread of points shows that many other factors also shape how extensively an artist tours."
+            "The trend line rises from left to right. Artists with more Last.fm listeners tend to play more concerts. "
+            "This suggests that streaming popularity and tour scale move in the same direction, "
+            "though the wide spread of points shows that many other factors also shape how extensively an artist tours."
         )
     elif p < 0.05 and r < 0:
         interp_text = (
-        "The trend line falls from left to right. Artists with more Last.fm listeners tend to play fewer concerts. "
-        "This might reflect that highly streamed artists are more selective about their live appearances, "
-        "or that smaller artists rely more heavily on touring to build their audience."
+            "The trend line falls from left to right. Artists with more Last.fm listeners tend to play fewer concerts. "
+            "This might reflect that highly streamed artists are more selective about their live appearances, "
+            "or that smaller artists rely more heavily on touring to build their audience."
         )
     else:
         interp_text = (
-        "The trend line shows a slight tendency, but the overall pattern is not strong enough to draw a firm conclusion. "
-        "The data points are spread widely, suggesting that factors beyond streaming popularity — "
-        "such as genre, career stage, or management strategy — play an equally important role in tour scale."
+            "The trend line shows a slight tendency, but the overall pattern is not strong enough to draw a firm conclusion. "
+            "The data points are spread widely, suggesting that factors beyond streaming popularity — "
+            "such as genre, career stage, or management strategy — play an equally important role in tour scale."
         )
 
-    st.markdown(f"""
+    st.markdown(
+        f"""
     <div class="insight-card">
         <h4 style="font-size:1.1rem;">🔍 Interpretation</h4>
         <p style="font-size:1rem;">{interp_text}</p>
     </div>
-    """, unsafe_allow_html=True)
+    """,
+        unsafe_allow_html=True,
+    )
 else:
     st.warning("Too few data points after filtering. Please adjust the filters.")
 
@@ -313,7 +363,7 @@ st.divider()
 # ══════════════════════════════════════════════════════
 st.markdown(
     '<div class="section-title">📊 Graph 2 — Average events per listener group</div>',
-    unsafe_allow_html=True
+    unsafe_allow_html=True,
 )
 
 explanation_placeholder = st.empty()
@@ -324,51 +374,70 @@ with qa:
         "Number of groups",
         options=[3, 4, 5, 6, 8, 10],
         value=4,
-        key="g2_ng"
+        key="g2_ng",
     )
-    agg = st.radio("Y-axis", ["Mean of events", "Median of events"], index=0, key="g2_agg")
+    agg = st.radio(
+        "Y-axis",
+        ["Mean of events", "Median of events"],
+        index=0,
+        key="g2_agg",
+    )
     group_share = 100 / n_groups
 
-explanation_placeholder.markdown(f"""
+explanation_placeholder.markdown(
+    f"""
 <p style="font-size:1rem;">
 Artists are sorted by their Last.fm listener count and then divided into <strong>{n_groups} equally sized groups</strong>.
 This means that each group contains about <strong>{group_share:.1f}%</strong> of all artists in the dataset.
 G1 represents the artists with the fewest listeners, while G{n_groups} represents those with the most listeners.
 For each group, the chart shows the <strong>{agg.lower()}</strong> number of events, making broad patterns easier to compare than in the scatterplot alone.
 </p>
-""", unsafe_allow_html=True)
+""",
+    unsafe_allow_html=True,
+)
 
 try:
     df2 = df.copy()
     labels = [f"G{i + 1}" for i in range(n_groups)]
-    df2["group"] = pd.qcut(df2["listeners"], q=n_groups, labels=labels, duplicates="drop")
+    df2["group"] = pd.qcut(
+        df2["listeners"],
+        q=n_groups,
+        labels=labels,
+        duplicates="drop",
+    )
     agg_fn = "mean" if "Mean" in agg else "median"
 
-    grouped = df2.groupby("group", observed=True).agg(
-        avg_events=("total_events", agg_fn),
-        n_artists=("artist_name", "count"),
-        avg_listeners=("listeners", "mean")
-    ).reset_index()
-
-    fig2 = go.Figure(go.Bar(
-        x=grouped["group"].astype(str),
-        y=grouped["avg_events"],
-        text=[f"{v:.1f}" for v in grouped["avg_events"]],
-        textposition="outside",
-        textfont=dict(color="white", size=13),
-        marker=dict(
-            color=list(range(len(grouped))),
-            colorscale=[[0, "#0d2b1a"], [0.5, "#1DB954"], [1, "#00ff88"]],
-            line=dict(width=0)
-        ),
-        customdata=grouped[["n_artists", "avg_listeners"]].values,
-        hovertemplate=(
-            "<b>Group %{x}</b><br>"
-            f"{agg}: %{{y:.1f}}<br>"
-            "Artists: %{customdata[0]}<br>"
-            "Avg. listeners: %{customdata[1]:,.0f}<extra></extra>"
+    grouped = (
+        df2.groupby("group", observed=True)
+        .agg(
+            avg_events=("total_events", agg_fn),
+            n_artists=("artist_name", "count"),
+            avg_listeners=("listeners", "mean"),
         )
-    ))
+        .reset_index()
+    )
+
+    fig2 = go.Figure(
+        go.Bar(
+            x=grouped["group"].astype(str),
+            y=grouped["avg_events"],
+            text=[f"{v:.1f}" for v in grouped["avg_events"]],
+            textposition="outside",
+            textfont=dict(color="white", size=13),
+            marker=dict(
+                color=list(range(len(grouped))),
+                colorscale=[[0, "#0d2b1a"], [0.5, "#1DB954"], [1, "#00ff88"]],
+                line=dict(width=0),
+            ),
+            customdata=grouped[["n_artists", "avg_listeners"]].values,
+            hovertemplate=(
+                "<b>Group %{x}</b><br>"
+                f"{agg}: %{{y:.1f}}<br>"
+                "Artists: %{customdata[0]}<br>"
+                "Avg. listeners: %{customdata[1]:,.0f}<extra></extra>"
+            ),
+        )
+    )
     fig2.update_layout(
         title=f"{agg} number of events per listener group  ({n_groups} groups, G1 = fewest listeners)",
         xaxis_title="Listener group",
@@ -380,7 +449,7 @@ try:
         height=400,
         xaxis=dict(gridcolor="#333"),
         yaxis=dict(gridcolor="#333"),
-        showlegend=False
+        showlegend=False,
     )
 
     with qb:
@@ -390,8 +459,12 @@ try:
     g1_val = values[0]
     gn_val = values[-1]
 
-    monotonic_increasing = all(values[i] <= values[i + 1] for i in range(len(values) - 1))
-    monotonic_decreasing = all(values[i] >= values[i + 1] for i in range(len(values) - 1))
+    monotonic_increasing = all(
+        values[i] <= values[i + 1] for i in range(len(values) - 1)
+    )
+    monotonic_decreasing = all(
+        values[i] >= values[i + 1] for i in range(len(values) - 1)
+    )
 
     if abs(gn_val - g1_val) < 0.5:
         interp_text = (
@@ -416,12 +489,15 @@ try:
             "This suggests that listener count is not strongly associated with tour scale in a consistent way."
         )
 
-    st.markdown(f"""
+    st.markdown(
+        f"""
     <div class="insight-card">
         <h4 style="font-size:1.1rem;">🔍 Interpretation</h4>
         <p style="font-size:1rem;">{interp_text}</p>
     </div>
-    """, unsafe_allow_html=True)
+    """,
+        unsafe_allow_html=True,
+    )
 
 except Exception as e:
     st.warning(f"Grouping failed: {e}")
@@ -433,13 +509,15 @@ st.divider()
 # ══════════════════════════════════════════════════════
 st.markdown(
     '<div class="section-title">📉 Graph 3 — Distribution of Last.fm listeners</div>',
-    unsafe_allow_html=True
+    unsafe_allow_html=True,
 )
-st.markdown("""
+st.markdown(
+    """
 This histogram shows how Last.fm listener counts are distributed across all artists in the dataset.
 The x-axis represents listener count, and the y-axis shows how many artists fall into each range.
 The dashed and dotted vertical lines mark the median and mean.
-""")
+"""
+)
 
 ha, hb = st.columns([1, 3])
 with ha:
@@ -448,34 +526,43 @@ with ha:
 with hb:
     x_data = np.log10(df["listeners"] + 1) if log_x else df["listeners"]
     x_lab = "log₁₀(Last.fm listeners)" if log_x else "Last.fm listeners"
+
     fig3 = go.Figure()
-    fig3.add_trace(go.Histogram(
-        x=x_data,
-        nbinsx=n_bins,
-        name="Artists",
-        marker=dict(
-            color="#1DB954",
-            opacity=0.8,
-            line=dict(width=0.5, color="#0e0e0e")
-        ),
-        hovertemplate="Listeners: %{x}<br>Count: %{y}<extra></extra>"
-    ))
+    fig3.add_trace(
+        go.Histogram(
+            x=x_data,
+            nbinsx=n_bins,
+            name="Artists",
+            marker=dict(
+                color="#1DB954",
+                opacity=0.8,
+                line=dict(width=0.5, color="#0e0e0e"),
+            ),
+            hovertemplate="Listeners: %{x}<br>Count: %{y}<extra></extra>",
+        )
+    )
+
     med = float(np.median(x_data))
     avg = float(np.mean(x_data))
+
     fig3.add_vline(
         x=med,
         line=dict(color="#00d4ff", width=2, dash="dash"),
-        annotation_text=f"Median: {10 ** med:,.0f}" if log_x else f"Median: {med:,.0f}",
+        annotation_text=(
+            f"Median: {10 ** med:,.0f}" if log_x else f"Median: {med:,.0f}"
+        ),
         annotation_font_color="#00d4ff",
         annotation_position="top left",
-        annotation_yshift=10
+        annotation_yshift=10,
     )
     fig3.add_vline(
         x=avg,
         line=dict(color="#ff8c00", width=2, dash="dot"),
-        annotation_text=f"Mean: {10 ** avg:,.0f}" if log_x else f"Mean: {avg:,.0f}",
+        annotation_text=(
+            f"Mean: {10 ** avg:,.0f}" if log_x else f"Mean: {avg:,.0f}"
+        ),
         annotation_font_color="#ff8c00",
-        annotation_position="top right"
+        annotation_position="top right",
     )
     fig3.update_layout(
         title="Distribution of Last.fm listeners across all artists",
@@ -488,16 +575,21 @@ with hb:
         height=380,
         xaxis=dict(gridcolor="#333", tickformat=","),
         yaxis=dict(gridcolor="#333"),
-        showlegend=False
+        showlegend=False,
     )
     st.plotly_chart(fig3, use_container_width=True)
 
 if log_x:
-    scale_note = "The logarithmic x-axis spreads out the lower range and compresses the long upper tail, making the shape easier to read."
+    scale_note = (
+        "The logarithmic x-axis spreads out the lower range and compresses the long upper tail, making the shape easier to read."
+    )
 else:
-    scale_note = "The long tail toward the right shows that only a few artists reach very high listener counts."
+    scale_note = (
+        "The long tail toward the right shows that only a few artists reach very high listener counts."
+    )
 
-st.markdown(f"""
+st.markdown(
+    f"""
 <div class="insight-card">
     <h4 style="font-size:1.1rem;">🔍 Interpretation</h4>
     <p style="font-size:1rem;">
@@ -507,17 +599,22 @@ st.markdown(f"""
         rather than a broad pattern across all artists. {scale_note}
     </p>
 </div>
-""", unsafe_allow_html=True)
+""",
+    unsafe_allow_html=True,
+)
 
 st.divider()
 
 # ══════════════════════════════════════════════════════
 # SUMMARY F1
 # ══════════════════════════════════════════════════════
-st.markdown('<div class="section-title">Summary — Research Question 1</div>',
-    unsafe_allow_html=True)
+st.markdown(
+    '<div class="section-title">Summary — Research Question 1</div>',
+    unsafe_allow_html=True,
+)
 
-st.markdown(f"""<div class="insight-card">
+st.markdown(
+    """<div class="insight-card">
     <h4 style="font-size:1.1rem;">🎯 Answer to Research Question 1</h4>
     <p style="font-size:1rem;">
         The graphs suggest that artists with a larger Last.fm audience tend to schedule more events overall,
@@ -527,7 +624,9 @@ st.markdown(f"""<div class="insight-card">
         tour presence — more dates, more cities, more events. For the majority of artists in the dataset,
         however, listener count alone does not reliably predict how extensively they tour.
     </p>
-</div>""", unsafe_allow_html=True)
+</div>""",
+    unsafe_allow_html=True,
+)
 
 st.markdown('<div id="frage-2"></div>', unsafe_allow_html=True)
 

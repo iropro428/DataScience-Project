@@ -4,7 +4,7 @@ from components.styles import apply_styles
 from components.navbar import render_navbar
 from components.glossary import apply_glossary_styles, tt, glossar_seite, TERMS
 
-apply_glossary_styles()  # einmal pro Page aufrufen
+apply_glossary_styles()  # Call once per page to inject glossary CSS.
 
 
 st.set_page_config(
@@ -28,6 +28,7 @@ st.markdown("""
 
 suche = st.text_input("🔍 Search term...", placeholder="e.g. median, quartile, pct_capital...")
 
+# Filter terms by search input and display matches; fall back to full glossary if input is empty.
 if suche.strip():
     treffer = {t: v for t, v in TERMS.items()
                if suche.lower() in t.lower() or suche.lower() in v["kurz"].lower()}
@@ -41,4 +42,3 @@ if suche.strip():
     st.divider()
 
 glossar_seite()
-
