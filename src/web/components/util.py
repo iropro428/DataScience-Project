@@ -1,3 +1,8 @@
+# =============================================================================
+# AI was used exclusively for debugging purposes,
+# not for the creation or generation of the code itself.
+# =============================================================================
+
 # Small utility helpers used across the web app.
 
 def hex_rgba(hex_color: str, alpha: float = 0.2) -> str:
