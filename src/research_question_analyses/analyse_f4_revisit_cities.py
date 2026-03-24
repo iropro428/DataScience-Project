@@ -1,3 +1,7 @@
+# =============================================================================
+# AI was actively used for the generation and creation of the code.
+# =============================================================================
+
 # Standalone Data-Science Analysis for F4: Revisit vs. New Cities
 # Executable without Streamlit — outputs statistics in the console
 #
