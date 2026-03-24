@@ -1,3 +1,7 @@
+# =============================================================================
+# AI was actively used for the generation and creation of the code.
+# =============================================================================
+
 # components/glossary.py
 #
 # Glossary definitions and CSS tooltip helpers for technical terms.
