@@ -116,7 +116,7 @@ pip install -r requirements.txt
 Add the required API keys in the project root:
 
 ```env
-LASTFM_KEY=your_lastfm_key
+LASTFM_API_KEY=your_lastfm_key
 TICKETMASTER_KEY=your_ticketmaster_key
 ```
 
