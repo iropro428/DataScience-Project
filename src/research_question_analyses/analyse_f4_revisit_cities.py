@@ -1,19 +1,17 @@
-"""
-Standalone Data-Science Analysis for F4: Revisit vs. New Cities
-Executable without Streamlit — outputs statistics in the console
-
-Prerequisite: join_data.py must have been executed
-
-Console Output:
-  - Descriptive Statistics
-  - Correlation Analysis
-  - Group Comparison (Tour Size)
-  - Top/Bottom Artists
-  - Most Visited Cities
-
-Output Files:
-  data/processed/f4_results.csv
-"""
+# Standalone Data-Science Analysis for F4: Revisit vs. New Cities
+# Executable without Streamlit — outputs statistics in the console
+#
+# Prerequisite: join_data.py must have been executed
+#
+# Console Output:
+#   - Descriptive Statistics
+#   - Correlation Analysis
+#   - Group Comparison (Tour Size)
+#   - Top/Bottom Artists
+#   - Most Visited Cities
+# 
+# Output Files:
+#   data/processed/f4_results.csv
 
 import pandas as pd
 import numpy as np
