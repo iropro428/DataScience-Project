@@ -117,7 +117,7 @@ Add the required API keys in the project root:
 
 ```env
 LASTFM_API_KEY=your_lastfm_key
-TICKETMASTER_KEY=your_ticketmaster_key
+TICKETMASTER_API_KEY=your_ticketmaster_key
 ```
 
 ### 3. Run the web application
