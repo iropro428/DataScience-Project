@@ -1,3 +1,8 @@
+# =============================================================================
+# AI was used both to support development
+# and for debugging purposes.
+# =============================================================================
+
 import os
 import time
 import requests
