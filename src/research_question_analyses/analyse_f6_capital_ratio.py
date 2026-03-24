@@ -1,14 +1,12 @@
-"""
-analyse_f6_capital_ratio.py
-Standalone Data-Science Analysis for F6: Capital vs. Non-Capital Cities
-No Streamlit — Console Output + CSV
-
-Prerequisite: join_data.py must have been executed
-
-Output:
-  Console — Statistics, Correlations, Rankings
-  data/processed/f6_results.csv
-"""
+# analyse_f6_capital_ratio.py
+# Standalone Data-Science Analysis for F6: Capital vs. Non-Capital Cities
+# No Streamlit — Console Output + CSV
+#
+# Prerequisite: join_data.py must have been executed
+#
+# Output:
+#   Console — Statistics, Correlations, Rankings
+#   data/processed/f6_results.csv
 
 import pandas as pd
 import numpy as np
