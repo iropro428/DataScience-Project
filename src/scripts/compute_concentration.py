@@ -1,3 +1,8 @@
+# =============================================================================
+# AI was used both to support development
+# and for debugging purposes.
+# =============================================================================
+
 import pandas as pd
 import numpy as np
 import os
