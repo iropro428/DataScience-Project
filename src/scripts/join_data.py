@@ -1,3 +1,7 @@
+# =============================================================================
+# AI was actively used for the generation and creation of the code.
+# =============================================================================
+
 # join_data.py
 # Aggregates raw data → data/processed/final_dataset.csv
 # Research questions: F2, F4, F6, F7 + foundation for all other analyses
