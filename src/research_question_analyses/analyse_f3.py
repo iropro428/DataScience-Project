@@ -1,13 +1,15 @@
-# analyse_f3.py
-# Standalone Analysis for F3:
-# Last.fm Listeners — Chart Artists vs. Non-Chart Artists (Spotify Weekly 2023–2026)
-#
-# Prerequisites:
-#   1. python scripts/process_spotify_charts.py
-#   2. python scripts/join_data.py
-#      (or directly: run join_f3.py to add 'was_on_chart' flag)
-#
-# Console Output + data/processed/f3_results.csv
+"""
+analyse_f3.py
+Standalone Analysis for F3:
+Last.fm Listeners — Chart Artists vs. Non-Chart Artists (Spotify Weekly 2023–2026)
+
+Prerequisites:
+  1. python scripts/process_spotify_charts.py
+  2. python scripts/join_data.py
+     (or directly: run join_f3.py to add 'was_on_chart' flag)
+
+Console Output + data/processed/f3_results.csv
+"""
 
 import pandas as pd
 import numpy as np
@@ -27,7 +29,7 @@ for p in [FINAL, CHARTS]:
 df     = pd.read_csv(FINAL)
 charts = pd.read_csv(CHARTS)
 
-# ── Join: was_on_chart Flag ───────────────────────────────────────────────
+# Join: was_on_chart Flag 
 # Normalized artist name comparison (lowercase, stripped)
 charts["artist_norm"] = charts["artist"].str.lower().str.strip()
 df["artist_norm"]     = df["artist_name"].str.lower().str.strip()
@@ -64,7 +66,7 @@ print(f"In Spotify Chart:       {n_chart}  ({n_chart/n_total*100:.0f}%)")
 print(f"Not in Chart:           {n_non_chart}  ({n_non_chart/n_total*100:.0f}%)")
 
 # ══════════════════════════════════════════════════════════════════════════
-# A) DESCRIPTIVE STATISTICS
+# DESCRIPTIVE STATISTICS
 # ══════════════════════════════════════════════════════════════════════════
 print(f"\n{SEP}")
 print("A) DESCRIPTIVE STATISTICS — Last.fm Listeners")
@@ -91,7 +93,7 @@ if mean_nc and mean_nc > 0:
     print(f"\n  → Chart Artists have Ø {mean_c/mean_nc:.1f}× more Listeners than Non-Chart Artists")
 
 # ══════════════════════════════════════════════════════════════════════════
-# D) TOP / BOTTOM
+#TOP / BOTTOM
 # ══════════════════════════════════════════════════════════════════════════
 show_cols = [c for c in ["artist_name","was_on_chart","listeners","chart_weeks",
                           "total_chart_streams","peak_position","total_events"]
@@ -110,7 +112,7 @@ print(SEP)
 print(df[~df["was_on_chart"]].nlargest(10, "listeners")[show_cols].to_string(index=False))
 
 # ══════════════════════════════════════════════════════════════════════════
-# F) SAVE RESULTS
+# SAVE RESULTS
 # ══════════════════════════════════════════════════════════════════════════
 save_cols = [c for c in ["artist_name","was_on_chart","listeners","playcount",
                           "total_events","events_last_year","total_chart_streams",
