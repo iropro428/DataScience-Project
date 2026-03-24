@@ -1,8 +1,6 @@
-"""
-components/glossary.py
-
-Glossary definitions and CSS tooltip helpers for technical terms.
-"""
+# components/glossary.py
+#
+# Glossary definitions and CSS tooltip helpers for technical terms.
 
 import streamlit as st
 
